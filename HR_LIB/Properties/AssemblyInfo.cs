@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HR-Desktop")]
+[assembly: AssemblyTitle("HR_Lib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HR-Desktop")]
+[assembly: AssemblyProduct("HR_Lib")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("63d34f26-bb43-4b60-b09a-0279170d6ed5")]
+[assembly: Guid("af5a4ff1-b4af-45fb-8f22-183dcd4cb44f")]
 
 // Version information for an assembly consists of the following four values:
 //

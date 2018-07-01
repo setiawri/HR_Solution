@@ -16,7 +16,17 @@ namespace HR_Desktop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            LIBUtil.DBConnection.initialize(HR_LIB.Settings.CONNECTIONSTRING_DEFAULTPARAMS, HR_LIB.Settings.SQL_USERNAME, HR_LIB.Settings.SQL_PASSWORD);
+            LIBUtil.Util.ensureSingleInstance(runApplication);
+        }
+
+        static void runApplication()
+        {
+            LOGIN.Login_Form loginform = new LOGIN.Login_Form();
+            LIBUtil.Util.displayForm(null, loginform);
+            if (loginform.isAuthenticated)
+                Application.Run(new Main_Form());
         }
     }
 }
