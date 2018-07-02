@@ -1,152 +1,66 @@
 ﻿/**************************************************************************************************************************************************************/
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
-
-
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[UserAccounts_add]
 
-	@Id uniqueidentifier,
-	@Username nvarchar(MAX),
-	@INPUT_Password nvarchar(MAX),
-	@Firstname nvarchar(MAX),
-	@Lastname nvarchar(MAX) = NULL,
-	@Address1 nvarchar(MAX),
-	@Address2 nvarchar(MAX) = NULL,
-	@Phone1 nvarchar(MAX),
-	@Phone2 nvarchar(MAX) = NULL,
-	@Email nvarchar(MAX) = NULL,
-	@Birthdate datetime,
-	@Identification nvarchar(MAX),
-	@Height int ,
-	@Weight int ,
-	@Notes nvarchar(MAX) = NULL
-	
-AS
-
-BEGIN
-
-	INSERT INTO UserAccounts(Id,Username,Firstname,Lastname,Address1, Address2,Phone1,Phone2,Email,Birthdate,Identification,Height,Weight,Notes) 
-	VALUES(@Id,@Username,@Firstname,@Lastname,@Address1, @Address2,@Phone1,@Phone2,@Email,@Birthdate,@Identification,@Height,@Weight,@Notes)
-
-	EXECUTE UserAccounts_update_HashedPassword @Id, @INPUT_Password
-
-END
-
+CREATE TABLE [dbo].[Attendance]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [UserAccounts_Id] UNIQUEIDENTIFIER NOT NULL, 
+    [TimestampIn] DATETIME NOT NULL, 
+    [TimestampOut] DATETIME NOT NULL, 
+    [Notes] NVARCHAR(MAX) NULL, 
+    [Flag1] BIT NOT NULL DEFAULT ((0)), 
+    [Flag2] BIT NOT NULL DEFAULT ((0)), 
+    [Approved] BIT NOT NULL DEFAULT ((0))
+)
 GO
-/****** Object:  StoredProcedure [dbo].[UserAccounts_authenticate]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Clients]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [CompanyName] NVARCHAR(MAX) NOT NULL, 
+    [Address] NVARCHAR(MAX) NULL, 
+    [BillingAddress] NVARCHAR(MAX) NULL, 
+    [ContactPersonName] NVARCHAR(MAX) NULL, 
+    [Phone1] NVARCHAR(MAX) NULL, 
+    [Phone2] NVARCHAR(MAX) NULL, 
+    [Notes] NVARCHAR(MAX) NULL, 
+    [NPWP] NVARCHAR(MAX) NULL, 
+    [NPWPAddress] NVARCHAR(MAX) NULL,
+    [Active] BIT NOT NULL DEFAULT ((1))
+)
 GO
 
 
-/**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[UserAccounts_get]
-
-	@Id uniqueidentifier = NULL,
-	@Username nvarchar(MAX) = NULL,
-	@HashedPassword nvarchar(MAX) = NULL,
-	@Firstname nvarchar(MAX) = NULL,
-	@Lastname nvarchar(MAX) = NULL,
-	@Address1 nvarchar(MAX) = NULL,
-	@Address2 nvarchar(MAX) = NULL,
-	@Phone1 nvarchar(MAX) = NULL,
-	@Phone2 nvarchar(MAX) = NULL,
-	@Email nvarchar(MAX) = NULL,
-	@Birthdate datetime = NULL,
-	@Identification nvarchar(MAX),
-	@Height int = NULL,
-	@Weight int = NULL,
-	@Notes nvarchar(MAX) = NULL
-
-AS
-
-BEGIN
-
-	SELECT UserAccounts.*,
-		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS Fullname,
-		ISNULL(SpecialList.Special,0) AS Special
-	FROM UserAccounts 
-		LEFT OUTER JOIN (
-				SELECT UserAccountRoleAssignments.UserAccounts_Id, 1 AS Special 
-				FROM UserAccountRoleAssignments 
-				WHERE UserAccountRoleAssignments.UserAccountRoles_Id IN (SELECT UserAccountRoles.Id FROM UserAccountRoles WHERE Special=1)
-			) SpecialList ON SpecialList.UserAccounts_Id = UserAccounts.Id
-	WHERE 1=1
-		AND (@Id IS NULL OR Id = @Id)
-		AND (@Username IS NULL OR Username = @Username)
-		AND (@Firstname IS NULL OR Firstname LIKE '%'+ @Firstname+'%')
-		AND (@Lastname IS NULL OR Lastname LIKE '%' + @Lastname + '%')
-		AND (@Address1 IS NULL OR Address1 LIKE '%' + @Address1 + '%')
-		AND (@Address2 IS NULL OR Address2 LIKE '%' + @Address2 + '%')
-		AND (@Phone1 IS NULL OR Phone1 LIKE '%' + @Phone1 + '%' OR Phone2 LIKE '%'+@Phone1+'%')
-		AND (@Phone2 IS NULL OR Phone1 LIKE '%' + @Phone2 + '%' OR Phone2 LIKE '%'+@Phone2+'%')
-		AND (@Email IS NULL OR Email LIKE '%' + @Email + '%')
-		AND (@Birthdate IS NULL OR Birthdate = @Birthdate)
-		AND (@Identification IS NULL OR Identification LIKE '%'+ @Identification+'%')
-		AND (@Height IS NULL OR @Height = 0 OR Height =@Height)
-		AND (@Weight IS NULL OR @Weight = 0 OR Weight =@Weight)
-
-END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccounts_isexist_Username]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+CREATE TABLE [dbo].[Workshifts]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(MAX) NOT NULL, 
+    [Clients_Id] UNIQUEIDENTIFIER NOT NULL, 
+    [WorkshiftCategories_Id] UNIQUEIDENTIFIER NOT NULL, 
+    [DayOfWeek] TINYINT NOT NULL, 
+    [Start] TIME NOT NULL, 
+    [End] TIME NOT NULL, 
+    [Notes] NVARCHAR(MAX) NULL, 
+    [Active] BIT NOT NULL DEFAULT ((1))
+)
 GO
 
 
-/**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[UserAccounts_update]
-
-	@Id uniqueidentifier,
-	@Username nvarchar(MAX),
-	@Firstname nvarchar(MAX),
-	@Lastname nvarchar(MAX) = NULL,
-	@Address1 nvarchar(MAX),
-	@Address2 nvarchar(MAX) = NULL,
-	@Phone1 nvarchar(MAX),
-	@Phone2 nvarchar(MAX) = NULL,
-	@Email nvarchar(MAX) = NULL,
-	@Birthdate datetime,
-	@Identification nvarchar(MAX),
-	@Height int ,
-	@Weight int ,
-	@Notes nvarchar(MAX) = NULL
-	
-AS
-
-BEGIN
-
-	UPDATE UserAccounts SET
-		Username = @Username,
-		Firstname = @Firstname,
-		Lastname = @Lastname,
-		Address1 = @Address1,
-		Address2 = @Address2,
-		Phone1 = @Phone1,
-		Phone2 = @Phone2,
-		Email = @Email,
-		Birthdate = @Birthdate,
-		Identification = @Identification,
-		Height = @Height,
-		Weight = @Weight,
-		Notes = @Notes
-	WHERE Id = @Id
-
-END
-
+CREATE TABLE [dbo].[WorkshiftCategories]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(MAX) NOT NULL, 
+    [Notes] NVARCHAR(MAX) NULL, 
+    [Active] BIT NOT NULL DEFAULT ((1))
+)
 GO
-/****** Object:  StoredProcedure [dbo].[UserAccounts_update_HashedPassword]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 
 
 /**************************************************************************************************************************************************************/
 /* DATABASE CLEARING ******************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
 
 
 /* COMPLETE CLEARING */
@@ -157,10 +71,6 @@ GO
 --DELETE UserAccountRoles
 --DELETE UserAccounts
 --GO
-
-
-
-
 
 /**************************************************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
@@ -179,12 +89,6 @@ BEGIN
 	INSERT INTO ActivityLogs(Id,Timestamp,AssociatedId,Description,UserAccounts_Id) VALUES(@Id,@Timestamp,@AssociatedId,@Description,@UserAccounts_Id)
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[ActivityLogs_get]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -204,12 +108,6 @@ BEGIN
 	ORDER BY Timestamp DESC
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[Settings_get]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -226,12 +124,6 @@ BEGIN
 	WHERE Id = @Id
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[Settings_update]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -256,12 +148,6 @@ BEGIN
 			UPDATE Settings SET Value_String = @Value_String WHERE Id = @Id
 		END
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountAccessRoleAssignments_add]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -278,12 +164,6 @@ BEGIN
 	VALUES(NEWID(),@UserAccountRoles_Id,@UserAccountAccess_EnumId)
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountAccessRoleAssignments_delete]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -299,12 +179,6 @@ BEGIN
 	DELETE UserAccountAccessRoleAssignments WHERE UserAccountRoles_Id = @UserAccountRoles_Id AND UserAccountAccess_EnumId = @UserAccountAccess_EnumId
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountAccessRoleAssignments_getby_UserAccountRoles_Id]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -321,12 +195,6 @@ BEGIN
 	WHERE UserAccountRoles_Id = @UserAccountRoles_Id
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountAccessRoleAssignments_getby_UserAccounts_Id]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -347,12 +215,6 @@ BEGIN
 		)
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountAccessRoleAssignments_update]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -407,12 +269,6 @@ BEGIN
 	DROP TABLE #TEMP_CURRENTLIST
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountRoleAssignments_add]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -429,12 +285,6 @@ BEGIN
 	VALUES(NEWID(),@UserAccounts_Id,@UserAccountRoles_Id)
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountRoleAssignments_delete]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -450,12 +300,6 @@ BEGIN
 	DELETE UserAccountRoleAssignments WHERE UserAccounts_Id = @UserAccounts_Id AND UserAccountRoles_Id = @UserAccountRoles_Id
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountRoleAssignments_get]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -475,12 +319,6 @@ BEGIN
 		AND (@UserAccounts_Id IS NULL OR UserAccounts_Id = @UserAccounts_Id)
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountRoleAssignments_getby_UserAccounts_Id]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -497,12 +335,6 @@ BEGIN
 	WHERE UserAccounts_Id = @UserAccounts_Id
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountRoleAssignments_update]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -557,12 +389,6 @@ BEGIN
 	DROP TABLE #TEMP_CURRENTLIST
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountRoles_add]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -580,12 +406,6 @@ BEGIN
 	VALUES(@Id,@Name,@Notes)
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountRoles_get]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -609,12 +429,6 @@ BEGIN
 		AND (@Name IS NULL OR Name LIKE '%'+@Name+'%')
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountRoles_update]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -634,12 +448,6 @@ BEGIN
 	WHERE Id = @Id
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountRoles_update_Active]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -657,12 +465,6 @@ BEGIN
 	WHERE Id = @Id
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccountRoles_update_Special]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -680,12 +482,6 @@ BEGIN
 	WHERE Id = @Id
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccounts_add]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -712,12 +508,6 @@ BEGIN
 		SET @returnValueString = @ERROR_MESSAGE
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UserAccounts_get]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 
@@ -738,14 +528,7 @@ BEGIN
 		SET @ReturnValueBoolean = 0
 
 END
-
 GO
-/****** Object:  StoredProcedure [dbo].[UserAccounts_update]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[UserAccounts_update_HashedPassword]
@@ -762,12 +545,6 @@ BEGIN
 	WHERE UserAccounts.Id = @Id
 
 END
-
-GO
-/****** Object:  StoredProcedure [dbo].[UTIL_IncrementHex]    Script Date: 6/30/2018 6:02:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /**************************************************************************************************************************************************************/
@@ -786,8 +563,8 @@ BEGIN
 	SET @NewHex_String = RIGHT(CONVERT(NVARCHAR(10), CONVERT(VARBINARY(8), @LastHex_Int + 1), 1),@HexLength)
 
 END
-
 GO
+
 /**************************************************************************************************************************************************************/
 
 ALTER FUNCTION [dbo].[DayOfWeekName] (@DayOfWeek VARCHAR(1))
@@ -807,3 +584,127 @@ BEGIN
     RETURN '';
 END
 GO
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[UserAccounts_add]
+
+	@Id uniqueidentifier,
+	@Username nvarchar(MAX),
+	@INPUT_Password nvarchar(MAX),
+	@Firstname nvarchar(MAX),
+	@Lastname nvarchar(MAX) = NULL,
+	@Address1 nvarchar(MAX),
+	@Address2 nvarchar(MAX) = NULL,
+	@Phone1 nvarchar(MAX),
+	@Phone2 nvarchar(MAX) = NULL,
+	@Email nvarchar(MAX) = NULL,
+	@Birthdate datetime,
+	@Identification nvarchar(MAX),
+	@Height int ,
+	@Weight int ,
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+
+	INSERT INTO UserAccounts(Id,Username,Firstname,Lastname,Address1, Address2,Phone1,Phone2,Email,Birthdate,Identification,Height,Weight,Notes) 
+	VALUES(@Id,@Username,@Firstname,@Lastname,@Address1, @Address2,@Phone1,@Phone2,@Email,@Birthdate,@Identification,@Height,@Weight,@Notes)
+
+	EXECUTE UserAccounts_update_HashedPassword @Id, @INPUT_Password
+
+END
+GO
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[UserAccounts_get]
+
+	@Id uniqueidentifier = NULL,
+	@Username nvarchar(MAX) = NULL,
+	@HashedPassword nvarchar(MAX) = NULL,
+	@Firstname nvarchar(MAX) = NULL,
+	@Lastname nvarchar(MAX) = NULL,
+	@Address1 nvarchar(MAX) = NULL,
+	@Address2 nvarchar(MAX) = NULL,
+	@Phone1 nvarchar(MAX) = NULL,
+	@Phone2 nvarchar(MAX) = NULL,
+	@Email nvarchar(MAX) = NULL,
+	@Birthdate datetime = NULL,
+	@Identification nvarchar(MAX),
+	@Height int = NULL,
+	@Weight int = NULL,
+	@Notes nvarchar(MAX) = NULL
+
+AS
+
+BEGIN
+
+	SELECT UserAccounts.*,
+		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS Fullname,
+		ISNULL(SpecialList.Special,0) AS Special
+	FROM UserAccounts 
+		LEFT OUTER JOIN (
+				SELECT UserAccountRoleAssignments.UserAccounts_Id, 1 AS Special 
+				FROM UserAccountRoleAssignments 
+				WHERE UserAccountRoleAssignments.UserAccountRoles_Id IN (SELECT UserAccountRoles.Id FROM UserAccountRoles WHERE Special=1)
+			) SpecialList ON SpecialList.UserAccounts_Id = UserAccounts.Id
+	WHERE 1=1
+		AND (@Id IS NULL OR Id = @Id)
+		AND (@Username IS NULL OR Username = @Username)
+		AND (@Firstname IS NULL OR Firstname LIKE '%'+ @Firstname+'%')
+		AND (@Lastname IS NULL OR Lastname LIKE '%' + @Lastname + '%')
+		AND (@Address1 IS NULL OR Address1 LIKE '%' + @Address1 + '%')
+		AND (@Address2 IS NULL OR Address2 LIKE '%' + @Address2 + '%')
+		AND (@Phone1 IS NULL OR Phone1 LIKE '%' + @Phone1 + '%' OR Phone2 LIKE '%'+@Phone1+'%')
+		AND (@Phone2 IS NULL OR Phone1 LIKE '%' + @Phone2 + '%' OR Phone2 LIKE '%'+@Phone2+'%')
+		AND (@Email IS NULL OR Email LIKE '%' + @Email + '%')
+		AND (@Birthdate IS NULL OR Birthdate = @Birthdate)
+		AND (@Identification IS NULL OR Identification LIKE '%'+ @Identification+'%')
+		AND (@Height IS NULL OR @Height = 0 OR Height =@Height)
+		AND (@Weight IS NULL OR @Weight = 0 OR Weight =@Weight)
+
+END
+GO
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[UserAccounts_update]
+
+	@Id uniqueidentifier,
+	@Username nvarchar(MAX),
+	@Firstname nvarchar(MAX),
+	@Lastname nvarchar(MAX) = NULL,
+	@Address1 nvarchar(MAX),
+	@Address2 nvarchar(MAX) = NULL,
+	@Phone1 nvarchar(MAX),
+	@Phone2 nvarchar(MAX) = NULL,
+	@Email nvarchar(MAX) = NULL,
+	@Birthdate datetime,
+	@Identification nvarchar(MAX),
+	@Height int ,
+	@Weight int ,
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+
+	UPDATE UserAccounts SET
+		Username = @Username,
+		Firstname = @Firstname,
+		Lastname = @Lastname,
+		Address1 = @Address1,
+		Address2 = @Address2,
+		Phone1 = @Phone1,
+		Phone2 = @Phone2,
+		Email = @Email,
+		Birthdate = @Birthdate,
+		Identification = @Identification,
+		Height = @Height,
+		Weight = @Weight,
+		Notes = @Notes
+	WHERE Id = @Id
+
+END
+GO
+
+/**************************************************************************************************************************************************************/

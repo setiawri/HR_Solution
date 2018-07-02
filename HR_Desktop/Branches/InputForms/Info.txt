@@ -1,0 +1,9 @@
+﻿
+Under folder Admin:
+
+> Create MasterData_v1_Clients_Form
+> Create MasterData_v1_WorkshiftCategories_Form
+> Create MasterData_v1_Attendance_Form
+
+Table Workshifts jangan dibuat dulu. Mau dibuat pake GUI biar lebih effisien.
+

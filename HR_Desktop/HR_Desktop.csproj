@@ -90,7 +90,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Branches\Chintia.txt" />
+    <Content Include="Branches\InputForms\Info.txt" />
     <Content Include="Branches\UPDATE-DB.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Admin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
