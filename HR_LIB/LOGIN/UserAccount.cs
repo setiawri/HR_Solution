@@ -44,6 +44,9 @@ namespace LOGIN
         public string Phone2;
         public string Email;
         public DateTime? Birthdate;
+        public string Identification;
+        public int Height;
+        public int Weight;
         public string Notes = "";
         public bool Active;
 
@@ -79,6 +82,9 @@ namespace LOGIN
         public const string COL_DB_Phone2 = "Phone2";
         public const string COL_DB_Email = "Email";
         public const string COL_DB_Birthdate = "Birthdate";
+        public const string COL_DB_Identification = "Identification";
+        public const string COL_DB_Height = "Height";
+        public const string COL_DB_Weight = "Weight";
         public const string COL_DB_Notes = "notes";
         public const string COL_DB_Active = "Active";
 
@@ -106,6 +112,9 @@ namespace LOGIN
             Phone2 = Util.wrapNullable<string>(row, COL_DB_Phone2);
             Email = Util.wrapNullable<string>(row, COL_DB_Email);
             Birthdate = Util.wrapNullable<DateTime?>(row, COL_DB_Birthdate);
+            Identification = Util.wrapNullable<string>(row, COL_DB_Identification);
+            Height = Util.wrapNullable<int>(row, COL_DB_Height);
+            Weight = Util.wrapNullable<int>(row, COL_DB_Weight);
             Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
             Active = Util.wrapNullable<bool>(row, COL_DB_Active);
 
@@ -130,7 +139,7 @@ namespace LOGIN
         }
 
         public static Guid add(Guid userAccountID, string username, string password, string firstName, string lastName,
-            string address1, string address2, string phone1, string phone2, string email, DateTime? birthdate, string notes, List<Guid?> userAccountRoles)
+            string address1, string address2, string phone1, string phone2, string email, DateTime? birthdate, string identification, int height, int weight, string notes, List<Guid?> userAccountRoles)
         {
             Guid id = Guid.NewGuid();
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
@@ -150,6 +159,9 @@ namespace LOGIN
                     new SqlQueryParameter(COL_DB_Phone2, SqlDbType.NVarChar, Util.wrapNullable(phone2)),
                     new SqlQueryParameter(COL_DB_Email, SqlDbType.NVarChar, Util.wrapNullable(email)),
                     new SqlQueryParameter(COL_DB_Birthdate, SqlDbType.NVarChar, Util.wrapNullable(birthdate)),
+                    new SqlQueryParameter(COL_DB_Identification, SqlDbType.NVarChar, Util.wrapNullable(identification)),
+                    new SqlQueryParameter(COL_DB_Height, SqlDbType.Int, Util.wrapNullable(height)),
+                    new SqlQueryParameter(COL_DB_Weight, SqlDbType.Int, Util.wrapNullable(weight)),
                     new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                 );
 
@@ -201,9 +213,9 @@ namespace LOGIN
             }
         }
 
-        public static DataRow get(Guid id) { return Util.getFirstRow(get(true, id, null, null, null, null, null, null, null, null, null, null)); }
+        public static DataRow get(Guid id) { return Util.getFirstRow(get(true, id, null, null, null, null, null, null, null, null, null, null, null, null, null)); }
         public static DataTable get(bool filterIncludeInactive, Guid? id, string username, string firstName, string lastName,
-            string address1, string address2, string phone1, string phone2, string email, DateTime? birthdate, string notes)
+            string address1, string address2, string phone1, string phone2, string email, DateTime? birthdate, string identification, int? height, int? weight, string notes)
         {
             SqlQueryResult result = DBConnection.query(
                 QueryTypes.FillByAdapter,
@@ -218,13 +230,16 @@ namespace LOGIN
                     new SqlQueryParameter(COL_DB_Phone2, SqlDbType.NVarChar, Util.wrapNullable(phone2)),
                     new SqlQueryParameter(COL_DB_Email, SqlDbType.NVarChar, Util.wrapNullable(email)),
                     new SqlQueryParameter(COL_DB_Birthdate, SqlDbType.NVarChar, Util.wrapNullable(birthdate)),
+                    new SqlQueryParameter(COL_DB_Identification, SqlDbType.NVarChar, Util.wrapNullable(identification)),
+                    new SqlQueryParameter(COL_DB_Height, SqlDbType.Int, Util.wrapNullable(height)),
+                    new SqlQueryParameter(COL_DB_Weight, SqlDbType.Int, Util.wrapNullable(weight)),
                     new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                 );
             return result.Datatable;
         }
 
         public static void update(Guid userAccountID, Guid id, string username, string firstName, string lastName,
-            string address1, string address2, string phone1, string phone2, string email, DateTime? birthdate, string notes, List<Guid?> userAccountRoles)
+            string address1, string address2, string phone1, string phone2, string email, DateTime? birthdate, string identification, int height, int weight, string notes, List<Guid?> userAccountRoles)
         {
             UserAccount objOld = new UserAccount(id);
             string log = "";
@@ -257,6 +272,9 @@ namespace LOGIN
                         new SqlQueryParameter(COL_DB_Phone2, SqlDbType.NVarChar, Util.wrapNullable(phone2)),
                         new SqlQueryParameter(COL_DB_Email, SqlDbType.NVarChar, Util.wrapNullable(email)),
                         new SqlQueryParameter(COL_DB_Birthdate, SqlDbType.NVarChar, Util.wrapNullable(birthdate)),
+                        new SqlQueryParameter(COL_DB_Identification, SqlDbType.NVarChar, Util.wrapNullable(identification)),
+                        new SqlQueryParameter(COL_DB_Height, SqlDbType.Int, Util.wrapNullable(height)),
+                        new SqlQueryParameter(COL_DB_Weight, SqlDbType.Int, Util.wrapNullable(weight)),
                         new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                     );
 
@@ -324,7 +342,7 @@ namespace LOGIN
 
         public static void populateDropDownList(LIBUtil.Desktop.UserControls.InputControl_Dropdownlist dropdownlist, bool includeInactive)
         {
-            dropdownlist.populate(get(false, null, null, null, null, null, null, null, null, null, null, null), COL_Fullname, COL_DB_Id, null);
+            dropdownlist.populate(get(false, null, null, null, null, null, null, null, null, null, null, null, null, null, null), COL_Fullname, COL_DB_Id, null);
         }
 
         #endregion CLASS METHODS

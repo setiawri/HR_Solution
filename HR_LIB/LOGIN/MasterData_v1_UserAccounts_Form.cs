@@ -101,6 +101,9 @@ namespace LOGIN
             itxt_Email.reset();
             itxt_Phone1.reset();
             itxt_Phone2.reset();
+            itxt_Identification.reset();
+            itxt_Height.reset();
+            itxt_Weight.reset();
             itxt_Notes.reset();
             LIBUtil.Desktop.UserControls.InputControl_CheckedListBox.clearCheckedItems(clbUserAccountRoles);
         }
@@ -111,10 +114,10 @@ namespace LOGIN
         {
             DataView dataview;
             if (_showCurrentUserAccountInfoOnly)
-                dataview = UserAccount.get(true, UserAccount.LoggedInAccount.Id, null, null, null, null, null, null, null, null, null, null).DefaultView;
+                dataview = UserAccount.get(true, UserAccount.LoggedInAccount.Id, null, null, null, null, null, null, null, null, null, null, null, null, null).DefaultView;
             else
                 dataview = UserAccount.get(chkIncludeInactive.Checked, null, itxt_Username.ValueText, itxt_Firstname.ValueText, itxt_Lastname.ValueText, 
-                    itxt_Address1.ValueText, itxt_Address2.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_Email.ValueText, idtp_Birthdate.Value, itxt_Notes.ValueText).DefaultView;
+                    itxt_Address1.ValueText, itxt_Address2.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_Email.ValueText, idtp_Birthdate.Value, itxt_Identification.ValueText, itxt_Height.ValueInt, itxt_Weight.ValueInt, itxt_Notes.ValueText).DefaultView;
 
             btnTutorSchedule.Enabled = dataview.Count > 0;
 
@@ -133,6 +136,9 @@ namespace LOGIN
             itxt_Email.ValueText = obj.Email;
             itxt_Phone1.ValueText = obj.Phone1;
             itxt_Phone2.ValueText = obj.Phone2;
+            itxt_Identification.ValueText = obj.Identification;
+            itxt_Height.ValueText = obj.Height.ToString();
+            itxt_Weight.ValueText = obj.Weight.ToString();
             itxt_Notes.ValueText = obj.Notes;
 
             LIBUtil.Desktop.UserControls.InputControl_CheckedListBox.clearCheckedItems(clbUserAccountRoles);
@@ -150,14 +156,14 @@ namespace LOGIN
         protected override void update()
         {
             UserAccount.update(UserAccount.LoggedInAccount.Id, selectedRowID(), itxt_Username.ValueText, itxt_Firstname.ValueText, itxt_Lastname.ValueText,
-                itxt_Address1.ValueText, itxt_Address2.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_Email.ValueText, idtp_Birthdate.Value, itxt_Notes.ValueText,
+                itxt_Address1.ValueText, itxt_Address2.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_Email.ValueText, idtp_Birthdate.Value, itxt_Identification.ValueText, itxt_Height.ValueInt, itxt_Weight.ValueInt, itxt_Notes.ValueText,
                 LIBUtil.Desktop.UserControls.InputControl_CheckedListBox.copySelectionToList<Guid?>(clbUserAccountRoles, UserAccountRole.COL_DB_Id));
         }
 
         protected override void add()
         {
             Clipboard.SetText(UserAccount.add(UserAccount.LoggedInAccount.Id, itxt_Username.ValueText, HR_LIB.Settings.TEMPORARY_PASSWORD, itxt_Firstname.ValueText, itxt_Lastname.ValueText,
-                itxt_Address1.ValueText, itxt_Address2.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_Email.ValueText, idtp_Birthdate.Value, itxt_Notes.ValueText,
+                itxt_Address1.ValueText, itxt_Address2.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_Email.ValueText, idtp_Birthdate.Value, itxt_Identification.ValueText, itxt_Height.ValueInt, itxt_Weight.ValueInt, itxt_Notes.ValueText,
                 LIBUtil.Desktop.UserControls.InputControl_CheckedListBox.copySelectionToList<Guid?>(clbUserAccountRoles, UserAccountRole.COL_DB_Id)).ToString());
         }
 
