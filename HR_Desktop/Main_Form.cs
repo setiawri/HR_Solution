@@ -95,6 +95,26 @@ namespace HR_Desktop
             LIBUtil.Util.displayMDIChild(new LOGIN.MasterData_v1_UserAccounts_Form());
         }
 
+        private void admin_workshiftcategories_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_WorkshiftCategories_Form());
+        }
+
+        private void admin_clients_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_Clients_Form());
+        }
+
+        private void admin_workshifts_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_Workshifts_Form());
+        }
+
+        private void admin_attendance_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_Attendance_Form());
+        }
+
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
