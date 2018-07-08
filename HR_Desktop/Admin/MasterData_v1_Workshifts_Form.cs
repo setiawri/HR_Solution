@@ -24,7 +24,7 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_WorkshiftCategories_Name;
         private DataGridViewColumn col_dgv_DayOfWeek;
         private DataGridViewColumn col_dgv_Start;
-        private DataGridViewColumn col_dgv_End;
+        private DataGridViewColumn col_dgv_Duration;
         private DataGridViewColumn col_dgv_Notes;
 
         #endregion PRIVATE VARIABLES
@@ -47,10 +47,9 @@ namespace HR_Desktop.Admin
 
         protected override void setupFields()
         {
-
             iddl_DayOfWeek.populate(typeof(DayOfWeek));
-            iddl_Start.populateWithTime(0, 0, 23, 0, 60, Workshift.COL_DB_Start, @"{0:h\:mm}");
-            iddl_End.populateWithTime(0, 0, 23, 0, 60, Workshift.COL_DB_End, @"{0:h\:mm}");
+            //iddl_Start.populateWithTime(0, 0, 23, 0, 60, Workshift.COL_DB_Start, @"{0:h\:mm}");
+            //iddl_End.populateWithTime(0, 0, 23, 0, 60, Workshift.COL_DB_End, @"{0:h\:mm}");
 
             setColumnsDataPropertyNames(Workshift.COL_DB_Id, Workshift.COL_DB_Active, null, null, null, null);
 
@@ -58,10 +57,12 @@ namespace HR_Desktop.Admin
             col_dgv_Clients_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Clients_CompanyName", itxt_Clients.LabelText, Workshift.COL_Clients_CompanyName, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_WorkshiftCategories_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_WorkshiftCategories_Name", itxt_WorkshiftCategories.LabelText, Workshift.COL_WorkshiftCategories_Name, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_DayOfWeek", iddl_DayOfWeek.LabelText, Workshift.COL_DayOfWeekName, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Start", iddl_Start.LabelText, Workshift.COL_DB_Start, true, @"h\:mm", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
-            col_dgv_End = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_End", iddl_End.LabelText, Workshift.COL_DB_End, true, @"h\:mm", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Start", idtp_Start.LabelText, Workshift.COL_DB_Start, true, @"h\:mm", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Duration = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Duration", in_DurationMinutes.LabelText, Workshift.COL_DB_DurationMinutes, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Workshift.COL_DB_Notes, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            ptInputPanel.PerformClick();
         }
 
         protected override void additionalSettings() { }
@@ -75,10 +76,10 @@ namespace HR_Desktop.Admin
             itxt_WorkshiftCategories.reset();
             iddl_DayOfWeek.Enabled = true;
             iddl_DayOfWeek.reset();
-            iddl_Start.Enabled = true;
-            iddl_Start.reset();
-            iddl_End.Enabled = true;
-            iddl_End.reset();
+            idtp_Start.Enabled = true;
+            idtp_Start.reset();
+            in_DurationMinutes.Enabled = true;
+            in_DurationMinutes.reset();
             itxt_Notes.reset();
         }
 
@@ -94,8 +95,8 @@ namespace HR_Desktop.Admin
                 itxt_Clients.ValueGuid,
                 itxt_WorkshiftCategories.ValueGuid,
                 Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
-                Util.wrapNullable<string>(iddl_Start.SelectedValue),
-                Util.wrapNullable<string>(iddl_End.SelectedValue),
+                Util.wrapNullable<string>(idtp_Start.Value.ToString()),
+                null,
                 Util.wrapNullable<string>(itxt_Notes.ValueText)
                 ).DefaultView;
         }
@@ -107,8 +108,8 @@ namespace HR_Desktop.Admin
             itxt_Clients.setValue(obj.Clients_CompanyName, obj.Clients_Id);
             itxt_WorkshiftCategories.setValue(obj.WorkshiftCategories_Name, obj.WorkshiftCategories_Id);
             iddl_DayOfWeek.SelectedItem = obj.DayOfWeek;
-            iddl_Start.SelectedValue = obj.Start.ToString(@"h\:mm");
-            iddl_End.SelectedValue = obj.End.ToString(@"h\:mm");
+            idtp_Start.ValueTimeSpan = obj.Start;
+            in_DurationMinutes.Value = obj.DurationMinutes;
             itxt_Notes.ValueText = obj.Notes;
         }
 
@@ -119,8 +120,8 @@ namespace HR_Desktop.Admin
                 itxt_Name.ValueText,
                 (Guid)itxt_WorkshiftCategories.ValueGuid,
                 (DayOfWeek)iddl_DayOfWeek.SelectedValue,
-                iddl_Start.SelectedValue.ToString(),
-                iddl_End.SelectedValue.ToString(),
+                idtp_Start.ValueTimeSpan.ToString(),
+                in_DurationMinutes.ValueInt,
                 itxt_Notes.ValueText);
         }
 
@@ -131,8 +132,8 @@ namespace HR_Desktop.Admin
                 (Guid)itxt_Clients.ValueGuid,
                 (Guid)itxt_WorkshiftCategories.ValueGuid,
                 (DayOfWeek)iddl_DayOfWeek.SelectedValue,
-                iddl_Start.SelectedValue.ToString(),
-                iddl_End.SelectedValue.ToString(),
+                idtp_Start.ValueTimeSpan.ToString(),
+                in_DurationMinutes.ValueInt,
                 itxt_Notes.ValueText);
         }
 
@@ -147,14 +148,8 @@ namespace HR_Desktop.Admin
                 return itxt_WorkshiftCategories.isValueError("Please select a Workshift Category");
             else if (!iddl_DayOfWeek.hasSelectedValue())
                 return iddl_DayOfWeek.SelectedValueError("Please select the day.");
-            else if (!iddl_Start.hasSelectedValue())
-                return iddl_Start.SelectedValueError("Please select start time.");
-            else if (!iddl_End.hasSelectedValue())
-                return iddl_End.SelectedValueError("Please select end time.");
-            else if (!iddl_End.isValidEndTime(iddl_Start))
-                return iddl_End.SelectedValueError("Invalid End Time. Must be later than Start Time");
-            else if ((Mode != FormModes.Update && Workshift.isCombinationExist(null,itxt_Name.ValueText, (Guid)itxt_Clients.ValueGuid, Util.parseEnum<DayOfWeek>(iddl_DayOfWeek.SelectedValue), iddl_Start.SelectedValue.ToString()))
-                    || (Mode == FormModes.Update && Workshift.isCombinationExist(selectedRowID(), itxt_Name.ValueText, (Guid)itxt_Clients.ValueGuid, Util.parseEnum<DayOfWeek>(iddl_DayOfWeek.SelectedValue), iddl_Start.SelectedValue.ToString())))
+            else if ((Mode != FormModes.Update && Workshift.isCombinationExist(null,itxt_Name.ValueText, (Guid)itxt_Clients.ValueGuid, Util.parseEnum<DayOfWeek>(iddl_DayOfWeek.SelectedValue), idtp_Start.ValueTimeSpan.ToString()))
+                    || (Mode == FormModes.Update && Workshift.isCombinationExist(selectedRowID(), itxt_Name.ValueText, (Guid)itxt_Clients.ValueGuid, Util.parseEnum<DayOfWeek>(iddl_DayOfWeek.SelectedValue), idtp_Start.ValueTimeSpan.ToString())))
                 return iddl_DayOfWeek.SelectedValueError("Workshift combination exists. Please change Name/Client/Day/Start.");
 
             return true;
@@ -180,7 +175,7 @@ namespace HR_Desktop.Admin
                 Util.getSelectedRowValue(dgv, col_dgv_Clients_CompanyName),
                 Util.getSelectedRowValue(dgv, col_dgv_DayOfWeek),
                 Util.getSelectedRowValue(dgv, col_dgv_Start),
-                Util.getSelectedRowValue(dgv, col_dgv_End)
+                Util.getSelectedRowValue(dgv, col_dgv_Duration)
                 );
         }
 

@@ -42,6 +42,8 @@ namespace HR_Desktop.Admin
             col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, WorkshiftCategory.COL_DB_Name, true, "", true, false, null, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, WorkshiftCategory.COL_DB_Notes, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            ptInputPanel.PerformClick();
         }
 
         protected override void additionalSettings() { }

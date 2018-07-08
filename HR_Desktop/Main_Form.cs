@@ -115,6 +115,11 @@ namespace HR_Desktop
             LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_Attendance_Form());
         }
 
+        private void reports_timesheets_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Payroll.Timesheets_Form());
+        }
+
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

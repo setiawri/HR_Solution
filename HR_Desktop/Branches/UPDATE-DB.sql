@@ -2,7 +2,18 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
+ALTER TABLE Workshifts ADD DurationMinutes int not null default 0
+GO
 
+ALTER TABLE Workshifts DROP COLUMN [End]
+GO
+
+
+
+
+
+
+/**************************************************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
 ALTER FUNCTION [dbo].[DayOfWeekName] (@DayOfWeek VARCHAR(1))
@@ -25,7 +36,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Workshifts_get]
+ALTER PROCEDURE [dbo].[Workshifts_get]
 
 	@FILTER_IncludeInactive bit,
 	@Id uniqueidentifier = NULL,
@@ -34,7 +45,7 @@ CREATE PROCEDURE [dbo].[Workshifts_get]
 	@WorkshiftCategories_Id UNIQUEIDENTIFIER = NULL,
 	@DayOfWeek tinyint= NULL,
 	@Start time(7) = NULL,
-	@End time(7) = NULL,
+	@DurationMinutes int = NULL,
 	@Notes nvarchar(MAX) = NULL
 
 AS
@@ -55,7 +66,7 @@ BEGIN
 		AND (@WorkshiftCategories_Id IS NULL OR Workshifts.WorkshiftCategories_Id = @WorkshiftCategories_Id)
 		AND (@DayOfWeek IS NULL OR Workshifts.DayOfWeek = @DayOfWeek)
 		AND (@Start IS NULL OR Workshifts.Start = @Start)
-		AND (@End IS NULL OR Workshifts."End" = @End)
+		AND (@DurationMinutes IS NULL OR Workshifts.DurationMinutes = @DurationMinutes)
 		AND (@Notes IS NULL OR Workshifts.Notes LIKE '%'+ @Notes +'%')
 
 	ORDER BY Clients.CompanyName DESC, Workshifts.DayOfWeek ASC, Workshifts.Start ASC
@@ -65,7 +76,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Workshifts_iscombinationexist]
+ALTER PROCEDURE [dbo].[Workshifts_iscombinationexist]
 
 	@Id uniqueidentifier = NULL,
 	@Name NVARCHAR(MAX)=NULL,
@@ -95,7 +106,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Workshifts_add]
+ALTER PROCEDURE [dbo].[Workshifts_add]
 
 	@Id uniqueidentifier,
 	@Name NVARCHAR(max) = NULL,
@@ -103,29 +114,29 @@ CREATE PROCEDURE [dbo].[Workshifts_add]
 	@WorkshiftCategories_Id uniqueidentifier,
 	@DayOfWeek int,
 	@Start nvarchar(MAX) = NULL,
-	@End nvarchar(MAX) = NULL,
+	@DurationMinutes int = NULL,
 	@Notes nvarchar(MAX) = NULL
 	
 AS
 
 BEGIN
 
-	INSERT INTO Workshifts(Id,Name, Clients_Id,WorkshiftCategories_Id, DayOfWeek, Start, "End", Notes) 
-	VALUES(@Id,@Name,@Clients_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@End,@Notes)
+	INSERT INTO Workshifts(Id,Name, Clients_Id,WorkshiftCategories_Id, DayOfWeek, Start, DurationMinutes, Notes) 
+	VALUES(@Id,@Name,@Clients_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@DurationMinutes,@Notes)
 
 END
 GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Workshifts_update]
+ALTER PROCEDURE [dbo].[Workshifts_update]
 
 	@Id uniqueidentifier,
 	@Name NVARCHAR(max) = NULL,
 	@WorkshiftCategories_Id uniqueidentifier,
 	@DayOfWeek INT,
 	@Start nvarchar(MAX) = NULL,
-	@End nvarchar(MAX) = NULL,
+	@DurationMinutes int = NULL,
 	@Notes nvarchar(MAX) = NULL
 	
 AS
@@ -137,7 +148,7 @@ BEGIN
 		WorkshiftCategories_Id = @WorkshiftCategories_Id,
 		DayOfWeek = @DayOfWeek,
 		Start = @Start,
-		"End" = @End,
+		DurationMinutes = @DurationMinutes,
 		Notes = @Notes
 	WHERE Id = @Id 
 
@@ -146,7 +157,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Workshifts_update_Active]
+ALTER PROCEDURE [dbo].[Workshifts_update_Active]
 
 	@Id uniqueidentifier,
 	@Active bit
@@ -163,7 +174,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Workshifts_delete]
+ALTER PROCEDURE [dbo].[Workshifts_delete]
 
 	@Id uniqueidentifier
 	
@@ -177,7 +188,7 @@ END
 GO
 /**************************************************************************************************************************************************************/
 
-CREATE PROCEDURE [dbo].[WorkshiftCategories_add]
+ALTER PROCEDURE [dbo].[WorkshiftCategories_add]
 
 	@Id uniqueidentifier,
 	@Name nvarchar(MAX),
@@ -195,7 +206,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[WorkshiftCategories_get]
+ALTER PROCEDURE [dbo].[WorkshiftCategories_get]
 
 	@FILTER_IncludeInactive bit,
 	@Id uniqueidentifier = NULL,
@@ -217,7 +228,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[WorkshiftCategories_isexist_Name]
+ALTER PROCEDURE [dbo].[WorkshiftCategories_isexist_Name]
 
 	@Name nvarchar(MAX), 
 	@Id uniqueidentifier = NULL,
@@ -237,7 +248,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[WorkshiftCategories_update]
+ALTER PROCEDURE [dbo].[WorkshiftCategories_update]
 
 	@Id uniqueidentifier,
 	@Name nvarchar(MAX),
@@ -255,7 +266,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[WorkshiftCategories_update_Active]
+ALTER PROCEDURE [dbo].[WorkshiftCategories_update_Active]
 
 	@Id uniqueidentifier,
 	@Active bit
@@ -273,7 +284,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Clients_get]
+ALTER PROCEDURE [dbo].[Clients_get]
 
 	@FILTER_IncludeInactive BIT,
 	@Id UNIQUEIDENTIFIER = NULL,
@@ -310,7 +321,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Clients_isexist_CompanyName]
+ALTER PROCEDURE [dbo].[Clients_isexist_CompanyName]
 
 	@CompanyName nvarchar(MAX), 
 	@Id uniqueidentifier = NULL,
@@ -329,7 +340,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Clients_add]
+ALTER PROCEDURE [dbo].[Clients_add]
 
 	@Id uniqueidentifier,
 	@CompanyName NVARCHAR(max) = NULL,
@@ -353,7 +364,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Clients_update]
+ALTER PROCEDURE [dbo].[Clients_update]
 
 	@Id uniqueidentifier,
 	@CompanyName NVARCHAR(max) = NULL,
@@ -388,7 +399,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Clients_update_Active]
+ALTER PROCEDURE [dbo].[Clients_update_Active]
 
 	@Id UNIQUEIDENTIFIER,
 	@Active BIT
@@ -406,7 +417,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Attendance_get]
+ALTER PROCEDURE [dbo].[Attendance_get]
 
 	@Id uniqueidentifier = NULL,
 	@UserAccounts_Id uniqueidentifier = NULL,
@@ -429,7 +440,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Attendance_iscombinationexist]
+ALTER PROCEDURE [dbo].[Attendance_iscombinationexist]
 
 	@Id uniqueidentifier = NULL,
 	@UserAccounts_Id  UNIQUEIDENTIFIER,
@@ -453,7 +464,7 @@ BEGIN
 END
 GO
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Attendance_add]
+ALTER PROCEDURE [dbo].[Attendance_add]
 
 	@Id uniqueidentifier,
 	@UserAccounts_Id uniqueidentifier,
@@ -472,7 +483,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Attendance_update]
+ALTER PROCEDURE [dbo].[Attendance_update]
 
 	@Id uniqueidentifier,
 	@TimestampIn DATETIME,
@@ -493,7 +504,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Attendance_update_Flag1]
+ALTER PROCEDURE [dbo].[Attendance_update_Flag1]
 
 	@Id UNIQUEIDENTIFIER,
 	@Flag1 BIT
@@ -511,7 +522,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Attendance_update_Flag2]
+ALTER PROCEDURE [dbo].[Attendance_update_Flag2]
 
 	@Id uniqueidentifier,
 	@Flag2 bit
@@ -529,7 +540,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Attendance_update_Approved]
+ALTER PROCEDURE [dbo].[Attendance_update_Approved]
 
 	@Id uniqueidentifier,
 	@Approved bit
@@ -546,7 +557,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Attendance_delete]
+ALTER PROCEDURE [dbo].[Attendance_delete]
 
 	@Id uniqueidentifier
 	
@@ -559,27 +570,6 @@ BEGIN
 END
 GO
 
-
-
-/**************************************************************************************************************************************************************/
-/* DATABASE CLEARING ******************************************************************************************************************************************/
-/**************************************************************************************************************************************************************/
-
-
-/* COMPLETE CLEARING */
---DELETE ActivityLogs
---DELETE Attendance
---DELETE Clients
---DELETE Settings
---DELETE UserAccountAccessRoleAssignments
---DELETE UserAccountRoleAssignments
---DELETE UserAccountRoles
---DELETE UserAccounts
---DELETE WorkshiftCategories
---DELETE Workshifts
---GO
-
-/**************************************************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[ActivityLogs_add]
 
@@ -1193,5 +1183,26 @@ BEGIN
 
 END
 GO
+
+/**************************************************************************************************************************************************************/
+
+
+/**************************************************************************************************************************************************************/
+/* DATABASE CLEARING ******************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+
+
+/* COMPLETE CLEARING */
+--DELETE ActivityLogs
+--DELETE Attendance
+--DELETE Clients
+--DELETE Settings
+--DELETE UserAccountAccessRoleAssignments
+--DELETE UserAccountRoleAssignments
+--DELETE UserAccountRoles
+--DELETE UserAccounts
+--DELETE WorkshiftCategories
+--DELETE Workshifts
+--GO
 
 /**************************************************************************************************************************************************************/

@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DBScript.txt" />
+    <Content Include="Documentation\Rules And Assumptions.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

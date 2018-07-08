@@ -45,17 +45,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Clients_Profile_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\Clients_Profile_Form.Designer.cs">
+      <DependentUpon>Clients_Profile_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\MasterData_v1_Attendance_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\MasterData_v1_Attendance_Forms.Designer.cs">
+      <DependentUpon>MasterData_v1_Attendance_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\MasterData_v1_Clients_Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Admin\MasterData_v1_Clients_Form.Designer.cs">
       <DependentUpon>MasterData_v1_Clients_Form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\MasterData_v1_Attendance_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Admin\MasterData_v1_Attendance_Form.Designer.cs">
-      <DependentUpon>MasterData_v1_Attendance_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin\MasterData_v1_Workshifts_Form.cs">
       <SubType>Form</SubType>
@@ -78,11 +84,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Admin\MasterData_v1_Clients_Form.resx">
-      <DependentUpon>MasterData_v1_Clients_Form.cs</DependentUpon>
+    <Compile Include="Payroll\Timesheets_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payroll\Timesheets_Form.Designer.cs">
+      <DependentUpon>Timesheets_Form.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Admin\Clients_Profile_Form.resx">
+      <DependentUpon>Clients_Profile_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\MasterData_v1_Attendance_Form.resx">
       <DependentUpon>MasterData_v1_Attendance_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\MasterData_v1_Clients_Form.resx">
+      <DependentUpon>MasterData_v1_Clients_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\MasterData_v1_Workshifts_Form.resx">
       <DependentUpon>MasterData_v1_Workshifts_Form.cs</DependentUpon>
@@ -102,6 +117,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Payroll\Timesheets_Form.resx">
+      <DependentUpon>Timesheets_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -127,9 +145,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Branches\Chintia.txt" />
-    <Content Include="Branches\InputForms\Info.txt" />
+    <Content Include="Branches\TimesheetForm\Info.txt" />
     <Content Include="Branches\UPDATE-DB.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Reports\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

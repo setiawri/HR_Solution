@@ -61,6 +61,8 @@ namespace HR_Desktop.Admin
             col_dgv_Approved = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Approved", Attendance.COL_DB_Approved, Attendance.COL_DB_Approved, true, "", true, false, 60, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Attendance.COL_DB_Notes, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            ptInputPanel.PerformClick();
         }
 
         protected override void additionalSettings() { }
@@ -123,18 +125,18 @@ namespace HR_Desktop.Admin
                 return idtp_TimestampIn.ValueError("Please fill Timestamp In");
             else if (idtp_TimestampOut.Value == null)
                 return idtp_TimestampOut.ValueError("Please fill Timestamp Out");
-            else if((Mode != FormModes.Update && Attendance.isCombinationExist(null, (Guid)itxt_UserAccount.ValueGuid, (DateTime)idtp_TimestampIn.Value))
+            else if ((Mode != FormModes.Update && Attendance.isCombinationExist(null, (Guid)itxt_UserAccount.ValueGuid, (DateTime)idtp_TimestampIn.Value))
                     || (Mode == FormModes.Update && Attendance.isCombinationExist(selectedRowID(), (Guid)itxt_UserAccount.ValueGuid, (DateTime)idtp_TimestampIn.Value)))
                 return itxt_UserAccount.isValueError("Attendance combination exists. Please change User/Timestamp In.");
 
             return true;
         }
 
-       
+
 
         protected override void btnLog_Click(object sender, EventArgs e)
         {
-            Util.displayForm(null, new LOGGING.ActivityLogs_Form(UserAccount.LoggedInAccount,selectedRowID()));
+            Util.displayForm(null, new LOGGING.ActivityLogs_Form(UserAccount.LoggedInAccount, selectedRowID()));
             txtQuickSearch.Focus();
         }
 
@@ -148,18 +150,20 @@ namespace HR_Desktop.Admin
                 Util.getSelectedRowValue(dgv, col_dgv_TimestampOut)
                 );
         }
-       
+
         protected override void virtual_dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (Util.isColumnMatch(sender, e, col_dgv_Flag1))
             {
                 Attendance.updateFlag1Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
                 populateGridViewDataSource(true);
-            } else if (Util.isColumnMatch(sender, e, col_dgv_Flag2))
+            }
+            else if (Util.isColumnMatch(sender, e, col_dgv_Flag2))
             {
                 Attendance.updateFlag2Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
                 populateGridViewDataSource(true);
-            } else if (Util.isColumnMatch(sender, e, col_dgv_Approved))
+            }
+            else if (Util.isColumnMatch(sender, e, col_dgv_Approved))
             {
                 Attendance.updateApprovedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
                 populateGridViewDataSource(true);
@@ -185,7 +189,7 @@ namespace HR_Desktop.Admin
 
         private void itxt_UserAccount_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            var form = new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse,false);
+            var form = new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false);
             Util.displayForm(null, form);
             if (form.DialogResult == DialogResult.OK)
                 itxt_UserAccount.setValue(form.BrowsedItemSelectionDescription, form.BrowsedItemSelectionId);
@@ -204,6 +208,11 @@ namespace HR_Desktop.Admin
         private void itxt_Notes_isBrowseMode_Clicked(object sender, EventArgs e)
         {
 
+        }
+
+        private void idtp_TimestampIn_ValueChanged(object sender, EventArgs e)
+        {
+            idtp_TimestampOut.Value = idtp_TimestampIn.Value;
         }
 
         #endregion EVENT HANDLERS

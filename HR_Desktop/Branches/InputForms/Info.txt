@@ -1,9 +1,0 @@
-﻿
-Under folder Admin:
-
-> Create MasterData_v1_Clients_Form
-> Create MasterData_v1_WorkshiftCategories_Form
-> Create MasterData_v1_Workshifts_Form
-> Create MasterData_v1_Attendance_Form
-
-

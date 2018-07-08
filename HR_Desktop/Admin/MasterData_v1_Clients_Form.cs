@@ -65,6 +65,10 @@ namespace HR_Desktop.Admin
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Client.COL_DB_Notes, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            if (Mode == FormModes.Browse)
+                btnProfile.Visible = false;
+
+            ptInputPanel.PerformClick();
         }
 
         protected override void additionalSettings()
@@ -153,6 +157,11 @@ namespace HR_Desktop.Admin
         {
             Util.displayForm(null, new LOGGING.ActivityLogs_Form(UserAccount.LoggedInAccount, selectedRowID()));
             txtQuickSearch.Focus();
+        }
+
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            Util.displayForm(null, new Admin.Clients_Profile_Form(selectedRowID()));
         }
 
         #endregion
