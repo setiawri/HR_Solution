@@ -43,6 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper.cs" />
+    <Compile Include="HR\WorkshiftCategory.cs" />
+    <Compile Include="HR\Workshift.cs" />
+    <Compile Include="HR\Client.cs" />
+    <Compile Include="HR\Attendance.cs" />
     <Compile Include="LOGGING\ActivityLog.cs" />
     <Compile Include="LOGGING\ActivityLogs_Form.cs">
       <SubType>Form</SubType>
@@ -116,6 +120,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DBScript.txt" />
+    <Content Include="Documentation\Rules And Assumptions.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

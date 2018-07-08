@@ -40,7 +40,12 @@
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.menu_admin = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_useraccounts = new System.Windows.Forms.ToolStripMenuItem();
+            this.admin_clients = new System.Windows.Forms.ToolStripMenuItem();
+            this.admin_workshiftcategories = new System.Windows.Forms.ToolStripMenuItem();
+            this.admin_workshifts = new System.Windows.Forms.ToolStripMenuItem();
+            this.admin_attendance = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_account = new System.Windows.Forms.ToolStripMenuItem();
+            this.reports_timesheets = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlShortcuts.SuspendLayout();
             this.gbShortcuts.SuspendLayout();
             this.flpShortcuts.SuspendLayout();
@@ -50,6 +55,8 @@
             // 
             // menu_reports
             // 
+            this.menu_reports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reports_timesheets});
             this.menu_reports.Name = "menu_reports";
             this.menu_reports.Size = new System.Drawing.Size(59, 20);
             this.menu_reports.Text = "Reports";
@@ -157,7 +164,11 @@
             // menu_admin
             // 
             this.menu_admin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.admin_useraccounts});
+            this.admin_useraccounts,
+            this.admin_clients,
+            this.admin_workshiftcategories,
+            this.admin_workshifts,
+            this.admin_attendance});
             this.menu_admin.Name = "menu_admin";
             this.menu_admin.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
             this.menu_admin.Size = new System.Drawing.Size(55, 20);
@@ -166,9 +177,37 @@
             // admin_useraccounts
             // 
             this.admin_useraccounts.Name = "admin_useraccounts";
-            this.admin_useraccounts.Size = new System.Drawing.Size(150, 22);
+            this.admin_useraccounts.Size = new System.Drawing.Size(184, 22);
             this.admin_useraccounts.Text = "User Accounts";
             this.admin_useraccounts.Click += new System.EventHandler(this.admin_useraccounts_Click);
+            // 
+            // admin_clients
+            // 
+            this.admin_clients.Name = "admin_clients";
+            this.admin_clients.Size = new System.Drawing.Size(184, 22);
+            this.admin_clients.Text = "Clients";
+            this.admin_clients.Click += new System.EventHandler(this.admin_clients_Click);
+            // 
+            // admin_workshiftcategories
+            // 
+            this.admin_workshiftcategories.Name = "admin_workshiftcategories";
+            this.admin_workshiftcategories.Size = new System.Drawing.Size(184, 22);
+            this.admin_workshiftcategories.Text = "Workshift Categories";
+            this.admin_workshiftcategories.Click += new System.EventHandler(this.admin_workshiftcategories_Click);
+            // 
+            // admin_workshifts
+            // 
+            this.admin_workshifts.Name = "admin_workshifts";
+            this.admin_workshifts.Size = new System.Drawing.Size(184, 22);
+            this.admin_workshifts.Text = "Workshifts";
+            this.admin_workshifts.Click += new System.EventHandler(this.admin_workshifts_Click);
+            // 
+            // admin_attendance
+            // 
+            this.admin_attendance.Name = "admin_attendance";
+            this.admin_attendance.Size = new System.Drawing.Size(184, 22);
+            this.admin_attendance.Text = "Attendance";
+            this.admin_attendance.Click += new System.EventHandler(this.admin_attendance_Click);
             // 
             // menu_account
             // 
@@ -179,6 +218,13 @@
             this.menu_account.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
             this.menu_account.Size = new System.Drawing.Size(64, 20);
             this.menu_account.Text = "Account";
+            // 
+            // reports_timesheets
+            // 
+            this.reports_timesheets.Name = "reports_timesheets";
+            this.reports_timesheets.Size = new System.Drawing.Size(180, 22);
+            this.reports_timesheets.Text = "Timesheets";
+            this.reports_timesheets.Click += new System.EventHandler(this.reports_timesheets_Click);
             // 
             // Main_Form
             // 
@@ -221,5 +267,10 @@
         private System.Windows.Forms.ToolStripMenuItem menu_admin;
         private System.Windows.Forms.ToolStripMenuItem admin_useraccounts;
         private System.Windows.Forms.ToolStripMenuItem menu_account;
+        private System.Windows.Forms.ToolStripMenuItem admin_workshiftcategories;
+        private System.Windows.Forms.ToolStripMenuItem admin_clients;
+        private System.Windows.Forms.ToolStripMenuItem admin_workshifts;
+        private System.Windows.Forms.ToolStripMenuItem admin_attendance;
+        private System.Windows.Forms.ToolStripMenuItem reports_timesheets;
     }
 }

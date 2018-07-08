@@ -1,0 +1,42 @@
+﻿
+GLOBAL
+> Periode gajian bisa berbeda tiap lokasi dan tiap employee
+> CASES:
+	- Period gajian tgl 01 s/d 31. shift 11pm-7am. Tgl 31Jan clock in 11pm, clock out 7am. Option utk pembayaran:
+		a) dipecah 1 jam Januari, 7 jam Februari
+		b) full 8 jam Januari
+		c) full 8 jam Februari
+	- 
+> Beda shift duration, beda payrate
+> Overtime rate set per employee. Create payrate profile template.
+> Work schedule
+	- create customizable templates
+
+LSS
+> Employee terlambat 1 jam, dianggap absen. employee lain menggantikan dengan rate overtime.
+> 
+
+
+
+
+Attendance
+> UserAccounts_Id
+> TimestampIn
+> TimestampOut
+> EffectiveTimestampIn
+> EffectiveTimestampOut
+> WorkShift_Start
+> WorkShift_Duration
+> Notes
+> Approved
+> Flag1
+> Flag2
+
+UserAccounts_WorkSchedules_PayRate
+> UserAccounts_Id
+> Clients_Id
+> Start
+> Duration
+> PayRate_Normal
+> PayRate_Overtime
+> PayRate_DoubleOvertime
