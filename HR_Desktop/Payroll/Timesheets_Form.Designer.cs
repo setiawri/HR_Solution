@@ -222,8 +222,6 @@
             // 
             // itxt_Notes
             // 
-            this.itxt_Notes.AllowDecimal = true;
-            this.itxt_Notes.AllowNegativeValue = true;
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
             this.itxt_Notes.Location = new System.Drawing.Point(147, 9);
@@ -234,7 +232,6 @@
             this.itxt_Notes.PasswordChar = '\0';
             this.itxt_Notes.RowCount = 6;
             this.itxt_Notes.ShowDeleteButton = false;
-            this.itxt_Notes.ShowInNumeric = false;
             this.itxt_Notes.ShowTextboxOnly = false;
             this.itxt_Notes.Size = new System.Drawing.Size(194, 110);
             this.itxt_Notes.TabIndex = 8;
@@ -379,8 +376,6 @@
             // 
             // itxt_FilterEmployee_UserAccounts_Name
             // 
-            this.itxt_FilterEmployee_UserAccounts_Name.AllowDecimal = true;
-            this.itxt_FilterEmployee_UserAccounts_Name.AllowNegativeValue = true;
             this.itxt_FilterEmployee_UserAccounts_Name.IsBrowseMode = false;
             this.itxt_FilterEmployee_UserAccounts_Name.LabelText = "Employee";
             this.itxt_FilterEmployee_UserAccounts_Name.Location = new System.Drawing.Point(4, 20);
@@ -391,7 +386,6 @@
             this.itxt_FilterEmployee_UserAccounts_Name.PasswordChar = '\0';
             this.itxt_FilterEmployee_UserAccounts_Name.RowCount = 1;
             this.itxt_FilterEmployee_UserAccounts_Name.ShowDeleteButton = false;
-            this.itxt_FilterEmployee_UserAccounts_Name.ShowInNumeric = false;
             this.itxt_FilterEmployee_UserAccounts_Name.ShowTextboxOnly = false;
             this.itxt_FilterEmployee_UserAccounts_Name.Size = new System.Drawing.Size(146, 41);
             this.itxt_FilterEmployee_UserAccounts_Name.TabIndex = 10;
@@ -421,8 +415,6 @@
             // 
             // itxt_FilterEmployee_Client
             // 
-            this.itxt_FilterEmployee_Client.AllowDecimal = true;
-            this.itxt_FilterEmployee_Client.AllowNegativeValue = true;
             this.itxt_FilterEmployee_Client.IsBrowseMode = true;
             this.itxt_FilterEmployee_Client.LabelText = "*Client";
             this.itxt_FilterEmployee_Client.Location = new System.Drawing.Point(7, 20);
@@ -433,7 +425,6 @@
             this.itxt_FilterEmployee_Client.PasswordChar = '\0';
             this.itxt_FilterEmployee_Client.RowCount = 1;
             this.itxt_FilterEmployee_Client.ShowDeleteButton = true;
-            this.itxt_FilterEmployee_Client.ShowInNumeric = false;
             this.itxt_FilterEmployee_Client.ShowTextboxOnly = false;
             this.itxt_FilterEmployee_Client.Size = new System.Drawing.Size(146, 41);
             this.itxt_FilterEmployee_Client.TabIndex = 9;
