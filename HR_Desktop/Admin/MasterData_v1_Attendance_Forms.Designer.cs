@@ -155,8 +155,6 @@
             // 
             // itxt_Notes
             // 
-            this.itxt_Notes.AllowDecimal = true;
-            this.itxt_Notes.AllowNegativeValue = true;
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
             this.itxt_Notes.Location = new System.Drawing.Point(3, 4);
@@ -167,7 +165,6 @@
             this.itxt_Notes.PasswordChar = '\0';
             this.itxt_Notes.RowCount = 5;
             this.itxt_Notes.ShowDeleteButton = false;
-            this.itxt_Notes.ShowInNumeric = false;
             this.itxt_Notes.ShowTextboxOnly = false;
             this.itxt_Notes.Size = new System.Drawing.Size(242, 99);
             this.itxt_Notes.TabIndex = 4;
@@ -177,8 +174,6 @@
             // 
             // itxt_UserAccount
             // 
-            this.itxt_UserAccount.AllowDecimal = true;
-            this.itxt_UserAccount.AllowNegativeValue = true;
             this.itxt_UserAccount.IsBrowseMode = true;
             this.itxt_UserAccount.LabelText = "*User";
             this.itxt_UserAccount.Location = new System.Drawing.Point(3, 10);
@@ -189,7 +184,6 @@
             this.itxt_UserAccount.PasswordChar = '\0';
             this.itxt_UserAccount.RowCount = 1;
             this.itxt_UserAccount.ShowDeleteButton = true;
-            this.itxt_UserAccount.ShowInNumeric = false;
             this.itxt_UserAccount.ShowTextboxOnly = false;
             this.itxt_UserAccount.Size = new System.Drawing.Size(242, 41);
             this.itxt_UserAccount.TabIndex = 0;

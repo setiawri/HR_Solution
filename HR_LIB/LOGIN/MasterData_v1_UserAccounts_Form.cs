@@ -137,8 +137,8 @@ namespace LOGIN
             itxt_Phone1.ValueText = obj.Phone1;
             itxt_Phone2.ValueText = obj.Phone2;
             itxt_Identification.ValueText = obj.Identification;
-            itxt_Height.ValueText = obj.Height.ToString();
-            itxt_Weight.ValueText = obj.Weight.ToString();
+            itxt_Height.Value = obj.Height;
+            itxt_Weight.Value = obj.Weight;
             itxt_Notes.ValueText = obj.Notes;
 
             LIBUtil.Desktop.UserControls.InputControl_CheckedListBox.clearCheckedItems(clbUserAccountRoles);

@@ -129,8 +129,6 @@
             // 
             // itxt_Notes
             // 
-            this.itxt_Notes.AllowDecimal = true;
-            this.itxt_Notes.AllowNegativeValue = true;
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
             this.itxt_Notes.Location = new System.Drawing.Point(6, 171);
@@ -141,7 +139,6 @@
             this.itxt_Notes.PasswordChar = '\0';
             this.itxt_Notes.RowCount = 2;
             this.itxt_Notes.ShowDeleteButton = false;
-            this.itxt_Notes.ShowInNumeric = false;
             this.itxt_Notes.ShowTextboxOnly = false;
             this.itxt_Notes.Size = new System.Drawing.Size(237, 53);
             this.itxt_Notes.TabIndex = 4;
@@ -149,8 +146,6 @@
             // 
             // itxt_Clients
             // 
-            this.itxt_Clients.AllowDecimal = true;
-            this.itxt_Clients.AllowNegativeValue = true;
             this.itxt_Clients.IsBrowseMode = true;
             this.itxt_Clients.LabelText = "*Client";
             this.itxt_Clients.Location = new System.Drawing.Point(6, 45);
@@ -161,7 +156,6 @@
             this.itxt_Clients.PasswordChar = '\0';
             this.itxt_Clients.RowCount = 1;
             this.itxt_Clients.ShowDeleteButton = true;
-            this.itxt_Clients.ShowInNumeric = false;
             this.itxt_Clients.ShowTextboxOnly = false;
             this.itxt_Clients.Size = new System.Drawing.Size(239, 41);
             this.itxt_Clients.TabIndex = 7;
@@ -170,8 +164,6 @@
             // 
             // itxt_WorkshiftCategories
             // 
-            this.itxt_WorkshiftCategories.AllowDecimal = true;
-            this.itxt_WorkshiftCategories.AllowNegativeValue = true;
             this.itxt_WorkshiftCategories.IsBrowseMode = true;
             this.itxt_WorkshiftCategories.LabelText = "Category";
             this.itxt_WorkshiftCategories.Location = new System.Drawing.Point(6, 87);
@@ -182,7 +174,6 @@
             this.itxt_WorkshiftCategories.PasswordChar = '\0';
             this.itxt_WorkshiftCategories.RowCount = 1;
             this.itxt_WorkshiftCategories.ShowDeleteButton = true;
-            this.itxt_WorkshiftCategories.ShowInNumeric = false;
             this.itxt_WorkshiftCategories.ShowTextboxOnly = false;
             this.itxt_WorkshiftCategories.Size = new System.Drawing.Size(239, 41);
             this.itxt_WorkshiftCategories.TabIndex = 8;
@@ -191,8 +182,6 @@
             // 
             // itxt_Name
             // 
-            this.itxt_Name.AllowDecimal = true;
-            this.itxt_Name.AllowNegativeValue = true;
             this.itxt_Name.IsBrowseMode = false;
             this.itxt_Name.LabelText = "*Name";
             this.itxt_Name.Location = new System.Drawing.Point(4, 4);
@@ -203,7 +192,6 @@
             this.itxt_Name.PasswordChar = '\0';
             this.itxt_Name.RowCount = 1;
             this.itxt_Name.ShowDeleteButton = false;
-            this.itxt_Name.ShowInNumeric = false;
             this.itxt_Name.ShowTextboxOnly = false;
             this.itxt_Name.Size = new System.Drawing.Size(239, 41);
             this.itxt_Name.TabIndex = 9;

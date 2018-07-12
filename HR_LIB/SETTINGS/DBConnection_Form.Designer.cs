@@ -47,8 +47,6 @@
             // 
             // itxt_DatabaseName
             // 
-            this.itxt_DatabaseName.AllowDecimal = true;
-            this.itxt_DatabaseName.AllowNegativeValue = true;
             this.itxt_DatabaseName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.itxt_DatabaseName.IsBrowseMode = false;
             this.itxt_DatabaseName.LabelText = "Database Name";
@@ -58,7 +56,6 @@
             this.itxt_DatabaseName.Name = "itxt_DatabaseName";
             this.itxt_DatabaseName.RowCount = 1;
             this.itxt_DatabaseName.ShowDeleteButton = false;
-            this.itxt_DatabaseName.ShowInNumeric = false;
             this.itxt_DatabaseName.ShowTextboxOnly = false;
             this.itxt_DatabaseName.Size = new System.Drawing.Size(151, 40);
             this.itxt_DatabaseName.TabIndex = 7;
@@ -66,8 +63,6 @@
             // 
             // itxt_ServerName
             // 
-            this.itxt_ServerName.AllowDecimal = true;
-            this.itxt_ServerName.AllowNegativeValue = true;
             this.itxt_ServerName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.itxt_ServerName.IsBrowseMode = false;
             this.itxt_ServerName.LabelText = "Server Name";
@@ -77,7 +72,6 @@
             this.itxt_ServerName.Name = "itxt_ServerName";
             this.itxt_ServerName.RowCount = 1;
             this.itxt_ServerName.ShowDeleteButton = false;
-            this.itxt_ServerName.ShowInNumeric = false;
             this.itxt_ServerName.ShowTextboxOnly = false;
             this.itxt_ServerName.Size = new System.Drawing.Size(151, 40);
             this.itxt_ServerName.TabIndex = 6;

@@ -85,7 +85,7 @@ namespace HR_Desktop.Admin
         {
             return Attendance.get(null,
                 itxt_UserAccount.ValueGuid,
-                itxt_Notes.ValueText
+                null, null, null, itxt_Notes.ValueText
                 ).DefaultView;
         }
 

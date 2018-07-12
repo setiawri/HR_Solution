@@ -126,9 +126,6 @@
             this.ptInputPanel.Location = new System.Drawing.Point(0, 0);
             // 
             // itxt_CompanyName
-            // 
-            this.itxt_CompanyName.AllowDecimal = true;
-            this.itxt_CompanyName.AllowNegativeValue = true;
             this.itxt_CompanyName.IsBrowseMode = false;
             this.itxt_CompanyName.LabelText = "*Company";
             this.itxt_CompanyName.Location = new System.Drawing.Point(12, 9);
@@ -139,7 +136,6 @@
             this.itxt_CompanyName.PasswordChar = '\0';
             this.itxt_CompanyName.RowCount = 1;
             this.itxt_CompanyName.ShowDeleteButton = false;
-            this.itxt_CompanyName.ShowInNumeric = false;
             this.itxt_CompanyName.ShowTextboxOnly = false;
             this.itxt_CompanyName.Size = new System.Drawing.Size(225, 40);
             this.itxt_CompanyName.TabIndex = 0;
@@ -147,8 +143,6 @@
             // 
             // itxt_Notes
             // 
-            this.itxt_Notes.AllowDecimal = true;
-            this.itxt_Notes.AllowNegativeValue = true;
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
             this.itxt_Notes.Location = new System.Drawing.Point(11, 131);
@@ -159,7 +153,6 @@
             this.itxt_Notes.PasswordChar = '\0';
             this.itxt_Notes.RowCount = 8;
             this.itxt_Notes.ShowDeleteButton = false;
-            this.itxt_Notes.ShowInNumeric = false;
             this.itxt_Notes.ShowTextboxOnly = false;
             this.itxt_Notes.Size = new System.Drawing.Size(225, 66);
             this.itxt_Notes.TabIndex = 3;
@@ -167,8 +160,6 @@
             // 
             // itxt_Address
             // 
-            this.itxt_Address.AllowDecimal = true;
-            this.itxt_Address.AllowNegativeValue = true;
             this.itxt_Address.IsBrowseMode = false;
             this.itxt_Address.LabelText = "Address";
             this.itxt_Address.Location = new System.Drawing.Point(12, 49);
@@ -179,7 +170,6 @@
             this.itxt_Address.PasswordChar = '\0';
             this.itxt_Address.RowCount = 1;
             this.itxt_Address.ShowDeleteButton = false;
-            this.itxt_Address.ShowInNumeric = false;
             this.itxt_Address.ShowTextboxOnly = false;
             this.itxt_Address.Size = new System.Drawing.Size(225, 49);
             this.itxt_Address.TabIndex = 1;
@@ -187,8 +177,6 @@
             // 
             // itxt_BillingAddress
             // 
-            this.itxt_BillingAddress.AllowDecimal = true;
-            this.itxt_BillingAddress.AllowNegativeValue = true;
             this.itxt_BillingAddress.IsBrowseMode = false;
             this.itxt_BillingAddress.LabelText = "Billing Address";
             this.itxt_BillingAddress.Location = new System.Drawing.Point(12, 101);
@@ -199,7 +187,6 @@
             this.itxt_BillingAddress.PasswordChar = '\0';
             this.itxt_BillingAddress.RowCount = 1;
             this.itxt_BillingAddress.ShowDeleteButton = false;
-            this.itxt_BillingAddress.ShowInNumeric = false;
             this.itxt_BillingAddress.ShowTextboxOnly = false;
             this.itxt_BillingAddress.Size = new System.Drawing.Size(225, 49);
             this.itxt_BillingAddress.TabIndex = 2;
@@ -207,8 +194,6 @@
             // 
             // itxt_ContactPersonName
             // 
-            this.itxt_ContactPersonName.AllowDecimal = true;
-            this.itxt_ContactPersonName.AllowNegativeValue = true;
             this.itxt_ContactPersonName.IsBrowseMode = false;
             this.itxt_ContactPersonName.LabelText = "Contact";
             this.itxt_ContactPersonName.Location = new System.Drawing.Point(11, 8);
@@ -219,7 +204,6 @@
             this.itxt_ContactPersonName.PasswordChar = '\0';
             this.itxt_ContactPersonName.RowCount = 5;
             this.itxt_ContactPersonName.ShowDeleteButton = false;
-            this.itxt_ContactPersonName.ShowInNumeric = false;
             this.itxt_ContactPersonName.ShowTextboxOnly = false;
             this.itxt_ContactPersonName.Size = new System.Drawing.Size(225, 41);
             this.itxt_ContactPersonName.TabIndex = 4;
@@ -227,8 +211,6 @@
             // 
             // itxt_Phone1
             // 
-            this.itxt_Phone1.AllowDecimal = true;
-            this.itxt_Phone1.AllowNegativeValue = true;
             this.itxt_Phone1.IsBrowseMode = false;
             this.itxt_Phone1.LabelText = "Phone1";
             this.itxt_Phone1.Location = new System.Drawing.Point(11, 48);
@@ -239,7 +221,6 @@
             this.itxt_Phone1.PasswordChar = '\0';
             this.itxt_Phone1.RowCount = 1;
             this.itxt_Phone1.ShowDeleteButton = false;
-            this.itxt_Phone1.ShowInNumeric = false;
             this.itxt_Phone1.ShowTextboxOnly = false;
             this.itxt_Phone1.Size = new System.Drawing.Size(225, 46);
             this.itxt_Phone1.TabIndex = 1;
@@ -247,8 +228,6 @@
             // 
             // itxt_Phone2
             // 
-            this.itxt_Phone2.AllowDecimal = true;
-            this.itxt_Phone2.AllowNegativeValue = true;
             this.itxt_Phone2.IsBrowseMode = false;
             this.itxt_Phone2.LabelText = "Phone 2";
             this.itxt_Phone2.Location = new System.Drawing.Point(11, 89);
@@ -259,7 +238,6 @@
             this.itxt_Phone2.PasswordChar = '\0';
             this.itxt_Phone2.RowCount = 1;
             this.itxt_Phone2.ShowDeleteButton = false;
-            this.itxt_Phone2.ShowInNumeric = false;
             this.itxt_Phone2.ShowTextboxOnly = false;
             this.itxt_Phone2.Size = new System.Drawing.Size(225, 40);
             this.itxt_Phone2.TabIndex = 2;
@@ -267,8 +245,6 @@
             // 
             // itxt_NPWP
             // 
-            this.itxt_NPWP.AllowDecimal = true;
-            this.itxt_NPWP.AllowNegativeValue = true;
             this.itxt_NPWP.IsBrowseMode = false;
             this.itxt_NPWP.LabelText = "NPWP";
             this.itxt_NPWP.Location = new System.Drawing.Point(12, 153);
@@ -278,7 +254,6 @@
             this.itxt_NPWP.PasswordChar = '\0';
             this.itxt_NPWP.RowCount = 1;
             this.itxt_NPWP.ShowDeleteButton = false;
-            this.itxt_NPWP.ShowInNumeric = false;
             this.itxt_NPWP.ShowTextboxOnly = false;
             this.itxt_NPWP.Size = new System.Drawing.Size(225, 41);
             this.itxt_NPWP.TabIndex = 3;
@@ -286,8 +261,6 @@
             // 
             // itxt_NPWPAddress
             // 
-            this.itxt_NPWPAddress.AllowDecimal = true;
-            this.itxt_NPWPAddress.AllowNegativeValue = true;
             this.itxt_NPWPAddress.IsBrowseMode = false;
             this.itxt_NPWPAddress.LabelText = "NPWP Address";
             this.itxt_NPWPAddress.Location = new System.Drawing.Point(12, 193);
@@ -298,7 +271,6 @@
             this.itxt_NPWPAddress.PasswordChar = '\0';
             this.itxt_NPWPAddress.RowCount = 1;
             this.itxt_NPWPAddress.ShowDeleteButton = false;
-            this.itxt_NPWPAddress.ShowInNumeric = false;
             this.itxt_NPWPAddress.ShowTextboxOnly = false;
             this.itxt_NPWPAddress.Size = new System.Drawing.Size(225, 49);
             this.itxt_NPWPAddress.TabIndex = 3;

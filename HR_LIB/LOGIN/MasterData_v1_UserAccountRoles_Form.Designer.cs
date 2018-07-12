@@ -111,8 +111,6 @@
             // 
             // itxt_Name
             // 
-            this.itxt_Name.AllowDecimal = true;
-            this.itxt_Name.AllowNegativeValue = true;
             this.itxt_Name.IsBrowseMode = false;
             this.itxt_Name.LabelText = "Name";
             this.itxt_Name.Location = new System.Drawing.Point(12, 6);
@@ -122,7 +120,6 @@
             this.itxt_Name.PasswordChar = '\0';
             this.itxt_Name.RowCount = 1;
             this.itxt_Name.ShowDeleteButton = false;
-            this.itxt_Name.ShowInNumeric = false;
             this.itxt_Name.ShowTextboxOnly = false;
             this.itxt_Name.Size = new System.Drawing.Size(180, 40);
             this.itxt_Name.TabIndex = 0;
@@ -198,8 +195,6 @@
             // 
             // itxt_Notes
             // 
-            this.itxt_Notes.AllowDecimal = true;
-            this.itxt_Notes.AllowNegativeValue = true;
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
             this.itxt_Notes.Location = new System.Drawing.Point(12, 47);
@@ -209,7 +204,6 @@
             this.itxt_Notes.PasswordChar = '\0';
             this.itxt_Notes.RowCount = 5;
             this.itxt_Notes.ShowDeleteButton = false;
-            this.itxt_Notes.ShowInNumeric = false;
             this.itxt_Notes.ShowTextboxOnly = false;
             this.itxt_Notes.Size = new System.Drawing.Size(180, 95);
             this.itxt_Notes.TabIndex = 1;

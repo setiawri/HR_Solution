@@ -104,23 +104,23 @@ namespace HR_LIB.HR
 
         public static DataRow get(SqlConnection sqlConnection, Guid id)
         {
-            return Util.getFirstRow(get(sqlConnection, id, null, null));
+            return Util.getFirstRow(get(sqlConnection, id, null, null, null, null, null));
         }
         public static DataRow get(Guid id)
         {
             DataRow row;
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
-                row = Util.getFirstRow(get(sqlConnection, id, null, null));
+                row = Util.getFirstRow(get(sqlConnection, id, null, null, null, null, null));
             return row;
         }
-        public static DataTable get(Guid? id, Guid? UserAccounts_Id, string notes)
+        public static DataTable get(Guid? id, Guid? UserAccounts_Id, int? dayOfWeek, TimeSpan? startTime, TimeSpan? endTime, string notes)
         {
             DataTable datatable;
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
-                datatable = get(sqlConnection, id, UserAccounts_Id, notes);
+                datatable = get(sqlConnection, id, UserAccounts_Id, dayOfWeek, startTime, endTime, notes);
             return datatable;
         }
-        public static DataTable get(SqlConnection sqlConnection, Guid? id, Guid? UserAccounts_Id, string notes)
+        public static DataTable get(SqlConnection sqlConnection, Guid? id, Guid? UserAccounts_Id, int? dayOfWeek, TimeSpan? startTime, TimeSpan? endTime, string notes)
         {
             SqlQueryResult result = DBConnection.query(
                 sqlConnection,
@@ -128,6 +128,9 @@ namespace HR_LIB.HR
                 "Attendance_get",
                 new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
                 new SqlQueryParameter(COL_DB_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(UserAccounts_Id)),
+                new SqlQueryParameter("dayOfWeek", SqlDbType.TinyInt, Util.wrapNullable<int?>(dayOfWeek)),
+                new SqlQueryParameter("startTime", SqlDbType.Time, Util.wrapNullable(startTime)),
+                new SqlQueryParameter("endTime", SqlDbType.Time, Util.wrapNullable(endTime)),
                 new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                 );
             return result.Datatable;

@@ -92,7 +92,7 @@ namespace HR_Desktop.Admin
         {
             return Workshift.get(chkIncludeInactive.Checked, null,
                 itxt_Name.ValueText,
-                itxt_Clients.ValueGuid,
+                itxt_Clients.ValueGuid, null,
                 itxt_WorkshiftCategories.ValueGuid,
                 Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
                 Util.wrapNullable<string>(idtp_Start.Value.ToString()),
