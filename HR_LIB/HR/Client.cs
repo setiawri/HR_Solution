@@ -41,6 +41,7 @@ namespace HR_LIB.HR
         public const string COL_DB_Active = "Active";
 
         public const string COL_FILTER_IncludeInactive = "FILTER_IncludeInactive";
+        public const string COL_UserAccounts_Id = "UserAccounts_Id";
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
@@ -111,25 +112,25 @@ namespace HR_LIB.HR
 
         public static DataRow get(SqlConnection sqlConnection, Guid id)
         {
-            return Util.getFirstRow(get(sqlConnection,true, id, null, null, null, null, null, null, null, null, null));
+            return Util.getFirstRow(get(sqlConnection,true, id, null, null, null, null, null, null, null, null, null, null));
         }
         public static DataRow get(Guid id)
         {
             DataRow row;
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
-                row = Util.getFirstRow(get(sqlConnection,true, id, null, null, null, null, null, null, null, null, null));
+                row = Util.getFirstRow(get(sqlConnection,true, id, null, null, null, null, null, null, null, null, null, null));
             return row;
         }
         public static DataTable get(bool filterIncludeInactive, Guid? id, string companyName, string address, string billingAddress,
-            string contactPersonName, string phone1, string phone2, string npwp, string npwpAddress, string notes)
+            string contactPersonName, string phone1, string phone2, string npwp, string npwpAddress, string notes, Guid? UserAccounts_Id)
         {
             DataTable datatable;
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
-                datatable = get(sqlConnection, filterIncludeInactive, id, companyName, address, billingAddress, contactPersonName, phone1, phone2, npwp, npwpAddress, notes);
+                datatable = get(sqlConnection, filterIncludeInactive, id, companyName, address, billingAddress, contactPersonName, phone1, phone2, npwp, npwpAddress, notes, UserAccounts_Id);
             return datatable;
         }
         public static DataTable get(SqlConnection sqlConnection, bool filterIncludeInactive, Guid? id, string companyName, string address, string billingAddress,
-            string contactPersonName, string phone1, string phone2, string npwp, string npwpAddress, string notes)
+            string contactPersonName, string phone1, string phone2, string npwp, string npwpAddress, string notes, Guid? UserAccounts_Id)
         {
             SqlQueryResult result = DBConnection.query(
                 sqlConnection,
@@ -145,7 +146,8 @@ namespace HR_LIB.HR
                 new SqlQueryParameter(COL_DB_Phone2, SqlDbType.NVarChar, Util.wrapNullable(phone2)),
                 new SqlQueryParameter(COL_DB_NPWP, SqlDbType.NVarChar, Util.wrapNullable(npwp)),
                 new SqlQueryParameter(COL_DB_NPWPAddress, SqlDbType.NVarChar, Util.wrapNullable(npwpAddress)),
-                new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
+                new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes)),
+                new SqlQueryParameter(COL_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(UserAccounts_Id))
 
                 );
             return result.Datatable;

@@ -30,14 +30,18 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_NPWPAddress;
         private DataGridViewColumn col_dgv_Notes;
 
+        private Guid? _UserAccounts_Id = null;
+
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_Clients_Form() : this(FormModes.Add) { }
-        public MasterData_v1_Clients_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD)
+        public MasterData_v1_Clients_Form() : this(FormModes.Add, null) { }
+        public MasterData_v1_Clients_Form(FormModes startingMode, Guid? Employee_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
         {
             InitializeComponent();
+            if (Employee_Id != null)
+                    _UserAccounts_Id = (Guid)Employee_Id;
 
         }
 
@@ -93,9 +97,9 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            return Client.get(chkIncludeInactive.Checked, null, itxt_CompanyName.ValueText, itxt_Address.ValueText, itxt_BillingAddress.ValueText,
+                return Client.get(chkIncludeInactive.Checked, null, itxt_CompanyName.ValueText, itxt_Address.ValueText, itxt_BillingAddress.ValueText,
                     itxt_ContactPersonName.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_NPWP.ValueText, itxt_NPWPAddress.ValueText,
-                    itxt_Notes.ValueText).DefaultView;
+                    itxt_Notes.ValueText, _UserAccounts_Id).DefaultView;
         }
 
         protected override void populateInputFields()

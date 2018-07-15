@@ -14,6 +14,7 @@ namespace HR_Desktop.Admin
         #region SETTINGS
 
         private const bool FORM_SHOWDATAONLOAD = true;
+        private Guid? _Clients_Id = null;
 
         #endregion SETTINGS
         /*******************************************************************************************************/
@@ -31,9 +32,15 @@ namespace HR_Desktop.Admin
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_Workshifts_Form() : this(FormModes.Add) { }
-        public MasterData_v1_Workshifts_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD) { InitializeComponent(); }
+        public MasterData_v1_Workshifts_Form() : this(FormModes.Add, null) { }
+        public MasterData_v1_Workshifts_Form(FormModes startingMode, Guid? Clients_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
+        {
+            InitializeComponent();
+            if (Clients_Id != null)
+                _Clients_Id = Clients_Id;
 
+        }
+        
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
         #region METHODS
@@ -90,15 +97,21 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
+            if(Mode == FormModes.Browse && _Clients_Id != null)
+                return Workshift.get(chkIncludeInactive.Checked, null, null,
+                    _Clients_Id, null, null, null, null, null, null
+                    ).DefaultView;
+
+
             return Workshift.get(chkIncludeInactive.Checked, null,
-                itxt_Name.ValueText,
-                itxt_Clients.ValueGuid, null,
-                itxt_WorkshiftCategories.ValueGuid,
-                Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
-                Util.wrapNullable<string>(idtp_Start.Value.ToString()),
-                null,
-                Util.wrapNullable<string>(itxt_Notes.ValueText)
-                ).DefaultView;
+                    itxt_Name.ValueText,
+                    itxt_Clients.ValueGuid, null,
+                    itxt_WorkshiftCategories.ValueGuid,
+                    Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
+                    Util.wrapNullable<string>(idtp_Start.Value.ToString()),
+                    null,
+                    Util.wrapNullable<string>(itxt_Notes.ValueText)
+                    ).DefaultView;
         }
 
         protected override void populateInputFields()
@@ -198,7 +211,7 @@ namespace HR_Desktop.Admin
 
         private void itxt_Clients_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse), ref sender);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse, null), ref sender);
         }
 
         private void itxt_WorkshiftCategories_isBrowseMode_Clicked(object sender, EventArgs e)

@@ -40,10 +40,18 @@ namespace HR_Desktop.Payroll
             setupControlsBasedOnRoles();
 
             iddl_DayOfWeek.populate(typeof(DayOfWeek));
+            AttendanceStatus.populateDropDownList(iddl_AttendanceStatuses, false);
 
             chkFilterEmployeesByClient.Checked = true;
+
             idtp_FilterEmployee_StartDate.Value = DateTime.Today.AddMonths(-3);
             idtp_FilterEmployee_EndDate.Value = DateTime.Today;
+
+            idtp_FilterAttendance_StartDate.Value = DateTime.Today.AddMonths(-3);
+            idtp_FilterAttendance_EndDate.Value = DateTime.Today;
+
+            idtp_TimestampIn.Value = DateTime.Now;
+            idtp_TimestampOut.Value = DateTime.Now;
 
             dgvEmployees.AutoGenerateColumns = false;
             col_dgvEmployees_UserAccounts_Id.DataPropertyName = Workshift.COL_DB_UserAccounts_Id;
@@ -58,6 +66,7 @@ namespace HR_Desktop.Payroll
             col_dgvAttendance_Flag1.DataPropertyName = Attendance.COL_DB_Flag1;
             col_dgvAttendance_Flag2.DataPropertyName = Attendance.COL_DB_Flag2;
             col_dgvAttendance_Approved.DataPropertyName = Attendance.COL_DB_Approved;
+            col_dgvAttendance_Rejected.DataPropertyName = Attendance.COL_DB_Rejected;
             col_dgvAttendance_Notes.DataPropertyName = Attendance.COL_DB_Notes;
 
         }
@@ -90,6 +99,8 @@ namespace HR_Desktop.Payroll
                     null,
                     (Guid)Util.getSelectedRowValue(dgvEmployees, col_dgvEmployees_UserAccounts_Id), 
                     Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue), 
+                    idtp_FilterAttendance_StartDate.ValueAsStartDateFilter,
+                    idtp_FilterAttendance_EndDate.ValueAsEndDateFilter,
                     idtp_FilterAttendance_In.ValueTimeSpan, 
                     idtp_FilterAttendance_Out.ValueTimeSpan, 
                     null
@@ -138,9 +149,16 @@ namespace HR_Desktop.Payroll
 
         private void itxt_Client_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse), ref sender);
-            itxt_Attendance_Client.setValue(itxt_FilterEmployee_Client.ValueText, (Guid)itxt_FilterEmployee_Client.ValueGuid);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse, null), ref sender);
+            if(itxt_FilterEmployee_Client.ValueGuid != null)
+                itxt_Attendance_Client.setValue(itxt_FilterEmployee_Client.ValueText, (Guid)itxt_FilterEmployee_Client.ValueGuid);
         }
+
+        private void itxt_Attendance_Client_isBrowseMode_Clicked(object sender, EventArgs e)
+        {
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse, (Guid)Util.getSelectedRowValue(dgvEmployees, col_dgvEmployees_UserAccounts_Id)), ref sender);   
+        }
+
 
         private void btnFilterEmployees_Click(object sender, EventArgs e)
         {
@@ -153,6 +171,10 @@ namespace HR_Desktop.Payroll
                 (Guid)Util.getSelectedRowValue(dgvEmployees, col_dgvEmployees_UserAccounts_Id),
                 (DateTime)idtp_TimestampIn.Value,
                 (DateTime)idtp_TimestampOut.Value,
+                itxt_Attendance_Client.ValueGuid,
+                itxt_Workshift.ValueGuid,
+                (DateTime)idtp_EffectiveTimestampIn.Value,
+                (DateTime)idtp_EffectiveTimestampOut.Value,
                 itxt_Notes.ValueText);
 
             populateDgvAttendance();
@@ -175,6 +197,11 @@ namespace HR_Desktop.Payroll
                 Attendance.updateApprovedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendance, col_dgvAttendance_Id), !Util.getCheckboxValue(sender, e));
                 populateDgvAttendance();
             }
+            else if (Util.isColumnMatch(sender, e, col_dgvAttendance_Rejected))
+            {
+                Attendance.updateRejectedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendance, col_dgvAttendance_Id), !Util.getCheckboxValue(sender, e));
+                populateDgvAttendance();
+            }
         }
 
         private void btnFilterAttendance_Click(object sender, EventArgs e)
@@ -184,7 +211,7 @@ namespace HR_Desktop.Payroll
 
         private void itxt_Workshift_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Workshifts_Form(FormModes.Browse), ref sender);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Workshifts_Form(FormModes.Browse, itxt_Attendance_Client.ValueGuid), ref sender);
         }
 
         private void idtp_TimestampIn_ValueChanged(object sender, EventArgs e)
@@ -197,6 +224,7 @@ namespace HR_Desktop.Payroll
             idtp_EffectiveTimestampOut.Value = idtp_TimestampOut.Value;
         }
 
+        
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
     }

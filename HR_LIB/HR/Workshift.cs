@@ -67,7 +67,6 @@ namespace HR_LIB.HR
             Active = Util.wrapNullable<bool>(row, COL_DB_Active);
 
             Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
-            UserAccounts_Name = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
             WorkshiftCategories_Name = Util.wrapNullable<string>(row, COL_WorkshiftCategories_Name);
         }
 
