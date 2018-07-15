@@ -49,6 +49,7 @@
             this.scInputContainer.Panel1.SuspendLayout();
             this.scInputContainer.Panel2.SuspendLayout();
             this.scInputContainer.SuspendLayout();
+            this.pnlQuickSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -58,15 +59,15 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(27, 8);
+            this.label1.Location = new System.Drawing.Point(6, 8);
             // 
             // lnkClearQuickSearch
             // 
-            this.lnkClearQuickSearch.Location = new System.Drawing.Point(204, 8);
+            this.lnkClearQuickSearch.Location = new System.Drawing.Point(183, 8);
             // 
             // chkIncludeInactive
             // 
-            this.chkIncludeInactive.Location = new System.Drawing.Point(223, 6);
+            this.chkIncludeInactive.Location = new System.Drawing.Point(202, 6);
             // 
             // pnlActionButtons
             // 
@@ -129,7 +130,7 @@
             // 
             // txtQuickSearch
             // 
-            this.txtQuickSearch.Location = new System.Drawing.Point(100, 4);
+            this.txtQuickSearch.Location = new System.Drawing.Point(79, 4);
             this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtQuickSearch.TabStop = false;
             // 
@@ -150,8 +151,11 @@
             // 
             // ptInputPanel
             // 
-            this.ptInputPanel.Location = new System.Drawing.Point(-5, 0);
             this.ptInputPanel.TabStop = false;
+            // 
+            // pnlQuickSearch
+            // 
+            this.pnlQuickSearch.Size = new System.Drawing.Size(484, 28);
             // 
             // itxt_Notes
             // 
@@ -170,7 +174,6 @@
             this.itxt_Notes.TabIndex = 4;
             this.itxt_Notes.TabStop = false;
             this.itxt_Notes.ValueText = "";
-            this.itxt_Notes.isBrowseMode_Clicked += new System.EventHandler(this.itxt_Notes_isBrowseMode_Clicked);
             // 
             // itxt_UserAccount
             // 
@@ -231,7 +234,6 @@
             this.Name = "MasterData_v1_Attendance_Form";
             this.Text = "Attendance";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);
             this.scInputLeft.Panel2.ResumeLayout(false);
@@ -248,6 +250,8 @@
             this.scInputContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputContainer)).EndInit();
             this.scInputContainer.ResumeLayout(false);
+            this.pnlQuickSearch.ResumeLayout(false);
+            this.pnlQuickSearch.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -198,18 +198,12 @@ namespace HR_Desktop.Admin
 
         private void itxt_Clients_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            var form = new Admin.MasterData_v1_Clients_Form(FormModes.Browse);
-            Util.displayForm(null, form);
-            if (form.DialogResult == DialogResult.OK)
-                itxt_Clients.setValue(form.BrowsedItemSelectionDescription, form.BrowsedItemSelectionId);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse), ref sender);
         }
 
         private void itxt_WorkshiftCategories_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            var form = new Admin.MasterData_v1_WorkshiftCategories_Form(FormModes.Browse);
-            Util.displayForm(null, form);
-            if (form.DialogResult == DialogResult.OK)
-                itxt_WorkshiftCategories.setValue(form.BrowsedItemSelectionDescription, form.BrowsedItemSelectionId);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_WorkshiftCategories_Form(FormModes.Browse), ref sender);
         }
 
         #endregion EVENT HANDLERS

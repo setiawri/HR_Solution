@@ -35,17 +35,17 @@ namespace HR_Desktop.Admin
         #region CONSTRUCTOR METHODS
 
         public MasterData_v1_Clients_Form() : this(FormModes.Add) { }
-        public MasterData_v1_Clients_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD) 
-        { 
+        public MasterData_v1_Clients_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD)
+        {
             InitializeComponent();
-            
+
         }
-        
+
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
         #region OVERRIDE METHODS
 
-        protected override void setupControlsBasedOnRoles() 
+        protected override void setupControlsBasedOnRoles()
         {
 
         }
@@ -61,7 +61,7 @@ namespace HR_Desktop.Admin
             col_dgv_Phone1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone1", itxt_Phone1.LabelText, Client.COL_DB_Phone1, true, "", true, false, 55, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Phone2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone2", itxt_Phone2.LabelText, Client.COL_DB_Phone2, true, "", true, false, 55, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_NPWP = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWP", itxt_NPWP.LabelText, Client.COL_DB_NPWP, true, "", true, true, 40, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_NPWPAddress = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWPAddress", itxt_NPWPAddress.LabelText, Client.COL_DB_NPWPAddress, true, "", true, false,110, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_NPWPAddress = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWPAddress", itxt_NPWPAddress.LabelText, Client.COL_DB_NPWPAddress, true, "", true, false, 110, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Client.COL_DB_Notes, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
@@ -93,8 +93,8 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            return Client.get(chkIncludeInactive.Checked, null, itxt_CompanyName.ValueText, itxt_Address.ValueText, itxt_BillingAddress.ValueText, 
-                    itxt_ContactPersonName.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText,itxt_NPWP.ValueText, itxt_NPWPAddress.ValueText,
+            return Client.get(chkIncludeInactive.Checked, null, itxt_CompanyName.ValueText, itxt_Address.ValueText, itxt_BillingAddress.ValueText,
+                    itxt_ContactPersonName.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_NPWP.ValueText, itxt_NPWPAddress.ValueText,
                     itxt_Notes.ValueText).DefaultView;
         }
 
@@ -129,7 +129,7 @@ namespace HR_Desktop.Admin
 
         protected override Boolean isInputFieldsValid()
         {
-            Util.sanitize(itxt_CompanyName,itxt_Address, itxt_BillingAddress, itxt_ContactPersonName, itxt_Phone1, itxt_Phone2, itxt_NPWP, itxt_NPWPAddress, itxt_Notes);
+            Util.sanitize(itxt_CompanyName, itxt_Address, itxt_BillingAddress, itxt_ContactPersonName, itxt_Phone1, itxt_Phone2, itxt_NPWP, itxt_NPWPAddress, itxt_Notes);
             if (string.IsNullOrEmpty(itxt_CompanyName.ValueText))
                 return itxt_CompanyName.isValueError("Please fill Company Name");
             else if ((Mode != FormModes.Update && Client.isCompanyNameExist(itxt_CompanyName.ValueText, null))

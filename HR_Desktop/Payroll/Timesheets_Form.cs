@@ -85,7 +85,15 @@ namespace HR_Desktop.Payroll
 
         private void populateDgvAttendance()
         {
-            Util.setGridviewDataSource(dgvAttendance, true, true, Attendance.get(null,(Guid)Util.getSelectedRowValue(dgvEmployees, col_dgvEmployees_UserAccounts_Id), Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue), idtp_FilterAttendance_In.ValueTimeSpan, idtp_FilterAttendance_Out.ValueTimeSpan, null));
+            Util.setGridviewDataSource(dgvAttendance, true, true, 
+                Attendance.get(
+                    null,
+                    (Guid)Util.getSelectedRowValue(dgvEmployees, col_dgvEmployees_UserAccounts_Id), 
+                    Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue), 
+                    idtp_FilterAttendance_In.ValueTimeSpan, 
+                    idtp_FilterAttendance_Out.ValueTimeSpan, 
+                    null
+                ));
         }
 
         private void resetData()
@@ -128,12 +136,10 @@ namespace HR_Desktop.Payroll
             }
         }
 
-        private void itxt_FilterEmployee_Client_isBrowseMode_Clicked(object sender, EventArgs e)
+        private void itxt_Client_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            var form = new Admin.MasterData_v1_Clients_Form(FormModes.Browse);
-            Util.displayForm(null, form);
-            if (form.DialogResult == DialogResult.OK)
-                itxt_FilterEmployee_Client.setValue(form.BrowsedItemSelectionDescription, form.BrowsedItemSelectionId);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse), ref sender);
+            itxt_Attendance_Client.setValue(itxt_FilterEmployee_Client.ValueText, (Guid)itxt_FilterEmployee_Client.ValueGuid);
         }
 
         private void btnFilterEmployees_Click(object sender, EventArgs e)
@@ -175,7 +181,22 @@ namespace HR_Desktop.Payroll
         {
             populateDgvAttendance();
         }
-        
+
+        private void itxt_Workshift_isBrowseMode_Clicked(object sender, EventArgs e)
+        {
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Workshifts_Form(FormModes.Browse), ref sender);
+        }
+
+        private void idtp_TimestampIn_ValueChanged(object sender, EventArgs e)
+        {
+            idtp_EffectiveTimestampIn.Value = idtp_TimestampIn.Value;
+        }
+
+        private void idtp_TimestampOut_ValueChanged(object sender, EventArgs e)
+        {
+            idtp_EffectiveTimestampOut.Value = idtp_TimestampOut.Value;
+        }
+
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
     }

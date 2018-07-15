@@ -40,7 +40,6 @@
             this.gbUserAccountRoles = new System.Windows.Forms.GroupBox();
             this.clbUserAccountRoles = new System.Windows.Forms.CheckedListBox();
             this.btnRoles = new System.Windows.Forms.Button();
-            this.btnTutorSchedule = new System.Windows.Forms.Button();
             this.itxt_Address2 = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.itxt_Identification = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.itxt_Height = new LIBUtil.Desktop.UserControls.InputControl_Numeric();
@@ -68,30 +67,26 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnTutorSchedule);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panel1.Size = new System.Drawing.Size(765, 28);
-            this.panel1.Controls.SetChildIndex(this.label1, 0);
-            this.panel1.Controls.SetChildIndex(this.chkIncludeInactive, 0);
-            this.panel1.Controls.SetChildIndex(this.txtQuickSearch, 0);
-            this.panel1.Controls.SetChildIndex(this.lnkClearQuickSearch, 0);
-            this.panel1.Controls.SetChildIndex(this.btnTutorSchedule, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(760, 28);
             // 
             // pnlActionButtons
             // 
-            this.pnlActionButtons.Location = new System.Drawing.Point(0, 237);
-            this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlActionButtons.Size = new System.Drawing.Size(754, 23);
+            this.pnlActionButtons.Location = new System.Drawing.Point(0, 277);
+            this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlActionButtons.Size = new System.Drawing.Size(760, 23);
             // 
             // scInputLeft
             // 
-            this.scInputLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.scInputLeft.Margin = new System.Windows.Forms.Padding(2);
             // 
             // scInputLeft.Panel1
             // 
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Username);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Identification);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Lastname);
+            this.scInputLeft.Panel1.Controls.Add(this.itxt_Phone1);
+            this.scInputLeft.Panel1.Controls.Add(this.itxt_Phone2);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Firstname);
             this.scInputLeft.Panel1.Controls.Add(this.idtp_Birthdate);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Email);
@@ -103,37 +98,34 @@
             this.scInputLeft.Panel2.Controls.Add(this.itxt_Address1);
             this.scInputLeft.Panel2.Controls.Add(this.itxt_Address2);
             this.scInputLeft.Panel2.Controls.Add(this.itxt_Notes);
-            this.scInputLeft.Panel2.Controls.Add(this.itxt_Phone2);
-            this.scInputLeft.Panel2.Controls.Add(this.itxt_Phone1);
-            this.scInputLeft.Size = new System.Drawing.Size(500, 211);
+            this.scInputLeft.Size = new System.Drawing.Size(500, 251);
             this.scInputLeft.SplitterWidth = 3;
             // 
             // scInputRight
             // 
-            this.scInputRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.scInputRight.Margin = new System.Windows.Forms.Padding(4);
             // 
             // scInputRight.Panel1
             // 
             this.scInputRight.Panel1.Controls.Add(this.gbUserAccountRoles);
-            this.scInputRight.Size = new System.Drawing.Size(249, 211);
+            this.scInputRight.Size = new System.Drawing.Size(255, 251);
             this.scInputRight.SplitterWidth = 5;
             // 
             // scMain
             // 
-            this.scMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.scMain.Panel1Collapsed = true;
-            this.scMain.Size = new System.Drawing.Size(765, 609);
-            this.scMain.SplitterWidth = 5;
+            this.scMain.Margin = new System.Windows.Forms.Padding(4);
+            this.scMain.Size = new System.Drawing.Size(760, 609);
+            this.scMain.SplitterDistance = 300;
             // 
             // txtQuickSearch
             // 
-            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(4);
             // 
             // pnlButtons
             // 
             this.pnlButtons.Controls.Add(this.btnRoles);
-            this.pnlButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlButtons.Size = new System.Drawing.Size(754, 26);
+            this.pnlButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlButtons.Size = new System.Drawing.Size(760, 26);
             this.pnlButtons.Controls.SetChildIndex(this.btnRoles, 0);
             this.pnlButtons.Controls.SetChildIndex(this.btnSearch, 0);
             this.pnlButtons.Controls.SetChildIndex(this.btnUpdate, 0);
@@ -142,16 +134,20 @@
             // 
             // scInputContainer
             // 
-            this.scInputContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.scInputContainer.Size = new System.Drawing.Size(754, 211);
+            this.scInputContainer.Margin = new System.Windows.Forms.Padding(4);
+            this.scInputContainer.Size = new System.Drawing.Size(760, 251);
             this.scInputContainer.SplitterWidth = 5;
+            // 
+            // ptInputPanel
+            // 
+            this.ptInputPanel.Location = new System.Drawing.Point(0, -1);
             // 
             // itxt_Username
             // 
             this.itxt_Username.IsBrowseMode = false;
             this.itxt_Username.LabelText = "Username";
-            this.itxt_Username.Location = new System.Drawing.Point(12, 6);
-            this.itxt_Username.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Username.Location = new System.Drawing.Point(4, 4);
+            this.itxt_Username.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Username.MaxLength = 50;
             this.itxt_Username.MultiLine = false;
             this.itxt_Username.Name = "itxt_Username";
@@ -159,7 +155,7 @@
             this.itxt_Username.RowCount = 1;
             this.itxt_Username.ShowDeleteButton = false;
             this.itxt_Username.ShowTextboxOnly = false;
-            this.itxt_Username.Size = new System.Drawing.Size(225, 40);
+            this.itxt_Username.Size = new System.Drawing.Size(110, 41);
             this.itxt_Username.TabIndex = 0;
             this.itxt_Username.ValueText = "";
             // 
@@ -167,16 +163,16 @@
             // 
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
-            this.itxt_Notes.Location = new System.Drawing.Point(11, 195);
-            this.itxt_Notes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Notes.Location = new System.Drawing.Point(12, 163);
+            this.itxt_Notes.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Notes.MaxLength = 32767;
             this.itxt_Notes.MultiLine = true;
             this.itxt_Notes.Name = "itxt_Notes";
             this.itxt_Notes.PasswordChar = '\0';
-            this.itxt_Notes.RowCount = 8;
+            this.itxt_Notes.RowCount = 4;
             this.itxt_Notes.ShowDeleteButton = false;
             this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(225, 66);
+            this.itxt_Notes.Size = new System.Drawing.Size(225, 80);
             this.itxt_Notes.TabIndex = 3;
             this.itxt_Notes.ValueText = "";
             // 
@@ -184,8 +180,8 @@
             // 
             this.itxt_Firstname.IsBrowseMode = false;
             this.itxt_Firstname.LabelText = "Firstname";
-            this.itxt_Firstname.Location = new System.Drawing.Point(12, 45);
-            this.itxt_Firstname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Firstname.Location = new System.Drawing.Point(4, 45);
+            this.itxt_Firstname.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Firstname.MaxLength = 50;
             this.itxt_Firstname.MultiLine = false;
             this.itxt_Firstname.Name = "itxt_Firstname";
@@ -193,7 +189,7 @@
             this.itxt_Firstname.RowCount = 1;
             this.itxt_Firstname.ShowDeleteButton = false;
             this.itxt_Firstname.ShowTextboxOnly = false;
-            this.itxt_Firstname.Size = new System.Drawing.Size(225, 40);
+            this.itxt_Firstname.Size = new System.Drawing.Size(110, 41);
             this.itxt_Firstname.TabIndex = 1;
             this.itxt_Firstname.ValueText = "";
             // 
@@ -201,8 +197,8 @@
             // 
             this.itxt_Lastname.IsBrowseMode = false;
             this.itxt_Lastname.LabelText = "Lastname";
-            this.itxt_Lastname.Location = new System.Drawing.Point(12, 84);
-            this.itxt_Lastname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Lastname.Location = new System.Drawing.Point(4, 86);
+            this.itxt_Lastname.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Lastname.MaxLength = 50;
             this.itxt_Lastname.MultiLine = false;
             this.itxt_Lastname.Name = "itxt_Lastname";
@@ -210,7 +206,7 @@
             this.itxt_Lastname.RowCount = 1;
             this.itxt_Lastname.ShowDeleteButton = false;
             this.itxt_Lastname.ShowTextboxOnly = false;
-            this.itxt_Lastname.Size = new System.Drawing.Size(225, 40);
+            this.itxt_Lastname.Size = new System.Drawing.Size(110, 41);
             this.itxt_Lastname.TabIndex = 2;
             this.itxt_Lastname.ValueText = "";
             // 
@@ -218,16 +214,16 @@
             // 
             this.itxt_Address1.IsBrowseMode = false;
             this.itxt_Address1.LabelText = "Address1";
-            this.itxt_Address1.Location = new System.Drawing.Point(11, 5);
-            this.itxt_Address1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Address1.Location = new System.Drawing.Point(12, 3);
+            this.itxt_Address1.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Address1.MaxLength = 32767;
             this.itxt_Address1.MultiLine = true;
             this.itxt_Address1.Name = "itxt_Address1";
             this.itxt_Address1.PasswordChar = '\0';
-            this.itxt_Address1.RowCount = 5;
+            this.itxt_Address1.RowCount = 4;
             this.itxt_Address1.ShowDeleteButton = false;
             this.itxt_Address1.ShowTextboxOnly = false;
-            this.itxt_Address1.Size = new System.Drawing.Size(225, 49);
+            this.itxt_Address1.Size = new System.Drawing.Size(225, 80);
             this.itxt_Address1.TabIndex = 4;
             this.itxt_Address1.ValueText = "";
             // 
@@ -235,8 +231,8 @@
             // 
             this.itxt_Email.IsBrowseMode = false;
             this.itxt_Email.LabelText = "Email";
-            this.itxt_Email.Location = new System.Drawing.Point(12, 199);
-            this.itxt_Email.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Email.Location = new System.Drawing.Point(120, 169);
+            this.itxt_Email.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Email.MaxLength = 50;
             this.itxt_Email.MultiLine = false;
             this.itxt_Email.Name = "itxt_Email";
@@ -244,7 +240,7 @@
             this.itxt_Email.RowCount = 1;
             this.itxt_Email.ShowDeleteButton = false;
             this.itxt_Email.ShowTextboxOnly = false;
-            this.itxt_Email.Size = new System.Drawing.Size(225, 35);
+            this.itxt_Email.Size = new System.Drawing.Size(110, 41);
             this.itxt_Email.TabIndex = 3;
             this.itxt_Email.ValueText = "";
             // 
@@ -252,8 +248,8 @@
             // 
             this.itxt_Phone1.IsBrowseMode = false;
             this.itxt_Phone1.LabelText = "Phone1";
-            this.itxt_Phone1.Location = new System.Drawing.Point(11, 113);
-            this.itxt_Phone1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Phone1.Location = new System.Drawing.Point(120, 4);
+            this.itxt_Phone1.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Phone1.MaxLength = 50;
             this.itxt_Phone1.MultiLine = false;
             this.itxt_Phone1.Name = "itxt_Phone1";
@@ -261,7 +257,7 @@
             this.itxt_Phone1.RowCount = 1;
             this.itxt_Phone1.ShowDeleteButton = false;
             this.itxt_Phone1.ShowTextboxOnly = false;
-            this.itxt_Phone1.Size = new System.Drawing.Size(225, 46);
+            this.itxt_Phone1.Size = new System.Drawing.Size(110, 41);
             this.itxt_Phone1.TabIndex = 1;
             this.itxt_Phone1.ValueText = "";
             // 
@@ -269,8 +265,8 @@
             // 
             this.itxt_Phone2.IsBrowseMode = false;
             this.itxt_Phone2.LabelText = "Phone 2";
-            this.itxt_Phone2.Location = new System.Drawing.Point(11, 151);
-            this.itxt_Phone2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Phone2.Location = new System.Drawing.Point(120, 45);
+            this.itxt_Phone2.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Phone2.MaxLength = 50;
             this.itxt_Phone2.MultiLine = false;
             this.itxt_Phone2.Name = "itxt_Phone2";
@@ -278,23 +274,25 @@
             this.itxt_Phone2.RowCount = 1;
             this.itxt_Phone2.ShowDeleteButton = false;
             this.itxt_Phone2.ShowTextboxOnly = false;
-            this.itxt_Phone2.Size = new System.Drawing.Size(225, 40);
+            this.itxt_Phone2.Size = new System.Drawing.Size(110, 41);
             this.itxt_Phone2.TabIndex = 2;
             this.itxt_Phone2.ValueText = "";
             // 
             // idtp_Birthdate
             // 
-            this.idtp_Birthdate.CustomFormat = "";
+            this.idtp_Birthdate.CustomFormat = "dd/MM/yyyy";
             this.idtp_Birthdate.DefaultCheckedValue = false;
-            this.idtp_Birthdate.Format = System.Windows.Forms.DateTimePickerFormat.Long;
+            this.idtp_Birthdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_Birthdate.LabelText = "Birthday";
-            this.idtp_Birthdate.Location = new System.Drawing.Point(12, 162);
-            this.idtp_Birthdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.idtp_Birthdate.Location = new System.Drawing.Point(4, 168);
+            this.idtp_Birthdate.Margin = new System.Windows.Forms.Padding(4);
             this.idtp_Birthdate.Name = "idtp_Birthdate";
             this.idtp_Birthdate.ShowCheckBox = true;
-            this.idtp_Birthdate.Size = new System.Drawing.Size(225, 35);
+            this.idtp_Birthdate.ShowUpAndDown = false;
+            this.idtp_Birthdate.Size = new System.Drawing.Size(110, 41);
             this.idtp_Birthdate.TabIndex = 3;
             this.idtp_Birthdate.Value = new System.DateTime(2017, 2, 28, 16, 27, 12, 664);
+            this.idtp_Birthdate.ValueTimeSpan = System.TimeSpan.Parse("16:27:12.6640000");
             // 
             // gbUserAccountRoles
             // 
@@ -303,8 +301,8 @@
             this.gbUserAccountRoles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbUserAccountRoles.Location = new System.Drawing.Point(0, 0);
             this.gbUserAccountRoles.Name = "gbUserAccountRoles";
-            this.gbUserAccountRoles.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.gbUserAccountRoles.Size = new System.Drawing.Size(249, 211);
+            this.gbUserAccountRoles.Padding = new System.Windows.Forms.Padding(5);
+            this.gbUserAccountRoles.Size = new System.Drawing.Size(249, 251);
             this.gbUserAccountRoles.TabIndex = 1;
             this.gbUserAccountRoles.TabStop = false;
             this.gbUserAccountRoles.Text = "Roles";
@@ -315,7 +313,7 @@
             this.clbUserAccountRoles.FormattingEnabled = true;
             this.clbUserAccountRoles.Location = new System.Drawing.Point(5, 18);
             this.clbUserAccountRoles.Name = "clbUserAccountRoles";
-            this.clbUserAccountRoles.Size = new System.Drawing.Size(239, 188);
+            this.clbUserAccountRoles.Size = new System.Drawing.Size(239, 228);
             this.clbUserAccountRoles.TabIndex = 0;
             // 
             // btnRoles
@@ -328,30 +326,20 @@
             this.btnRoles.UseVisualStyleBackColor = true;
             this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
             // 
-            // btnTutorSchedule
-            // 
-            this.btnTutorSchedule.Location = new System.Drawing.Point(649, 3);
-            this.btnTutorSchedule.Name = "btnTutorSchedule";
-            this.btnTutorSchedule.Size = new System.Drawing.Size(75, 23);
-            this.btnTutorSchedule.TabIndex = 14;
-            this.btnTutorSchedule.Text = "Schedule";
-            this.btnTutorSchedule.UseVisualStyleBackColor = true;
-            this.btnTutorSchedule.Click += new System.EventHandler(this.btnTutorSchedule_Click);
-            // 
             // itxt_Address2
             // 
             this.itxt_Address2.IsBrowseMode = false;
             this.itxt_Address2.LabelText = "Address2";
-            this.itxt_Address2.Location = new System.Drawing.Point(11, 55);
-            this.itxt_Address2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Address2.Location = new System.Drawing.Point(12, 83);
+            this.itxt_Address2.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Address2.MaxLength = 32767;
             this.itxt_Address2.MultiLine = true;
             this.itxt_Address2.Name = "itxt_Address2";
             this.itxt_Address2.PasswordChar = '\0';
-            this.itxt_Address2.RowCount = 5;
+            this.itxt_Address2.RowCount = 4;
             this.itxt_Address2.ShowDeleteButton = false;
             this.itxt_Address2.ShowTextboxOnly = false;
-            this.itxt_Address2.Size = new System.Drawing.Size(225, 57);
+            this.itxt_Address2.Size = new System.Drawing.Size(225, 80);
             this.itxt_Address2.TabIndex = 5;
             this.itxt_Address2.ValueText = "";
             // 
@@ -359,7 +347,7 @@
             // 
             this.itxt_Identification.IsBrowseMode = false;
             this.itxt_Identification.LabelText = "Identification";
-            this.itxt_Identification.Location = new System.Drawing.Point(12, 123);
+            this.itxt_Identification.Location = new System.Drawing.Point(4, 127);
             this.itxt_Identification.MaxLength = 32767;
             this.itxt_Identification.MultiLine = false;
             this.itxt_Identification.Name = "itxt_Identification";
@@ -367,33 +355,82 @@
             this.itxt_Identification.RowCount = 1;
             this.itxt_Identification.ShowDeleteButton = false;
             this.itxt_Identification.ShowTextboxOnly = false;
-            this.itxt_Identification.Size = new System.Drawing.Size(225, 41);
+            this.itxt_Identification.Size = new System.Drawing.Size(110, 41);
             this.itxt_Identification.TabIndex = 3;
             this.itxt_Identification.ValueText = "";
             // 
             // itxt_Height
             // 
+            this.itxt_Height.Checked = false;
+            this.itxt_Height.DecimalPlaces = 0;
+            this.itxt_Height.HideUpDown = false;
+            this.itxt_Height.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.itxt_Height.LabelText = "Height";
-            this.itxt_Height.Location = new System.Drawing.Point(12, 234);
+            this.itxt_Height.Location = new System.Drawing.Point(120, 86);
+            this.itxt_Height.MaximumValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.itxt_Height.MinimumValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.itxt_Height.Name = "itxt_Height";
+            this.itxt_Height.ShowCheckbox = false;
             this.itxt_Height.ShowTextboxOnly = false;
-            this.itxt_Height.Size = new System.Drawing.Size(105, 35);
+            this.itxt_Height.Size = new System.Drawing.Size(110, 41);
             this.itxt_Height.TabIndex = 4;
+            this.itxt_Height.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             // 
             // itxt_Weight
             // 
+            this.itxt_Weight.Checked = false;
+            this.itxt_Weight.DecimalPlaces = 0;
+            this.itxt_Weight.HideUpDown = false;
+            this.itxt_Weight.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.itxt_Weight.LabelText = "Weight";
-            this.itxt_Weight.Location = new System.Drawing.Point(132, 234);
+            this.itxt_Weight.Location = new System.Drawing.Point(120, 128);
+            this.itxt_Weight.MaximumValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.itxt_Weight.MinimumValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.itxt_Weight.Name = "itxt_Weight";
+            this.itxt_Weight.ShowCheckbox = false;
             this.itxt_Weight.ShowTextboxOnly = false;
-            this.itxt_Weight.Size = new System.Drawing.Size(105, 35);
+            this.itxt_Weight.Size = new System.Drawing.Size(110, 41);
             this.itxt_Weight.TabIndex = 5;
+            this.itxt_Weight.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             // 
             // MasterData_v1_UserAccounts_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 609);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClientSize = new System.Drawing.Size(760, 609);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MasterData_v1_UserAccounts_Form";
             this.Text = "USER ACCOUNTS";
             this.panel1.ResumeLayout(false);
@@ -434,7 +471,6 @@
         private System.Windows.Forms.GroupBox gbUserAccountRoles;
         private System.Windows.Forms.CheckedListBox clbUserAccountRoles;
         private System.Windows.Forms.Button btnRoles;
-        private System.Windows.Forms.Button btnTutorSchedule;
         private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_Address2;
         private LIBUtil.Desktop.UserControls.InputControl_Numeric itxt_Weight;
         private LIBUtil.Desktop.UserControls.InputControl_Numeric itxt_Height;

@@ -46,6 +46,7 @@
             this.scInputContainer.Panel1.SuspendLayout();
             this.scInputContainer.Panel2.SuspendLayout();
             this.scInputContainer.SuspendLayout();
+            this.pnlQuickSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -55,7 +56,7 @@
             // 
             // pnlActionButtons
             // 
-            this.pnlActionButtons.Location = new System.Drawing.Point(0, 257);
+            this.pnlActionButtons.Location = new System.Drawing.Point(0, 207);
             this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(4);
             this.pnlActionButtons.Size = new System.Drawing.Size(330, 23);
             // 
@@ -67,20 +68,20 @@
             // 
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Name);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Notes);
-            this.scInputLeft.Size = new System.Drawing.Size(500, 231);
+            this.scInputLeft.Size = new System.Drawing.Size(500, 181);
             this.scInputLeft.SplitterWidth = 3;
             // 
             // scInputRight
             // 
             this.scInputRight.Margin = new System.Windows.Forms.Padding(4);
-            this.scInputRight.Size = new System.Drawing.Size(25, 231);
+            this.scInputRight.Size = new System.Drawing.Size(25, 181);
             this.scInputRight.SplitterWidth = 5;
             // 
             // scMain
             // 
             this.scMain.Margin = new System.Windows.Forms.Padding(4);
             this.scMain.Size = new System.Drawing.Size(330, 528);
-            this.scMain.SplitterDistance = 280;
+            this.scMain.SplitterDistance = 230;
             this.scMain.SplitterWidth = 5;
             // 
             // txtQuickSearch
@@ -95,12 +96,16 @@
             // scInputContainer
             // 
             this.scInputContainer.Margin = new System.Windows.Forms.Padding(4);
-            this.scInputContainer.Size = new System.Drawing.Size(330, 231);
+            this.scInputContainer.Size = new System.Drawing.Size(330, 181);
             this.scInputContainer.SplitterWidth = 5;
             // 
-            // ptInputPanel
+            // btnLog
             // 
-            this.ptInputPanel.Location = new System.Drawing.Point(0, 0);
+            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
+            // 
+            // pnlQuickSearch
+            // 
+            this.pnlQuickSearch.Size = new System.Drawing.Size(300, 28);
             // 
             // itxt_Name
             // 
@@ -145,7 +150,6 @@
             this.Name = "MasterData_v1_WorkshiftCategories_Form";
             this.Text = "Workshift Categories";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputLeft)).EndInit();
@@ -161,6 +165,8 @@
             this.scInputContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputContainer)).EndInit();
             this.scInputContainer.ResumeLayout(false);
+            this.pnlQuickSearch.ResumeLayout(false);
+            this.pnlQuickSearch.PerformLayout();
             this.ResumeLayout(false);
 
         }

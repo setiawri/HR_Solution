@@ -189,27 +189,9 @@ namespace HR_Desktop.Admin
 
         private void itxt_UserAccount_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            var form = new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false);
-            Util.displayForm(null, form);
-            if (form.DialogResult == DialogResult.OK)
-                itxt_UserAccount.setValue(form.BrowsedItemSelectionDescription, form.BrowsedItemSelectionId);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false), ref sender);
         }
-
-        private void idtp_TimestampIn_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void idtp_TimestampOut_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void itxt_Notes_isBrowseMode_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void idtp_TimestampIn_ValueChanged(object sender, EventArgs e)
         {
             idtp_TimestampOut.Value = idtp_TimestampIn.Value;

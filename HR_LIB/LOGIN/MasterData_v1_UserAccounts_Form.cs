@@ -118,9 +118,7 @@ namespace LOGIN
             else
                 dataview = UserAccount.get(chkIncludeInactive.Checked, null, itxt_Username.ValueText, itxt_Firstname.ValueText, itxt_Lastname.ValueText, 
                     itxt_Address1.ValueText, itxt_Address2.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_Email.ValueText, idtp_Birthdate.Value, itxt_Identification.ValueText, itxt_Height.ValueInt, itxt_Weight.ValueInt, itxt_Notes.ValueText).DefaultView;
-
-            btnTutorSchedule.Enabled = dataview.Count > 0;
-
+            
             return dataview;
         }
 
@@ -215,17 +213,6 @@ namespace LOGIN
             Util.displayForm(null, new LOGIN.MasterData_v1_UserAccountRoles_Form());
             UserAccountRole.populateCheckedListBox(clbUserAccountRoles, false, true);
         }
-
-        private void btnTutorSchedule_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //private void lnkUpdateStates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        //{
-        //    Tools.displayForm(new MasterData.States_Form(FormMode.New));
-        //    State.populateDropDownList(_inputDDLStates.Dropdownlist, false, true);
-        //}
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

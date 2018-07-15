@@ -1,13 +1,29 @@
 ﻿/**************************************************************************************************************************************************************/
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
---start 
 
-
-ALTER TABLE Workshifts ADD UserAccounts_Id uniqueidentifier 
+CREATE TABLE [dbo].[AttendanceStatuses]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(MAX) NOT NULL, 
+    [Notes] NVARCHAR(MAX) NULL, 
+    [Active] BIT NOT NULL DEFAULT ((1))
+)
 GO
 
-ALTER TABLE Workshifts ALTER COLUMN UserAccounts_Id uniqueidentifier NOT NULL
+ALTER TABLE Attendance ADD Clients_Id uniqueidentifier NOT NULL
+GO
+ALTER TABLE Attendance ADD Workshifts_DayOfWeek tinyint
+GO
+ALTER TABLE Attendance ADD Workshifts_Start datetime NULL
+GO
+ALTER TABLE Attendance ADD Workshifts_DurationMinutes int NULL
+GO
+ALTER TABLE Attendance ADD EffectiveTimestampIn datetime NULL
+GO
+ALTER TABLE Attendance ADD EffectiveTimestampOut datetime NULL
+GO
+ALTER TABLE Attendance ADD Rejected bit NOT NULL DEFAULT 0
 GO
 
 

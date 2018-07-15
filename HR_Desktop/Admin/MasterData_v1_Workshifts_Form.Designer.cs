@@ -51,6 +51,7 @@
             this.scInputContainer.Panel1.SuspendLayout();
             this.scInputContainer.Panel2.SuspendLayout();
             this.scInputContainer.SuspendLayout();
+            this.pnlQuickSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -108,9 +109,13 @@
             this.scInputContainer.Size = new System.Drawing.Size(514, 231);
             this.scInputContainer.SplitterWidth = 5;
             // 
-            // ptInputPanel
+            // btnLog
             // 
-            this.ptInputPanel.Location = new System.Drawing.Point(-1478, 0);
+            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
+            // 
+            // pnlQuickSearch
+            // 
+            this.pnlQuickSearch.Size = new System.Drawing.Size(484, 28);
             // 
             // iddl_DayOfWeek
             // 
@@ -214,7 +219,9 @@
             // 
             // in_DurationMinutes
             // 
+            this.in_DurationMinutes.Checked = false;
             this.in_DurationMinutes.DecimalPlaces = 0;
+            this.in_DurationMinutes.HideUpDown = false;
             this.in_DurationMinutes.Increment = new decimal(new int[] {
             30,
             0,
@@ -233,6 +240,7 @@
             0,
             0});
             this.in_DurationMinutes.Name = "in_DurationMinutes";
+            this.in_DurationMinutes.ShowCheckbox = false;
             this.in_DurationMinutes.ShowTextboxOnly = false;
             this.in_DurationMinutes.Size = new System.Drawing.Size(70, 41);
             this.in_DurationMinutes.TabIndex = 0;
@@ -251,7 +259,6 @@
             this.Name = "MasterData_v1_Workshifts_Form";
             this.Text = "Workshifts";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputLeft)).EndInit();
@@ -267,6 +274,8 @@
             this.scInputContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputContainer)).EndInit();
             this.scInputContainer.ResumeLayout(false);
+            this.pnlQuickSearch.ResumeLayout(false);
+            this.pnlQuickSearch.PerformLayout();
             this.ResumeLayout(false);
 
         }
