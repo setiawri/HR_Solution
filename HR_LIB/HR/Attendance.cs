@@ -52,11 +52,11 @@ namespace HR_LIB.HR
 
         public const string COL_UserAccounts_Fullname = "UserAccounts_Fullname";
         public const string COL_Workshifts_Id = "Workshifts_Id";
-        public const string COL_FILTER_DayOfWeek = "FILTER_DayOfWeek";
-        public const string COL_FILTER_StartDate = "FILTER_StartDate";
-        public const string COL_FILTER_EndDate = "FILTER_EndDate";
-        public const string COL_FILTER_StartTime = "FILTER_StartTime";
-        public const string COL_FILTER_EndTime = "FILTER_EndTime";
+        public const string FILTER_DayOfWeek = "FILTER_DayOfWeek";
+        public const string FILTER_StartDate = "FILTER_StartDate";
+        public const string FILTER_EndDate = "FILTER_EndDate";
+        public const string FILTER_StartTime = "FILTER_StartTime";
+        public const string FILTER_EndTime = "FILTER_EndTime";
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
@@ -159,11 +159,11 @@ namespace HR_LIB.HR
                 "Attendance_get",
                 new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
                 new SqlQueryParameter(COL_DB_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(UserAccounts_Id)),
-                new SqlQueryParameter(COL_FILTER_DayOfWeek, SqlDbType.TinyInt, Util.wrapNullable<int?>(dayOfWeek)),
-                new SqlQueryParameter(COL_FILTER_StartDate, SqlDbType.DateTime, Util.wrapNullable(startDate)),
-                new SqlQueryParameter(COL_FILTER_EndDate, SqlDbType.DateTime, Util.wrapNullable(endDate)),
-                new SqlQueryParameter(COL_FILTER_StartTime, SqlDbType.Time, Util.wrapNullable(startTime)),
-                new SqlQueryParameter(COL_FILTER_EndTime, SqlDbType.Time, Util.wrapNullable(endTime)),
+                new SqlQueryParameter(FILTER_DayOfWeek, SqlDbType.TinyInt, Util.wrapNullable<int?>(dayOfWeek)),
+                new SqlQueryParameter(FILTER_StartDate, SqlDbType.DateTime, Util.wrapNullable(startDate)),
+                new SqlQueryParameter(FILTER_EndDate, SqlDbType.DateTime, Util.wrapNullable(endDate)),
+                new SqlQueryParameter(FILTER_StartTime, SqlDbType.Time, Util.wrapNullable(startTime)),
+                new SqlQueryParameter(FILTER_EndTime, SqlDbType.Time, Util.wrapNullable(endTime)),
                 new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                 );
             return result.Datatable;

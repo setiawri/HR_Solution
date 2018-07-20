@@ -46,8 +46,8 @@ namespace HR_LIB.HR
         public const string COL_WorkshiftCategories_Name = "WorkshiftCategories_Name";
         public const string COL_DayOfWeekName = "Day_Of_Week_Name";
         public const string COL_FILTER_IncludeInactive = "FILTER_IncludeInactive";
-        public const string COL_FILTER_StartDate = "FILTER_StartDate";
-        public const string COL_FILTER_EndDate = "FILTER_EndDate";
+        public const string FILTER_StartDate = "FILTER_StartDate";
+        public const string FILTER_EndDate = "FILTER_EndDate";
 
 
         #endregion PUBLIC VARIABLES
@@ -148,8 +148,8 @@ namespace HR_LIB.HR
                 QueryTypes.FillByAdapter,
                 "Workshifts_getEmployeeByClientOrName",
                     new SqlQueryParameter(COL_DB_Clients_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Clients_Id)),
-                    new SqlQueryParameter(COL_FILTER_StartDate, SqlDbType.DateTime, Util.wrapNullable(startDate)),
-                    new SqlQueryParameter(COL_FILTER_EndDate, SqlDbType.DateTime, Util.wrapNullable(endDate)),
+                    new SqlQueryParameter(FILTER_StartDate, SqlDbType.DateTime, Util.wrapNullable(startDate)),
+                    new SqlQueryParameter(FILTER_EndDate, SqlDbType.DateTime, Util.wrapNullable(endDate)),
                     new SqlQueryParameter(COL_UserAccounts_Fullname, SqlDbType.NVarChar, Util.wrapNullable(employeeName))
                 );
             return result.Datatable;
