@@ -120,6 +120,11 @@ namespace HR_Desktop
             LIBUtil.Util.displayMDIChild(new Payroll.Timesheets_Form());
         }
 
+        private void admin_attendance_statuses_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_AttendanceStatuses_Form());
+        }
+
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

@@ -63,6 +63,12 @@
     <Compile Include="Admin\MasterData_v1_Clients_Form.Designer.cs">
       <DependentUpon>MasterData_v1_Clients_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\MasterData_v1_AttendanceStatuses_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\MasterData_v1_AttendanceStatuses_Form.Designer.cs">
+      <DependentUpon>MasterData_v1_AttendanceStatuses_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\MasterData_v1_Workshifts_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\MasterData_v1_Clients_Form.resx">
       <DependentUpon>MasterData_v1_Clients_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\MasterData_v1_AttendanceStatuses_Form.resx">
+      <DependentUpon>MasterData_v1_AttendanceStatuses_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\MasterData_v1_Workshifts_Form.resx">
       <DependentUpon>MasterData_v1_Workshifts_Form.cs</DependentUpon>

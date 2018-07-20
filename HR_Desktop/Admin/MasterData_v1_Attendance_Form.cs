@@ -85,7 +85,7 @@ namespace HR_Desktop.Admin
         {
             return Attendance.get(null,
                 itxt_UserAccount.ValueGuid,
-                null, null, null, itxt_Notes.ValueText
+                null, null, null, null, null, itxt_Notes.ValueText
                 ).DefaultView;
         }
 
@@ -108,11 +108,12 @@ namespace HR_Desktop.Admin
         }
 
         protected override void add()
-        {
+        {   
             Attendance.add(UserAccount.LoggedInAccount.Id,
                 (Guid)itxt_UserAccount.ValueGuid,
                 (DateTime)idtp_TimestampIn.Value,
                 (DateTime)idtp_TimestampOut.Value,
+                null, null, null, null,
                 itxt_Notes.ValueText);
         }
 
