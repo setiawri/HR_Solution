@@ -35,10 +35,13 @@
             this.itxt_Name = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.idtp_Start = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
             this.in_DurationMinutes = new LIBUtil.Desktop.UserControls.InputControl_Numeric();
+            this.gb_Template = new System.Windows.Forms.GroupBox();
+            this.itxt_WorkshiftTemplate = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.panel1.SuspendLayout();
             this.pnlActionButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scInputLeft)).BeginInit();
             this.scInputLeft.Panel1.SuspendLayout();
+            this.scInputLeft.Panel2.SuspendLayout();
             this.scInputLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scInputRight)).BeginInit();
             this.scInputRight.SuspendLayout();
@@ -51,6 +54,8 @@
             this.scInputContainer.Panel1.SuspendLayout();
             this.scInputContainer.Panel2.SuspendLayout();
             this.scInputContainer.SuspendLayout();
+            this.pnlQuickSearch.SuspendLayout();
+            this.gb_Template.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -70,13 +75,17 @@
             // 
             // scInputLeft.Panel1
             // 
+            this.scInputLeft.Panel1.Controls.Add(this.gb_Template);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_WorkshiftCategories);
             this.scInputLeft.Panel1.Controls.Add(this.in_DurationMinutes);
             this.scInputLeft.Panel1.Controls.Add(this.idtp_Start);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Name);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Clients);
             this.scInputLeft.Panel1.Controls.Add(this.iddl_DayOfWeek);
-            this.scInputLeft.Panel1.Controls.Add(this.itxt_Notes);
+            // 
+            // scInputLeft.Panel2
+            // 
+            this.scInputLeft.Panel2.Controls.Add(this.itxt_Notes);
             this.scInputLeft.Size = new System.Drawing.Size(500, 231);
             this.scInputLeft.SplitterWidth = 3;
             // 
@@ -108,9 +117,13 @@
             this.scInputContainer.Size = new System.Drawing.Size(514, 231);
             this.scInputContainer.SplitterWidth = 5;
             // 
-            // ptInputPanel
+            // btnLog
             // 
-            this.ptInputPanel.Location = new System.Drawing.Point(-1478, 0);
+            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
+            // 
+            // pnlQuickSearch
+            // 
+            this.pnlQuickSearch.Size = new System.Drawing.Size(484, 28);
             // 
             // iddl_DayOfWeek
             // 
@@ -118,63 +131,55 @@
             this.iddl_DayOfWeek.HideFilter = true;
             this.iddl_DayOfWeek.HideUpdateLink = true;
             this.iddl_DayOfWeek.LabelText = "*Day";
-            this.iddl_DayOfWeek.Location = new System.Drawing.Point(6, 128);
+            this.iddl_DayOfWeek.Location = new System.Drawing.Point(4, 175);
             this.iddl_DayOfWeek.Margin = new System.Windows.Forms.Padding(4);
             this.iddl_DayOfWeek.Name = "iddl_DayOfWeek";
             this.iddl_DayOfWeek.SelectedItem = null;
             this.iddl_DayOfWeek.SelectedValue = null;
             this.iddl_DayOfWeek.ShowDropdownlistOnly = false;
-            this.iddl_DayOfWeek.Size = new System.Drawing.Size(87, 41);
+            this.iddl_DayOfWeek.Size = new System.Drawing.Size(91, 41);
             this.iddl_DayOfWeek.TabIndex = 0;
             // 
             // itxt_Notes
             // 
-            this.itxt_Notes.AllowDecimal = true;
-            this.itxt_Notes.AllowNegativeValue = true;
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
-            this.itxt_Notes.Location = new System.Drawing.Point(6, 171);
+            this.itxt_Notes.Location = new System.Drawing.Point(6, 8);
             this.itxt_Notes.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Notes.MaxLength = 32767;
             this.itxt_Notes.MultiLine = true;
             this.itxt_Notes.Name = "itxt_Notes";
             this.itxt_Notes.PasswordChar = '\0';
-            this.itxt_Notes.RowCount = 2;
+            this.itxt_Notes.RowCount = 3;
             this.itxt_Notes.ShowDeleteButton = false;
-            this.itxt_Notes.ShowInNumeric = false;
             this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(237, 53);
+            this.itxt_Notes.Size = new System.Drawing.Size(237, 71);
             this.itxt_Notes.TabIndex = 4;
             this.itxt_Notes.ValueText = "";
             // 
             // itxt_Clients
             // 
-            this.itxt_Clients.AllowDecimal = true;
-            this.itxt_Clients.AllowNegativeValue = true;
             this.itxt_Clients.IsBrowseMode = true;
             this.itxt_Clients.LabelText = "*Client";
-            this.itxt_Clients.Location = new System.Drawing.Point(6, 45);
+            this.itxt_Clients.Location = new System.Drawing.Point(4, 8);
             this.itxt_Clients.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Clients.MaxLength = 32767;
             this.itxt_Clients.MultiLine = false;
             this.itxt_Clients.Name = "itxt_Clients";
             this.itxt_Clients.PasswordChar = '\0';
             this.itxt_Clients.RowCount = 1;
-            this.itxt_Clients.ShowDeleteButton = true;
-            this.itxt_Clients.ShowInNumeric = false;
+            this.itxt_Clients.ShowDeleteButton = false;
             this.itxt_Clients.ShowTextboxOnly = false;
-            this.itxt_Clients.Size = new System.Drawing.Size(239, 41);
+            this.itxt_Clients.Size = new System.Drawing.Size(241, 41);
             this.itxt_Clients.TabIndex = 7;
             this.itxt_Clients.ValueText = "";
             this.itxt_Clients.isBrowseMode_Clicked += new System.EventHandler(this.itxt_Clients_isBrowseMode_Clicked);
             // 
             // itxt_WorkshiftCategories
             // 
-            this.itxt_WorkshiftCategories.AllowDecimal = true;
-            this.itxt_WorkshiftCategories.AllowNegativeValue = true;
             this.itxt_WorkshiftCategories.IsBrowseMode = true;
-            this.itxt_WorkshiftCategories.LabelText = "Category";
-            this.itxt_WorkshiftCategories.Location = new System.Drawing.Point(6, 87);
+            this.itxt_WorkshiftCategories.LabelText = "*Category";
+            this.itxt_WorkshiftCategories.Location = new System.Drawing.Point(4, 134);
             this.itxt_WorkshiftCategories.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_WorkshiftCategories.MaxLength = 32767;
             this.itxt_WorkshiftCategories.MultiLine = false;
@@ -182,20 +187,17 @@
             this.itxt_WorkshiftCategories.PasswordChar = '\0';
             this.itxt_WorkshiftCategories.RowCount = 1;
             this.itxt_WorkshiftCategories.ShowDeleteButton = true;
-            this.itxt_WorkshiftCategories.ShowInNumeric = false;
             this.itxt_WorkshiftCategories.ShowTextboxOnly = false;
-            this.itxt_WorkshiftCategories.Size = new System.Drawing.Size(239, 41);
+            this.itxt_WorkshiftCategories.Size = new System.Drawing.Size(241, 41);
             this.itxt_WorkshiftCategories.TabIndex = 8;
             this.itxt_WorkshiftCategories.ValueText = "";
             this.itxt_WorkshiftCategories.isBrowseMode_Clicked += new System.EventHandler(this.itxt_WorkshiftCategories_isBrowseMode_Clicked);
             // 
             // itxt_Name
             // 
-            this.itxt_Name.AllowDecimal = true;
-            this.itxt_Name.AllowNegativeValue = true;
             this.itxt_Name.IsBrowseMode = false;
             this.itxt_Name.LabelText = "*Name";
-            this.itxt_Name.Location = new System.Drawing.Point(4, 4);
+            this.itxt_Name.Location = new System.Drawing.Point(4, 93);
             this.itxt_Name.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Name.MaxLength = 32767;
             this.itxt_Name.MultiLine = false;
@@ -203,19 +205,19 @@
             this.itxt_Name.PasswordChar = '\0';
             this.itxt_Name.RowCount = 1;
             this.itxt_Name.ShowDeleteButton = false;
-            this.itxt_Name.ShowInNumeric = false;
             this.itxt_Name.ShowTextboxOnly = false;
-            this.itxt_Name.Size = new System.Drawing.Size(239, 41);
+            this.itxt_Name.Size = new System.Drawing.Size(241, 41);
             this.itxt_Name.TabIndex = 9;
             this.itxt_Name.ValueText = "";
             // 
             // idtp_Start
             // 
+            this.idtp_Start.Checked = false;
             this.idtp_Start.CustomFormat = "HH:mm";
             this.idtp_Start.DefaultCheckedValue = false;
             this.idtp_Start.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_Start.LabelText = "*Start";
-            this.idtp_Start.Location = new System.Drawing.Point(98, 128);
+            this.idtp_Start.Location = new System.Drawing.Point(100, 175);
             this.idtp_Start.Name = "idtp_Start";
             this.idtp_Start.ShowCheckBox = false;
             this.idtp_Start.ShowUpAndDown = true;
@@ -226,14 +228,16 @@
             // 
             // in_DurationMinutes
             // 
+            this.in_DurationMinutes.Checked = false;
             this.in_DurationMinutes.DecimalPlaces = 0;
+            this.in_DurationMinutes.HideUpDown = false;
             this.in_DurationMinutes.Increment = new decimal(new int[] {
             30,
             0,
             0,
             0});
             this.in_DurationMinutes.LabelText = "*Minutes";
-            this.in_DurationMinutes.Location = new System.Drawing.Point(173, 128);
+            this.in_DurationMinutes.Location = new System.Drawing.Point(175, 175);
             this.in_DurationMinutes.MaximumValue = new decimal(new int[] {
             1440,
             0,
@@ -245,6 +249,7 @@
             0,
             0});
             this.in_DurationMinutes.Name = "in_DurationMinutes";
+            this.in_DurationMinutes.ShowCheckbox = false;
             this.in_DurationMinutes.ShowTextboxOnly = false;
             this.in_DurationMinutes.Size = new System.Drawing.Size(70, 41);
             this.in_DurationMinutes.TabIndex = 0;
@@ -253,6 +258,36 @@
             0,
             0,
             0});
+            // 
+            // gb_Template
+            // 
+            this.gb_Template.Controls.Add(this.itxt_WorkshiftTemplate);
+            this.gb_Template.Enabled = false;
+            this.gb_Template.Location = new System.Drawing.Point(4, 51);
+            this.gb_Template.Name = "gb_Template";
+            this.gb_Template.Padding = new System.Windows.Forms.Padding(5, 3, 5, 5);
+            this.gb_Template.Size = new System.Drawing.Size(241, 42);
+            this.gb_Template.TabIndex = 5;
+            this.gb_Template.TabStop = false;
+            this.gb_Template.Text = "TEMPLATES";
+            // 
+            // itxt_WorkshiftTemplate
+            // 
+            this.itxt_WorkshiftTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.itxt_WorkshiftTemplate.IsBrowseMode = true;
+            this.itxt_WorkshiftTemplate.LabelText = "Template";
+            this.itxt_WorkshiftTemplate.Location = new System.Drawing.Point(5, 16);
+            this.itxt_WorkshiftTemplate.Margin = new System.Windows.Forms.Padding(4);
+            this.itxt_WorkshiftTemplate.MaxLength = 32767;
+            this.itxt_WorkshiftTemplate.MultiLine = false;
+            this.itxt_WorkshiftTemplate.Name = "itxt_WorkshiftTemplate";
+            this.itxt_WorkshiftTemplate.PasswordChar = '\0';
+            this.itxt_WorkshiftTemplate.RowCount = 1;
+            this.itxt_WorkshiftTemplate.ShowDeleteButton = true;
+            this.itxt_WorkshiftTemplate.ShowTextboxOnly = true;
+            this.itxt_WorkshiftTemplate.Size = new System.Drawing.Size(231, 21);
+            this.itxt_WorkshiftTemplate.TabIndex = 8;
+            this.itxt_WorkshiftTemplate.ValueText = "";
             // 
             // MasterData_v1_Workshifts_Form
             // 
@@ -263,9 +298,9 @@
             this.Name = "MasterData_v1_Workshifts_Form";
             this.Text = "Workshifts";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);
+            this.scInputLeft.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputLeft)).EndInit();
             this.scInputLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputRight)).EndInit();
@@ -279,6 +314,9 @@
             this.scInputContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputContainer)).EndInit();
             this.scInputContainer.ResumeLayout(false);
+            this.pnlQuickSearch.ResumeLayout(false);
+            this.pnlQuickSearch.PerformLayout();
+            this.gb_Template.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -291,5 +329,7 @@
         private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_Name;
         private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_Start;
         private LIBUtil.Desktop.UserControls.InputControl_Numeric in_DurationMinutes;
+        private System.Windows.Forms.GroupBox gb_Template;
+        private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_WorkshiftTemplate;
     }
 }

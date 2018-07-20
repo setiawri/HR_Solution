@@ -6,7 +6,7 @@ using LOGIN;
 
 namespace HR_Desktop.Admin
 {
-    public partial class MasterData_v1_WorkshiftCategories_Form : LIBUtil.Desktop.Forms.MasterData_v1_Form
+    public partial class MasterData_v1_AttendanceStatuses_Form : LIBUtil.Desktop.Forms.MasterData_v1_Form
     {
         /*******************************************************************************************************/
         #region SETTINGS
@@ -24,8 +24,8 @@ namespace HR_Desktop.Admin
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_WorkshiftCategories_Form() : this(FormModes.Add) { }
-        public MasterData_v1_WorkshiftCategories_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD) { InitializeComponent(); }
+        public MasterData_v1_AttendanceStatuses_Form() : this(FormModes.Add) { }
+        public MasterData_v1_AttendanceStatuses_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD) { InitializeComponent(); }
 
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
@@ -38,15 +38,13 @@ namespace HR_Desktop.Admin
         protected override void setupFields()
         {
 
-            setColumnsDataPropertyNames(WorkshiftCategory.COL_DB_Id, WorkshiftCategory.COL_DB_Active, null, null, null, null);
-            col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, WorkshiftCategory.COL_DB_Name, true, true, "", true, false, null, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, WorkshiftCategory.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            setColumnsDataPropertyNames(AttendanceStatus.COL_DB_Id, AttendanceStatus.COL_DB_Active, null, null, null, null);
+            col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, AttendanceStatus.COL_DB_Name, true, true, "", true, false, null, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, AttendanceStatus.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             ptInputPanel.PerformClick();
         }
-
-        protected override void additionalSettings() { }
 
         protected override void clearInputFields()
         {
@@ -61,7 +59,7 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            return WorkshiftCategory.get(chkIncludeInactive.Checked, null,
+            return AttendanceStatus.get(chkIncludeInactive.Checked, null,
                 itxt_Name.ValueText,
                 itxt_Notes.ValueText).DefaultView;
 
@@ -69,14 +67,14 @@ namespace HR_Desktop.Admin
 
         protected override void populateInputFields()
         {
-            WorkshiftCategory obj = new WorkshiftCategory(selectedRowID());
+            AttendanceStatus obj = new AttendanceStatus(selectedRowID());
             itxt_Name.ValueText = obj.Name;
             itxt_Notes.ValueText = obj.Notes;
         }
 
         protected override void update()
         {
-            WorkshiftCategory.update(UserAccount.LoggedInAccount.Id,
+            AttendanceStatus.update(UserAccount.LoggedInAccount.Id,
                 selectedRowID(),
                 itxt_Name.ValueText,
                 itxt_Notes.ValueText);
@@ -84,7 +82,7 @@ namespace HR_Desktop.Admin
 
         protected override void add()
         {
-            WorkshiftCategory.add(UserAccount.LoggedInAccount.Id,
+            AttendanceStatus.add(UserAccount.LoggedInAccount.Id,
                 itxt_Name.ValueText,
                 itxt_Notes.ValueText);
         }
@@ -94,15 +92,15 @@ namespace HR_Desktop.Admin
             Util.sanitize(itxt_Name, itxt_Notes);
             if (string.IsNullOrEmpty(itxt_Name.ValueText))
                 return itxt_Name.isValueError("Please provide name");
-            else if ((Mode != FormModes.Update && WorkshiftCategory.isNameExist(null, itxt_Name.ValueText))
-                    || (Mode == FormModes.Update && WorkshiftCategory.isNameExist(selectedRowID(), itxt_Name.ValueText)))
+            else if ((Mode != FormModes.Update && AttendanceStatus.isNameExist(null, itxt_Name.ValueText))
+                    || (Mode == FormModes.Update && AttendanceStatus.isNameExist(selectedRowID(), itxt_Name.ValueText)))
                 return itxt_Name.isValueError("Name is already in the list.");
             return true;
         }
 
         protected override void updateActiveStatus(Guid id, Boolean activeStatus)
         {
-            WorkshiftCategory.updateActiveStatus(UserAccount.LoggedInAccount.Id, id, activeStatus);
+            AttendanceStatus.updateActiveStatus(UserAccount.LoggedInAccount.Id, id, activeStatus);
         }
 
 
@@ -111,8 +109,6 @@ namespace HR_Desktop.Admin
             Util.displayForm(null, new LOGGING.ActivityLogs_Form(UserAccount.LoggedInAccount, selectedRowID()));
             txtQuickSearch.Focus();
         }
-
-        protected override void updateDefaultRow(Guid id) { }
 
         protected override string getSelectedItemDescription(int rowIndex)
         {

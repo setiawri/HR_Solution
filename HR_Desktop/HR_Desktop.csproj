@@ -63,6 +63,12 @@
     <Compile Include="Admin\MasterData_v1_Clients_Form.Designer.cs">
       <DependentUpon>MasterData_v1_Clients_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\MasterData_v1_AttendanceStatuses_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\MasterData_v1_AttendanceStatuses_Form.Designer.cs">
+      <DependentUpon>MasterData_v1_AttendanceStatuses_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\MasterData_v1_Workshifts_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,12 @@
     </Compile>
     <Compile Include="Admin\MasterData_v1_WorkshiftCategories_Form.Designer.cs">
       <DependentUpon>MasterData_v1_WorkshiftCategories_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserAccounts_Profile_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\UserAccounts_Profile_Form.Designer.cs">
+      <DependentUpon>UserAccounts_Profile_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\GlobalData.cs" />
     <Compile Include="Main_Form.cs">
@@ -99,11 +111,17 @@
     <EmbeddedResource Include="Admin\MasterData_v1_Clients_Form.resx">
       <DependentUpon>MasterData_v1_Clients_Form.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Admin\MasterData_v1_AttendanceStatuses_Form.resx">
+      <DependentUpon>MasterData_v1_AttendanceStatuses_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Admin\MasterData_v1_Workshifts_Form.resx">
       <DependentUpon>MasterData_v1_Workshifts_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\MasterData_v1_WorkshiftCategories_Form.resx">
       <DependentUpon>MasterData_v1_WorkshiftCategories_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\UserAccounts_Profile_Form.resx">
+      <DependentUpon>UserAccounts_Profile_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main_Form.resx">
       <DependentUpon>Main_Form.cs</DependentUpon>
@@ -145,7 +163,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Branches\Chintia.txt" />
-    <Content Include="Branches\TimesheetForm\Info.txt" />
+    <Content Include="Branches\To Do List.txt" />
+    <Content Include="Branches\WorkshiftTemplates\Info.txt" />
     <Content Include="Branches\UPDATE-DB.sql" />
   </ItemGroup>
   <ItemGroup>

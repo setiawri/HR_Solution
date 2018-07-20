@@ -62,6 +62,7 @@
             this.scInputContainer.Panel1.SuspendLayout();
             this.scInputContainer.Panel2.SuspendLayout();
             this.scInputContainer.SuspendLayout();
+            this.pnlQuickSearch.SuspendLayout();
             this.pnlUserAccountAccesses.SuspendLayout();
             this.panel2.SuspendLayout();
             this.gbUserAccountAccesses.SuspendLayout();
@@ -109,10 +110,12 @@
             // 
             this.scInputContainer.Size = new System.Drawing.Size(512, 401);
             // 
+            // pnlQuickSearch
+            // 
+            this.pnlQuickSearch.Size = new System.Drawing.Size(482, 28);
+            // 
             // itxt_Name
             // 
-            this.itxt_Name.AllowDecimal = true;
-            this.itxt_Name.AllowNegativeValue = true;
             this.itxt_Name.IsBrowseMode = false;
             this.itxt_Name.LabelText = "Name";
             this.itxt_Name.Location = new System.Drawing.Point(12, 6);
@@ -122,7 +125,6 @@
             this.itxt_Name.PasswordChar = '\0';
             this.itxt_Name.RowCount = 1;
             this.itxt_Name.ShowDeleteButton = false;
-            this.itxt_Name.ShowInNumeric = false;
             this.itxt_Name.ShowTextboxOnly = false;
             this.itxt_Name.Size = new System.Drawing.Size(180, 40);
             this.itxt_Name.TabIndex = 0;
@@ -198,8 +200,6 @@
             // 
             // itxt_Notes
             // 
-            this.itxt_Notes.AllowDecimal = true;
-            this.itxt_Notes.AllowNegativeValue = true;
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
             this.itxt_Notes.Location = new System.Drawing.Point(12, 47);
@@ -207,11 +207,10 @@
             this.itxt_Notes.MultiLine = true;
             this.itxt_Notes.Name = "itxt_Notes";
             this.itxt_Notes.PasswordChar = '\0';
-            this.itxt_Notes.RowCount = 5;
+            this.itxt_Notes.RowCount = 4;
             this.itxt_Notes.ShowDeleteButton = false;
-            this.itxt_Notes.ShowInNumeric = false;
             this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(180, 95);
+            this.itxt_Notes.Size = new System.Drawing.Size(180, 86);
             this.itxt_Notes.TabIndex = 1;
             this.itxt_Notes.ValueText = "";
             // 
@@ -316,7 +315,6 @@
             this.Name = "MasterData_v1_UserAccountRoles_Form";
             this.Text = "USER ACCOUNT ROLES";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);
             this.scInputLeft.Panel2.ResumeLayout(false);
@@ -333,6 +331,8 @@
             this.scInputContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputContainer)).EndInit();
             this.scInputContainer.ResumeLayout(false);
+            this.pnlQuickSearch.ResumeLayout(false);
+            this.pnlQuickSearch.PerformLayout();
             this.pnlUserAccountAccesses.ResumeLayout(false);
             this.pnlUserAccountAccesses.PerformLayout();
             this.panel2.ResumeLayout(false);

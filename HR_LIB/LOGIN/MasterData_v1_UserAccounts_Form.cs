@@ -57,17 +57,17 @@ namespace LOGIN
         {
             setColumnsDataPropertyNames(UserAccount.COL_DB_Id, UserAccount.COL_DB_Active, null, null, null, null);
 
-            col_dgv_Username = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Username", itxt_Username.LabelText, UserAccount.COL_DB_Username, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Username = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Username", itxt_Username.LabelText, UserAccount.COL_DB_Username, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             itxt_Username.MaxLength = UserAccount.USERNAME_MAXLENGTH;
-            col_dgv_Firstname = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Firstname", itxt_Firstname.LabelText, UserAccount.COL_DB_Firstname, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Lastname = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Lastname", itxt_Lastname.LabelText, UserAccount.COL_DB_Lastname, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Birthday = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Birthday", idtp_Birthdate.LabelText, UserAccount.COL_DB_Birthdate, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Address1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address1", itxt_Address1.LabelText, UserAccount.COL_DB_Address1, true, "", true, true, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Address2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address2", itxt_Address2.LabelText, UserAccount.COL_DB_Address2, true, "", true, true, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Phone1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone1", itxt_Phone1.LabelText, UserAccount.COL_DB_Phone1, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Phone2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone2", itxt_Phone2.LabelText, UserAccount.COL_DB_Phone2, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Email = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Email", itxt_Email.LabelText, UserAccount.COL_DB_Email, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, UserAccount.COL_DB_Notes, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Firstname = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Firstname", itxt_Firstname.LabelText, UserAccount.COL_DB_Firstname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Lastname = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Lastname", itxt_Lastname.LabelText, UserAccount.COL_DB_Lastname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Birthday = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Birthday", idtp_Birthdate.LabelText, UserAccount.COL_DB_Birthdate, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Address1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address1", itxt_Address1.LabelText, UserAccount.COL_DB_Address1, true, true, "", true, true, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Address2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address2", itxt_Address2.LabelText, UserAccount.COL_DB_Address2, true, true, "", true, true, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Phone1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone1", itxt_Phone1.LabelText, UserAccount.COL_DB_Phone1, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Phone2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone2", itxt_Phone2.LabelText, UserAccount.COL_DB_Phone2, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Email = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Email", itxt_Email.LabelText, UserAccount.COL_DB_Email, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, UserAccount.COL_DB_Notes, true, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             UserAccountRole.populateCheckedListBox(clbUserAccountRoles, false, UserAccount.LoggedInAccount.Special || UserAccount.IsCreateAccount);
@@ -118,9 +118,7 @@ namespace LOGIN
             else
                 dataview = UserAccount.get(chkIncludeInactive.Checked, null, itxt_Username.ValueText, itxt_Firstname.ValueText, itxt_Lastname.ValueText, 
                     itxt_Address1.ValueText, itxt_Address2.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_Email.ValueText, idtp_Birthdate.Value, itxt_Identification.ValueText, itxt_Height.ValueInt, itxt_Weight.ValueInt, itxt_Notes.ValueText).DefaultView;
-
-            btnTutorSchedule.Enabled = dataview.Count > 0;
-
+            
             return dataview;
         }
 
@@ -137,8 +135,8 @@ namespace LOGIN
             itxt_Phone1.ValueText = obj.Phone1;
             itxt_Phone2.ValueText = obj.Phone2;
             itxt_Identification.ValueText = obj.Identification;
-            itxt_Height.ValueText = obj.Height.ToString();
-            itxt_Weight.ValueText = obj.Weight.ToString();
+            itxt_Height.Value = obj.Height;
+            itxt_Weight.Value = obj.Weight;
             itxt_Notes.ValueText = obj.Notes;
 
             LIBUtil.Desktop.UserControls.InputControl_CheckedListBox.clearCheckedItems(clbUserAccountRoles);
@@ -216,16 +214,10 @@ namespace LOGIN
             UserAccountRole.populateCheckedListBox(clbUserAccountRoles, false, true);
         }
 
-        private void btnTutorSchedule_Click(object sender, EventArgs e)
+        private void btnProfile_Click(object sender, EventArgs e)
         {
-
+            //Util.displayForm(null, new Admin.Clients_Profile_Form(selectedRowID()));
         }
-
-        //private void lnkUpdateStates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        //{
-        //    Tools.displayForm(new MasterData.States_Form(FormMode.New));
-        //    State.populateDropDownList(_inputDDLStates.Dropdownlist, false, true);
-        //}
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

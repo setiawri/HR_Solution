@@ -30,22 +30,26 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_NPWPAddress;
         private DataGridViewColumn col_dgv_Notes;
 
+        private Guid? _UserAccounts_Id = null;
+
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_Clients_Form() : this(FormModes.Add) { }
-        public MasterData_v1_Clients_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD) 
-        { 
+        public MasterData_v1_Clients_Form() : this(FormModes.Add, null) { }
+        public MasterData_v1_Clients_Form(FormModes startingMode, Guid? Employee_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
+        {
             InitializeComponent();
-            
+            if (Employee_Id != null)
+                    _UserAccounts_Id = (Guid)Employee_Id;
+
         }
-        
+
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
         #region OVERRIDE METHODS
 
-        protected override void setupControlsBasedOnRoles() 
+        protected override void setupControlsBasedOnRoles()
         {
 
         }
@@ -54,15 +58,15 @@ namespace HR_Desktop.Admin
         {
             setColumnsDataPropertyNames(Client.COL_DB_Id, Client.COL_DB_Active, null, null, null, null);
 
-            col_dgv_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_CompanyName", itxt_CompanyName.LabelText, Client.COL_DB_CompanyName, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Address = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address", itxt_Address.LabelText, Client.COL_DB_Address, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_BillingAddress = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_BillingAddress", itxt_BillingAddress.LabelText, Client.COL_DB_BillingAddress, true, "", true, false, 100, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_ContactPersonName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_ContactPersonName", itxt_ContactPersonName.LabelText, Client.COL_DB_ContactPersonName, true, "", true, true, 40, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Phone1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone1", itxt_Phone1.LabelText, Client.COL_DB_Phone1, true, "", true, false, 55, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Phone2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone2", itxt_Phone2.LabelText, Client.COL_DB_Phone2, true, "", true, false, 55, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_NPWP = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWP", itxt_NPWP.LabelText, Client.COL_DB_NPWP, true, "", true, true, 40, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_NPWPAddress = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWPAddress", itxt_NPWPAddress.LabelText, Client.COL_DB_NPWPAddress, true, "", true, false,110, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Client.COL_DB_Notes, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_CompanyName", itxt_CompanyName.LabelText, Client.COL_DB_CompanyName, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Address = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address", itxt_Address.LabelText, Client.COL_DB_Address, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_BillingAddress = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_BillingAddress", itxt_BillingAddress.LabelText, Client.COL_DB_BillingAddress, true, true, "", true, false, 100, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_ContactPersonName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_ContactPersonName", itxt_ContactPersonName.LabelText, Client.COL_DB_ContactPersonName, true, true, "", true, true, 40, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Phone1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone1", itxt_Phone1.LabelText, Client.COL_DB_Phone1, true, true, "", true, false, 55, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Phone2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone2", itxt_Phone2.LabelText, Client.COL_DB_Phone2, true, true, "", true, false, 55, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_NPWP = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWP", itxt_NPWP.LabelText, Client.COL_DB_NPWP, true, true, "", true, true, 40, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_NPWPAddress = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWPAddress", itxt_NPWPAddress.LabelText, Client.COL_DB_NPWPAddress, true, true, "", true, false, 110, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Client.COL_DB_Notes, true, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             if (Mode == FormModes.Browse)
@@ -93,9 +97,9 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            return Client.get(chkIncludeInactive.Checked, null, itxt_CompanyName.ValueText, itxt_Address.ValueText, itxt_BillingAddress.ValueText, 
-                    itxt_ContactPersonName.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText,itxt_NPWP.ValueText, itxt_NPWPAddress.ValueText,
-                    itxt_Notes.ValueText).DefaultView;
+                return Client.get(chkIncludeInactive.Checked, null, itxt_CompanyName.ValueText, itxt_Address.ValueText, itxt_BillingAddress.ValueText,
+                    itxt_ContactPersonName.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_NPWP.ValueText, itxt_NPWPAddress.ValueText,
+                    itxt_Notes.ValueText, _UserAccounts_Id).DefaultView;
         }
 
         protected override void populateInputFields()
@@ -129,7 +133,7 @@ namespace HR_Desktop.Admin
 
         protected override Boolean isInputFieldsValid()
         {
-            Util.sanitize(itxt_CompanyName,itxt_Address, itxt_BillingAddress, itxt_ContactPersonName, itxt_Phone1, itxt_Phone2, itxt_NPWP, itxt_NPWPAddress, itxt_Notes);
+            Util.sanitize(itxt_CompanyName, itxt_Address, itxt_BillingAddress, itxt_ContactPersonName, itxt_Phone1, itxt_Phone2, itxt_NPWP, itxt_NPWPAddress, itxt_Notes);
             if (string.IsNullOrEmpty(itxt_CompanyName.ValueText))
                 return itxt_CompanyName.isValueError("Please fill Company Name");
             else if ((Mode != FormModes.Update && Client.isCompanyNameExist(itxt_CompanyName.ValueText, null))

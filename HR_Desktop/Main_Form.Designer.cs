@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.menu_reports = new System.Windows.Forms.ToolStripMenuItem();
+            this.reports_timesheets = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlShortcuts = new System.Windows.Forms.Panel();
             this.gbShortcuts = new System.Windows.Forms.GroupBox();
             this.flpShortcuts = new System.Windows.Forms.FlowLayoutPanel();
@@ -43,9 +44,8 @@
             this.admin_clients = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_workshiftcategories = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_workshifts = new System.Windows.Forms.ToolStripMenuItem();
-            this.admin_attendance = new System.Windows.Forms.ToolStripMenuItem();
+            this.admin_attendance_statuses = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_account = new System.Windows.Forms.ToolStripMenuItem();
-            this.reports_timesheets = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlShortcuts.SuspendLayout();
             this.gbShortcuts.SuspendLayout();
             this.flpShortcuts.SuspendLayout();
@@ -61,6 +61,13 @@
             this.menu_reports.Size = new System.Drawing.Size(59, 20);
             this.menu_reports.Text = "Reports";
             // 
+            // reports_timesheets
+            // 
+            this.reports_timesheets.Name = "reports_timesheets";
+            this.reports_timesheets.Size = new System.Drawing.Size(134, 22);
+            this.reports_timesheets.Text = "Timesheets";
+            this.reports_timesheets.Click += new System.EventHandler(this.reports_timesheets_Click);
+            // 
             // pnlShortcuts
             // 
             this.pnlShortcuts.BackColor = System.Drawing.Color.White;
@@ -68,7 +75,7 @@
             this.pnlShortcuts.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlShortcuts.Location = new System.Drawing.Point(0, 24);
             this.pnlShortcuts.Name = "pnlShortcuts";
-            this.pnlShortcuts.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlShortcuts.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.pnlShortcuts.Size = new System.Drawing.Size(145, 426);
             this.pnlShortcuts.TabIndex = 21;
             // 
@@ -129,7 +136,7 @@
             // 
             this.expandCollapseToggle1.InitialArrowDirection = System.Windows.Forms.ArrowDirection.Left;
             this.expandCollapseToggle1.Location = new System.Drawing.Point(0, 0);
-            this.expandCollapseToggle1.Margin = new System.Windows.Forms.Padding(4);
+            this.expandCollapseToggle1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.expandCollapseToggle1.Name = "expandCollapseToggle1";
             this.expandCollapseToggle1.Size = new System.Drawing.Size(20, 20);
             this.expandCollapseToggle1.TabIndex = 17;
@@ -168,7 +175,7 @@
             this.admin_clients,
             this.admin_workshiftcategories,
             this.admin_workshifts,
-            this.admin_attendance});
+            this.admin_attendance_statuses});
             this.menu_admin.Name = "menu_admin";
             this.menu_admin.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
             this.menu_admin.Size = new System.Drawing.Size(55, 20);
@@ -202,12 +209,12 @@
             this.admin_workshifts.Text = "Workshifts";
             this.admin_workshifts.Click += new System.EventHandler(this.admin_workshifts_Click);
             // 
-            // admin_attendance
+            // admin_attendance_statuses
             // 
-            this.admin_attendance.Name = "admin_attendance";
-            this.admin_attendance.Size = new System.Drawing.Size(184, 22);
-            this.admin_attendance.Text = "Attendance";
-            this.admin_attendance.Click += new System.EventHandler(this.admin_attendance_Click);
+            this.admin_attendance_statuses.Name = "admin_attendance_statuses";
+            this.admin_attendance_statuses.Size = new System.Drawing.Size(184, 22);
+            this.admin_attendance_statuses.Text = "Attendance Statuses";
+            this.admin_attendance_statuses.Click += new System.EventHandler(this.admin_attendance_statuses_Click);
             // 
             // menu_account
             // 
@@ -218,13 +225,6 @@
             this.menu_account.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
             this.menu_account.Size = new System.Drawing.Size(64, 20);
             this.menu_account.Text = "Account";
-            // 
-            // reports_timesheets
-            // 
-            this.reports_timesheets.Name = "reports_timesheets";
-            this.reports_timesheets.Size = new System.Drawing.Size(180, 22);
-            this.reports_timesheets.Text = "Timesheets";
-            this.reports_timesheets.Click += new System.EventHandler(this.reports_timesheets_Click);
             // 
             // Main_Form
             // 
@@ -270,7 +270,7 @@
         private System.Windows.Forms.ToolStripMenuItem admin_workshiftcategories;
         private System.Windows.Forms.ToolStripMenuItem admin_clients;
         private System.Windows.Forms.ToolStripMenuItem admin_workshifts;
-        private System.Windows.Forms.ToolStripMenuItem admin_attendance;
         private System.Windows.Forms.ToolStripMenuItem reports_timesheets;
+        private System.Windows.Forms.ToolStripMenuItem admin_attendance_statuses;
     }
 }

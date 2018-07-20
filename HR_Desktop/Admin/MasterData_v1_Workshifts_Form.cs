@@ -14,6 +14,7 @@ namespace HR_Desktop.Admin
         #region SETTINGS
 
         private const bool FORM_SHOWDATAONLOAD = true;
+        private Guid? _Clients_Id = null;
 
         #endregion SETTINGS
         /*******************************************************************************************************/
@@ -31,9 +32,15 @@ namespace HR_Desktop.Admin
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_Workshifts_Form() : this(FormModes.Add) { }
-        public MasterData_v1_Workshifts_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD) { InitializeComponent(); }
+        public MasterData_v1_Workshifts_Form() : this(FormModes.Add, null) { }
+        public MasterData_v1_Workshifts_Form(FormModes startingMode, Guid? Clients_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
+        {
+            InitializeComponent();
+            if (Clients_Id != null)
+                _Clients_Id = Clients_Id;
 
+        }
+        
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
         #region METHODS
@@ -53,13 +60,13 @@ namespace HR_Desktop.Admin
 
             setColumnsDataPropertyNames(Workshift.COL_DB_Id, Workshift.COL_DB_Active, null, null, null, null);
 
-            col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, Workshift.COL_DB_Name, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Clients_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Clients_CompanyName", itxt_Clients.LabelText, Workshift.COL_Clients_CompanyName, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_WorkshiftCategories_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_WorkshiftCategories_Name", itxt_WorkshiftCategories.LabelText, Workshift.COL_WorkshiftCategories_Name, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_DayOfWeek", iddl_DayOfWeek.LabelText, Workshift.COL_DayOfWeekName, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Start", idtp_Start.LabelText, Workshift.COL_DB_Start, true, @"h\:mm", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
-            col_dgv_Duration = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Duration", in_DurationMinutes.LabelText, Workshift.COL_DB_DurationMinutes, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
-            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Workshift.COL_DB_Notes, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, Workshift.COL_DB_Name, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Clients_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Clients_CompanyName", itxt_Clients.LabelText, Workshift.COL_Clients_CompanyName, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_WorkshiftCategories_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_WorkshiftCategories_Name", itxt_WorkshiftCategories.LabelText, Workshift.COL_WorkshiftCategories_Name, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_DayOfWeek", iddl_DayOfWeek.LabelText, Workshift.COL_DayOfWeekName, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Start", idtp_Start.LabelText, Workshift.COL_DB_Start, true, true, @"h\:mm", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Duration = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Duration", in_DurationMinutes.LabelText, Workshift.COL_DB_DurationMinutes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Workshift.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             ptInputPanel.PerformClick();
@@ -90,15 +97,21 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
+            if(Mode == FormModes.Browse && _Clients_Id != null)
+                return Workshift.get(chkIncludeInactive.Checked, null, null,
+                    _Clients_Id, null, null, null, null, null, null
+                    ).DefaultView;
+
+
             return Workshift.get(chkIncludeInactive.Checked, null,
-                itxt_Name.ValueText,
-                itxt_Clients.ValueGuid,
-                itxt_WorkshiftCategories.ValueGuid,
-                Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
-                Util.wrapNullable<string>(idtp_Start.Value.ToString()),
-                null,
-                Util.wrapNullable<string>(itxt_Notes.ValueText)
-                ).DefaultView;
+                    itxt_Name.ValueText,
+                    itxt_Clients.ValueGuid, null,
+                    itxt_WorkshiftCategories.ValueGuid,
+                    Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
+                    Util.wrapNullable<string>(idtp_Start.Value.ToString()),
+                    null,
+                    Util.wrapNullable<string>(itxt_Notes.ValueText)
+                    ).DefaultView;
         }
 
         protected override void populateInputFields()
@@ -198,18 +211,14 @@ namespace HR_Desktop.Admin
 
         private void itxt_Clients_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            var form = new Admin.MasterData_v1_Clients_Form(FormModes.Browse);
-            Util.displayForm(null, form);
-            if (form.DialogResult == DialogResult.OK)
-                itxt_Clients.setValue(form.BrowsedItemSelectionDescription, form.BrowsedItemSelectionId);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse, null), ref sender);
+            if (itxt_Clients.ValueGuid != null)
+                gb_Template.Enabled = true;
         }
 
         private void itxt_WorkshiftCategories_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            var form = new Admin.MasterData_v1_WorkshiftCategories_Form(FormModes.Browse);
-            Util.displayForm(null, form);
-            if (form.DialogResult == DialogResult.OK)
-                itxt_WorkshiftCategories.setValue(form.BrowsedItemSelectionDescription, form.BrowsedItemSelectionId);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_WorkshiftCategories_Form(FormModes.Browse), ref sender);
         }
 
         #endregion EVENT HANDLERS

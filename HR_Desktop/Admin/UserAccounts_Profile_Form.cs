@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace HR_Desktop.Admin
 {
-    public partial class Clients_Profile_Form : Form
+    public partial class UserAccounts_Profile_Form : Form
     {
         /*******************************************************************************************************/
         #region SETTINGS
@@ -25,8 +25,8 @@ namespace HR_Desktop.Admin
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public Clients_Profile_Form() : this(null) { }
-        public Clients_Profile_Form(Guid? id) { InitializeComponent(); }
+        public UserAccounts_Profile_Form() : this(null) { }
+        public UserAccounts_Profile_Form(Guid? id) { InitializeComponent(); }
 
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
@@ -69,13 +69,8 @@ namespace HR_Desktop.Admin
             setupControls();
             populateData();
         }
-
-        private void lnk_Edit_WorkshiftTemplates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
-        private void lnk_Edit_Workshifts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        
+        private void lnk_Edit_Workshift_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form());
         }

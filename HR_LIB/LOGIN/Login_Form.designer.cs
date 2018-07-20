@@ -44,9 +44,7 @@
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // itxt_Password
-            // 
-            this.itxt_Password.AllowDecimal = true;
-            this.itxt_Password.AllowNegativeValue = true;
+            //
             this.itxt_Password.IsBrowseMode = false;
             this.itxt_Password.LabelText = "password";
             this.itxt_Password.Location = new System.Drawing.Point(38, 62);
@@ -56,7 +54,6 @@
             this.itxt_Password.PasswordChar = '*';
             this.itxt_Password.RowCount = 1;
             this.itxt_Password.ShowDeleteButton = false;
-            this.itxt_Password.ShowInNumeric = false;
             this.itxt_Password.ShowTextboxOnly = false;
             this.itxt_Password.Size = new System.Drawing.Size(143, 41);
             this.itxt_Password.TabIndex = 1;
@@ -64,8 +61,6 @@
             // 
             // itxt_Username
             // 
-            this.itxt_Username.AllowDecimal = true;
-            this.itxt_Username.AllowNegativeValue = true;
             this.itxt_Username.IsBrowseMode = false;
             this.itxt_Username.LabelText = "username";
             this.itxt_Username.Location = new System.Drawing.Point(38, 20);
@@ -75,7 +70,6 @@
             this.itxt_Username.PasswordChar = '\0';
             this.itxt_Username.RowCount = 1;
             this.itxt_Username.ShowDeleteButton = false;
-            this.itxt_Username.ShowInNumeric = false;
             this.itxt_Username.ShowTextboxOnly = false;
             this.itxt_Username.Size = new System.Drawing.Size(143, 41);
             this.itxt_Username.TabIndex = 0;

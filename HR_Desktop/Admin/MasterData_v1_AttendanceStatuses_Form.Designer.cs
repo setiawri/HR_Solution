@@ -1,6 +1,6 @@
 ﻿namespace HR_Desktop.Admin
 {
-    partial class MasterData_v1_WorkshiftCategories_Form
+    partial class MasterData_v1_AttendanceStatuses_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -56,7 +56,7 @@
             // 
             // pnlActionButtons
             // 
-            this.pnlActionButtons.Location = new System.Drawing.Point(0, 207);
+            this.pnlActionButtons.Location = new System.Drawing.Point(0, 177);
             this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(4);
             this.pnlActionButtons.Size = new System.Drawing.Size(330, 23);
             // 
@@ -68,20 +68,20 @@
             // 
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Name);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Notes);
-            this.scInputLeft.Size = new System.Drawing.Size(500, 181);
+            this.scInputLeft.Size = new System.Drawing.Size(500, 151);
             this.scInputLeft.SplitterWidth = 3;
             // 
             // scInputRight
             // 
             this.scInputRight.Margin = new System.Windows.Forms.Padding(4);
-            this.scInputRight.Size = new System.Drawing.Size(25, 181);
+            this.scInputRight.Size = new System.Drawing.Size(25, 151);
             this.scInputRight.SplitterWidth = 5;
             // 
             // scMain
             // 
             this.scMain.Margin = new System.Windows.Forms.Padding(4);
             this.scMain.Size = new System.Drawing.Size(330, 528);
-            this.scMain.SplitterDistance = 230;
+            this.scMain.SplitterDistance = 200;
             this.scMain.SplitterWidth = 5;
             // 
             // txtQuickSearch
@@ -96,7 +96,7 @@
             // scInputContainer
             // 
             this.scInputContainer.Margin = new System.Windows.Forms.Padding(4);
-            this.scInputContainer.Size = new System.Drawing.Size(330, 181);
+            this.scInputContainer.Size = new System.Drawing.Size(330, 151);
             this.scInputContainer.SplitterWidth = 5;
             // 
             // btnLog
@@ -134,21 +134,21 @@
             this.itxt_Notes.MultiLine = true;
             this.itxt_Notes.Name = "itxt_Notes";
             this.itxt_Notes.PasswordChar = '\0';
-            this.itxt_Notes.RowCount = 5;
+            this.itxt_Notes.RowCount = 4;
             this.itxt_Notes.ShowDeleteButton = false;
             this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(237, 101);
+            this.itxt_Notes.Size = new System.Drawing.Size(237, 86);
             this.itxt_Notes.TabIndex = 4;
             this.itxt_Notes.ValueText = "";
             // 
-            // MasterData_v1_WorkshiftCategories_Form
+            // MasterData_v1_AttendanceStatuses_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(330, 528);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "MasterData_v1_WorkshiftCategories_Form";
-            this.Text = "Workshift Categories";
+            this.Name = "MasterData_v1_AttendanceStatuses_Form";
+            this.Text = "Attendance Statuses";
             this.panel1.ResumeLayout(false);
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);

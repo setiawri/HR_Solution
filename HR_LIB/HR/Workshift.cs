@@ -14,6 +14,7 @@ namespace HR_LIB.HR
         public Guid Id;
         public string Name;
         public Guid Clients_Id;
+        public Guid UserAccounts_Id;
         public Guid WorkshiftCategories_Id;
         public DayOfWeek DayOfWeek;
         public TimeSpan Start;
@@ -22,6 +23,7 @@ namespace HR_LIB.HR
         public bool Active;
 
         public string Clients_CompanyName;
+        public string UserAccounts_Name;
         public string WorkshiftCategories_Name;
 
         #endregion PUBLIC VARIABLES
@@ -31,6 +33,7 @@ namespace HR_LIB.HR
         public const string COL_DB_Id = "Id";
         public const string COL_DB_Name = "Name";
         public const string COL_DB_Clients_Id = "Clients_Id";
+        public const string COL_DB_UserAccounts_Id = "UserAccounts_Id";
         public const string COL_DB_WorkshiftCategories_Id = "WorkshiftCategories_Id";
         public const string COL_DB_DayOfWeek = "DayOfWeek";
         public const string COL_DB_Start = "Start";
@@ -39,9 +42,12 @@ namespace HR_LIB.HR
         public const string COL_DB_Active = "Active";
 
         public const string COL_Clients_CompanyName = "Clients_CompanyName";
+        public const string COL_UserAccounts_Fullname = "UserAccounts_Fullname";
         public const string COL_WorkshiftCategories_Name = "WorkshiftCategories_Name";
         public const string COL_DayOfWeekName = "Day_Of_Week_Name";
         public const string COL_FILTER_IncludeInactive = "FILTER_IncludeInactive";
+        public const string FILTER_StartDate = "FILTER_StartDate";
+        public const string FILTER_EndDate = "FILTER_EndDate";
 
 
         #endregion PUBLIC VARIABLES
@@ -54,6 +60,7 @@ namespace HR_LIB.HR
             Id = id;
             Name = Util.wrapNullable<string>(row, COL_DB_Name);
             Clients_Id = Util.wrapNullable<Guid>(row, COL_DB_Clients_Id);
+            UserAccounts_Id = Util.wrapNullable<Guid>(row, COL_DB_UserAccounts_Id);
             WorkshiftCategories_Id = Util.wrapNullable<Guid>(row, COL_DB_WorkshiftCategories_Id);
             DayOfWeek = Util.parseEnum<DayOfWeek>(Util.wrapNullable<int>(row, COL_DB_DayOfWeek));
             Start = Util.wrapNullable<TimeSpan>(row, COL_DB_Start);
@@ -98,6 +105,7 @@ namespace HR_LIB.HR
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
                     new SqlQueryParameter(COL_DB_Name, SqlDbType.NVarChar, name),
                     new SqlQueryParameter(COL_DB_Clients_Id, SqlDbType.UniqueIdentifier, Clients_Id),
+                    //new SqlQueryParameter(COL_DB_UserAccounts_Id, SqlDbType.UniqueIdentifier, UserAccounts_Id),
                     new SqlQueryParameter(COL_DB_WorkshiftCategories_Id, SqlDbType.UniqueIdentifier, WorkshiftCategories_Id),
                     new SqlQueryParameter(COL_DB_DayOfWeek, SqlDbType.Int, (int)dayOfWeek),
                     new SqlQueryParameter(COL_DB_Start, SqlDbType.Time, Util.wrapNullable<TimeSpan?>(start)),
@@ -112,9 +120,9 @@ namespace HR_LIB.HR
             return id;
         }
 
-        public static DataRow get(Guid id) { return Util.getFirstRow(get(true, id, null, null, null, null, null, null, null)); }
+        public static DataRow get(Guid id) { return Util.getFirstRow(get(true, id, null, null, null, null, null, null, null, null)); }
 
-        public static DataTable get(bool filterIncludeInactive, Guid? id, string name, Guid? Clients_Id, Guid? WorkshiftCategories_Id, int? dayOfWeek, 
+        public static DataTable get(bool filterIncludeInactive, Guid? id, string name, Guid? Clients_Id, Guid? UserAccounts_Id, Guid? WorkshiftCategories_Id, int? dayOfWeek, 
             string start, int? durationMinutes, string notes)
         {
             SqlQueryResult result = DBConnection.query(
@@ -124,6 +132,7 @@ namespace HR_LIB.HR
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
                     new SqlQueryParameter(COL_DB_Name, SqlDbType.NVarChar, Util.wrapNullable(name)),
                     new SqlQueryParameter(COL_DB_Clients_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Clients_Id)),
+                    new SqlQueryParameter(COL_DB_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(UserAccounts_Id)),
                     new SqlQueryParameter(COL_DB_WorkshiftCategories_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(WorkshiftCategories_Id)),
                     new SqlQueryParameter(COL_DB_DayOfWeek, SqlDbType.TinyInt, Util.wrapNullable<int?>(dayOfWeek)),
                     new SqlQueryParameter(COL_DB_Start, SqlDbType.Time, Util.wrapNullable<TimeSpan?>(start)),
@@ -132,6 +141,20 @@ namespace HR_LIB.HR
                 );
             return result.Datatable;
         }
+
+        public static DataTable getEmployeeByClientOrName(Guid? Clients_Id, DateTime? startDate, DateTime? endDate, string employeeName)
+        {
+            SqlQueryResult result = DBConnection.query(
+                QueryTypes.FillByAdapter,
+                "Workshifts_getEmployeeByClientOrName",
+                    new SqlQueryParameter(COL_DB_Clients_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Clients_Id)),
+                    new SqlQueryParameter(FILTER_StartDate, SqlDbType.DateTime, Util.wrapNullable(startDate)),
+                    new SqlQueryParameter(FILTER_EndDate, SqlDbType.DateTime, Util.wrapNullable(endDate)),
+                    new SqlQueryParameter(COL_UserAccounts_Fullname, SqlDbType.NVarChar, Util.wrapNullable(employeeName))
+                );
+            return result.Datatable;
+        }
+
 
         public static void update(Guid userAccountID, Guid id, string name, Guid WorkshiftCategories_Id, DayOfWeek dayOfWeek, string start, int durationMinutes, string notes)
         {

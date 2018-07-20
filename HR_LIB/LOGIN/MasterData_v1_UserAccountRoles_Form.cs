@@ -68,10 +68,10 @@ namespace LOGIN
         {
             setColumnsDataPropertyNames(UserAccountRole.COL_DB_Id, UserAccountRole.COL_DB_Active, null, null, null, null);
 
-            col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, UserAccountRole.COL_DB_Name, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, UserAccountRole.COL_DB_Notes, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, UserAccountRole.COL_DB_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, UserAccountRole.COL_DB_Notes, true, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            col_dgv_Special = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Special", "Special", UserAccountRole.COL_DB_Special, true, "", false, true, 50, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Special = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Special", "Special", UserAccountRole.COL_DB_Special, true, true, "", false, true, 50, DataGridViewContentAlignment.MiddleCenter);
 
             _userAccountAccessDictionary.Add(UserAccountAccessEnum.UserAccounts_View, chkUserAccountView);
             _userAccountAccessDictionary.Add(UserAccountAccessEnum.UserAccounts_AddUpdate, chkUserAccountAddUpdate);

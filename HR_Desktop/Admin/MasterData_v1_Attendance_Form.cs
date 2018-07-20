@@ -53,13 +53,13 @@ namespace HR_Desktop.Admin
 
             setColumnsDataPropertyNames(Attendance.COL_DB_Id, null, null, null, null, null);
 
-            col_dgv_UserAccounts_FullName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_UserAccounts_FullName", itxt_UserAccount.LabelText, Attendance.COL_UserAccounts_Fullname, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_TimestampIn = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_TimestampIn", idtp_TimestampIn.LabelText, Attendance.COL_DB_TimestampIn, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
-            col_dgv_TimestampOut = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_TimestampOut", idtp_TimestampOut.LabelText, Attendance.COL_DB_TimestampOut, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
-            col_dgv_Flag1 = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Flag1", Attendance.COL_DB_Flag1, Attendance.COL_DB_Flag1, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
-            col_dgv_Flag2 = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Flag2", Attendance.COL_DB_Flag2, Attendance.COL_DB_Flag2, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
-            col_dgv_Approved = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Approved", Attendance.COL_DB_Approved, Attendance.COL_DB_Approved, true, "", true, false, 60, DataGridViewContentAlignment.MiddleCenter);
-            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Attendance.COL_DB_Notes, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_UserAccounts_FullName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_UserAccounts_FullName", itxt_UserAccount.LabelText, Attendance.COL_UserAccounts_Fullname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_TimestampIn = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_TimestampIn", idtp_TimestampIn.LabelText, Attendance.COL_DB_TimestampIn, true, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_TimestampOut = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_TimestampOut", idtp_TimestampOut.LabelText, Attendance.COL_DB_TimestampOut, true, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Flag1 = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Flag1", Attendance.COL_DB_Flag1, Attendance.COL_DB_Flag1, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Flag2 = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Flag2", Attendance.COL_DB_Flag2, Attendance.COL_DB_Flag2, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Approved = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Approved", Attendance.COL_DB_Approved, Attendance.COL_DB_Approved, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Attendance.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             ptInputPanel.PerformClick();
@@ -85,7 +85,7 @@ namespace HR_Desktop.Admin
         {
             return Attendance.get(null,
                 itxt_UserAccount.ValueGuid,
-                itxt_Notes.ValueText
+                null, null, null, null, null, itxt_Notes.ValueText
                 ).DefaultView;
         }
 
@@ -108,11 +108,12 @@ namespace HR_Desktop.Admin
         }
 
         protected override void add()
-        {
+        {   
             Attendance.add(UserAccount.LoggedInAccount.Id,
                 (Guid)itxt_UserAccount.ValueGuid,
                 (DateTime)idtp_TimestampIn.Value,
                 (DateTime)idtp_TimestampOut.Value,
+                null, null, null, null,
                 itxt_Notes.ValueText);
         }
 
@@ -189,27 +190,9 @@ namespace HR_Desktop.Admin
 
         private void itxt_UserAccount_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            var form = new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false);
-            Util.displayForm(null, form);
-            if (form.DialogResult == DialogResult.OK)
-                itxt_UserAccount.setValue(form.BrowsedItemSelectionDescription, form.BrowsedItemSelectionId);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false), ref sender);
         }
-
-        private void idtp_TimestampIn_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void idtp_TimestampOut_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void itxt_Notes_isBrowseMode_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void idtp_TimestampIn_ValueChanged(object sender, EventArgs e)
         {
             idtp_TimestampOut.Value = idtp_TimestampIn.Value;
