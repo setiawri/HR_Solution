@@ -54,15 +54,15 @@ namespace HR_Desktop.Admin
         {
             setColumnsDataPropertyNames(Client.COL_DB_Id, Client.COL_DB_Active, null, null, null, null);
 
-            col_dgv_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_CompanyName", itxt_CompanyName.LabelText, Client.COL_DB_CompanyName, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Address = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address", itxt_Address.LabelText, Client.COL_DB_Address, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_BillingAddress = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_BillingAddress", itxt_BillingAddress.LabelText, Client.COL_DB_BillingAddress, true, "", true, false, 100, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_ContactPersonName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_ContactPersonName", itxt_ContactPersonName.LabelText, Client.COL_DB_ContactPersonName, true, "", true, true, 40, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Phone1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone1", itxt_Phone1.LabelText, Client.COL_DB_Phone1, true, "", true, false, 55, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Phone2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone2", itxt_Phone2.LabelText, Client.COL_DB_Phone2, true, "", true, false, 55, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_NPWP = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWP", itxt_NPWP.LabelText, Client.COL_DB_NPWP, true, "", true, true, 40, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_NPWPAddress = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWPAddress", itxt_NPWPAddress.LabelText, Client.COL_DB_NPWPAddress, true, "", true, false, 110, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Client.COL_DB_Notes, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_CompanyName", itxt_CompanyName.LabelText, Client.COL_DB_CompanyName, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Address = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address", itxt_Address.LabelText, Client.COL_DB_Address, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_BillingAddress = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_BillingAddress", itxt_BillingAddress.LabelText, Client.COL_DB_BillingAddress, true, true, "", true, false, 100, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_ContactPersonName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_ContactPersonName", itxt_ContactPersonName.LabelText, Client.COL_DB_ContactPersonName, true, true, "", true, true, 40, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Phone1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone1", itxt_Phone1.LabelText, Client.COL_DB_Phone1, true, true, "", true, false, 55, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Phone2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone2", itxt_Phone2.LabelText, Client.COL_DB_Phone2, true, true, "", true, false, 55, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_NPWP = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWP", itxt_NPWP.LabelText, Client.COL_DB_NPWP, true, true, "", true, true, 40, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_NPWPAddress = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_NPWPAddress", itxt_NPWPAddress.LabelText, Client.COL_DB_NPWPAddress, true, true, "", true, false, 110, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Client.COL_DB_Notes, true, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             if (Mode == FormModes.Browse)

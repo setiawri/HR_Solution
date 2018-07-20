@@ -57,17 +57,17 @@ namespace LOGIN
         {
             setColumnsDataPropertyNames(UserAccount.COL_DB_Id, UserAccount.COL_DB_Active, null, null, null, null);
 
-            col_dgv_Username = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Username", itxt_Username.LabelText, UserAccount.COL_DB_Username, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Username = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Username", itxt_Username.LabelText, UserAccount.COL_DB_Username, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             itxt_Username.MaxLength = UserAccount.USERNAME_MAXLENGTH;
-            col_dgv_Firstname = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Firstname", itxt_Firstname.LabelText, UserAccount.COL_DB_Firstname, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Lastname = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Lastname", itxt_Lastname.LabelText, UserAccount.COL_DB_Lastname, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Birthday = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Birthday", idtp_Birthdate.LabelText, UserAccount.COL_DB_Birthdate, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Address1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address1", itxt_Address1.LabelText, UserAccount.COL_DB_Address1, true, "", true, true, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Address2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address2", itxt_Address2.LabelText, UserAccount.COL_DB_Address2, true, "", true, true, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Phone1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone1", itxt_Phone1.LabelText, UserAccount.COL_DB_Phone1, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Phone2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone2", itxt_Phone2.LabelText, UserAccount.COL_DB_Phone2, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Email = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Email", itxt_Email.LabelText, UserAccount.COL_DB_Email, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, UserAccount.COL_DB_Notes, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Firstname = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Firstname", itxt_Firstname.LabelText, UserAccount.COL_DB_Firstname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Lastname = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Lastname", itxt_Lastname.LabelText, UserAccount.COL_DB_Lastname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Birthday = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Birthday", idtp_Birthdate.LabelText, UserAccount.COL_DB_Birthdate, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Address1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address1", itxt_Address1.LabelText, UserAccount.COL_DB_Address1, true, true, "", true, true, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Address2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Address2", itxt_Address2.LabelText, UserAccount.COL_DB_Address2, true, true, "", true, true, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Phone1 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone1", itxt_Phone1.LabelText, UserAccount.COL_DB_Phone1, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Phone2 = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Phone2", itxt_Phone2.LabelText, UserAccount.COL_DB_Phone2, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Email = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Email", itxt_Email.LabelText, UserAccount.COL_DB_Email, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, UserAccount.COL_DB_Notes, true, true, "", false, true, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             UserAccountRole.populateCheckedListBox(clbUserAccountRoles, false, UserAccount.LoggedInAccount.Special || UserAccount.IsCreateAccount);
