@@ -3,6 +3,126 @@
 /**************************************************************************************************************************************************************/
 
 
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[Clients_get]
+
+	@FILTER_IncludeInactive BIT,
+	@Id UNIQUEIDENTIFIER = NULL,
+	@CompanyName NVARCHAR(max) = NULL,
+    @Address NVARCHAR(max) = NULL,
+    @BillingAddress NVARCHAR(max) = NULL,
+    @ContactPersonName NVARCHAR(max) = NULL,
+    @Phone1 NVARCHAR(max) = NULL,
+    @Phone2 NVARCHAR(max) = NULL,
+    @NPWP NVARCHAR(max) = NULL,
+    @NPWPAddress NVARCHAR(max) = NULL,
+	@Notes NVARCHAR(max) = NULL,
+	@FILTER_UserAccounts_Id UNIQUEIDENTIFIER = NULL
+
+AS
+
+BEGIN
+
+	SELECT Clients.*
+	FROM Clients 
+	WHERE 1=1
+		AND (@FILTER_IncludeInactive = 1 OR Active = 1)
+		AND (@Id IS NULL OR Clients.Id = @Id)
+		AND (@CompanyName IS NULL OR Clients.CompanyName LIKE '%'+ @CompanyName+'%')
+		AND (@Address IS NULL OR Clients.Address LIKE '%'+ @Address+'%')
+		AND (@BillingAddress IS NULL OR Clients.BillingAddress LIKE '%'+ @BillingAddress+'%')
+		AND (@ContactPersonName IS NULL OR Clients.ContactPersonName LIKE '%'+ @ContactPersonName+'%')
+		AND (@Phone1 IS NULL OR Clients.Phone1 LIKE '%'+ @Phone1+'%')
+		AND (@Phone2 IS NULL OR Clients.Phone2 LIKE '%'+ @Phone2+'%')
+		AND (@Notes IS NULL OR Clients.Notes LIKE '%'+ @Notes+'%')
+		AND (@NPWP IS NULL OR Clients.Notes LIKE '%'+ @NPWP+'%')
+		AND (@NPWPAddress IS NULL OR Clients.Notes LIKE '%'+ @NPWPAddress+'%')
+		AND (@FILTER_UserAccounts_Id IS NULL OR Clients.Id IN 
+			(SELECT DISTINCT CLIENTS_ID FROM Workshifts WHERE UserAccounts_Id = @FILTER_UserAccounts_Id)
+		)
+	ORDER BY Clients.CompanyName
+END
+GO
+
+
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[Attendance_get]
+
+	@Id uniqueidentifier = NULL,
+	@UserAccounts_Id uniqueidentifier = NULL,
+	@FILTER_DayOfWeek tinyint= NULL,
+	@FILTER_StartDate Datetime = NULL,
+	@FILTER_EndDate Datetime = NULL,
+	@FILTER_StartTime Time(7) = NULL,
+	@FILTER_EndTime Time(7) = NULL,
+	@Notes nvarchar(MAX) = NULL
+AS
+
+BEGIN
+
+	SELECT Attendance.*,
+		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname
+	FROM Attendance 
+		LEFT OUTER JOIN UserAccounts ON Attendance.UserAccounts_Id = UserAccounts.ID
+	WHERE 1=1
+		AND (@Id IS NULL OR Attendance.Id = @Id)
+		AND (@UserAccounts_Id IS NULL OR Attendance.UserAccounts_Id = @UserAccounts_Id)
+		AND (@FILTER_DayOfWeek IS NULL OR (DATEPART(weekday,Attendance.TimestampIn) - 1) = @FILTER_DayOfWeek OR (DATEPART(weekday,Attendance.TimestampOut) - 1) = @FILTER_DayOfWeek)
+		AND (@FILTER_StartDate IS NULL OR Attendance.TimestampIn >= @FILTER_StartDate)
+		AND (@FILTER_EndDate IS NULL OR Attendance.TimestampOut <= @FILTER_EndDate)
+		AND (@FILTER_StartTime IS NULL OR CAST(Attendance.TimestampIn AS time)>= @FILTER_StartTime)
+		AND (@FILTER_EndTime IS NULL OR CAST(Attendance.TimestampOut AS time)<= @FILTER_EndTime)
+		AND (@Notes IS NULL OR Attendance.Notes LIKE '%'+ @Notes+'%')
+
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[Workshifts_getEmployeeByClientOrName]
+
+	@Clients_Id uniqueidentifier= NULL,
+	@FILTER_StartDate datetime = null,
+	@FILTER_EndDate datetime = null,
+	@UserAccounts_Fullname nvarchar(max) = null
+AS
+
+BEGIN
+	SELECT * 
+	FROM (
+		SELECT DISTINCT Workshifts.UserAccounts_Id,
+			UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname,
+			Clients.CompanyName AS Clients_CompanyName
+		FROM Workshifts 
+			LEFT OUTER JOIN Clients ON Workshifts.Clients_Id = Clients.Id
+			LEFT OUTER JOIN UserAccounts ON Workshifts.UserAccounts_Id = UserAccounts.Id
+		WHERE 1=1
+			AND (@Clients_Id IS NULL OR Workshifts.Clients_Id = @Clients_Id)
+			OR Workshifts.UserAccounts_Id IN (
+					SELECT DISTINCT Attendance.UserAccounts_Id 
+					FROM Attendance
+					WHERE 1=1 
+					AND (@FILTER_StartDate IS NULL OR Attendance.TimestampIn >= @FILTER_StartDate)
+					AND (@FILTER_EndDate IS NULL OR Attendance.TimestampIn <= @FILTER_EndDate)
+				)		
+	) Employee 
+	WHERE 1=1
+	AND (@UserAccounts_Fullname IS NULL OR Employee.UserAccounts_Fullname LIKE '%' + @UserAccounts_Fullname +'%')
+	ORDER BY  Employee.UserAccounts_Id, Employee.Clients_CompanyName
+END
+GO
+
+
+
+
+
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+
+
+
 
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Attendance_add]
@@ -31,85 +151,6 @@ BEGIN
 	Attendance_Data left join Workshift_Data ON Attendance_Data.Workshifts_Id = Workshift_Data.Id
 END
 GO
-
-
-
-
-/**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Clients_get]
-
-	@FILTER_IncludeInactive BIT,
-	@Id UNIQUEIDENTIFIER = NULL,
-	@CompanyName NVARCHAR(max) = NULL,
-    @Address NVARCHAR(max) = NULL,
-    @BillingAddress NVARCHAR(max) = NULL,
-    @ContactPersonName NVARCHAR(max) = NULL,
-    @Phone1 NVARCHAR(max) = NULL,
-    @Phone2 NVARCHAR(max) = NULL,
-    @NPWP NVARCHAR(max) = NULL,
-    @NPWPAddress NVARCHAR(max) = NULL,
-	@Notes NVARCHAR(max) = NULL,
-	@UserAccounts_Id UNIQUEIDENTIFIER = NULL
-
-AS
-
-BEGIN
-
-	SELECT Clients.*
-	FROM Clients 
-	WHERE 1=1
-		AND (@FILTER_IncludeInactive = 1 OR Active = 1)
-		AND (@Id IS NULL OR Clients.Id = @Id)
-		AND (@CompanyName IS NULL OR Clients.CompanyName LIKE '%'+ @CompanyName+'%')
-		AND (@Address IS NULL OR Clients.Address LIKE '%'+ @Address+'%')
-		AND (@BillingAddress IS NULL OR Clients.BillingAddress LIKE '%'+ @BillingAddress+'%')
-		AND (@ContactPersonName IS NULL OR Clients.ContactPersonName LIKE '%'+ @ContactPersonName+'%')
-		AND (@Phone1 IS NULL OR Clients.Phone1 LIKE '%'+ @Phone1+'%')
-		AND (@Phone2 IS NULL OR Clients.Phone2 LIKE '%'+ @Phone2+'%')
-		AND (@Notes IS NULL OR Clients.Notes LIKE '%'+ @Notes+'%')
-		AND (@NPWP IS NULL OR Clients.Notes LIKE '%'+ @NPWP+'%')
-		AND (@NPWPAddress IS NULL OR Clients.Notes LIKE '%'+ @NPWPAddress+'%')
-		AND (@UserAccounts_Id IS NULL OR Clients.Id IN 
-			(SELECT DISTINCT CLIENTS_ID FROM Workshifts WHERE UserAccounts_Id = @UserAccounts_Id)
-		)
-	ORDER BY Clients.CompanyName
-END
-GO
-
-
-/**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Attendance_get]
-
-	@Id uniqueidentifier = NULL,
-	@UserAccounts_Id uniqueidentifier = NULL,
-	@DayOfWeek tinyint= NULL,
-	@StartDate Datetime = NULL,
-	@EndDate Datetime = NULL,
-	@StartTime Time(7) = NULL,
-	@EndTime Time(7) = NULL,
-	@Notes nvarchar(MAX) = NULL
-AS
-
-BEGIN
-
-	SELECT Attendance.*,
-		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname
-	FROM Attendance 
-		LEFT OUTER JOIN UserAccounts ON Attendance.UserAccounts_Id = UserAccounts.ID
-	WHERE 1=1
-		AND (@Id IS NULL OR Attendance.Id = @Id)
-		AND (@UserAccounts_Id IS NULL OR Attendance.UserAccounts_Id = @UserAccounts_Id)
-		AND (@DayOfWeek IS NULL OR (DATEPART(weekday,Attendance.TimestampIn) - 1) = @DayOfWeek OR (DATEPART(weekday,Attendance.TimestampOut) - 1) = @DayOfWeek)
-		AND (@StartDate IS NULL OR Attendance.TimestampIn >= @StartDate)
-		AND (@EndDate IS NULL OR Attendance.TimestampOut <= @EndDate)
-		AND (@StartTime IS NULL OR CAST(Attendance.TimestampIn AS time)>= @StartTime)
-		AND (@EndTime IS NULL OR CAST(Attendance.TimestampOut AS time)<= @EndTime)
-		AND (@Notes IS NULL OR Attendance.Notes LIKE '%'+ @Notes+'%')
-
-
-END
-GO
-
 
 
 /**************************************************************************************************************************************************************/
@@ -226,12 +267,6 @@ END
 GO
 
 
-
-
-
-/**************************************************************************************************************************************************************/
-/**************************************************************************************************************************************************************/
-
 ALTER FUNCTION [dbo].[DayOfWeekName] (@DayOfWeek VARCHAR(1))
 
 	RETURNS NVARCHAR(MAX)
@@ -252,39 +287,6 @@ GO
 
 
 
-/**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Workshifts_getEmployeeByClientOrName]
-
-	@Clients_Id uniqueidentifier= NULL,
-	@StartDate datetime = null,
-	@EndDate datetime = null,
-	@UserAccounts_Fullname nvarchar(max) = null
-AS
-
-BEGIN
-	SELECT * 
-	FROM (
-		SELECT DISTINCT Workshifts.UserAccounts_Id,
-			UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname,
-			Clients.CompanyName AS Clients_CompanyName
-		FROM Workshifts 
-			LEFT OUTER JOIN Clients ON Workshifts.Clients_Id = Clients.Id
-			LEFT OUTER JOIN UserAccounts ON Workshifts.UserAccounts_Id = UserAccounts.Id
-		WHERE 1=1
-			AND (@Clients_Id IS NULL OR Workshifts.Clients_Id = @Clients_Id)
-			OR Workshifts.UserAccounts_Id IN (
-					SELECT DISTINCT Attendance.UserAccounts_Id 
-					FROM Attendance
-					WHERE 1=1 
-					AND (@StartDate IS NULL OR Attendance.TimestampIn >= @StartDate)
-					AND (@EndDate IS NULL OR Attendance.TimestampIn <= @EndDate)
-				)		
-	) Employee 
-	WHERE 1=1
-	AND (@UserAccounts_Fullname IS NULL OR Employee.UserAccounts_Fullname LIKE '%' + @UserAccounts_Fullname +'%')
-	ORDER BY  Employee.UserAccounts_Id, Employee.Clients_CompanyName
-END
-GO
 
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Workshifts_get]

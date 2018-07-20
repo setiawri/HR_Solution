@@ -41,7 +41,7 @@ namespace HR_LIB.HR
         public const string COL_DB_Active = "Active";
 
         public const string COL_FILTER_IncludeInactive = "FILTER_IncludeInactive";
-        public const string COL_UserAccounts_Id = "UserAccounts_Id";
+        public const string COL_FILTER_UserAccounts_Id = "FILTER_UserAccounts_Id";
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
@@ -147,7 +147,7 @@ namespace HR_LIB.HR
                 new SqlQueryParameter(COL_DB_NPWP, SqlDbType.NVarChar, Util.wrapNullable(npwp)),
                 new SqlQueryParameter(COL_DB_NPWPAddress, SqlDbType.NVarChar, Util.wrapNullable(npwpAddress)),
                 new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes)),
-                new SqlQueryParameter(COL_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(UserAccounts_Id))
+                new SqlQueryParameter(COL_FILTER_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(UserAccounts_Id))
 
                 );
             return result.Datatable;
