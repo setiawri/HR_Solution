@@ -2,6 +2,30 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
+CREATE TABLE [dbo].[WorkshiftTemplates] (
+    [Id]                     UNIQUEIDENTIFIER NOT NULL,
+    [Name]                   NVARCHAR (MAX)   NOT NULL,
+    [Clients_Id]             UNIQUEIDENTIFIER NOT NULL,
+    [WorkshiftCategories_Id] UNIQUEIDENTIFIER NOT NULL,
+    [DayOfWeek]              TINYINT          NOT NULL,
+    [Start]                  TIME (7)         NOT NULL,
+    [DurationMinutes]        INT              DEFAULT ((0)) NOT NULL,
+    [Notes]                  NVARCHAR (MAX)   NULL,
+    [Active]                 BIT              DEFAULT ((1)) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+GO
+
+
+
+
+
+
+
+
+
+
+
 
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Clients_get]
@@ -43,8 +67,6 @@ BEGIN
 	ORDER BY Clients.CompanyName
 END
 GO
-
-
 
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Attendance_get]
@@ -114,16 +136,6 @@ BEGIN
 END
 GO
 
-
-
-
-
-/**************************************************************************************************************************************************************/
-/**************************************************************************************************************************************************************/
-
-
-
-
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Attendance_add]
 
@@ -152,9 +164,8 @@ BEGIN
 END
 GO
 
-
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Attendance_update_Rejected]
+ALTER PROCEDURE [dbo].[Attendance_update_Rejected]
 
 	@Id uniqueidentifier,
 	@Rejected bit
@@ -172,7 +183,7 @@ GO
 
 /**************************************************************************************************************************************************************/
 
-CREATE PROCEDURE [dbo].[AttendanceStatuses_add]
+ALTER PROCEDURE [dbo].[AttendanceStatuses_add]
 
 	@Id uniqueidentifier,
 	@Name nvarchar(MAX),
@@ -188,9 +199,8 @@ BEGIN
 END
 GO
 
-
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[AttendanceStatuses_get]
+ALTER PROCEDURE [dbo].[AttendanceStatuses_get]
 
 	@FILTER_IncludeInactive bit,
 	@Id uniqueidentifier = NULL,
@@ -212,7 +222,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[AttendanceStatuses_isexist_Name]
+ALTER PROCEDURE [dbo].[AttendanceStatuses_isexist_Name]
 
 	@Name nvarchar(MAX), 
 	@Id uniqueidentifier = NULL,
@@ -230,9 +240,8 @@ BEGIN
 END
 GO
 
-
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[AttendanceStatuses_update]
+ALTER PROCEDURE [dbo].[AttendanceStatuses_update]
 
 	@Id uniqueidentifier,
 	@Name nvarchar(MAX),
@@ -250,7 +259,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[AttendanceStatuses_update_Active]
+ALTER PROCEDURE [dbo].[AttendanceStatuses_update_Active]
 
 	@Id uniqueidentifier,
 	@Active bit
@@ -266,7 +275,7 @@ BEGIN
 END
 GO
 
-
+/**************************************************************************************************************************************************************/
 ALTER FUNCTION [dbo].[DayOfWeekName] (@DayOfWeek VARCHAR(1))
 
 	RETURNS NVARCHAR(MAX)
@@ -284,9 +293,6 @@ BEGIN
     RETURN '';
 END
 GO
-
-
-
 
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Workshifts_get]
@@ -330,9 +336,6 @@ BEGIN
 END
 GO
 
-
-
-
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Workshifts_iscombinationexist]
 
@@ -361,7 +364,6 @@ BEGIN
 
 END
 GO
-
 
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Workshifts_add]

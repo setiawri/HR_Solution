@@ -179,7 +179,7 @@
             // 
             this.itxt_UserAccount.IsBrowseMode = true;
             this.itxt_UserAccount.LabelText = "*User";
-            this.itxt_UserAccount.Location = new System.Drawing.Point(3, 10);
+            this.itxt_UserAccount.Location = new System.Drawing.Point(4, 8);
             this.itxt_UserAccount.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_UserAccount.MaxLength = 32767;
             this.itxt_UserAccount.MultiLine = false;
@@ -196,14 +196,15 @@
             // 
             // idtp_TimestampIn
             // 
-            this.idtp_TimestampIn.CustomFormat = "dd/MM/yy HH:mm";
+            this.idtp_TimestampIn.Checked = false;
+            this.idtp_TimestampIn.CustomFormat = "dd/MM/yyyy HH:mm";
             this.idtp_TimestampIn.DefaultCheckedValue = false;
             this.idtp_TimestampIn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_TimestampIn.LabelText = "IN";
-            this.idtp_TimestampIn.Location = new System.Drawing.Point(3, 62);
+            this.idtp_TimestampIn.Location = new System.Drawing.Point(3, 49);
             this.idtp_TimestampIn.Name = "idtp_TimestampIn";
             this.idtp_TimestampIn.ShowCheckBox = false;
-            this.idtp_TimestampIn.ShowUpAndDown = false;
+            this.idtp_TimestampIn.ShowUpAndDown = true;
             this.idtp_TimestampIn.Size = new System.Drawing.Size(120, 41);
             this.idtp_TimestampIn.TabIndex = 1;
             this.idtp_TimestampIn.Value = null;
@@ -212,14 +213,15 @@
             // 
             // idtp_TimestampOut
             // 
-            this.idtp_TimestampOut.CustomFormat = "dd/MM/yy HH:mm";
+            this.idtp_TimestampOut.Checked = false;
+            this.idtp_TimestampOut.CustomFormat = "dd/MM/yyyy HH:mm";
             this.idtp_TimestampOut.DefaultCheckedValue = false;
             this.idtp_TimestampOut.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_TimestampOut.LabelText = "OUT";
-            this.idtp_TimestampOut.Location = new System.Drawing.Point(125, 62);
+            this.idtp_TimestampOut.Location = new System.Drawing.Point(126, 49);
             this.idtp_TimestampOut.Name = "idtp_TimestampOut";
             this.idtp_TimestampOut.ShowCheckBox = false;
-            this.idtp_TimestampOut.ShowUpAndDown = false;
+            this.idtp_TimestampOut.ShowUpAndDown = true;
             this.idtp_TimestampOut.Size = new System.Drawing.Size(120, 41);
             this.idtp_TimestampOut.TabIndex = 2;
             this.idtp_TimestampOut.Value = null;

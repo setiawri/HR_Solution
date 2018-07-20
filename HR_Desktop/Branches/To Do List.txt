@@ -3,7 +3,18 @@
 > run UPDATE-DB.sql
 
 	
+	
+> MasterData_v1_Form 
+	- add FILTER section
+	- UserAccounts_Profile_Form
+		> add parameter to filter to current UserAccounts_Id when calling MasterData_v1_Workshifts_Form 
+	- Clients_Profile_Form
+		> add parameter to filter to current Clients_Id when calling MasterData_v1_Workshifts_Form 
 
-
-
-
+> Clients_Profile_Form.cs
+	- hook up dgvWorkshiftTemplates and dgvWorkshifts
+	- fill company data in gb_Info
+	
+> Admin.UserAccounts_Profile_Form
+	- fill employee data in gb_Info
+	- 

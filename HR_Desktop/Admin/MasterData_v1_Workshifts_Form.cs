@@ -212,6 +212,8 @@ namespace HR_Desktop.Admin
         private void itxt_Clients_isBrowseMode_Clicked(object sender, EventArgs e)
         {
             LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse, null), ref sender);
+            if (itxt_Clients.ValueGuid != null)
+                gb_Template.Enabled = true;
         }
 
         private void itxt_WorkshiftCategories_isBrowseMode_Clicked(object sender, EventArgs e)

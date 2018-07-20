@@ -44,6 +44,7 @@
             this.itxt_Identification = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.itxt_Height = new LIBUtil.Desktop.UserControls.InputControl_Numeric();
             this.itxt_Weight = new LIBUtil.Desktop.UserControls.InputControl_Numeric();
+            this.btnProfile = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlActionButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scInputLeft)).BeginInit();
@@ -62,6 +63,7 @@
             this.scInputContainer.Panel1.SuspendLayout();
             this.scInputContainer.Panel2.SuspendLayout();
             this.scInputContainer.SuspendLayout();
+            this.pnlQuickSearch.SuspendLayout();
             this.gbUserAccountRoles.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -138,9 +140,15 @@
             this.scInputContainer.Size = new System.Drawing.Size(760, 251);
             this.scInputContainer.SplitterWidth = 5;
             // 
-            // ptInputPanel
+            // pnlQuickSearch
             // 
-            this.ptInputPanel.Location = new System.Drawing.Point(0, -1);
+            this.pnlQuickSearch.Controls.Add(this.btnProfile);
+            this.pnlQuickSearch.Size = new System.Drawing.Size(730, 28);
+            this.pnlQuickSearch.Controls.SetChildIndex(this.txtQuickSearch, 0);
+            this.pnlQuickSearch.Controls.SetChildIndex(this.lnkClearQuickSearch, 0);
+            this.pnlQuickSearch.Controls.SetChildIndex(this.chkIncludeInactive, 0);
+            this.pnlQuickSearch.Controls.SetChildIndex(this.label1, 0);
+            this.pnlQuickSearch.Controls.SetChildIndex(this.btnProfile, 0);
             // 
             // itxt_Username
             // 
@@ -163,16 +171,16 @@
             // 
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
-            this.itxt_Notes.Location = new System.Drawing.Point(12, 163);
+            this.itxt_Notes.Location = new System.Drawing.Point(12, 175);
             this.itxt_Notes.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Notes.MaxLength = 32767;
             this.itxt_Notes.MultiLine = true;
             this.itxt_Notes.Name = "itxt_Notes";
             this.itxt_Notes.PasswordChar = '\0';
-            this.itxt_Notes.RowCount = 4;
+            this.itxt_Notes.RowCount = 3;
             this.itxt_Notes.ShowDeleteButton = false;
             this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(225, 80);
+            this.itxt_Notes.Size = new System.Drawing.Size(225, 71);
             this.itxt_Notes.TabIndex = 3;
             this.itxt_Notes.ValueText = "";
             // 
@@ -223,7 +231,7 @@
             this.itxt_Address1.RowCount = 4;
             this.itxt_Address1.ShowDeleteButton = false;
             this.itxt_Address1.ShowTextboxOnly = false;
-            this.itxt_Address1.Size = new System.Drawing.Size(225, 80);
+            this.itxt_Address1.Size = new System.Drawing.Size(225, 86);
             this.itxt_Address1.TabIndex = 4;
             this.itxt_Address1.ValueText = "";
             // 
@@ -280,6 +288,7 @@
             // 
             // idtp_Birthdate
             // 
+            this.idtp_Birthdate.Checked = true;
             this.idtp_Birthdate.CustomFormat = "dd/MM/yyyy";
             this.idtp_Birthdate.DefaultCheckedValue = false;
             this.idtp_Birthdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -291,12 +300,12 @@
             this.idtp_Birthdate.ShowUpAndDown = false;
             this.idtp_Birthdate.Size = new System.Drawing.Size(110, 41);
             this.idtp_Birthdate.TabIndex = 3;
-            this.idtp_Birthdate.Value = new System.DateTime(2017, 2, 28, 16, 27, 12, 664);
+            this.idtp_Birthdate.Value = new System.DateTime(1753, 1, 1, 16, 27, 12, 664);
             this.idtp_Birthdate.ValueTimeSpan = System.TimeSpan.Parse("16:27:12.6640000");
             // 
             // gbUserAccountRoles
             // 
-            this.gbUserAccountRoles.BackColor = System.Drawing.SystemColors.Control;
+            this.gbUserAccountRoles.BackColor = System.Drawing.Color.Transparent;
             this.gbUserAccountRoles.Controls.Add(this.clbUserAccountRoles);
             this.gbUserAccountRoles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbUserAccountRoles.Location = new System.Drawing.Point(0, 0);
@@ -330,7 +339,7 @@
             // 
             this.itxt_Address2.IsBrowseMode = false;
             this.itxt_Address2.LabelText = "Address2";
-            this.itxt_Address2.Location = new System.Drawing.Point(12, 83);
+            this.itxt_Address2.Location = new System.Drawing.Point(12, 89);
             this.itxt_Address2.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Address2.MaxLength = 32767;
             this.itxt_Address2.MultiLine = true;
@@ -339,7 +348,7 @@
             this.itxt_Address2.RowCount = 4;
             this.itxt_Address2.ShowDeleteButton = false;
             this.itxt_Address2.ShowTextboxOnly = false;
-            this.itxt_Address2.Size = new System.Drawing.Size(225, 80);
+            this.itxt_Address2.Size = new System.Drawing.Size(225, 86);
             this.itxt_Address2.TabIndex = 5;
             this.itxt_Address2.ValueText = "";
             // 
@@ -425,6 +434,17 @@
             0,
             0});
             // 
+            // btnProfile
+            // 
+            this.btnProfile.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnProfile.Location = new System.Drawing.Point(653, 0);
+            this.btnProfile.Name = "btnProfile";
+            this.btnProfile.Size = new System.Drawing.Size(75, 26);
+            this.btnProfile.TabIndex = 15;
+            this.btnProfile.Text = "PROFILE";
+            this.btnProfile.UseVisualStyleBackColor = true;
+            this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
+            // 
             // MasterData_v1_UserAccounts_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -434,7 +454,6 @@
             this.Name = "MasterData_v1_UserAccounts_Form";
             this.Text = "USER ACCOUNTS";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);
             this.scInputLeft.Panel2.ResumeLayout(false);
@@ -452,6 +471,8 @@
             this.scInputContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputContainer)).EndInit();
             this.scInputContainer.ResumeLayout(false);
+            this.pnlQuickSearch.ResumeLayout(false);
+            this.pnlQuickSearch.PerformLayout();
             this.gbUserAccountRoles.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -475,5 +496,6 @@
         private LIBUtil.Desktop.UserControls.InputControl_Numeric itxt_Weight;
         private LIBUtil.Desktop.UserControls.InputControl_Numeric itxt_Height;
         private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_Identification;
+        private System.Windows.Forms.Button btnProfile;
     }
 }

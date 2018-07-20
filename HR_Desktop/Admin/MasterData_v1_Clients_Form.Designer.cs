@@ -64,6 +64,7 @@
             // 
             // pnlActionButtons
             // 
+            this.pnlActionButtons.Location = new System.Drawing.Point(0, 327);
             this.pnlActionButtons.Size = new System.Drawing.Size(765, 23);
             // 
             // scInputLeft
@@ -83,14 +84,16 @@
             this.scInputLeft.Panel2.Controls.Add(this.itxt_Notes);
             this.scInputLeft.Panel2.Controls.Add(this.itxt_Phone2);
             this.scInputLeft.Panel2.Controls.Add(this.itxt_Phone1);
+            this.scInputLeft.Size = new System.Drawing.Size(500, 301);
             // 
             // scInputRight
             // 
-            this.scInputRight.Size = new System.Drawing.Size(261, 271);
+            this.scInputRight.Size = new System.Drawing.Size(261, 301);
             // 
             // scMain
             // 
             this.scMain.Size = new System.Drawing.Size(765, 609);
+            this.scMain.SplitterDistance = 350;
             // 
             // pnlButtons
             // 
@@ -98,7 +101,7 @@
             // 
             // scInputContainer
             // 
-            this.scInputContainer.Size = new System.Drawing.Size(765, 271);
+            this.scInputContainer.Size = new System.Drawing.Size(765, 301);
             // 
             // btnLog
             // 
@@ -107,7 +110,7 @@
             // pnlQuickSearch
             // 
             this.pnlQuickSearch.Controls.Add(this.btnProfile);
-            this.pnlQuickSearch.Size = new System.Drawing.Size(740, 28);
+            this.pnlQuickSearch.Size = new System.Drawing.Size(735, 28);
             this.pnlQuickSearch.Controls.SetChildIndex(this.txtQuickSearch, 0);
             this.pnlQuickSearch.Controls.SetChildIndex(this.lnkClearQuickSearch, 0);
             this.pnlQuickSearch.Controls.SetChildIndex(this.chkIncludeInactive, 0);
@@ -118,7 +121,7 @@
             // 
             this.itxt_CompanyName.IsBrowseMode = false;
             this.itxt_CompanyName.LabelText = "*Company";
-            this.itxt_CompanyName.Location = new System.Drawing.Point(12, 7);
+            this.itxt_CompanyName.Location = new System.Drawing.Point(4, 8);
             this.itxt_CompanyName.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_CompanyName.MaxLength = 50;
             this.itxt_CompanyName.MultiLine = false;
@@ -135,7 +138,7 @@
             // 
             this.itxt_NPWP.IsBrowseMode = false;
             this.itxt_NPWP.LabelText = "NPWP";
-            this.itxt_NPWP.Location = new System.Drawing.Point(12, 157);
+            this.itxt_NPWP.Location = new System.Drawing.Point(4, 161);
             this.itxt_NPWP.MaxLength = 50;
             this.itxt_NPWP.MultiLine = false;
             this.itxt_NPWP.Name = "itxt_NPWP";
@@ -151,7 +154,7 @@
             // 
             this.itxt_BillingAddress.IsBrowseMode = false;
             this.itxt_BillingAddress.LabelText = "Billing Address";
-            this.itxt_BillingAddress.Location = new System.Drawing.Point(12, 89);
+            this.itxt_BillingAddress.Location = new System.Drawing.Point(4, 90);
             this.itxt_BillingAddress.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_BillingAddress.MaxLength = 32767;
             this.itxt_BillingAddress.MultiLine = true;
@@ -160,7 +163,7 @@
             this.itxt_BillingAddress.RowCount = 3;
             this.itxt_BillingAddress.ShowDeleteButton = false;
             this.itxt_BillingAddress.ShowTextboxOnly = false;
-            this.itxt_BillingAddress.Size = new System.Drawing.Size(225, 68);
+            this.itxt_BillingAddress.Size = new System.Drawing.Size(225, 71);
             this.itxt_BillingAddress.TabIndex = 11;
             this.itxt_BillingAddress.ValueText = "";
             // 
@@ -168,7 +171,7 @@
             // 
             this.itxt_Address.IsBrowseMode = false;
             this.itxt_Address.LabelText = "Address";
-            this.itxt_Address.Location = new System.Drawing.Point(12, 48);
+            this.itxt_Address.Location = new System.Drawing.Point(4, 49);
             this.itxt_Address.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Address.MaxLength = 32767;
             this.itxt_Address.MultiLine = true;
@@ -185,7 +188,7 @@
             // 
             this.itxt_NPWPAddress.IsBrowseMode = false;
             this.itxt_NPWPAddress.LabelText = "NPWP Address";
-            this.itxt_NPWPAddress.Location = new System.Drawing.Point(12, 198);
+            this.itxt_NPWPAddress.Location = new System.Drawing.Point(4, 202);
             this.itxt_NPWPAddress.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_NPWPAddress.MaxLength = 32767;
             this.itxt_NPWPAddress.MultiLine = true;
@@ -194,7 +197,7 @@
             this.itxt_NPWPAddress.RowCount = 3;
             this.itxt_NPWPAddress.ShowDeleteButton = false;
             this.itxt_NPWPAddress.ShowTextboxOnly = false;
-            this.itxt_NPWPAddress.Size = new System.Drawing.Size(225, 68);
+            this.itxt_NPWPAddress.Size = new System.Drawing.Size(225, 71);
             this.itxt_NPWPAddress.TabIndex = 13;
             this.itxt_NPWPAddress.ValueText = "";
             // 
@@ -228,7 +231,7 @@
             this.itxt_Notes.RowCount = 3;
             this.itxt_Notes.ShowDeleteButton = false;
             this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(225, 68);
+            this.itxt_Notes.Size = new System.Drawing.Size(225, 71);
             this.itxt_Notes.TabIndex = 11;
             this.itxt_Notes.ValueText = "";
             // 
@@ -268,20 +271,21 @@
             // 
             // btnProfile
             // 
-            this.btnProfile.Location = new System.Drawing.Point(296, 2);
+            this.btnProfile.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnProfile.Location = new System.Drawing.Point(658, 0);
             this.btnProfile.Name = "btnProfile";
-            this.btnProfile.Size = new System.Drawing.Size(75, 23);
+            this.btnProfile.Size = new System.Drawing.Size(75, 26);
             this.btnProfile.TabIndex = 14;
             this.btnProfile.Text = "PROFILE";
             this.btnProfile.UseVisualStyleBackColor = true;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
-            // MasterData_v1_Clients_Formes
+            // MasterData_v1_Clients_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 609);
-            this.Name = "MasterData_v1_Clients_Formes";
+            this.Name = "MasterData_v1_Clients_Form";
             this.Text = "MasterData_v1_Clients_Formes";
             this.panel1.ResumeLayout(false);
             this.pnlActionButtons.ResumeLayout(false);

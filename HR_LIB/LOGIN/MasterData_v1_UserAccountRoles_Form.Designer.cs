@@ -62,6 +62,7 @@
             this.scInputContainer.Panel1.SuspendLayout();
             this.scInputContainer.Panel2.SuspendLayout();
             this.scInputContainer.SuspendLayout();
+            this.pnlQuickSearch.SuspendLayout();
             this.pnlUserAccountAccesses.SuspendLayout();
             this.panel2.SuspendLayout();
             this.gbUserAccountAccesses.SuspendLayout();
@@ -108,6 +109,10 @@
             // scInputContainer
             // 
             this.scInputContainer.Size = new System.Drawing.Size(512, 401);
+            // 
+            // pnlQuickSearch
+            // 
+            this.pnlQuickSearch.Size = new System.Drawing.Size(482, 28);
             // 
             // itxt_Name
             // 
@@ -202,10 +207,10 @@
             this.itxt_Notes.MultiLine = true;
             this.itxt_Notes.Name = "itxt_Notes";
             this.itxt_Notes.PasswordChar = '\0';
-            this.itxt_Notes.RowCount = 5;
+            this.itxt_Notes.RowCount = 4;
             this.itxt_Notes.ShowDeleteButton = false;
             this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(180, 95);
+            this.itxt_Notes.Size = new System.Drawing.Size(180, 86);
             this.itxt_Notes.TabIndex = 1;
             this.itxt_Notes.ValueText = "";
             // 
@@ -310,7 +315,6 @@
             this.Name = "MasterData_v1_UserAccountRoles_Form";
             this.Text = "USER ACCOUNT ROLES";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);
             this.scInputLeft.Panel2.ResumeLayout(false);
@@ -327,6 +331,8 @@
             this.scInputContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInputContainer)).EndInit();
             this.scInputContainer.ResumeLayout(false);
+            this.pnlQuickSearch.ResumeLayout(false);
+            this.pnlQuickSearch.PerformLayout();
             this.pnlUserAccountAccesses.ResumeLayout(false);
             this.pnlUserAccountAccesses.PerformLayout();
             this.panel2.ResumeLayout(false);

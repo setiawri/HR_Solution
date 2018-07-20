@@ -111,7 +111,7 @@
             // 
             this.itxt_Name.IsBrowseMode = false;
             this.itxt_Name.LabelText = "Name";
-            this.itxt_Name.Location = new System.Drawing.Point(4, 18);
+            this.itxt_Name.Location = new System.Drawing.Point(4, 8);
             this.itxt_Name.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Name.MaxLength = 32767;
             this.itxt_Name.MultiLine = false;
@@ -128,7 +128,7 @@
             // 
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
-            this.itxt_Notes.Location = new System.Drawing.Point(4, 58);
+            this.itxt_Notes.Location = new System.Drawing.Point(4, 49);
             this.itxt_Notes.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Notes.MaxLength = 32767;
             this.itxt_Notes.MultiLine = true;
@@ -137,7 +137,7 @@
             this.itxt_Notes.RowCount = 5;
             this.itxt_Notes.ShowDeleteButton = false;
             this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(237, 98);
+            this.itxt_Notes.Size = new System.Drawing.Size(237, 101);
             this.itxt_Notes.TabIndex = 4;
             this.itxt_Notes.ValueText = "";
             // 

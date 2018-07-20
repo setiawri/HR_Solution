@@ -214,6 +214,11 @@ namespace LOGIN
             UserAccountRole.populateCheckedListBox(clbUserAccountRoles, false, true);
         }
 
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            //Util.displayForm(null, new Admin.Clients_Profile_Form(selectedRowID()));
+        }
+
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
     }

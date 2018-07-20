@@ -69,6 +69,7 @@ namespace HR_Desktop.Payroll
             col_dgvAttendance_Rejected.DataPropertyName = Attendance.COL_DB_Rejected;
             col_dgvAttendance_Notes.DataPropertyName = Attendance.COL_DB_Notes;
 
+            pnlFilterAttendance.Enabled = false;
         }
 
         private void setupControlsBasedOnRoles()
@@ -140,6 +141,7 @@ namespace HR_Desktop.Payroll
         {
             if (Util.isColumnMatch(sender, e, col_dgvEmployees_UserAccounts_Fullname))
             {
+                pnlFilterAttendance.Enabled = true;
                 iddl_DayOfWeek.reset();
                 idtp_FilterAttendance_In.reset();
                 idtp_FilterAttendance_Out.reset();
