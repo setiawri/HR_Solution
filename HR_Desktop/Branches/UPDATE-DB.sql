@@ -3,8 +3,15 @@
 /**************************************************************************************************************************************************************/
 
 
+
+
+
+
+
+
+
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[WorkshiftTemplates_get]
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_get]
 
 	@FILTER_IncludeInactive bit,
 	@Id uniqueidentifier = NULL,
@@ -42,7 +49,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[WorkshiftTemplates_iscombinationexist]
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_iscombinationexist]
 
 	@Id uniqueidentifier = NULL,
 	@Name NVARCHAR(MAX)=NULL,
@@ -71,7 +78,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[WorkshiftTemplates_add]
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_add]
 
 	@Id uniqueidentifier,
 	@Name NVARCHAR(max) = NULL,
@@ -94,7 +101,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[WorkshiftTemplates_update]
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_update]
 
 	@Id uniqueidentifier,
 	@Name NVARCHAR(max) = NULL,
@@ -122,7 +129,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[WorkshiftTemplates_update_Active]
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_update_Active]
 
 	@Id uniqueidentifier,
 	@Active bit
@@ -139,7 +146,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[WorkshiftTemplates_delete]
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_delete]
 
 	@Id uniqueidentifier
 	
