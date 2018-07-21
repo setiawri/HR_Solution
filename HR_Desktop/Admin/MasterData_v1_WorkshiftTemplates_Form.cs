@@ -2,20 +2,21 @@
 using System.Windows.Forms;
 
 using LIBUtil;
-using LIBUtil.Desktop.UserControls;
 using LOGIN;
 using LOGGING;
 using HR_LIB.HR;
 
 namespace HR_Desktop.Admin
 {
-    public partial class MasterData_v1_Workshifts_Form : LIBUtil.Desktop.Forms.MasterData_v1_Form
+    public partial class MasterData_v1_WorkshiftTemplates_Form : LIBUtil.Desktop.Forms.MasterData_v1_Form
     {
         /*******************************************************************************************************/
         #region SETTINGS
 
         private const bool FORM_SHOWDATAONLOAD = true;
         private Guid? _Clients_Id = null;
+        public Guid? BrowsedItemSelectionValue = null;
+
 
         #endregion SETTINGS
         /*******************************************************************************************************/
@@ -23,7 +24,6 @@ namespace HR_Desktop.Admin
 
         private DataGridViewColumn col_dgv_Name;
         private DataGridViewColumn col_dgv_Clients_CompanyName;
-        private DataGridViewColumn col_dgv_UserAccounts_Fullname;
         private DataGridViewColumn col_dgv_WorkshiftCategories_Name;
         private DataGridViewColumn col_dgv_DayOfWeek;
         private DataGridViewColumn col_dgv_Start;
@@ -34,8 +34,8 @@ namespace HR_Desktop.Admin
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_Workshifts_Form() : this(FormModes.Add, null) { }
-        public MasterData_v1_Workshifts_Form(FormModes startingMode, Guid? Clients_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
+        public MasterData_v1_WorkshiftTemplates_Form() : this(FormModes.Add, null) { }
+        public MasterData_v1_WorkshiftTemplates_Form(FormModes startingMode, Guid? Clients_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
         {
             InitializeComponent();
             if (Clients_Id != null)
@@ -57,19 +57,16 @@ namespace HR_Desktop.Admin
         protected override void setupFields()
         {
             iddl_DayOfWeek.populate(typeof(DayOfWeek));
-            //iddl_Start.populateWithTime(0, 0, 23, 0, 60, Workshift.COL_DB_Start, @"{0:h\:mm}");
-            //iddl_End.populateWithTime(0, 0, 23, 0, 60, Workshift.COL_DB_End, @"{0:h\:mm}");
 
-            setColumnsDataPropertyNames(Workshift.COL_DB_Id, Workshift.COL_DB_Active, null, null, null, null);
+            setColumnsDataPropertyNames(WorkshiftTemplate.COL_DB_Id, WorkshiftTemplate.COL_DB_Active, null, null, null, null);
 
-            col_dgv_Clients_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Clients_CompanyName", itxt_Clients.LabelText, Workshift.COL_Clients_CompanyName, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_UserAccounts_Fullname = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_UserAccounts_Fullname", itxt_UserAccounts.LabelText, Workshift.COL_UserAccounts_Fullname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, Workshift.COL_DB_Name, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_WorkshiftCategories_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_WorkshiftCategories_Name", itxt_WorkshiftCategories.LabelText, Workshift.COL_WorkshiftCategories_Name, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_DayOfWeek", iddl_DayOfWeek.LabelText, Workshift.COL_DayOfWeekName, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Start", idtp_Start.LabelText, Workshift.COL_DB_Start, true, true, @"h\:mm", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
-            col_dgv_Duration = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Duration", in_DurationMinutes.LabelText, Workshift.COL_DB_DurationMinutes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
-            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Workshift.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, WorkshiftTemplate.COL_DB_Name, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Clients_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Clients_CompanyName", itxt_Clients.LabelText, WorkshiftTemplate.COL_Clients_CompanyName, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_WorkshiftCategories_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_WorkshiftCategories_Name", itxt_WorkshiftCategories.LabelText, WorkshiftTemplate.COL_WorkshiftCategories_Name, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_DayOfWeek", iddl_DayOfWeek.LabelText, WorkshiftTemplate.COL_DayOfWeekName, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Start", idtp_Start.LabelText, WorkshiftTemplate.COL_DB_Start, true, true, @"h\:mm", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Duration = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Duration", in_DurationMinutes.LabelText, WorkshiftTemplate.COL_DB_DurationMinutes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, WorkshiftTemplate.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             ptInputPanel.PerformClick();
@@ -80,11 +77,8 @@ namespace HR_Desktop.Admin
         protected override void clearInputFields()
         {
             itxt_Name.reset();
-            gb_Template.Enabled = false;
-            itxt_WorkshiftTemplate.reset();
             itxt_Clients.Enabled = true;
             itxt_Clients.reset();
-            itxt_UserAccounts.reset();
             itxt_WorkshiftCategories.Enabled = true;
             itxt_WorkshiftCategories.reset();
             iddl_DayOfWeek.Enabled = true;
@@ -103,13 +97,12 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            if(Mode == FormModes.Browse && _Clients_Id != null)
-                return Workshift.get(chkIncludeInactive.Checked, null, null,
+            if (Mode == FormModes.Browse && _Clients_Id != null)
+                return WorkshiftTemplate.get(chkIncludeInactive.Checked, null, null,
                     _Clients_Id, null, null, null, null, null, null
                     ).DefaultView;
 
-
-            return Workshift.get(chkIncludeInactive.Checked, null,
+            return WorkshiftTemplate.get(chkIncludeInactive.Checked, null,
                     itxt_Name.ValueText,
                     itxt_Clients.ValueGuid, null,
                     itxt_WorkshiftCategories.ValueGuid,
@@ -122,10 +115,9 @@ namespace HR_Desktop.Admin
 
         protected override void populateInputFields()
         {
-            Workshift obj = new Workshift(selectedRowID());
+            WorkshiftTemplate obj = new WorkshiftTemplate(selectedRowID());
             itxt_Name.ValueText = obj.Name;
             itxt_Clients.setValue(obj.Clients_CompanyName, obj.Clients_Id);
-            itxt_UserAccounts.setValue(obj.UserAccounts_Fullname, obj.UserAccounts_Id);
             itxt_WorkshiftCategories.setValue(obj.WorkshiftCategories_Name, obj.WorkshiftCategories_Id);
             iddl_DayOfWeek.SelectedItem = obj.DayOfWeek;
             idtp_Start.ValueTimeSpan = obj.Start;
@@ -135,10 +127,9 @@ namespace HR_Desktop.Admin
 
         protected override void update()
         {
-            Workshift.update(UserAccount.LoggedInAccount.Id,
+            WorkshiftTemplate.update(UserAccount.LoggedInAccount.Id,
                 selectedRowID(),
                 itxt_Name.ValueText,
-                (Guid)itxt_UserAccounts.ValueGuid,
                 (Guid)itxt_WorkshiftCategories.ValueGuid,
                 (DayOfWeek)iddl_DayOfWeek.SelectedValue,
                 idtp_Start.ValueTimeSpan.ToString(),
@@ -148,10 +139,9 @@ namespace HR_Desktop.Admin
 
         protected override void add()
         {
-            Workshift.add(UserAccount.LoggedInAccount.Id,
+            WorkshiftTemplate.add(UserAccount.LoggedInAccount.Id,
                 itxt_Name.ValueText,
                 (Guid)itxt_Clients.ValueGuid,
-                (Guid)itxt_UserAccounts.ValueGuid,
                 (Guid)itxt_WorkshiftCategories.ValueGuid,
                 (DayOfWeek)iddl_DayOfWeek.SelectedValue,
                 idtp_Start.ValueTimeSpan.ToString(),
@@ -163,25 +153,23 @@ namespace HR_Desktop.Admin
         {
             Util.sanitize(itxt_Name, itxt_Notes);
             if (string.IsNullOrEmpty(itxt_Name.ValueText))
-                return itxt_Name.isValueError("Please fill Workshift Name");
+                return itxt_Name.isValueError("Please fill WorkshiftTemplate Name");
             else if (itxt_Clients.ValueGuid == null)
                 return itxt_Clients.isValueError("Please select a Client");
-            else if (itxt_UserAccounts.ValueGuid == null)
-                return itxt_UserAccounts.isValueError("Please select a User");
             else if (itxt_WorkshiftCategories.ValueGuid == null)
-                return itxt_WorkshiftCategories.isValueError("Please select a Workshift Category");
+                return itxt_WorkshiftCategories.isValueError("Please select a WorkshiftTemplate Category");
             else if (!iddl_DayOfWeek.hasSelectedValue())
                 return iddl_DayOfWeek.SelectedValueError("Please select the day.");
-            else if ((Mode != FormModes.Update && Workshift.isCombinationExist(null,itxt_Name.ValueText, (Guid)itxt_Clients.ValueGuid, (Guid)itxt_UserAccounts.ValueGuid, Util.parseEnum<DayOfWeek>(iddl_DayOfWeek.SelectedValue), idtp_Start.ValueTimeSpan.ToString()))
-                    || (Mode == FormModes.Update && Workshift.isCombinationExist(selectedRowID(), itxt_Name.ValueText, (Guid)itxt_Clients.ValueGuid, (Guid)itxt_UserAccounts.ValueGuid, Util.parseEnum<DayOfWeek>(iddl_DayOfWeek.SelectedValue), idtp_Start.ValueTimeSpan.ToString())))
-                return iddl_DayOfWeek.SelectedValueError("Workshift combination exists. Please change Name/Client/Day/Start.");
+            else if ((Mode != FormModes.Update && WorkshiftTemplate.isCombinationExist(null,itxt_Name.ValueText, (Guid)itxt_Clients.ValueGuid, Util.parseEnum<DayOfWeek>(iddl_DayOfWeek.SelectedValue), idtp_Start.ValueTimeSpan.ToString()))
+                    || (Mode == FormModes.Update && WorkshiftTemplate.isCombinationExist(selectedRowID(), itxt_Name.ValueText, (Guid)itxt_Clients.ValueGuid, Util.parseEnum<DayOfWeek>(iddl_DayOfWeek.SelectedValue), idtp_Start.ValueTimeSpan.ToString())))
+                return iddl_DayOfWeek.SelectedValueError("WorkshiftTemplate combination exists. Please change Name/Client/Day/Start.");
 
             return true;
         }
 
         protected override void updateActiveStatus(Guid id, Boolean activeStatus)
         {
-            Workshift.updateActiveStatus(UserAccount.LoggedInAccount.Id, id, activeStatus);
+            WorkshiftTemplate.updateActiveStatus(UserAccount.LoggedInAccount.Id, id, activeStatus);
         }
 
         protected override void btnLog_Click(object sender, EventArgs e)
@@ -203,15 +191,9 @@ namespace HR_Desktop.Admin
                 );
         }
 
-        private void populateInputFieldsWorkshiftTemplate()
+        protected override void dgv_CellDoubleClick()
         {
-            WorkshiftTemplate obj = new WorkshiftTemplate((Guid)itxt_WorkshiftTemplate.ValueGuid);
-            itxt_Name.ValueText = obj.Name;
-            itxt_Clients.setValue(obj.Clients_CompanyName, obj.Clients_Id);
-            itxt_WorkshiftCategories.setValue(obj.WorkshiftCategories_Name, obj.WorkshiftCategories_Id);
-            iddl_DayOfWeek.SelectedItem = obj.DayOfWeek;
-            idtp_Start.ValueTimeSpan = obj.Start;
-            in_DurationMinutes.Value = obj.DurationMinutes;
+            BrowsedItemSelectionValue = Util.getSelectedRowID(dgv, col_dgv_Id);
         }
 
         #endregion METHODS
@@ -227,15 +209,13 @@ namespace HR_Desktop.Admin
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            Workshift.delete(UserAccount.LoggedInAccount.Id, selectedRowID());
+            WorkshiftTemplate.delete(UserAccount.LoggedInAccount.Id, selectedRowID());
             populateGridViewDataSource(true);
         }
 
         private void itxt_Clients_isBrowseMode_Clicked(object sender, EventArgs e)
         {
             LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse, null), ref sender);
-            if (itxt_Clients.ValueGuid != null)
-                gb_Template.Enabled = true;
         }
 
         private void itxt_WorkshiftCategories_isBrowseMode_Clicked(object sender, EventArgs e)
@@ -243,21 +223,6 @@ namespace HR_Desktop.Admin
             LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_WorkshiftCategories_Form(FormModes.Browse), ref sender);
         }
 
-        private void itxt_WorkshiftTemplate_isBrowseMode_Clicked(object sender, EventArgs e)
-        {
-            Admin.MasterData_v1_WorkshiftTemplates_Form form;
-            form = (Admin.MasterData_v1_WorkshiftTemplates_Form)InputControl_Textbox.browseForm(new Admin.MasterData_v1_WorkshiftTemplates_Form(FormModes.Browse, itxt_Clients.ValueGuid), ref sender);
-            if(form.BrowsedItemSelectionValue != null)
-            {
-                itxt_WorkshiftTemplate.ValueGuid = form.BrowsedItemSelectionValue;
-                populateInputFieldsWorkshiftTemplate();
-            }
-        }
-
-        private void itxt_UserAccounts_isBrowseMode_Clicked(object sender, EventArgs e)
-        {
-            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false), ref sender);
-        }
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
     }
