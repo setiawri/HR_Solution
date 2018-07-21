@@ -125,6 +125,11 @@ namespace HR_Desktop
             LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_AttendanceStatuses_Form());
         }
 
+        private void admin_workshifttemplates_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_WorkshiftTemplates_Form());
+        }
+
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
