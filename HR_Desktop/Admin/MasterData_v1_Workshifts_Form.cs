@@ -16,7 +16,6 @@ namespace HR_Desktop.Admin
 
         private const bool FORM_SHOWDATAONLOAD = true;
         private Guid? _Clients_Id = null;
-        private Guid? _Selected_WorkshiftTemplates_Id = null;
 
         #endregion SETTINGS
         /*******************************************************************************************************/
@@ -85,6 +84,7 @@ namespace HR_Desktop.Admin
             itxt_WorkshiftTemplate.reset();
             itxt_Clients.Enabled = true;
             itxt_Clients.reset();
+            itxt_UserAccounts.reset();
             itxt_WorkshiftCategories.Enabled = true;
             itxt_WorkshiftCategories.reset();
             iddl_DayOfWeek.Enabled = true;
@@ -125,6 +125,7 @@ namespace HR_Desktop.Admin
             Workshift obj = new Workshift(selectedRowID());
             itxt_Name.ValueText = obj.Name;
             itxt_Clients.setValue(obj.Clients_CompanyName, obj.Clients_Id);
+            itxt_UserAccounts.setValue(obj.UserAccounts_Fullname, obj.UserAccounts_Id);
             itxt_WorkshiftCategories.setValue(obj.WorkshiftCategories_Name, obj.WorkshiftCategories_Id);
             iddl_DayOfWeek.SelectedItem = obj.DayOfWeek;
             idtp_Start.ValueTimeSpan = obj.Start;
@@ -204,7 +205,7 @@ namespace HR_Desktop.Admin
 
         private void populateInputFieldsWorkshiftTemplate()
         {
-            WorkshiftTemplate obj = new WorkshiftTemplate((Guid)_Selected_WorkshiftTemplates_Id);
+            WorkshiftTemplate obj = new WorkshiftTemplate((Guid)itxt_WorkshiftTemplate.ValueGuid);
             itxt_Name.ValueText = obj.Name;
             itxt_Clients.setValue(obj.Clients_CompanyName, obj.Clients_Id);
             itxt_WorkshiftCategories.setValue(obj.WorkshiftCategories_Name, obj.WorkshiftCategories_Id);
@@ -248,7 +249,7 @@ namespace HR_Desktop.Admin
             form = (Admin.MasterData_v1_WorkshiftTemplates_Form)InputControl_Textbox.browseForm(new Admin.MasterData_v1_WorkshiftTemplates_Form(FormModes.Browse, itxt_Clients.ValueGuid), ref sender);
             if(form.BrowsedItemSelectionValue != null)
             {
-                _Selected_WorkshiftTemplates_Id = form.BrowsedItemSelectionValue;
+                itxt_WorkshiftTemplate.ValueGuid = form.BrowsedItemSelectionValue;
                 populateInputFieldsWorkshiftTemplate();
             }
         }
