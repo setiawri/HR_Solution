@@ -2,18 +2,161 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
-CREATE TABLE [dbo].[WorkshiftTemplates] (
-    [Id]                     UNIQUEIDENTIFIER NOT NULL,
-    [Name]                   NVARCHAR (MAX)   NOT NULL,
-    [Clients_Id]             UNIQUEIDENTIFIER NOT NULL,
-    [WorkshiftCategories_Id] UNIQUEIDENTIFIER NOT NULL,
-    [DayOfWeek]              TINYINT          NOT NULL,
-    [Start]                  TIME (7)         NOT NULL,
-    [DurationMinutes]        INT              DEFAULT ((0)) NOT NULL,
-    [Notes]                  NVARCHAR (MAX)   NULL,
-    [Active]                 BIT              DEFAULT ((1)) NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
+
+
+
+
+
+
+
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_get]
+
+	@FILTER_IncludeInactive bit,
+	@Id uniqueidentifier = NULL,
+	@Name NVARCHAR(max) = NULL,
+	@Clients_Id uniqueidentifier= NULL,
+	@WorkshiftCategories_Id UNIQUEIDENTIFIER = NULL,
+	@DayOfWeek tinyint= NULL,
+	@Start time(7) = NULL,
+	@DurationMinutes int = NULL,
+	@Notes nvarchar(MAX) = NULL
+
+AS
+
+BEGIN
+
+	SELECT WorkshiftTemplates.*, [dbo].[DayOfWeekName](WorkshiftTemplates.DayOfWeek) AS Day_Of_Week_Name,
+		Clients.CompanyName AS Clients_CompanyName, WorkshiftCategories.Name AS WorkshiftCategories_Name
+	FROM WorkshiftTemplates 
+		LEFT OUTER JOIN Clients ON WorkshiftTemplates.Clients_Id = Clients.Id
+		LEFT OUTER JOIN WorkshiftCategories ON WorkshiftTemplates.WorkshiftCategories_Id = WorkshiftCategories.Id
+	WHERE 1=1
+		AND (@FILTER_IncludeInactive = 1 OR WorkshiftTemplates.Active = 1)
+		AND (@Id IS NULL OR WorkshiftTemplates.Id = @Id)
+		AND (@Name IS NULL OR WorkshiftTemplates.Name LIKE '%'+ @Name +'%')
+		AND (@Clients_Id IS NULL OR WorkshiftTemplates.Clients_Id = @Clients_Id)
+		AND (@WorkshiftCategories_Id IS NULL OR WorkshiftTemplates.WorkshiftCategories_Id = @WorkshiftCategories_Id)
+		AND (@DayOfWeek IS NULL OR WorkshiftTemplates.DayOfWeek = @DayOfWeek)
+		AND (@Start IS NULL OR WorkshiftTemplates.Start = @Start)
+		AND (@DurationMinutes IS NULL OR WorkshiftTemplates.DurationMinutes = @DurationMinutes)
+		AND (@Notes IS NULL OR WorkshiftTemplates.Notes LIKE '%'+ @Notes +'%')
+
+	ORDER BY Clients.CompanyName DESC, WorkshiftTemplates.DayOfWeek ASC, WorkshiftTemplates.Start ASC
+
+END
+GO
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_iscombinationexist]
+
+	@Id uniqueidentifier = NULL,
+	@Name NVARCHAR(MAX)=NULL,
+	@Clients_Id uniqueidentifier= NULL,
+	@DayOfWeek int= NULL,
+	@Start nvarchar(MAX) = NULL,
+	@returnValueBoolean bit = 0 OUTPUT 
+
+AS
+
+BEGIN
+
+	IF EXISTS (	SELECT WorkshiftTemplates.Id 
+				FROM WorkshiftTemplates 
+				WHERE WorkshiftTemplates.Name = @Name
+					AND WorkshiftTemplates.Clients_Id = @Clients_Id
+					AND WorkshiftTemplates.DayOfWeek = @DayOfWeek
+					AND WorkshiftTemplates.Start = @Start
+					AND (@Id IS NULL OR WorkshiftTemplates.Id <> @Id)
+				)
+		SET @returnValueBoolean = 1
+	ELSE
+		SET @returnValueBoolean = 0
+
+END
+GO
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_add]
+
+	@Id uniqueidentifier,
+	@Name NVARCHAR(max) = NULL,
+	@Clients_Id uniqueidentifier,
+	@WorkshiftCategories_Id uniqueidentifier,
+	@DayOfWeek int,
+	@Start nvarchar(MAX) = NULL,
+	@DurationMinutes int = NULL,
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+
+	INSERT INTO WorkshiftTemplates(Id,Name, Clients_Id,WorkshiftCategories_Id, DayOfWeek, Start, DurationMinutes, Notes) 
+	VALUES(@Id,@Name,@Clients_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@DurationMinutes,@Notes)
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_update]
+
+	@Id uniqueidentifier,
+	@Name NVARCHAR(max) = NULL,
+	@WorkshiftCategories_Id uniqueidentifier,
+	@DayOfWeek INT,
+	@Start nvarchar(MAX) = NULL,
+	@DurationMinutes int = NULL,
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+
+	UPDATE WorkshiftTemplates SET
+		Name = @Name,
+		WorkshiftCategories_Id = @WorkshiftCategories_Id,
+		DayOfWeek = @DayOfWeek,
+		Start = @Start,
+		DurationMinutes = @DurationMinutes,
+		Notes = @Notes
+	WHERE Id = @Id 
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_update_Active]
+
+	@Id uniqueidentifier,
+	@Active bit
+	
+AS
+
+BEGIN
+
+	UPDATE WorkshiftTemplates SET
+		Active = @Active
+	WHERE Id = @Id
+
+END
+GO
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[WorkshiftTemplates_delete]
+
+	@Id uniqueidentifier
+	
+AS
+
+BEGIN
+
+	DELETE WorkshiftTemplates WHERE Id=@Id
+
+END
 GO
 
 
@@ -27,6 +170,8 @@ GO
 
 
 
+
+/**************************************************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Clients_get]
 
@@ -294,6 +439,7 @@ BEGIN
 END
 GO
 
+
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Workshifts_get]
 
@@ -319,6 +465,7 @@ BEGIN
 	FROM Workshifts 
 		LEFT OUTER JOIN Clients ON Workshifts.Clients_Id = Clients.Id
 		LEFT OUTER JOIN WorkshiftCategories ON Workshifts.WorkshiftCategories_Id = WorkshiftCategories.Id
+		LEFT OUTER JOIN UserAccounts ON UserAccounts.Id = Workshifts.UserAccounts_Id
 	WHERE 1=1
 		AND (@FILTER_IncludeInactive = 1 OR Workshifts.Active = 1)
 		AND (@Id IS NULL OR Workshifts.Id = @Id)
@@ -336,12 +483,14 @@ BEGIN
 END
 GO
 
+
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Workshifts_iscombinationexist]
 
 	@Id uniqueidentifier = NULL,
 	@Name NVARCHAR(MAX)=NULL,
 	@Clients_Id uniqueidentifier= NULL,
+	@UserAccounts_Id uniqueidentifier = NULL,
 	@DayOfWeek int= NULL,
 	@Start nvarchar(MAX) = NULL,
 	@returnValueBoolean bit = 0 OUTPUT 
@@ -354,6 +503,7 @@ BEGIN
 				FROM Workshifts 
 				WHERE Workshifts.Name = @Name
 					AND Workshifts.Clients_Id = @Clients_Id
+					AND Workshifts.UserAccounts_Id = @UserAccounts_Id
 					AND Workshifts.DayOfWeek = @DayOfWeek
 					AND Workshifts.Start = @Start
 					AND (@Id IS NULL OR Workshifts.Id <> @Id)
@@ -371,6 +521,7 @@ ALTER PROCEDURE [dbo].[Workshifts_add]
 	@Id uniqueidentifier,
 	@Name NVARCHAR(max) = NULL,
 	@Clients_Id uniqueidentifier,
+	@UserAccounts_Id uniqueidentifier,
 	@WorkshiftCategories_Id uniqueidentifier,
 	@DayOfWeek int,
 	@Start nvarchar(MAX) = NULL,
@@ -381,11 +532,12 @@ AS
 
 BEGIN
 
-	INSERT INTO Workshifts(Id,Name, Clients_Id,WorkshiftCategories_Id, DayOfWeek, Start, DurationMinutes, Notes) 
-	VALUES(@Id,@Name,@Clients_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@DurationMinutes,@Notes)
+	INSERT INTO Workshifts(Id,Name, Clients_Id, UserAccounts_Id, WorkshiftCategories_Id, DayOfWeek, Start, DurationMinutes, Notes) 
+	VALUES(@Id,@Name,@Clients_Id,@UserAccounts_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@DurationMinutes,@Notes)
 
 END
 GO
+
 
 
 /**************************************************************************************************************************************************************/
@@ -393,6 +545,7 @@ ALTER PROCEDURE [dbo].[Workshifts_update]
 
 	@Id uniqueidentifier,
 	@Name NVARCHAR(max) = NULL,
+	@UserAccounts_Id uniqueidentifier,
 	@WorkshiftCategories_Id uniqueidentifier,
 	@DayOfWeek INT,
 	@Start nvarchar(MAX) = NULL,
@@ -405,6 +558,7 @@ BEGIN
 
 	UPDATE Workshifts SET
 		Name = @Name,
+		UserAccounts_Id = @UserAccounts_Id,
 		WorkshiftCategories_Id = @WorkshiftCategories_Id,
 		DayOfWeek = @DayOfWeek,
 		Start = @Start,

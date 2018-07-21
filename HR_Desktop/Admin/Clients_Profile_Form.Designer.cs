@@ -82,6 +82,9 @@
             this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblAddress1 = new System.Windows.Forms.Label();
+            this.gb_Info.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -96,6 +99,8 @@
             // 
             // gb_Info
             // 
+            this.gb_Info.Controls.Add(this.lblAddress1);
+            this.gb_Info.Controls.Add(this.label1);
             this.gb_Info.Location = new System.Drawing.Point(20, 37);
             this.gb_Info.Name = "gb_Info";
             this.gb_Info.Size = new System.Drawing.Size(381, 384);
@@ -653,6 +658,23 @@
             this.dataGridViewCheckBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewCheckBoxColumn2.Width = 38;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Address 1:";
+            // 
+            // lblAddress1
+            // 
+            this.lblAddress1.Location = new System.Drawing.Point(69, 16);
+            this.lblAddress1.Name = "lblAddress1";
+            this.lblAddress1.Size = new System.Drawing.Size(133, 45);
+            this.lblAddress1.TabIndex = 1;
+            this.lblAddress1.Text = "lblAddress1";
+            // 
             // Clients_Profile_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -664,6 +686,8 @@
             this.Controls.Add(this.gb_Info);
             this.Name = "Clients_Profile_Form";
             this.Text = "PROFILE";
+            this.gb_Info.ResumeLayout(false);
+            this.gb_Info.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -734,5 +758,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.LinkLabel lnk_Edit_Workshifts;
         private System.Windows.Forms.LinkLabel lnk_Edit_WorkshiftTemplates;
+        private System.Windows.Forms.Label lblAddress1;
+        private System.Windows.Forms.Label label1;
     }
 }
