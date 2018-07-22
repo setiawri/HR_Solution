@@ -103,7 +103,7 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            if(Mode == FormModes.Browse && _Clients_Id != null)
+            if(_Clients_Id != null)
                 return Workshift.get(chkIncludeInactive.Checked, null, null,
                     _Clients_Id, null, null, null, null, null, null
                     ).DefaultView;
@@ -111,7 +111,8 @@ namespace HR_Desktop.Admin
 
             return Workshift.get(chkIncludeInactive.Checked, null,
                     itxt_Name.ValueText,
-                    itxt_Clients.ValueGuid, null,
+                    itxt_Clients.ValueGuid, 
+                    itxt_UserAccounts.ValueGuid,
                     itxt_WorkshiftCategories.ValueGuid,
                     Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
                     Util.wrapNullable<string>(idtp_Start.Value.ToString()),

@@ -114,9 +114,9 @@ namespace HR_LIB.HR
             return id;
         }
 
-        public static DataRow get(Guid id) { return Util.getFirstRow(get(true, id, null, null, null, null, null, null, null, null)); }
+        public static DataRow get(Guid id) { return Util.getFirstRow(get(true, id, null, null, null, null, null, null, null)); }
 
-        public static DataTable get(bool filterIncludeInactive, Guid? id, string name, Guid? Clients_Id, Guid? UserAccounts_Id, Guid? WorkshiftCategories_Id, int? dayOfWeek, 
+        public static DataTable get(bool filterIncludeInactive, Guid? id, string name, Guid? Clients_Id, Guid? WorkshiftCategories_Id, int? dayOfWeek, 
             string start, int? durationMinutes, string notes)
         {
             SqlQueryResult result = DBConnection.query(
