@@ -670,7 +670,7 @@
             this.rbWorkshifts_Monday.TabIndex = 8;
             this.rbWorkshifts_Monday.Text = "M";
             this.rbWorkshifts_Monday.UseVisualStyleBackColor = true;
-            this.rbWorkshifts_Monday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_Monday_CheckedChanged);
+            this.rbWorkshifts_Monday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_CheckedChanged);
             // 
             // rbWorkshifts_Tuesday
             // 
@@ -682,7 +682,7 @@
             this.rbWorkshifts_Tuesday.TabIndex = 9;
             this.rbWorkshifts_Tuesday.Text = "Tu";
             this.rbWorkshifts_Tuesday.UseVisualStyleBackColor = true;
-            this.rbWorkshifts_Tuesday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_Tuesday_CheckedChanged);
+            this.rbWorkshifts_Tuesday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_CheckedChanged);
             // 
             // rbWorkshifts_Wednesday
             // 
@@ -694,7 +694,7 @@
             this.rbWorkshifts_Wednesday.TabIndex = 10;
             this.rbWorkshifts_Wednesday.Text = "W";
             this.rbWorkshifts_Wednesday.UseVisualStyleBackColor = true;
-            this.rbWorkshifts_Wednesday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_Wednesday_CheckedChanged);
+            this.rbWorkshifts_Wednesday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_CheckedChanged);
             // 
             // rbWorkshifts_Thursday
             // 
@@ -706,7 +706,7 @@
             this.rbWorkshifts_Thursday.TabIndex = 11;
             this.rbWorkshifts_Thursday.Text = "Th";
             this.rbWorkshifts_Thursday.UseVisualStyleBackColor = true;
-            this.rbWorkshifts_Thursday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_Thursday_CheckedChanged);
+            this.rbWorkshifts_Thursday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_CheckedChanged);
             // 
             // rbWorkshifts_Friday
             // 
@@ -718,7 +718,7 @@
             this.rbWorkshifts_Friday.TabIndex = 12;
             this.rbWorkshifts_Friday.Text = "F";
             this.rbWorkshifts_Friday.UseVisualStyleBackColor = true;
-            this.rbWorkshifts_Friday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_Friday_CheckedChanged);
+            this.rbWorkshifts_Friday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_CheckedChanged);
             // 
             // rbWorkshifts_Saturday
             // 
@@ -730,7 +730,7 @@
             this.rbWorkshifts_Saturday.TabIndex = 13;
             this.rbWorkshifts_Saturday.Text = "Sa";
             this.rbWorkshifts_Saturday.UseVisualStyleBackColor = true;
-            this.rbWorkshifts_Saturday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_Saturday_CheckedChanged);
+            this.rbWorkshifts_Saturday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_CheckedChanged);
             // 
             // rbWorkshifts_Sunday
             // 
@@ -742,7 +742,7 @@
             this.rbWorkshifts_Sunday.TabIndex = 14;
             this.rbWorkshifts_Sunday.Text = "Su";
             this.rbWorkshifts_Sunday.UseVisualStyleBackColor = true;
-            this.rbWorkshifts_Sunday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_Sunday_CheckedChanged);
+            this.rbWorkshifts_Sunday.CheckedChanged += new System.EventHandler(this.rbWorkshifts_CheckedChanged);
             // 
             // groupBox2
             // 

@@ -25,8 +25,8 @@ namespace HR_Desktop.Admin
         #region PRIVATE VARIABLES
 
         private Guid? _Clients_Id =  null;
-        private int _dgvWorkshifts_FilterDayOfWeek;
-        private int _dgvWorkshiftTemplates_FilterDayOfWeek;
+        private DayOfWeek _dgvWorkshifts_FilterDayOfWeek;
+        private DayOfWeek _dgvWorkshiftTemplates_FilterDayOfWeek;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
@@ -50,9 +50,9 @@ namespace HR_Desktop.Admin
             setupControlsBasedOnRoles();
 
             rbWorkshifts_Monday.Checked = true;
-            _dgvWorkshifts_FilterDayOfWeek = 1;
+            _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Monday;
             rbWorkshiftTemplates_Monday.Checked = true;
-            _dgvWorkshiftTemplates_FilterDayOfWeek = 1;
+            _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Monday;
 
             dgvWorkshifts.AutoGenerateColumns = false;
             col_dgvWorkshifts_Id.DataPropertyName = Workshift.COL_DB_Id;
@@ -96,12 +96,12 @@ namespace HR_Desktop.Admin
 
         private void populateDgvWorkshifts()
         {
-            Util.populateDataGridView(dgvWorkshifts, Workshift.get(false, null, null, _Clients_Id, null, null, _dgvWorkshifts_FilterDayOfWeek, null, null, null));
+            Util.populateDataGridView(dgvWorkshifts, Workshift.get(false, null, null, _Clients_Id, null, null, (int)_dgvWorkshifts_FilterDayOfWeek, null, null, null));
         }
 
         private void populateDgvWorkshiftTemplates()
         {
-            Util.populateDataGridView(dgvWorkshiftTemplates, WorkshiftTemplate.get(false, null, null, _Clients_Id, null, _dgvWorkshiftTemplates_FilterDayOfWeek, null, null, null));
+            Util.populateDataGridView(dgvWorkshiftTemplates, WorkshiftTemplate.get(false, null, null, _Clients_Id, null, (int)_dgvWorkshiftTemplates_FilterDayOfWeek, null, null, null));
         }
 
         private bool isValidToPopulateData()
@@ -133,87 +133,43 @@ namespace HR_Desktop.Admin
             populateDgvWorkshifts();
         }
 
-        private void rbWorkshifts_Monday_CheckedChanged(object sender, EventArgs e)
+        private void rbWorkshifts_CheckedChanged(object sender, EventArgs e)
         {
-            _dgvWorkshifts_FilterDayOfWeek = 1;
+            if (sender == rbWorkshifts_Monday)
+                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Monday;
+            else if (sender == rbWorkshifts_Tuesday)
+                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Tuesday;
+            else if (sender == rbWorkshifts_Wednesday)
+                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Wednesday;
+            else if (sender == rbWorkshifts_Thursday)
+                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Thursday;
+            else if (sender == rbWorkshifts_Friday)
+                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Friday;
+            else if (sender == rbWorkshifts_Saturday)
+                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Saturday;
+            else if (sender == rbWorkshifts_Sunday)
+                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Sunday;
+
             populateDgvWorkshifts();
         }
 
-        private void rbWorkshifts_Tuesday_CheckedChanged(object sender, EventArgs e)
+        private void rbWorkshiftTemplates_CheckedChanged(object sender, EventArgs e)
         {
-            _dgvWorkshifts_FilterDayOfWeek = 2;
-            populateDgvWorkshifts();
-        }
+            if (sender == rbWorkshiftTemplates_Monday)
+                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Monday;
+            else if (sender == rbWorkshiftTemplates_Tuesday)
+                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Tuesday;
+            else if (sender == rbWorkshiftTemplates_Wednesday)
+                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Wednesday;
+            else if (sender == rbWorkshiftTemplates_Thursday)
+                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Thursday;
+            else if (sender == rbWorkshiftTemplates_Friday)
+                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Friday;
+            else if (sender == rbWorkshiftTemplates_Saturday)
+                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Saturday;
+            else if (sender == rbWorkshiftTemplates_Sunday)
+                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Sunday;
 
-        private void rbWorkshifts_Wednesday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshifts_FilterDayOfWeek = 3;
-            populateDgvWorkshifts();
-        }
-
-        private void rbWorkshifts_Thursday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshifts_FilterDayOfWeek = 4;
-            populateDgvWorkshifts();
-        }
-
-        private void rbWorkshifts_Friday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshifts_FilterDayOfWeek = 5;
-            populateDgvWorkshifts();
-        }
-
-        private void rbWorkshifts_Saturday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshifts_FilterDayOfWeek = 6;
-            populateDgvWorkshifts();
-        }
-
-        private void rbWorkshifts_Sunday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshifts_FilterDayOfWeek = 0;
-            populateDgvWorkshifts();
-        }
-
-        private void rbWorkshiftTemplates_Monday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshiftTemplates_FilterDayOfWeek = 1;
-            populateDgvWorkshiftTemplates();
-        }
-
-        private void rbWorkshiftTemplates_Tuesday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshiftTemplates_FilterDayOfWeek = 2;
-            populateDgvWorkshiftTemplates();
-        }
-
-        private void rbWorkshiftTemplates_Wednesday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshiftTemplates_FilterDayOfWeek = 3;
-            populateDgvWorkshiftTemplates();
-        }
-
-        private void rbWorkshiftTemplates_Thursday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshiftTemplates_FilterDayOfWeek = 4;
-            populateDgvWorkshiftTemplates();
-        }
-
-        private void rbWorkshiftTemplates_Friday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshiftTemplates_FilterDayOfWeek = 5;
-            populateDgvWorkshiftTemplates();
-        }
-
-        private void rbWorkshiftTemplates_Saturday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshiftTemplates_FilterDayOfWeek = 6;
-            populateDgvWorkshiftTemplates();
-        }
-
-        private void rbWorkshiftTemplates_Sunday_CheckedChanged(object sender, EventArgs e)
-        {
-            _dgvWorkshiftTemplates_FilterDayOfWeek = 0;
             populateDgvWorkshiftTemplates();
         }
 
