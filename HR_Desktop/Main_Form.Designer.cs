@@ -43,10 +43,11 @@
             this.admin_useraccounts = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_clients = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_workshiftcategories = new System.Windows.Forms.ToolStripMenuItem();
+            this.admin_workshifttemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_workshifts = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_attendance_statuses = new System.Windows.Forms.ToolStripMenuItem();
+            this.admin_userprofile = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_account = new System.Windows.Forms.ToolStripMenuItem();
-            this.admin_workshifttemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlShortcuts.SuspendLayout();
             this.gbShortcuts.SuspendLayout();
             this.flpShortcuts.SuspendLayout();
@@ -75,7 +76,7 @@
             this.pnlShortcuts.Controls.Add(this.gbShortcuts);
             this.pnlShortcuts.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlShortcuts.Location = new System.Drawing.Point(0, 28);
-            this.pnlShortcuts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlShortcuts.Margin = new System.Windows.Forms.Padding(4);
             this.pnlShortcuts.Name = "pnlShortcuts";
             this.pnlShortcuts.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.pnlShortcuts.Size = new System.Drawing.Size(193, 526);
@@ -88,9 +89,9 @@
             this.gbShortcuts.Controls.Add(this.flpShortcuts);
             this.gbShortcuts.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbShortcuts.Location = new System.Drawing.Point(7, 6);
-            this.gbShortcuts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbShortcuts.Margin = new System.Windows.Forms.Padding(4);
             this.gbShortcuts.Name = "gbShortcuts";
-            this.gbShortcuts.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbShortcuts.Padding = new System.Windows.Forms.Padding(4);
             this.gbShortcuts.Size = new System.Drawing.Size(179, 64);
             this.gbShortcuts.TabIndex = 14;
             this.gbShortcuts.TabStop = false;
@@ -104,7 +105,7 @@
             this.flpShortcuts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpShortcuts.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpShortcuts.Location = new System.Drawing.Point(4, 19);
-            this.flpShortcuts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flpShortcuts.Margin = new System.Windows.Forms.Padding(4);
             this.flpShortcuts.Name = "flpShortcuts";
             this.flpShortcuts.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.flpShortcuts.Size = new System.Drawing.Size(171, 41);
@@ -134,7 +135,7 @@
             this.pnlMDIChildren.Controls.Add(this.expandCollapseToggle1);
             this.pnlMDIChildren.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMDIChildren.Location = new System.Drawing.Point(193, 28);
-            this.pnlMDIChildren.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlMDIChildren.Margin = new System.Windows.Forms.Padding(4);
             this.pnlMDIChildren.Name = "pnlMDIChildren";
             this.pnlMDIChildren.Size = new System.Drawing.Size(874, 526);
             this.pnlMDIChildren.TabIndex = 22;
@@ -143,7 +144,7 @@
             // 
             this.expandCollapseToggle1.InitialArrowDirection = System.Windows.Forms.ArrowDirection.Left;
             this.expandCollapseToggle1.Location = new System.Drawing.Point(0, 0);
-            this.expandCollapseToggle1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.expandCollapseToggle1.Margin = new System.Windows.Forms.Padding(5);
             this.expandCollapseToggle1.Name = "expandCollapseToggle1";
             this.expandCollapseToggle1.Size = new System.Drawing.Size(27, 25);
             this.expandCollapseToggle1.TabIndex = 17;
@@ -184,7 +185,8 @@
             this.admin_workshiftcategories,
             this.admin_workshifttemplates,
             this.admin_workshifts,
-            this.admin_attendance_statuses});
+            this.admin_attendance_statuses,
+            this.admin_userprofile});
             this.menu_admin.Name = "menu_admin";
             this.menu_admin.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
             this.menu_admin.Size = new System.Drawing.Size(65, 24);
@@ -211,6 +213,13 @@
             this.admin_workshiftcategories.Text = "Workshift Categories";
             this.admin_workshiftcategories.Click += new System.EventHandler(this.admin_workshiftcategories_Click);
             // 
+            // admin_workshifttemplates
+            // 
+            this.admin_workshifttemplates.Name = "admin_workshifttemplates";
+            this.admin_workshifttemplates.Size = new System.Drawing.Size(221, 26);
+            this.admin_workshifttemplates.Text = "Workshift Templates";
+            this.admin_workshifttemplates.Click += new System.EventHandler(this.admin_workshifttemplates_Click);
+            // 
             // admin_workshifts
             // 
             this.admin_workshifts.Name = "admin_workshifts";
@@ -225,6 +234,13 @@
             this.admin_attendance_statuses.Text = "Attendance Statuses";
             this.admin_attendance_statuses.Click += new System.EventHandler(this.admin_attendance_statuses_Click);
             // 
+            // admin_userprofile
+            // 
+            this.admin_userprofile.Name = "admin_userprofile";
+            this.admin_userprofile.Size = new System.Drawing.Size(221, 26);
+            this.admin_userprofile.Text = "User Account Profile";
+            this.admin_userprofile.Click += new System.EventHandler(this.admin_userprofile_Click);
+            // 
             // menu_account
             // 
             this.menu_account.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -235,13 +251,6 @@
             this.menu_account.Size = new System.Drawing.Size(75, 24);
             this.menu_account.Text = "Account";
             // 
-            // admin_workshifttemplates
-            // 
-            this.admin_workshifttemplates.Name = "admin_workshifttemplates";
-            this.admin_workshifttemplates.Size = new System.Drawing.Size(221, 26);
-            this.admin_workshifttemplates.Text = "Workshift Templates";
-            this.admin_workshifttemplates.Click += new System.EventHandler(this.admin_workshifttemplates_Click);
-            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -250,7 +259,7 @@
             this.Controls.Add(this.pnlMDIChildren);
             this.Controls.Add(this.pnlShortcuts);
             this.Controls.Add(this.msMain);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Main_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LUCKY STAR SECURITY";
@@ -290,5 +299,6 @@
         private System.Windows.Forms.ToolStripMenuItem reports_timesheets;
         private System.Windows.Forms.ToolStripMenuItem admin_attendance_statuses;
         private System.Windows.Forms.ToolStripMenuItem admin_workshifttemplates;
+        private System.Windows.Forms.ToolStripMenuItem admin_userprofile;
     }
 }

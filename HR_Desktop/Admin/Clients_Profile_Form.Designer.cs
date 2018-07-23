@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gb_Info = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNotes = new System.Windows.Forms.Label();
@@ -62,6 +62,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvWorkshifts = new System.Windows.Forms.DataGridView();
+            this.col_dgvWorkshifts_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvWorkshifts_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvWorkshifts_UserAccounts_Fullname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvWorkshifts_Start = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvWorkshifts_Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.lnk_Edit_Workshifts = new System.Windows.Forms.LinkLabel();
             this.rbWorkshifts_Monday = new System.Windows.Forms.RadioButton();
@@ -77,7 +82,6 @@
             this.col_dgvWorkshiftTemplates_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvWorkshiftTemplates_Start = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvWorkshiftTemplates_Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvWorkshiftTemplates_Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.lnk_Edit_WorkshiftTemplates = new System.Windows.Forms.LinkLabel();
             this.rbWorkshiftTemplates_Monday = new System.Windows.Forms.RadioButton();
@@ -96,12 +100,6 @@
             this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.col_dgvWorkshifts_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvWorkshifts_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvWorkshifts_UserAccounts_Fullname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvWorkshifts_Start = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvWorkshifts_Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvWorkshifts_Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.gb_Info.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -153,7 +151,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(143, 314);
+            this.label1.Location = new System.Drawing.Point(143, 342);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(12, 17);
             this.label1.TabIndex = 27;
@@ -162,7 +160,7 @@
             // lblNotes
             // 
             this.lblNotes.AutoSize = true;
-            this.lblNotes.Location = new System.Drawing.Point(161, 314);
+            this.lblNotes.Location = new System.Drawing.Point(161, 342);
             this.lblNotes.MinimumSize = new System.Drawing.Size(100, 55);
             this.lblNotes.Name = "lblNotes";
             this.lblNotes.Size = new System.Drawing.Size(100, 55);
@@ -172,7 +170,7 @@
             // lblNpwpAddress
             // 
             this.lblNpwpAddress.AutoSize = true;
-            this.lblNpwpAddress.Location = new System.Drawing.Point(161, 248);
+            this.lblNpwpAddress.Location = new System.Drawing.Point(161, 276);
             this.lblNpwpAddress.MinimumSize = new System.Drawing.Size(100, 55);
             this.lblNpwpAddress.Name = "lblNpwpAddress";
             this.lblNpwpAddress.Size = new System.Drawing.Size(100, 55);
@@ -182,7 +180,7 @@
             // lblNpwp
             // 
             this.lblNpwp.AutoSize = true;
-            this.lblNpwp.Location = new System.Drawing.Point(161, 216);
+            this.lblNpwp.Location = new System.Drawing.Point(161, 244);
             this.lblNpwp.MinimumSize = new System.Drawing.Size(100, 25);
             this.lblNpwp.Name = "lblNpwp";
             this.lblNpwp.Size = new System.Drawing.Size(100, 25);
@@ -192,7 +190,7 @@
             // lblPhone2
             // 
             this.lblPhone2.AutoSize = true;
-            this.lblPhone2.Location = new System.Drawing.Point(161, 181);
+            this.lblPhone2.Location = new System.Drawing.Point(161, 209);
             this.lblPhone2.MinimumSize = new System.Drawing.Size(100, 25);
             this.lblPhone2.Name = "lblPhone2";
             this.lblPhone2.Size = new System.Drawing.Size(100, 25);
@@ -202,7 +200,7 @@
             // lblPhone1
             // 
             this.lblPhone1.AutoSize = true;
-            this.lblPhone1.Location = new System.Drawing.Point(161, 148);
+            this.lblPhone1.Location = new System.Drawing.Point(161, 173);
             this.lblPhone1.MinimumSize = new System.Drawing.Size(100, 25);
             this.lblPhone1.Name = "lblPhone1";
             this.lblPhone1.Size = new System.Drawing.Size(100, 25);
@@ -212,7 +210,7 @@
             // lblContactPerson
             // 
             this.lblContactPerson.AutoSize = true;
-            this.lblContactPerson.Location = new System.Drawing.Point(161, 114);
+            this.lblContactPerson.Location = new System.Drawing.Point(161, 142);
             this.lblContactPerson.MinimumSize = new System.Drawing.Size(100, 25);
             this.lblContactPerson.Name = "lblContactPerson";
             this.lblContactPerson.Size = new System.Drawing.Size(100, 25);
@@ -222,7 +220,7 @@
             // lblBillingAddress
             // 
             this.lblBillingAddress.AutoSize = true;
-            this.lblBillingAddress.Location = new System.Drawing.Point(161, 53);
+            this.lblBillingAddress.Location = new System.Drawing.Point(161, 81);
             this.lblBillingAddress.MinimumSize = new System.Drawing.Size(100, 55);
             this.lblBillingAddress.Name = "lblBillingAddress";
             this.lblBillingAddress.Size = new System.Drawing.Size(100, 55);
@@ -233,16 +231,16 @@
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.Location = new System.Drawing.Point(161, 19);
-            this.lblAddress.MinimumSize = new System.Drawing.Size(100, 25);
+            this.lblAddress.MinimumSize = new System.Drawing.Size(100, 55);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(100, 25);
+            this.lblAddress.Size = new System.Drawing.Size(100, 55);
             this.lblAddress.TabIndex = 19;
             this.lblAddress.Text = "address";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(143, 247);
+            this.label17.Location = new System.Drawing.Point(143, 275);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(12, 17);
             this.label17.TabIndex = 17;
@@ -251,7 +249,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(143, 220);
+            this.label16.Location = new System.Drawing.Point(143, 248);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(12, 17);
             this.label16.TabIndex = 16;
@@ -260,7 +258,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(143, 188);
+            this.label15.Location = new System.Drawing.Point(143, 209);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(12, 17);
             this.label15.TabIndex = 15;
@@ -269,7 +267,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(143, 153);
+            this.label14.Location = new System.Drawing.Point(143, 173);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(12, 17);
             this.label14.TabIndex = 14;
@@ -287,7 +285,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(143, 114);
+            this.label12.Location = new System.Drawing.Point(143, 142);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(12, 17);
             this.label12.TabIndex = 12;
@@ -296,7 +294,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(143, 53);
+            this.label11.Location = new System.Drawing.Point(143, 81);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(12, 17);
             this.label11.TabIndex = 11;
@@ -314,7 +312,7 @@
             // npwpAddress
             // 
             this.npwpAddress.AutoSize = true;
-            this.npwpAddress.Location = new System.Drawing.Point(3, 245);
+            this.npwpAddress.Location = new System.Drawing.Point(3, 273);
             this.npwpAddress.MinimumSize = new System.Drawing.Size(100, 25);
             this.npwpAddress.Name = "npwpAddress";
             this.npwpAddress.Size = new System.Drawing.Size(105, 25);
@@ -324,7 +322,7 @@
             // npwp
             // 
             this.npwp.AutoSize = true;
-            this.npwp.Location = new System.Drawing.Point(3, 213);
+            this.npwp.Location = new System.Drawing.Point(3, 241);
             this.npwp.MinimumSize = new System.Drawing.Size(100, 25);
             this.npwp.Name = "npwp";
             this.npwp.Size = new System.Drawing.Size(100, 25);
@@ -334,7 +332,7 @@
             // phone1
             // 
             this.phone1.AutoSize = true;
-            this.phone1.Location = new System.Drawing.Point(3, 148);
+            this.phone1.Location = new System.Drawing.Point(3, 176);
             this.phone1.MinimumSize = new System.Drawing.Size(100, 25);
             this.phone1.Name = "phone1";
             this.phone1.Size = new System.Drawing.Size(100, 25);
@@ -344,7 +342,7 @@
             // phone2
             // 
             this.phone2.AutoSize = true;
-            this.phone2.Location = new System.Drawing.Point(3, 181);
+            this.phone2.Location = new System.Drawing.Point(4, 209);
             this.phone2.MinimumSize = new System.Drawing.Size(100, 25);
             this.phone2.Name = "phone2";
             this.phone2.Size = new System.Drawing.Size(100, 25);
@@ -354,7 +352,7 @@
             // notess
             // 
             this.notess.AutoSize = true;
-            this.notess.Location = new System.Drawing.Point(3, 311);
+            this.notess.Location = new System.Drawing.Point(3, 339);
             this.notess.MinimumSize = new System.Drawing.Size(100, 25);
             this.notess.Name = "notess";
             this.notess.Size = new System.Drawing.Size(100, 25);
@@ -374,7 +372,7 @@
             // billingAddress
             // 
             this.billingAddress.AutoSize = true;
-            this.billingAddress.Location = new System.Drawing.Point(3, 53);
+            this.billingAddress.Location = new System.Drawing.Point(3, 81);
             this.billingAddress.MinimumSize = new System.Drawing.Size(100, 25);
             this.billingAddress.Name = "billingAddress";
             this.billingAddress.Size = new System.Drawing.Size(101, 25);
@@ -384,7 +382,7 @@
             // contactPerson
             // 
             this.contactPerson.AutoSize = true;
-            this.contactPerson.Location = new System.Drawing.Point(3, 114);
+            this.contactPerson.Location = new System.Drawing.Point(3, 142);
             this.contactPerson.MinimumSize = new System.Drawing.Size(100, 25);
             this.contactPerson.Name = "contactPerson";
             this.contactPerson.Size = new System.Drawing.Size(105, 25);
@@ -441,28 +439,26 @@
             // 
             // dgvWorkshifts
             // 
-            this.dgvWorkshifts.AutoGenerateColumns = false;
             this.dgvWorkshifts.AllowUserToAddRows = false;
             this.dgvWorkshifts.AllowUserToDeleteRows = false;
             this.dgvWorkshifts.AllowUserToResizeRows = false;
             this.dgvWorkshifts.BackgroundColor = System.Drawing.Color.White;
             this.dgvWorkshifts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvWorkshifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWorkshifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvWorkshifts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWorkshifts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_dgvWorkshifts_Id,
             this.col_dgvWorkshifts_Name,
             this.col_dgvWorkshifts_UserAccounts_Fullname,
             this.col_dgvWorkshifts_Start,
-            this.col_dgvWorkshifts_Duration,
-            this.col_dgvWorkshifts_Active});
+            this.col_dgvWorkshifts_Duration});
             this.dgvWorkshifts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvWorkshifts.Location = new System.Drawing.Point(4, 32);
             this.dgvWorkshifts.Margin = new System.Windows.Forms.Padding(4);
@@ -472,7 +468,41 @@
             this.dgvWorkshifts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvWorkshifts.Size = new System.Drawing.Size(484, 161);
             this.dgvWorkshifts.TabIndex = 5;
-            this.dgvWorkshifts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWorkshifts_CellContentClick);
+            // 
+            // col_dgvWorkshifts_Id
+            // 
+            this.col_dgvWorkshifts_Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_dgvWorkshifts_Id.HeaderText = "Id";
+            this.col_dgvWorkshifts_Id.Name = "col_dgvWorkshifts_Id";
+            this.col_dgvWorkshifts_Id.Visible = false;
+            // 
+            // col_dgvWorkshifts_Name
+            // 
+            this.col_dgvWorkshifts_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_dgvWorkshifts_Name.HeaderText = "Name";
+            this.col_dgvWorkshifts_Name.MinimumWidth = 50;
+            this.col_dgvWorkshifts_Name.Name = "col_dgvWorkshifts_Name";
+            // 
+            // col_dgvWorkshifts_UserAccounts_Fullname
+            // 
+            this.col_dgvWorkshifts_UserAccounts_Fullname.HeaderText = "Employee";
+            this.col_dgvWorkshifts_UserAccounts_Fullname.Name = "col_dgvWorkshifts_UserAccounts_Fullname";
+            // 
+            // col_dgvWorkshifts_Start
+            // 
+            this.col_dgvWorkshifts_Start.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvWorkshifts_Start.HeaderText = "Start";
+            this.col_dgvWorkshifts_Start.MinimumWidth = 40;
+            this.col_dgvWorkshifts_Start.Name = "col_dgvWorkshifts_Start";
+            this.col_dgvWorkshifts_Start.Width = 40;
+            // 
+            // col_dgvWorkshifts_Duration
+            // 
+            this.col_dgvWorkshifts_Duration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvWorkshifts_Duration.HeaderText = "Duration";
+            this.col_dgvWorkshifts_Duration.MinimumWidth = 50;
+            this.col_dgvWorkshifts_Duration.Name = "col_dgvWorkshifts_Duration";
+            this.col_dgvWorkshifts_Duration.Width = 50;
             // 
             // flowLayoutPanel1
             // 
@@ -606,27 +636,25 @@
             // 
             // dgvWorkshiftTemplates
             // 
-            this.dgvWorkshiftTemplates.AutoGenerateColumns = false;
             this.dgvWorkshiftTemplates.AllowUserToAddRows = false;
             this.dgvWorkshiftTemplates.AllowUserToDeleteRows = false;
             this.dgvWorkshiftTemplates.AllowUserToResizeRows = false;
             this.dgvWorkshiftTemplates.BackgroundColor = System.Drawing.Color.White;
             this.dgvWorkshiftTemplates.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvWorkshiftTemplates.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWorkshiftTemplates.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvWorkshiftTemplates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWorkshiftTemplates.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_dgvWorkshiftTemplates_Id,
             this.col_dgvWorkshiftTemplates_Name,
             this.col_dgvWorkshiftTemplates_Start,
-            this.col_dgvWorkshiftTemplates_Duration,
-            this.col_dgvWorkshiftTemplates_Active});
+            this.col_dgvWorkshiftTemplates_Duration});
             this.dgvWorkshiftTemplates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvWorkshiftTemplates.Location = new System.Drawing.Point(4, 32);
             this.dgvWorkshiftTemplates.Margin = new System.Windows.Forms.Padding(4);
@@ -636,7 +664,6 @@
             this.dgvWorkshiftTemplates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvWorkshiftTemplates.Size = new System.Drawing.Size(484, 161);
             this.dgvWorkshiftTemplates.TabIndex = 6;
-            this.dgvWorkshiftTemplates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWorkshiftTemplates_CellContentClick);
             // 
             // col_dgvWorkshiftTemplates_Id
             // 
@@ -667,16 +694,6 @@
             this.col_dgvWorkshiftTemplates_Duration.MinimumWidth = 50;
             this.col_dgvWorkshiftTemplates_Duration.Name = "col_dgvWorkshiftTemplates_Duration";
             this.col_dgvWorkshiftTemplates_Duration.Width = 50;
-            // 
-            // col_dgvWorkshiftTemplates_Active
-            // 
-            this.col_dgvWorkshiftTemplates_Active.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.col_dgvWorkshiftTemplates_Active.HeaderText = "Active";
-            this.col_dgvWorkshiftTemplates_Active.MinimumWidth = 38;
-            this.col_dgvWorkshiftTemplates_Active.Name = "col_dgvWorkshiftTemplates_Active";
-            this.col_dgvWorkshiftTemplates_Active.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_dgvWorkshiftTemplates_Active.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.col_dgvWorkshiftTemplates_Active.Width = 38;
             // 
             // flowLayoutPanel2
             // 
@@ -814,14 +831,14 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -895,52 +912,6 @@
             this.dataGridViewCheckBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewCheckBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewCheckBoxColumn2.Width = 38;
-            // 
-            // col_dgvWorkshifts_Id
-            // 
-            this.col_dgvWorkshifts_Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.col_dgvWorkshifts_Id.HeaderText = "Id";
-            this.col_dgvWorkshifts_Id.Name = "col_dgvWorkshifts_Id";
-            this.col_dgvWorkshifts_Id.Visible = false;
-            this.col_dgvWorkshifts_Id.Width = 25;
-            // 
-            // col_dgvWorkshifts_Name
-            // 
-            this.col_dgvWorkshifts_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_dgvWorkshifts_Name.HeaderText = "Name";
-            this.col_dgvWorkshifts_Name.MinimumWidth = 50;
-            this.col_dgvWorkshifts_Name.Name = "col_dgvWorkshifts_Name";
-            // 
-            // col_dgvWorkshifts_UserAccounts_Fullname
-            // 
-            this.col_dgvWorkshifts_UserAccounts_Fullname.HeaderText = "Employee";
-            this.col_dgvWorkshifts_UserAccounts_Fullname.Name = "col_dgvWorkshifts_UserAccounts_Fullname";
-            // 
-            // col_dgvWorkshifts_Start
-            // 
-            this.col_dgvWorkshifts_Start.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.col_dgvWorkshifts_Start.HeaderText = "Start";
-            this.col_dgvWorkshifts_Start.MinimumWidth = 40;
-            this.col_dgvWorkshifts_Start.Name = "col_dgvWorkshifts_Start";
-            this.col_dgvWorkshifts_Start.Width = 40;
-            // 
-            // col_dgvWorkshifts_Duration
-            // 
-            this.col_dgvWorkshifts_Duration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.col_dgvWorkshifts_Duration.HeaderText = "Duration";
-            this.col_dgvWorkshifts_Duration.MinimumWidth = 50;
-            this.col_dgvWorkshifts_Duration.Name = "col_dgvWorkshifts_Duration";
-            this.col_dgvWorkshifts_Duration.Width = 50;
-            // 
-            // col_dgvWorkshifts_Active
-            // 
-            this.col_dgvWorkshifts_Active.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.col_dgvWorkshifts_Active.HeaderText = "Active";
-            this.col_dgvWorkshifts_Active.MinimumWidth = 38;
-            this.col_dgvWorkshifts_Active.Name = "col_dgvWorkshifts_Active";
-            this.col_dgvWorkshifts_Active.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_dgvWorkshifts_Active.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.col_dgvWorkshifts_Active.Width = 38;
             // 
             // Clients_Profile_Form
             // 
@@ -1036,16 +1007,14 @@
         private System.Windows.Forms.Label lblBillingAddress;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Start;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Duration;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvWorkshiftTemplates_Active;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_UserAccounts_Fullname;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Start;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Duration;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvWorkshifts_Active;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Start;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Duration;
     }
 }

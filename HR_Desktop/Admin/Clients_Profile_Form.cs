@@ -60,14 +60,12 @@ namespace HR_Desktop.Admin
             col_dgvWorkshifts_UserAccounts_Fullname.DataPropertyName = Workshift.COL_UserAccounts_Fullname;
             col_dgvWorkshifts_Start.DataPropertyName = Workshift.COL_DB_Start;
             col_dgvWorkshifts_Duration.DataPropertyName = Workshift.COL_DB_DurationMinutes;
-            col_dgvWorkshifts_Active.DataPropertyName = Workshift.COL_DB_Active;
 
             dgvWorkshiftTemplates.AutoGenerateColumns = false;
             col_dgvWorkshiftTemplates_Id.DataPropertyName = WorkshiftTemplate.COL_DB_Id;
             col_dgvWorkshiftTemplates_Name.DataPropertyName = WorkshiftTemplate.COL_DB_Name;
             col_dgvWorkshiftTemplates_Start.DataPropertyName = WorkshiftTemplate.COL_DB_Start;
             col_dgvWorkshifts_Duration.DataPropertyName = WorkshiftTemplate.COL_DB_DurationMinutes;
-            col_dgvWorkshiftTemplates_Active.DataPropertyName = WorkshiftTemplate.COL_DB_Active;
         }
 
         private void setupControlsBasedOnRoles()
@@ -133,24 +131,6 @@ namespace HR_Desktop.Admin
         {
             LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form(FormModes.Add, _Clients_Id));
             populateDgvWorkshifts();
-        }
-
-        private void dgvWorkshifts_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (Util.isColumnMatch(sender, e, col_dgvWorkshifts_Active))
-            {
-                Workshift.updateActiveStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvWorkshifts, col_dgvWorkshifts_Id), !Util.getCheckboxValue(sender, e));
-                populateDgvWorkshifts();
-            }
-        }
-
-        private void dgvWorkshiftTemplates_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (Util.isColumnMatch(sender, e, col_dgvWorkshiftTemplates_Active))
-            {
-                WorkshiftTemplate.updateActiveStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvWorkshiftTemplates, col_dgvWorkshiftTemplates_Id), !Util.getCheckboxValue(sender, e));
-                populateDgvWorkshiftTemplates();
-            }
         }
 
         private void rbWorkshifts_Monday_CheckedChanged(object sender, EventArgs e)
