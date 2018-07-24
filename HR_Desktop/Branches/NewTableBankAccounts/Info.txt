@@ -1,0 +1,21 @@
+﻿
+> PULL HR & LibUtil
+> run UPDATE-DB.sql
+
+> MODIFY TABLE Attendance name to Attendances, modify all SP accordingly
+
+> CREATE TABLE BankAccounts --> MasterData_v1_BankAccounts_Form
+	- Id (guid)
+	- Name (nvarchar(MAX))
+	- Owner_RefId (guid) --> bisa Clients_Id, UserAccounts_Id, etc. 
+		> In the form, provide selection of Clients_Id or UserAccounts_Id
+		> In datagridview, show both 
+	- BankName (nvarchar(MAX))
+	- AccountNumber (nvarchar(MAX))	
+	- Notes (nvarchar(MAX))
+
+> UserAccounts_Profile_Form & Clients_Profile_Form 
+	- populate dgv_BankAccounts
+
+
+

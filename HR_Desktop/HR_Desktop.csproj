@@ -173,7 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Branches\Chintia.txt" />
-    <Content Include="Branches\ClientsProfileForm\Info.txt" />
+    <Content Include="Branches\NewTableBankAccounts\Info.txt" />
     <Content Include="Branches\To Do List.txt" />
     <Content Include="Branches\UPDATE-DB.sql" />
   </ItemGroup>

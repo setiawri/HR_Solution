@@ -11,18 +11,7 @@
 	- Clients_Profile_Form
 		> add parameter to filter to current Clients_Id when calling MasterData_v1_Workshifts_Form 
 
-> MODIFY TABLE Attendance name to Attendances, modify all SP accordingly
 
-> CREATE TABLE BankAccounts --> MasterData_v1_BankAccounts_Form
-	- Id (guid)
-	- Name (nvarchar(MAX))
-	- Owner_RefId (guid) --> bisa Clients_Id, UserAccounts_Id, etc
-	- BankName (nvarchar(MAX))
-	- AccountNumber (nvarchar(MAX))	
-	- Notes (nvarchar(MAX))
-
-> UserAccounts_Profile_Form & Clients_Profile_Form 
-	- add dgv_BankAccounts
 
 > TABLE Payments
 	- Id (guid)
