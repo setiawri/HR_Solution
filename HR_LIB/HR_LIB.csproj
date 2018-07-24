@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Helper.cs" />
     <Compile Include="HR\AttendanceStatus.cs" />
+    <Compile Include="HR\BankAccounts.cs" />
     <Compile Include="HR\WorkshiftTemplate.cs" />
     <Compile Include="HR\WorkshiftCategory.cs" />
     <Compile Include="HR\Workshift.cs" />

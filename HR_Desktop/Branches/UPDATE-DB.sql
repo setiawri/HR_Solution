@@ -2,14 +2,168 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
+sp_rename '[dbo].[Attendance]', 'Attendances'
+GO
+sp_rename '[dbo].[Attendance_get]' , 'Attendances_get'
+GO
+sp_rename '[dbo].[Attendance_add]' , 'Attendances_add'
+GO
+sp_rename '[dbo].[Attendance_update]' , 'Attendances_update'
+GO
+sp_rename '[dbo].[Attendance_update_Flag1]' , 'Attendances_update_Flag1'
+GO
+sp_rename '[dbo].[Attendance_update_Flag2]' , 'Attendances_update_Flag2'
+GO
+sp_rename '[dbo].[Attendance_update_Rejected]' , 'Attendances_update_Rejected'
+GO
+sp_rename '[dbo].[Attendance_update_Approved]' , 'Attendances_update_Approved'
+GO
+sp_rename '[dbo].[Attendance_isCombinationExist]' , 'Attendances_isCombinationExist'
+GO
+sp_rename '[dbo].[Attendance_delete]' , 'Attendances_delete'
+GO
+
+CREATE TABLE [dbo].[BankAccounts] (
+    Id UNIQUEIDENTIFIER NOT NULL,
+	Name NVARCHAR (MAX) NOT NULL,
+	Owner_RefId UNIQUEIDENTIFIER NOT NULL,
+	BankName NVARCHAR (MAX) NOT NULL,
+	AccountNumber NVARCHAR (MAX) NOT NULL,
+	Notes NVARCHAR (MAX) 
+    CONSTRAINT [PK_BankAccounts] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+GO
+
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[BankAccounts_get]
+
+	@Id uniqueidentifier = NULL,
+	@Name NVARCHAR(max) = NULL,
+	@Owner_RefId uniqueidentifier= NULL,
+	@BankName nvarchar(max) = NULL,
+	@AccountNumber nvarchar(max) = NULL,
+	@Notes nvarchar(MAX) = NULL
+
+AS
+
+BEGIN
+
+	SELECT BankAccounts.*,
+		Clients.CompanyName AS Clients_CompanyName,
+		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname
+	FROM BankAccounts 
+		LEFT OUTER JOIN Clients ON BankAccounts.Owner_RefId = Clients.Id
+		LEFT OUTER JOIN UserAccounts ON UserAccounts.Id = BankAccounts.Owner_RefId
+	WHERE 1=1
+		AND (@Id IS NULL OR BankAccounts.Id = @Id)
+		AND (@Name IS NULL OR BankAccounts.Name LIKE '%'+ @Name +'%')
+		AND (@Owner_RefId IS NULL OR BankAccounts.Owner_RefId = @Owner_RefId)
+		AND (@BankName IS NULL OR BankAccounts.BankName LIKE '%'+ @BankName +'%')
+		AND (@AccountNumber IS NULL OR BankAccounts.AccountNumber = @AccountNumber)
+		AND (@Notes IS NULL OR BankAccounts.Notes LIKE '%'+ @Notes +'%')
+
+	ORDER BY BankAccounts.Name, BankAccounts.Owner_RefId, BankName
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[BankAccounts_iscombinationexist]
+
+	@Id uniqueidentifier = NULL,
+	@Owner_RefId uniqueidentifier,
+	@AccountNumber nvarchar(max),
+	@returnValueBoolean bit = 0 OUTPUT 
+
+AS
+
+BEGIN
+
+	IF EXISTS (	SELECT BankAccounts.Id 
+				FROM BankAccounts 
+				WHERE BankAccounts.Owner_RefId = @Owner_RefId
+					AND BankAccounts.AccountNumber = @AccountNumber		
+					AND (@Id IS NULL OR BankAccounts.Id <> @Id)
+				)
+		SET @returnValueBoolean = 1
+	ELSE
+		SET @returnValueBoolean = 0
+
+END
+GO
+
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[BankAccounts_add]
+
+	@Id uniqueidentifier,
+	@Name NVARCHAR(max),
+	@Owner_RefId uniqueidentifier,
+	@BankName nvarchar(max),
+	@AccountNumber nvarchar(max),
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+
+	INSERT INTO BankAccounts(Id,Name, Owner_RefId,BankName, AccountNumber, Notes) 
+	VALUES(@Id,@Name,@Owner_RefId,@BankName,@AccountNumber,@Notes)
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[BankAccounts_update]
+
+	@Id uniqueidentifier,
+	@Name NVARCHAR(max),
+	@Owner_RefId uniqueidentifier,
+	@BankName nvarchar(max),
+	@AccountNumber nvarchar(max),
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+
+	UPDATE BankAccounts SET
+		Name = @Name,
+		Owner_RefId = @Owner_RefId,
+		BankName = @BankName,
+		AccountNumber = @AccountNumber,
+		Notes = @Notes
+	WHERE Id = @Id 
+
+END
+GO
+
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[BankAccounts_delete]
+
+	@Id uniqueidentifier
+	
+AS
+
+BEGIN
+
+	DELETE BankAccounts WHERE Id=@Id
+
+END
+GO
 
 
 
 
 
-
-
-
+/**************************************************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[WorkshiftTemplates_get]
 
@@ -160,18 +314,6 @@ END
 GO
 
 
-
-
-
-
-
-
-
-
-
-
-
-/**************************************************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Clients_get]
 
@@ -214,7 +356,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Attendance_get]
+ALTER PROCEDURE [dbo].[Attendances_get]
 
 	@Id uniqueidentifier = NULL,
 	@UserAccounts_Id uniqueidentifier = NULL,
@@ -228,19 +370,19 @@ AS
 
 BEGIN
 
-	SELECT Attendance.*,
+	SELECT Attendances.*,
 		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname
-	FROM Attendance 
-		LEFT OUTER JOIN UserAccounts ON Attendance.UserAccounts_Id = UserAccounts.ID
+	FROM Attendances 
+		LEFT OUTER JOIN UserAccounts ON Attendances.UserAccounts_Id = UserAccounts.ID
 	WHERE 1=1
-		AND (@Id IS NULL OR Attendance.Id = @Id)
-		AND (@UserAccounts_Id IS NULL OR Attendance.UserAccounts_Id = @UserAccounts_Id)
-		AND (@FILTER_DayOfWeek IS NULL OR (DATEPART(weekday,Attendance.TimestampIn) - 1) = @FILTER_DayOfWeek OR (DATEPART(weekday,Attendance.TimestampOut) - 1) = @FILTER_DayOfWeek)
-		AND (@FILTER_StartDate IS NULL OR Attendance.TimestampIn >= @FILTER_StartDate)
-		AND (@FILTER_EndDate IS NULL OR Attendance.TimestampOut <= @FILTER_EndDate)
-		AND (@FILTER_StartTime IS NULL OR CAST(Attendance.TimestampIn AS time)>= @FILTER_StartTime)
-		AND (@FILTER_EndTime IS NULL OR CAST(Attendance.TimestampOut AS time)<= @FILTER_EndTime)
-		AND (@Notes IS NULL OR Attendance.Notes LIKE '%'+ @Notes+'%')
+		AND (@Id IS NULL OR Attendances.Id = @Id)
+		AND (@UserAccounts_Id IS NULL OR Attendances.UserAccounts_Id = @UserAccounts_Id)
+		AND (@FILTER_DayOfWeek IS NULL OR (DATEPART(weekday,Attendances.TimestampIn) - 1) = @FILTER_DayOfWeek OR (DATEPART(weekday,Attendances.TimestampOut) - 1) = @FILTER_DayOfWeek)
+		AND (@FILTER_StartDate IS NULL OR Attendances.TimestampIn >= @FILTER_StartDate)
+		AND (@FILTER_EndDate IS NULL OR Attendances.TimestampOut <= @FILTER_EndDate)
+		AND (@FILTER_StartTime IS NULL OR CAST(Attendances.TimestampIn AS time)>= @FILTER_StartTime)
+		AND (@FILTER_EndTime IS NULL OR CAST(Attendances.TimestampOut AS time)<= @FILTER_EndTime)
+		AND (@Notes IS NULL OR Attendances.Notes LIKE '%'+ @Notes+'%')
 
 
 END
@@ -268,11 +410,11 @@ BEGIN
 		WHERE 1=1
 			AND (@Clients_Id IS NULL OR Workshifts.Clients_Id = @Clients_Id)
 			OR Workshifts.UserAccounts_Id IN (
-					SELECT DISTINCT Attendance.UserAccounts_Id 
-					FROM Attendance
+					SELECT DISTINCT Attendances.UserAccounts_Id 
+					FROM Attendances
 					WHERE 1=1 
-					AND (@FILTER_StartDate IS NULL OR Attendance.TimestampIn >= @FILTER_StartDate)
-					AND (@FILTER_EndDate IS NULL OR Attendance.TimestampIn <= @FILTER_EndDate)
+					AND (@FILTER_StartDate IS NULL OR Attendances.TimestampIn >= @FILTER_StartDate)
+					AND (@FILTER_EndDate IS NULL OR Attendances.TimestampIn <= @FILTER_EndDate)
 				)		
 	) Employee 
 	WHERE 1=1
@@ -282,7 +424,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Attendance_add]
+ALTER PROCEDURE [dbo].[Attendances_add]
 
 	@Id uniqueidentifier,
 	@UserAccounts_Id uniqueidentifier,
@@ -298,19 +440,19 @@ AS
 
 BEGIN
 	WITH 
-	Attendance_Data AS
+	Attendances_Data AS
 	(SELECT @Id AS Id, @UserAccounts_Id AS UserAccounts_Id, @TimestampIn AS TimestampIn, @TimestampOut AS TimestampOut ,@Clients_Id AS Clients_Id, @Workshifts_Id AS Workshifts_Id, @EffectiveTimestampIn AS EffectiveTimestampIn, @EffectiveTimestampOut AS EffectiveTimestampOut, @Notes AS Notes),
 	Workshift_Data AS 
 	(SELECT TOP 1 Workshifts.* FROM Workshifts WHERE Id = @Workshifts_Id)
-	INSERT INTO Attendance(Id,UserAccounts_Id,TimestampIn,TimestampOut,Clients_Id, Workshifts_DayOfWeek, Workshifts_Start, Workshifts_DurationMinutes, EffectiveTimestampIn, EffectiveTimestampOut , Notes)
-	SELECT Attendance_Data.Id, Attendance_Data.UserAccounts_Id, Attendance_Data.TimestampIn, Attendance_Data.TimestampOut,Attendance_Data.Clients_Id, Workshift_Data.DayOfWeek, Workshift_Data.Start, Workshift_Data.DurationMinutes, Attendance_Data.EffectiveTimestampIn, Attendance_Data.EffectiveTimestampOut, Attendance_Data.Notes
+	INSERT INTO Attendances(Id,UserAccounts_Id,TimestampIn,TimestampOut,Clients_Id, Workshifts_DayOfWeek, Workshifts_Start, Workshifts_DurationMinutes, EffectiveTimestampIn, EffectiveTimestampOut , Notes)
+	SELECT Attendances_Data.Id, Attendances_Data.UserAccounts_Id, Attendances_Data.TimestampIn, Attendances_Data.TimestampOut,Attendances_Data.Clients_Id, Workshift_Data.DayOfWeek, Workshift_Data.Start, Workshift_Data.DurationMinutes, Attendances_Data.EffectiveTimestampIn, Attendances_Data.EffectiveTimestampOut, Attendances_Data.Notes
 	FROM 
-	Attendance_Data left join Workshift_Data ON Attendance_Data.Workshifts_Id = Workshift_Data.Id
+	Attendances_Data left join Workshift_Data ON Attendances_Data.Workshifts_Id = Workshift_Data.Id
 END
 GO
 
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Attendance_update_Rejected]
+ALTER PROCEDURE [dbo].[Attendances_update_Rejected]
 
 	@Id uniqueidentifier,
 	@Rejected bit
@@ -319,7 +461,7 @@ AS
 
 BEGIN
 
-	UPDATE Attendance SET
+	UPDATE Attendances SET
 		Rejected = @Rejected
 	WHERE Id = @Id
 
@@ -794,7 +936,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Attendance_iscombinationexist]
+ALTER PROCEDURE [dbo].[Attendances_iscombinationexist]
 
 	@Id uniqueidentifier = NULL,
 	@UserAccounts_Id  UNIQUEIDENTIFIER,
@@ -805,11 +947,11 @@ AS
 
 BEGIN
 
-	IF EXISTS (	SELECT Attendance.Id 
-				FROM Attendance 
-				WHERE Attendance.UserAccounts_Id = @UserAccounts_Id
-					AND Attendance.TimestampIn = @TimestampIn
-					AND (@Id IS NULL OR Attendance.Id <> @Id)
+	IF EXISTS (	SELECT Attendances.Id 
+				FROM Attendances 
+				WHERE Attendances.UserAccounts_Id = @UserAccounts_Id
+					AND Attendances.TimestampIn = @TimestampIn
+					AND (@Id IS NULL OR Attendances.Id <> @Id)
 				)
 		SET @returnValueBoolean = 1
 	ELSE
@@ -819,7 +961,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Attendance_update]
+ALTER PROCEDURE [dbo].[Attendances_update]
 
 	@Id uniqueidentifier,
 	@TimestampIn DATETIME,
@@ -830,7 +972,7 @@ AS
 
 BEGIN
 
-	UPDATE Attendance SET
+	UPDATE Attendances SET
 		TimestampIn = @TimestampIn,
 		TimestampOut = @TimestampOut,
 		Notes = @Notes
@@ -840,7 +982,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Attendance_update_Flag1]
+ALTER PROCEDURE [dbo].[Attendances_update_Flag1]
 
 	@Id UNIQUEIDENTIFIER,
 	@Flag1 BIT
@@ -849,7 +991,7 @@ AS
 
 BEGIN
 
-	UPDATE Attendance SET
+	UPDATE Attendances SET
 		Flag1 = @Flag1
 	WHERE Id = @Id
 
@@ -858,7 +1000,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Attendance_update_Flag2]
+ALTER PROCEDURE [dbo].[Attendances_update_Flag2]
 
 	@Id uniqueidentifier,
 	@Flag2 bit
@@ -867,7 +1009,7 @@ AS
 
 BEGIN
 
-	UPDATE Attendance SET
+	UPDATE Attendances SET
 		Flag2 = @Flag2
 	WHERE Id = @Id
 
@@ -876,7 +1018,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Attendance_update_Approved]
+ALTER PROCEDURE [dbo].[Attendances_update_Approved]
 
 	@Id uniqueidentifier,
 	@Approved bit
@@ -885,7 +1027,7 @@ AS
 
 BEGIN
 
-	UPDATE Attendance SET
+	UPDATE Attendances SET
 		Approved = @Approved
 	WHERE Id = @Id
 
@@ -893,7 +1035,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[Attendance_delete]
+ALTER PROCEDURE [dbo].[Attendances_delete]
 
 	@Id uniqueidentifier
 	
@@ -901,7 +1043,7 @@ AS
 
 BEGIN
 
-	DELETE Attendance WHERE Id=@Id
+	DELETE Attendances WHERE Id=@Id
 
 END
 GO
@@ -1530,7 +1672,7 @@ GO
 
 /* COMPLETE CLEARING */
 --DELETE ActivityLogs
---DELETE Attendance
+--DELETE Attendances
 --DELETE Clients
 --DELETE Settings
 --DELETE UserAccountAccessRoleAssignments

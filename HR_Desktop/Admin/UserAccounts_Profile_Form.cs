@@ -58,6 +58,13 @@ namespace HR_Desktop.Admin
             col_dgvWorkshifts_Name.DataPropertyName = Workshift.COL_DB_Name;
             col_dgvWorkshifts_Start.DataPropertyName = Workshift.COL_DB_Start;
             col_dgvWorkshifts_Duration.DataPropertyName = Workshift.COL_DB_DurationMinutes;
+
+            dgvBankAccounts.AutoGenerateColumns = false;
+            col_dgvBankAccounts_Id.DataPropertyName = BankAccount.COL_DB_Id;
+            col_dgvBankAccounts_Name.DataPropertyName = BankAccount.COL_DB_Name;
+            col_dgvBankAccounts_BankName.DataPropertyName = BankAccount.COL_DB_BankName;
+            col_dgvBankAccounts_AccountNumber.DataPropertyName = BankAccount.COL_DB_AccountNumber;
+            col_dgvBankAccounts_Notes.DataPropertyName = BankAccount.COL_DB_Notes;
         }
 
         private void setupControlsBasedOnRoles()
@@ -86,6 +93,7 @@ namespace HR_Desktop.Admin
                 lblNotes.Text = user.Notes;
 
                 populateDgvWorkshifts();
+                populateDgvBankAccounts();
             }
         }
 
@@ -104,6 +112,10 @@ namespace HR_Desktop.Admin
         private void populateDgvWorkshifts()
         {
             Util.populateDataGridView(dgvWorkshifts, Workshift.get(false, null, null, null, _UserAccounts_Id, null, (int)_dgvWorkshifts_FilterDayOfWeek, null, null, null));
+        }
+        private void populateDgvBankAccounts()
+        {
+            Util.populateDataGridView(dgvBankAccounts, BankAccount.get(null, null, _UserAccounts_Id, null, null, null));
         }
 
         #endregion METHODS
@@ -125,7 +137,8 @@ namespace HR_Desktop.Admin
         {
             LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false), ref sender);
             _UserAccounts_Id = itxt_UserAccount.ValueGuid;
-            populateData();        }
+            populateData();
+        }
 
         private void rbWorkshifts_CheckedChanged(object sender, EventArgs e)
         {

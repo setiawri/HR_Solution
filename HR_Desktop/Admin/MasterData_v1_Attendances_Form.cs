@@ -8,7 +8,7 @@ using HR_LIB.HR;
 
 namespace HR_Desktop.Admin
 {
-    public partial class MasterData_v1_Attendance_Form : LIBUtil.Desktop.Forms.MasterData_v1_Form
+    public partial class MasterData_v1_Attendances_Form : LIBUtil.Desktop.Forms.MasterData_v1_Form
     {
         /*******************************************************************************************************/
         #region SETTINGS
@@ -31,8 +31,8 @@ namespace HR_Desktop.Admin
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_Attendance_Form() : this(FormModes.Add) { }
-        public MasterData_v1_Attendance_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD) { InitializeComponent(); }
+        public MasterData_v1_Attendances_Form() : this(FormModes.Add) { }
+        public MasterData_v1_Attendances_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD) { InitializeComponent(); }
 
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/

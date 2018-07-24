@@ -66,6 +66,13 @@ namespace HR_Desktop.Admin
             col_dgvWorkshiftTemplates_Name.DataPropertyName = WorkshiftTemplate.COL_DB_Name;
             col_dgvWorkshiftTemplates_Start.DataPropertyName = WorkshiftTemplate.COL_DB_Start;
             col_dgvWorkshifts_Duration.DataPropertyName = WorkshiftTemplate.COL_DB_DurationMinutes;
+
+            dgvBankAccounts.AutoGenerateColumns = false;
+            col_dgvBankAccounts_Id.DataPropertyName = BankAccount.COL_DB_Id;
+            col_dgvBankAccounts_Name.DataPropertyName = BankAccount.COL_DB_Name;
+            col_dgvBankAccounts_BankName.DataPropertyName = BankAccount.COL_DB_BankName;
+            col_dgvBankAccounts_AccountNumber.DataPropertyName = BankAccount.COL_DB_AccountNumber;
+            col_dgvBankAccounts_Notes.DataPropertyName = BankAccount.COL_DB_Notes;
         }
 
         private void setupControlsBasedOnRoles()
@@ -90,7 +97,7 @@ namespace HR_Desktop.Admin
 
                 populateDgvWorkshifts();
                 populateDgvWorkshiftTemplates();
-
+                populateDgvBankAccounts();
            }
         }
 
@@ -102,6 +109,11 @@ namespace HR_Desktop.Admin
         private void populateDgvWorkshiftTemplates()
         {
             Util.populateDataGridView(dgvWorkshiftTemplates, WorkshiftTemplate.get(false, null, null, _Clients_Id, null, (int)_dgvWorkshiftTemplates_FilterDayOfWeek, null, null, null));
+        }
+
+        private void populateDgvBankAccounts()
+        {
+            Util.populateDataGridView(dgvBankAccounts, BankAccount.get(null, null, _Clients_Id, null, null, null));
         }
 
         private bool isValidToPopulateData()

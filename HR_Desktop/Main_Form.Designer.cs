@@ -47,6 +47,7 @@
             this.admin_workshifts = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_attendance_statuses = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_userprofile = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_account = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlShortcuts.SuspendLayout();
             this.gbShortcuts.SuspendLayout();
@@ -186,7 +187,8 @@
             this.admin_workshifttemplates,
             this.admin_workshifts,
             this.admin_attendance_statuses,
-            this.admin_userprofile});
+            this.admin_userprofile,
+            this.bankAccountToolStripMenuItem});
             this.menu_admin.Name = "menu_admin";
             this.menu_admin.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
             this.menu_admin.Size = new System.Drawing.Size(65, 24);
@@ -240,6 +242,13 @@
             this.admin_userprofile.Size = new System.Drawing.Size(221, 26);
             this.admin_userprofile.Text = "User Account Profile";
             this.admin_userprofile.Click += new System.EventHandler(this.admin_userprofile_Click);
+            // 
+            // bankAccountToolStripMenuItem
+            // 
+            this.bankAccountToolStripMenuItem.Name = "bankAccountToolStripMenuItem";
+            this.bankAccountToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.bankAccountToolStripMenuItem.Text = "Bank Accounts";
+            this.bankAccountToolStripMenuItem.Click += new System.EventHandler(this.bankAccountToolStripMenuItem_Click);
             // 
             // menu_account
             // 
@@ -300,5 +309,6 @@
         private System.Windows.Forms.ToolStripMenuItem admin_attendance_statuses;
         private System.Windows.Forms.ToolStripMenuItem admin_workshifttemplates;
         private System.Windows.Forms.ToolStripMenuItem admin_userprofile;
+        private System.Windows.Forms.ToolStripMenuItem bankAccountToolStripMenuItem;
     }
 }
