@@ -48,7 +48,7 @@
     <Compile Include="Admin\Clients_Profile_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\Clients_Profile_Form.Designer.cs">
+    <Compile Include="Admin\Clients_Profile_Form.designer.cs">
       <DependentUpon>Clients_Profile_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin\MasterData_v1_Attendance_Form.cs">
@@ -90,7 +90,7 @@
     <Compile Include="Admin\UserAccounts_Profile_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\UserAccounts_Profile_Form.Designer.cs">
+    <Compile Include="Admin\UserAccounts_Profile_Form.designer.cs">
       <DependentUpon>UserAccounts_Profile_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\GlobalData.cs" />
@@ -110,6 +110,7 @@
     </Compile>
     <EmbeddedResource Include="Admin\Clients_Profile_Form.resx">
       <DependentUpon>Clients_Profile_Form.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\MasterData_v1_Attendance_Form.resx">
       <DependentUpon>MasterData_v1_Attendance_Form.cs</DependentUpon>
