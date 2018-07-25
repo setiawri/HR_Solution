@@ -2,42 +2,14 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
-sp_rename '[dbo].[Attendance]', 'Attendances'
-GO
-sp_rename '[dbo].[Attendance_get]' , 'Attendances_get'
-GO
-sp_rename '[dbo].[Attendance_add]' , 'Attendances_add'
-GO
-sp_rename '[dbo].[Attendance_update]' , 'Attendances_update'
-GO
-sp_rename '[dbo].[Attendance_update_Flag1]' , 'Attendances_update_Flag1'
-GO
-sp_rename '[dbo].[Attendance_update_Flag2]' , 'Attendances_update_Flag2'
-GO
-sp_rename '[dbo].[Attendance_update_Rejected]' , 'Attendances_update_Rejected'
-GO
-sp_rename '[dbo].[Attendance_update_Approved]' , 'Attendances_update_Approved'
-GO
-sp_rename '[dbo].[Attendance_isCombinationExist]' , 'Attendances_isCombinationExist'
-GO
-sp_rename '[dbo].[Attendance_delete]' , 'Attendances_delete'
-GO
 
-CREATE TABLE [dbo].[BankAccounts] (
-    Id UNIQUEIDENTIFIER NOT NULL,
-	Name NVARCHAR (MAX) NOT NULL,
-	Owner_RefId UNIQUEIDENTIFIER NOT NULL,
-	BankName NVARCHAR (MAX) NOT NULL,
-	AccountNumber NVARCHAR (MAX) NOT NULL,
-	Notes NVARCHAR (MAX) 
-    CONSTRAINT [PK_BankAccounts] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-GO
+
+
 
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[BankAccounts_get]
+ALTER PROCEDURE [dbo].[BankAccounts_get]
 
 	@Id uniqueidentifier = NULL,
 	@Name NVARCHAR(max) = NULL,
@@ -71,7 +43,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[BankAccounts_iscombinationexist]
+ALTER PROCEDURE [dbo].[BankAccounts_iscombinationexist]
 
 	@Id uniqueidentifier = NULL,
 	@Owner_RefId uniqueidentifier,
@@ -98,7 +70,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[BankAccounts_add]
+ALTER PROCEDURE [dbo].[BankAccounts_add]
 
 	@Id uniqueidentifier,
 	@Name NVARCHAR(max),
@@ -119,7 +91,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[BankAccounts_update]
+ALTER PROCEDURE [dbo].[BankAccounts_update]
 
 	@Id uniqueidentifier,
 	@Name NVARCHAR(max),
@@ -146,7 +118,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[BankAccounts_delete]
+ALTER PROCEDURE [dbo].[BankAccounts_delete]
 
 	@Id uniqueidentifier
 	
