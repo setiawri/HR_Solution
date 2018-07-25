@@ -1,0 +1,12 @@
+﻿
+> PULL HR & LibUtil
+> run UPDATE-DB.sql
+
+
+> TABLE HolidaySchedules --> MasterData_v1_HolidaySchedules_Form
+	- Id (guid)
+	- StartDate (datetime)
+	- DurationDays (int)
+	- Description (nvarchar(MAX))
+	- Notes (nvarchar(MAX))
+	- Active (bit,1)
