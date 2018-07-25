@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gb_Info = new System.Windows.Forms.GroupBox();
-            this.itxt_UserAccount = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.lblNotes = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.notes = new System.Windows.Forms.Label();
@@ -100,7 +99,11 @@
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.gbBankAccounts = new System.Windows.Forms.GroupBox();
             this.dgvBankAccounts = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvBankAccounts_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvBankAccounts_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvBankAccounts_BankName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvBankAccounts_AccountNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvBankAccounts_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_Info.SuspendLayout();
             this.gb_Workshifts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorkshifts)).BeginInit();
@@ -157,23 +160,6 @@
             this.gb_Info.Size = new System.Drawing.Size(381, 384);
             this.gb_Info.TabIndex = 0;
             this.gb_Info.TabStop = false;
-            // 
-            // itxt_UserAccount
-            // 
-            this.itxt_UserAccount.IsBrowseMode = true;
-            this.itxt_UserAccount.LabelText = "User Account";
-            this.itxt_UserAccount.Location = new System.Drawing.Point(643, -1);
-            this.itxt_UserAccount.MaxLength = 32767;
-            this.itxt_UserAccount.MultiLine = false;
-            this.itxt_UserAccount.Name = "itxt_UserAccount";
-            this.itxt_UserAccount.PasswordChar = '\0';
-            this.itxt_UserAccount.RowCount = 1;
-            this.itxt_UserAccount.ShowDeleteButton = true;
-            this.itxt_UserAccount.ShowTextboxOnly = false;
-            this.itxt_UserAccount.Size = new System.Drawing.Size(146, 41);
-            this.itxt_UserAccount.TabIndex = 62;
-            this.itxt_UserAccount.ValueText = "";
-            this.itxt_UserAccount.isBrowseMode_Clicked += new System.EventHandler(this.itxt_UserAccount_isBrowseMode_Clicked);
             // 
             // lblNotes
             // 
@@ -619,14 +605,14 @@
             this.dgvWorkshifts.AllowUserToResizeRows = false;
             this.dgvWorkshifts.BackgroundColor = System.Drawing.Color.White;
             this.dgvWorkshifts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvWorkshifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWorkshifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvWorkshifts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWorkshifts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_dgvWorkshifts_Id,
@@ -649,6 +635,7 @@
             this.col_dgvWorkshifts_Id.HeaderText = "Id";
             this.col_dgvWorkshifts_Id.Name = "col_dgvWorkshifts_Id";
             this.col_dgvWorkshifts_Id.Visible = false;
+            this.col_dgvWorkshifts_Id.Width = 22;
             // 
             // col_dgvWorkshifts_Client_CompanyName
             // 
@@ -806,14 +793,14 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -838,6 +825,7 @@
             this.dataGridViewTextBoxColumn1.HeaderText = "Id";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 22;
             // 
             // Column1
             // 
@@ -904,17 +892,21 @@
             this.dgvBankAccounts.AllowUserToResizeRows = false;
             this.dgvBankAccounts.BackgroundColor = System.Drawing.Color.White;
             this.dgvBankAccounts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBankAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBankAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvBankAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBankAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn2});
+            this.col_dgvBankAccounts_Id,
+            this.col_dgvBankAccounts_Name,
+            this.col_dgvBankAccounts_BankName,
+            this.col_dgvBankAccounts_AccountNumber,
+            this.col_dgvBankAccounts_Notes});
             this.dgvBankAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBankAccounts.Location = new System.Drawing.Point(3, 16);
             this.dgvBankAccounts.MultiSelect = false;
@@ -924,20 +916,50 @@
             this.dgvBankAccounts.Size = new System.Drawing.Size(179, 160);
             this.dgvBankAccounts.TabIndex = 5;
             // 
-            // dataGridViewTextBoxColumn2
+            // col_dgvBankAccounts_Id
             // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Visible = false;
-            this.dataGridViewTextBoxColumn2.Width = 22;
+            this.col_dgvBankAccounts_Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_dgvBankAccounts_Id.HeaderText = "Id";
+            this.col_dgvBankAccounts_Id.Name = "col_dgvBankAccounts_Id";
+            this.col_dgvBankAccounts_Id.Visible = false;
+            this.col_dgvBankAccounts_Id.Width = 22;
+            // 
+            // col_dgvBankAccounts_Name
+            // 
+            this.col_dgvBankAccounts_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvBankAccounts_Name.HeaderText = "Name";
+            this.col_dgvBankAccounts_Name.MinimumWidth = 35;
+            this.col_dgvBankAccounts_Name.Name = "col_dgvBankAccounts_Name";
+            this.col_dgvBankAccounts_Name.Width = 35;
+            // 
+            // col_dgvBankAccounts_BankName
+            // 
+            this.col_dgvBankAccounts_BankName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvBankAccounts_BankName.HeaderText = "Bank";
+            this.col_dgvBankAccounts_BankName.MinimumWidth = 35;
+            this.col_dgvBankAccounts_BankName.Name = "col_dgvBankAccounts_BankName";
+            this.col_dgvBankAccounts_BankName.Width = 35;
+            // 
+            // col_dgvBankAccounts_AccountNumber
+            // 
+            this.col_dgvBankAccounts_AccountNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvBankAccounts_AccountNumber.HeaderText = "Account";
+            this.col_dgvBankAccounts_AccountNumber.MinimumWidth = 55;
+            this.col_dgvBankAccounts_AccountNumber.Name = "col_dgvBankAccounts_AccountNumber";
+            this.col_dgvBankAccounts_AccountNumber.Width = 55;
+            // 
+            // col_dgvBankAccounts_Notes
+            // 
+            this.col_dgvBankAccounts_Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_dgvBankAccounts_Notes.HeaderText = "Notes";
+            this.col_dgvBankAccounts_Notes.MinimumWidth = 30;
+            this.col_dgvBankAccounts_Notes.Name = "col_dgvBankAccounts_Notes";
             // 
             // UserAccounts_Profile_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 435);
-            this.Controls.Add(this.itxt_UserAccount);
             this.Controls.Add(this.gbBankAccounts);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gb_Workshifts);
@@ -1029,9 +1051,12 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label username;
-        private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_UserAccount;
         private System.Windows.Forms.GroupBox gbBankAccounts;
         protected System.Windows.Forms.DataGridView dgvBankAccounts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvBankAccounts_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvBankAccounts_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvBankAccounts_BankName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvBankAccounts_AccountNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvBankAccounts_Notes;
     }
 }

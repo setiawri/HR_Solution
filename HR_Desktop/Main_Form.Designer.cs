@@ -46,7 +46,7 @@
             this.admin_workshifttemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_workshifts = new System.Windows.Forms.ToolStripMenuItem();
             this.admin_attendance_statuses = new System.Windows.Forms.ToolStripMenuItem();
-            this.admin_userprofile = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_account = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlShortcuts.SuspendLayout();
             this.gbShortcuts.SuspendLayout();
@@ -60,13 +60,13 @@
             this.menu_reports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reports_timesheets});
             this.menu_reports.Name = "menu_reports";
-            this.menu_reports.Size = new System.Drawing.Size(72, 24);
+            this.menu_reports.Size = new System.Drawing.Size(59, 20);
             this.menu_reports.Text = "Reports";
             // 
             // reports_timesheets
             // 
             this.reports_timesheets.Name = "reports_timesheets";
-            this.reports_timesheets.Size = new System.Drawing.Size(158, 26);
+            this.reports_timesheets.Size = new System.Drawing.Size(134, 22);
             this.reports_timesheets.Text = "Timesheets";
             this.reports_timesheets.Click += new System.EventHandler(this.reports_timesheets_Click);
             // 
@@ -75,11 +75,10 @@
             this.pnlShortcuts.BackColor = System.Drawing.Color.White;
             this.pnlShortcuts.Controls.Add(this.gbShortcuts);
             this.pnlShortcuts.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlShortcuts.Location = new System.Drawing.Point(0, 28);
-            this.pnlShortcuts.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlShortcuts.Location = new System.Drawing.Point(0, 24);
             this.pnlShortcuts.Name = "pnlShortcuts";
-            this.pnlShortcuts.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.pnlShortcuts.Size = new System.Drawing.Size(193, 526);
+            this.pnlShortcuts.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.pnlShortcuts.Size = new System.Drawing.Size(145, 426);
             this.pnlShortcuts.TabIndex = 21;
             // 
             // gbShortcuts
@@ -88,11 +87,9 @@
             this.gbShortcuts.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.gbShortcuts.Controls.Add(this.flpShortcuts);
             this.gbShortcuts.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbShortcuts.Location = new System.Drawing.Point(7, 6);
-            this.gbShortcuts.Margin = new System.Windows.Forms.Padding(4);
+            this.gbShortcuts.Location = new System.Drawing.Point(5, 5);
             this.gbShortcuts.Name = "gbShortcuts";
-            this.gbShortcuts.Padding = new System.Windows.Forms.Padding(4);
-            this.gbShortcuts.Size = new System.Drawing.Size(179, 64);
+            this.gbShortcuts.Size = new System.Drawing.Size(135, 52);
             this.gbShortcuts.TabIndex = 14;
             this.gbShortcuts.TabStop = false;
             this.gbShortcuts.Text = "Shortcuts";
@@ -104,11 +101,10 @@
             this.flpShortcuts.Controls.Add(this.lnkUserAccounts);
             this.flpShortcuts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpShortcuts.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpShortcuts.Location = new System.Drawing.Point(4, 19);
-            this.flpShortcuts.Margin = new System.Windows.Forms.Padding(4);
+            this.flpShortcuts.Location = new System.Drawing.Point(3, 16);
             this.flpShortcuts.Name = "flpShortcuts";
-            this.flpShortcuts.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.flpShortcuts.Size = new System.Drawing.Size(171, 41);
+            this.flpShortcuts.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.flpShortcuts.Size = new System.Drawing.Size(129, 33);
             this.flpShortcuts.TabIndex = 17;
             // 
             // lnkUserAccounts
@@ -118,11 +114,10 @@
             this.lnkUserAccounts.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.lnkUserAccounts.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkUserAccounts.LinkColor = System.Drawing.Color.CornflowerBlue;
-            this.lnkUserAccounts.Location = new System.Drawing.Point(4, 6);
-            this.lnkUserAccounts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lnkUserAccounts.Location = new System.Drawing.Point(3, 5);
             this.lnkUserAccounts.Name = "lnkUserAccounts";
-            this.lnkUserAccounts.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.lnkUserAccounts.Size = new System.Drawing.Size(100, 29);
+            this.lnkUserAccounts.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.lnkUserAccounts.Size = new System.Drawing.Size(77, 23);
             this.lnkUserAccounts.TabIndex = 25;
             this.lnkUserAccounts.TabStop = true;
             this.lnkUserAccounts.Text = "User Accounts";
@@ -134,19 +129,18 @@
             this.pnlMDIChildren.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.pnlMDIChildren.Controls.Add(this.expandCollapseToggle1);
             this.pnlMDIChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMDIChildren.Location = new System.Drawing.Point(193, 28);
-            this.pnlMDIChildren.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlMDIChildren.Location = new System.Drawing.Point(145, 24);
             this.pnlMDIChildren.Name = "pnlMDIChildren";
-            this.pnlMDIChildren.Size = new System.Drawing.Size(874, 526);
+            this.pnlMDIChildren.Size = new System.Drawing.Size(655, 426);
             this.pnlMDIChildren.TabIndex = 22;
             // 
             // expandCollapseToggle1
             // 
             this.expandCollapseToggle1.InitialArrowDirection = System.Windows.Forms.ArrowDirection.Left;
             this.expandCollapseToggle1.Location = new System.Drawing.Point(0, 0);
-            this.expandCollapseToggle1.Margin = new System.Windows.Forms.Padding(5);
+            this.expandCollapseToggle1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.expandCollapseToggle1.Name = "expandCollapseToggle1";
-            this.expandCollapseToggle1.Size = new System.Drawing.Size(27, 25);
+            this.expandCollapseToggle1.Size = new System.Drawing.Size(20, 20);
             this.expandCollapseToggle1.TabIndex = 17;
             this.expandCollapseToggle1.TogglePanel = this.pnlShortcuts;
             // 
@@ -154,13 +148,13 @@
             // 
             this.account_password.Name = "account_password";
             this.account_password.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
-            this.account_password.Size = new System.Drawing.Size(191, 26);
+            this.account_password.Size = new System.Drawing.Size(161, 22);
             this.account_password.Text = "Password";
             // 
             // account_info
             // 
             this.account_info.Name = "account_info";
-            this.account_info.Size = new System.Drawing.Size(191, 26);
+            this.account_info.Size = new System.Drawing.Size(161, 22);
             this.account_info.Text = "Info";
             // 
             // msMain
@@ -172,8 +166,7 @@
             this.menu_reports});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
-            this.msMain.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.msMain.Size = new System.Drawing.Size(1067, 28);
+            this.msMain.Size = new System.Drawing.Size(800, 24);
             this.msMain.TabIndex = 20;
             this.msMain.Text = "menuStrip1";
             // 
@@ -186,60 +179,60 @@
             this.admin_workshifttemplates,
             this.admin_workshifts,
             this.admin_attendance_statuses,
-            this.admin_userprofile});
+            this.bankAccountToolStripMenuItem});
             this.menu_admin.Name = "menu_admin";
             this.menu_admin.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.menu_admin.Size = new System.Drawing.Size(65, 24);
+            this.menu_admin.Size = new System.Drawing.Size(55, 20);
             this.menu_admin.Text = "Admin";
             // 
             // admin_useraccounts
             // 
             this.admin_useraccounts.Name = "admin_useraccounts";
-            this.admin_useraccounts.Size = new System.Drawing.Size(221, 26);
+            this.admin_useraccounts.Size = new System.Drawing.Size(184, 22);
             this.admin_useraccounts.Text = "User Accounts";
             this.admin_useraccounts.Click += new System.EventHandler(this.admin_useraccounts_Click);
             // 
             // admin_clients
             // 
             this.admin_clients.Name = "admin_clients";
-            this.admin_clients.Size = new System.Drawing.Size(221, 26);
+            this.admin_clients.Size = new System.Drawing.Size(184, 22);
             this.admin_clients.Text = "Clients";
             this.admin_clients.Click += new System.EventHandler(this.admin_clients_Click);
             // 
             // admin_workshiftcategories
             // 
             this.admin_workshiftcategories.Name = "admin_workshiftcategories";
-            this.admin_workshiftcategories.Size = new System.Drawing.Size(221, 26);
+            this.admin_workshiftcategories.Size = new System.Drawing.Size(184, 22);
             this.admin_workshiftcategories.Text = "Workshift Categories";
             this.admin_workshiftcategories.Click += new System.EventHandler(this.admin_workshiftcategories_Click);
             // 
             // admin_workshifttemplates
             // 
             this.admin_workshifttemplates.Name = "admin_workshifttemplates";
-            this.admin_workshifttemplates.Size = new System.Drawing.Size(221, 26);
+            this.admin_workshifttemplates.Size = new System.Drawing.Size(184, 22);
             this.admin_workshifttemplates.Text = "Workshift Templates";
             this.admin_workshifttemplates.Click += new System.EventHandler(this.admin_workshifttemplates_Click);
             // 
             // admin_workshifts
             // 
             this.admin_workshifts.Name = "admin_workshifts";
-            this.admin_workshifts.Size = new System.Drawing.Size(221, 26);
+            this.admin_workshifts.Size = new System.Drawing.Size(184, 22);
             this.admin_workshifts.Text = "Workshifts";
             this.admin_workshifts.Click += new System.EventHandler(this.admin_workshifts_Click);
             // 
             // admin_attendance_statuses
             // 
             this.admin_attendance_statuses.Name = "admin_attendance_statuses";
-            this.admin_attendance_statuses.Size = new System.Drawing.Size(221, 26);
+            this.admin_attendance_statuses.Size = new System.Drawing.Size(184, 22);
             this.admin_attendance_statuses.Text = "Attendance Statuses";
             this.admin_attendance_statuses.Click += new System.EventHandler(this.admin_attendance_statuses_Click);
             // 
-            // admin_userprofile
+            // bankAccountToolStripMenuItem
             // 
-            this.admin_userprofile.Name = "admin_userprofile";
-            this.admin_userprofile.Size = new System.Drawing.Size(221, 26);
-            this.admin_userprofile.Text = "User Account Profile";
-            this.admin_userprofile.Click += new System.EventHandler(this.admin_userprofile_Click);
+            this.bankAccountToolStripMenuItem.Name = "bankAccountToolStripMenuItem";
+            this.bankAccountToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.bankAccountToolStripMenuItem.Text = "Bank Accounts";
+            this.bankAccountToolStripMenuItem.Click += new System.EventHandler(this.bankAccountToolStripMenuItem_Click);
             // 
             // menu_account
             // 
@@ -248,18 +241,17 @@
             this.account_info});
             this.menu_account.Name = "menu_account";
             this.menu_account.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.menu_account.Size = new System.Drawing.Size(75, 24);
+            this.menu_account.Size = new System.Drawing.Size(64, 20);
             this.menu_account.Text = "Account";
             // 
             // Main_Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pnlMDIChildren);
             this.Controls.Add(this.pnlShortcuts);
             this.Controls.Add(this.msMain);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Main_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LUCKY STAR SECURITY";
@@ -299,6 +291,6 @@
         private System.Windows.Forms.ToolStripMenuItem reports_timesheets;
         private System.Windows.Forms.ToolStripMenuItem admin_attendance_statuses;
         private System.Windows.Forms.ToolStripMenuItem admin_workshifttemplates;
-        private System.Windows.Forms.ToolStripMenuItem admin_userprofile;
+        private System.Windows.Forms.ToolStripMenuItem bankAccountToolStripMenuItem;
     }
 }

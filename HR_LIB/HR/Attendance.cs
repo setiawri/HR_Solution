@@ -96,7 +96,7 @@ namespace HR_LIB.HR
             SqlQueryResult result = DBConnection.query(
                 QueryTypes.ExecuteNonQuery,
                 false, false, false, true, false,
-                "Attendance_iscombinationexist",
+                "Attendances_iscombinationexist",
                 new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
                 new SqlQueryParameter(COL_DB_UserAccounts_Id, SqlDbType.UniqueIdentifier, UserAccounts_Id),
                 new SqlQueryParameter(COL_DB_TimestampIn, SqlDbType.DateTime, timestampIn)
@@ -114,7 +114,7 @@ namespace HR_LIB.HR
                 SqlQueryResult result = DBConnection.query(
                     sqlConnection,
                     QueryTypes.ExecuteNonQuery,
-                    "Attendance_add",
+                    "Attendances_add",
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
                     new SqlQueryParameter(COL_DB_UserAccounts_Id, SqlDbType.UniqueIdentifier, UserAccounts_Id),
                     new SqlQueryParameter(COL_DB_TimestampIn, SqlDbType.DateTime, timestampIn),
@@ -156,7 +156,7 @@ namespace HR_LIB.HR
             SqlQueryResult result = DBConnection.query(
                 sqlConnection,
                 QueryTypes.FillByAdapter,
-                "Attendance_get",
+                "Attendances_get",
                 new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
                 new SqlQueryParameter(COL_DB_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(UserAccounts_Id)),
                 new SqlQueryParameter(FILTER_DayOfWeek, SqlDbType.TinyInt, Util.wrapNullable<int?>(dayOfWeek)),
@@ -186,7 +186,7 @@ namespace HR_LIB.HR
                     SqlQueryResult result = DBConnection.query(
                         sqlConnection,
                         QueryTypes.ExecuteNonQuery,
-                        "Attendance_update",
+                        "Attendances_update",
                         new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
                         new SqlQueryParameter(COL_DB_TimestampIn, SqlDbType.DateTime, timestampIn),
                         new SqlQueryParameter(COL_DB_TimestampOut, SqlDbType.DateTime, timestampOut),
@@ -206,7 +206,7 @@ namespace HR_LIB.HR
                 SqlQueryResult result = DBConnection.query(
                     sqlConnection,
                     QueryTypes.ExecuteNonQuery,
-                    "Attendance_update_Flag1",
+                    "Attendances_update_Flag1",
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
                     new SqlQueryParameter(COL_DB_Flag1, SqlDbType.Bit, value)
                 );
@@ -223,7 +223,7 @@ namespace HR_LIB.HR
                 SqlQueryResult result = DBConnection.query(
                     sqlConnection,
                     QueryTypes.ExecuteNonQuery,
-                    "Attendance_update_Flag2",
+                    "Attendances_update_Flag2",
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
                     new SqlQueryParameter(COL_DB_Flag2, SqlDbType.Bit, value)
                 );
@@ -240,7 +240,7 @@ namespace HR_LIB.HR
                 SqlQueryResult result = DBConnection.query(
                     sqlConnection,
                     QueryTypes.ExecuteNonQuery,
-                    "Attendance_update_Approved",
+                    "Attendances_update_Approved",
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
                     new SqlQueryParameter(COL_DB_Approved, SqlDbType.Bit, value)
                 );
@@ -257,7 +257,7 @@ namespace HR_LIB.HR
                 SqlQueryResult result = DBConnection.query(
                     sqlConnection,
                     QueryTypes.ExecuteNonQuery,
-                    "Attendance_update_Rejected",
+                    "Attendances_update_Rejected",
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
                     new SqlQueryParameter(COL_DB_Rejected, SqlDbType.Bit, value)
                 );
@@ -274,7 +274,7 @@ namespace HR_LIB.HR
                 SqlQueryResult result = DBConnection.query(
                     sqlConnection,
                     QueryTypes.ExecuteNonQuery,
-                    "Attendance_delete",
+                    "Attendances_delete",
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id)
                 );
 

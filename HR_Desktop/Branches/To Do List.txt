@@ -39,13 +39,6 @@
 	- Amount (decimal(10,0))
 	- Notes (nvarchar(MAX))
 
-> TABLE HolidaySchedules --> MasterData_v1_HolidaySchedules_Form
-	- Id (guid)
-	- StartDate (datetime)
-	- DurationDays (int)
-	- Description (nvarchar(MAX))
-	- Notes (nvarchar(MAX))
-
 > TABLE Attendance ADD PayrollItems_Id
 	- if not null, locked (no further modification is allowed). 
 

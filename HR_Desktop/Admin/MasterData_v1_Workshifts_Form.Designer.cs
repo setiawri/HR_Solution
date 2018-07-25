@@ -61,62 +61,62 @@
             // 
             // panel1
             // 
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panel1.Size = new System.Drawing.Size(514, 28);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(567, 28);
             // 
             // pnlActionButtons
             // 
-            this.pnlActionButtons.Location = new System.Drawing.Point(0, 307);
-            this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlActionButtons.Size = new System.Drawing.Size(514, 23);
+            this.pnlActionButtons.Location = new System.Drawing.Point(0, 227);
+            this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlActionButtons.Size = new System.Drawing.Size(567, 23);
             // 
             // scInputLeft
             // 
-            this.scInputLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.scInputLeft.Margin = new System.Windows.Forms.Padding(2);
             // 
             // scInputLeft.Panel1
             // 
             this.scInputLeft.Panel1.Controls.Add(this.itxt_UserAccounts);
             this.scInputLeft.Panel1.Controls.Add(this.gb_Template);
-            this.scInputLeft.Panel1.Controls.Add(this.itxt_WorkshiftCategories);
-            this.scInputLeft.Panel1.Controls.Add(this.in_DurationMinutes);
-            this.scInputLeft.Panel1.Controls.Add(this.idtp_Start);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Name);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Clients);
-            this.scInputLeft.Panel1.Controls.Add(this.iddl_DayOfWeek);
             // 
             // scInputLeft.Panel2
             // 
             this.scInputLeft.Panel2.Controls.Add(this.itxt_Notes);
-            this.scInputLeft.Size = new System.Drawing.Size(500, 281);
+            this.scInputLeft.Panel2.Controls.Add(this.itxt_WorkshiftCategories);
+            this.scInputLeft.Panel2.Controls.Add(this.iddl_DayOfWeek);
+            this.scInputLeft.Panel2.Controls.Add(this.in_DurationMinutes);
+            this.scInputLeft.Panel2.Controls.Add(this.idtp_Start);
+            this.scInputLeft.Size = new System.Drawing.Size(500, 201);
             this.scInputLeft.SplitterWidth = 3;
             // 
             // scInputRight
             // 
-            this.scInputRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.scInputRight.Size = new System.Drawing.Size(25, 281);
+            this.scInputRight.Margin = new System.Windows.Forms.Padding(4);
+            this.scInputRight.Size = new System.Drawing.Size(62, 201);
             this.scInputRight.SplitterWidth = 5;
             // 
             // scMain
             // 
-            this.scMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.scMain.Size = new System.Drawing.Size(514, 609);
-            this.scMain.SplitterDistance = 330;
+            this.scMain.Margin = new System.Windows.Forms.Padding(4);
+            this.scMain.Size = new System.Drawing.Size(567, 609);
+            this.scMain.SplitterDistance = 250;
             this.scMain.SplitterWidth = 5;
             // 
             // txtQuickSearch
             // 
-            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(4);
             // 
             // pnlButtons
             // 
-            this.pnlButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlButtons.Size = new System.Drawing.Size(514, 26);
+            this.pnlButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlButtons.Size = new System.Drawing.Size(567, 26);
             // 
             // scInputContainer
             // 
-            this.scInputContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.scInputContainer.Size = new System.Drawing.Size(514, 281);
+            this.scInputContainer.Margin = new System.Windows.Forms.Padding(4);
+            this.scInputContainer.Size = new System.Drawing.Size(567, 201);
             this.scInputContainer.SplitterWidth = 5;
             // 
             // btnLog
@@ -125,8 +125,8 @@
             // 
             // pnlQuickSearch
             // 
-            this.pnlQuickSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlQuickSearch.Size = new System.Drawing.Size(484, 28);
+            this.pnlQuickSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlQuickSearch.Size = new System.Drawing.Size(537, 28);
             // 
             // iddl_DayOfWeek
             // 
@@ -134,8 +134,8 @@
             this.iddl_DayOfWeek.HideFilter = true;
             this.iddl_DayOfWeek.HideUpdateLink = true;
             this.iddl_DayOfWeek.LabelText = "*Day";
-            this.iddl_DayOfWeek.Location = new System.Drawing.Point(4, 229);
-            this.iddl_DayOfWeek.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iddl_DayOfWeek.Location = new System.Drawing.Point(4, 49);
+            this.iddl_DayOfWeek.Margin = new System.Windows.Forms.Padding(4);
             this.iddl_DayOfWeek.Name = "iddl_DayOfWeek";
             this.iddl_DayOfWeek.SelectedItem = null;
             this.iddl_DayOfWeek.SelectedValue = null;
@@ -147,16 +147,16 @@
             // 
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
-            this.itxt_Notes.Location = new System.Drawing.Point(6, 8);
-            this.itxt_Notes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Notes.Location = new System.Drawing.Point(4, 90);
+            this.itxt_Notes.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Notes.MaxLength = 32767;
             this.itxt_Notes.MultiLine = true;
             this.itxt_Notes.Name = "itxt_Notes";
             this.itxt_Notes.PasswordChar = '\0';
-            this.itxt_Notes.RowCount = 3;
+            this.itxt_Notes.RowCount = 4;
             this.itxt_Notes.ShowDeleteButton = false;
             this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(237, 71);
+            this.itxt_Notes.Size = new System.Drawing.Size(241, 86);
             this.itxt_Notes.TabIndex = 4;
             this.itxt_Notes.ValueText = "";
             // 
@@ -165,7 +165,7 @@
             this.itxt_Clients.IsBrowseMode = true;
             this.itxt_Clients.LabelText = "*Client";
             this.itxt_Clients.Location = new System.Drawing.Point(4, 8);
-            this.itxt_Clients.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Clients.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Clients.MaxLength = 32767;
             this.itxt_Clients.MultiLine = false;
             this.itxt_Clients.Name = "itxt_Clients";
@@ -182,8 +182,8 @@
             // 
             this.itxt_WorkshiftCategories.IsBrowseMode = true;
             this.itxt_WorkshiftCategories.LabelText = "*Category";
-            this.itxt_WorkshiftCategories.Location = new System.Drawing.Point(4, 185);
-            this.itxt_WorkshiftCategories.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_WorkshiftCategories.Location = new System.Drawing.Point(4, 8);
+            this.itxt_WorkshiftCategories.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_WorkshiftCategories.MaxLength = 32767;
             this.itxt_WorkshiftCategories.MultiLine = false;
             this.itxt_WorkshiftCategories.Name = "itxt_WorkshiftCategories";
@@ -200,8 +200,8 @@
             // 
             this.itxt_Name.IsBrowseMode = false;
             this.itxt_Name.LabelText = "*Name";
-            this.itxt_Name.Location = new System.Drawing.Point(4, 141);
-            this.itxt_Name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Name.Location = new System.Drawing.Point(4, 132);
+            this.itxt_Name.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Name.MaxLength = 32767;
             this.itxt_Name.MultiLine = false;
             this.itxt_Name.Name = "itxt_Name";
@@ -220,8 +220,8 @@
             this.idtp_Start.DefaultCheckedValue = false;
             this.idtp_Start.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_Start.LabelText = "*Start";
-            this.idtp_Start.Location = new System.Drawing.Point(100, 229);
-            this.idtp_Start.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.idtp_Start.Location = new System.Drawing.Point(100, 49);
+            this.idtp_Start.Margin = new System.Windows.Forms.Padding(4);
             this.idtp_Start.Name = "idtp_Start";
             this.idtp_Start.ShowCheckBox = false;
             this.idtp_Start.ShowUpAndDown = true;
@@ -241,8 +241,8 @@
             0,
             0});
             this.in_DurationMinutes.LabelText = "*Minutes";
-            this.in_DurationMinutes.Location = new System.Drawing.Point(175, 229);
-            this.in_DurationMinutes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.in_DurationMinutes.Location = new System.Drawing.Point(175, 49);
+            this.in_DurationMinutes.Margin = new System.Windows.Forms.Padding(4);
             this.in_DurationMinutes.MaximumValue = new decimal(new int[] {
             1440,
             0,
@@ -268,7 +268,7 @@
             // 
             this.gb_Template.Controls.Add(this.itxt_WorkshiftTemplate);
             this.gb_Template.Enabled = false;
-            this.gb_Template.Location = new System.Drawing.Point(4, 52);
+            this.gb_Template.Location = new System.Drawing.Point(4, 49);
             this.gb_Template.Name = "gb_Template";
             this.gb_Template.Padding = new System.Windows.Forms.Padding(5, 3, 5, 5);
             this.gb_Template.Size = new System.Drawing.Size(241, 42);
@@ -282,7 +282,7 @@
             this.itxt_WorkshiftTemplate.IsBrowseMode = true;
             this.itxt_WorkshiftTemplate.LabelText = "Template";
             this.itxt_WorkshiftTemplate.Location = new System.Drawing.Point(5, 16);
-            this.itxt_WorkshiftTemplate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_WorkshiftTemplate.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_WorkshiftTemplate.MaxLength = 32767;
             this.itxt_WorkshiftTemplate.MultiLine = false;
             this.itxt_WorkshiftTemplate.Name = "itxt_WorkshiftTemplate";
@@ -299,8 +299,8 @@
             // 
             this.itxt_UserAccounts.IsBrowseMode = true;
             this.itxt_UserAccounts.LabelText = "*Employee";
-            this.itxt_UserAccounts.Location = new System.Drawing.Point(4, 98);
-            this.itxt_UserAccounts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_UserAccounts.Location = new System.Drawing.Point(4, 91);
+            this.itxt_UserAccounts.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_UserAccounts.MaxLength = 32767;
             this.itxt_UserAccounts.MultiLine = false;
             this.itxt_UserAccounts.Name = "itxt_UserAccounts";
@@ -317,8 +317,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 609);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClientSize = new System.Drawing.Size(567, 609);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MasterData_v1_Workshifts_Form";
             this.Text = "Workshifts";
             this.panel1.ResumeLayout(false);

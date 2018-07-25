@@ -44,55 +44,14 @@
   <ItemGroup>
     <Compile Include="Helper.cs" />
     <Compile Include="HR\AttendanceStatus.cs" />
+    <Compile Include="HR\BankAccounts.cs" />
     <Compile Include="HR\WorkshiftTemplate.cs" />
     <Compile Include="HR\WorkshiftCategory.cs" />
     <Compile Include="HR\Workshift.cs" />
     <Compile Include="HR\Client.cs" />
     <Compile Include="HR\Attendance.cs" />
     <Compile Include="LOGGING\ActivityLog.cs" />
-    <Compile Include="LOGGING\ActivityLogs_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LOGGING\ActivityLogs_Form.designer.cs">
-      <DependentUpon>ActivityLogs_Form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SETTINGS\DBConnection_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SETTINGS\DBConnection_Form.Designer.cs">
-      <DependentUpon>DBConnection_Form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LOGIN\Login_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LOGIN\Login_Form.designer.cs">
-      <DependentUpon>Login_Form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LOGIN\MasterData_v1_UserAccountRoles_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LOGIN\MasterData_v1_UserAccountRoles_Form.Designer.cs">
-      <DependentUpon>MasterData_v1_UserAccountRoles_Form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LOGIN\MasterData_v1_UserAccounts_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LOGIN\MasterData_v1_UserAccounts_Form.Designer.cs">
-      <DependentUpon>MasterData_v1_UserAccounts_Form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LOGIN\UserAccount.cs" />
-    <Compile Include="LOGIN\UserAccountAccess.cs" />
-    <Compile Include="LOGIN\UserAccountAccessRoleAssignment.cs" />
-    <Compile Include="LOGIN\UserAccountRole.cs" />
-    <Compile Include="LOGIN\UserAccountRoleAssignment.cs" />
-    <Compile Include="LOGIN\UserAccounts_Update_Password_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LOGIN\UserAccounts_Update_Password_Form.Designer.cs">
-      <DependentUpon>UserAccounts_Update_Password_Form.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SETTINGS\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\LIBUtil\LIBUtil\LIBUtil\LIBUtil.csproj">
@@ -101,29 +60,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="LOGGING\ActivityLogs_Form.resx">
-      <DependentUpon>ActivityLogs_Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SETTINGS\DBConnection_Form.resx">
-      <DependentUpon>DBConnection_Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LOGIN\Login_Form.resx">
-      <DependentUpon>Login_Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LOGIN\MasterData_v1_UserAccountRoles_Form.resx">
-      <DependentUpon>MasterData_v1_UserAccountRoles_Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LOGIN\MasterData_v1_UserAccounts_Form.resx">
-      <DependentUpon>MasterData_v1_UserAccounts_Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LOGIN\UserAccounts_Update_Password_Form.resx">
-      <DependentUpon>UserAccounts_Update_Password_Form.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="DBScript.txt" />
     <Content Include="Documentation\Rules And Assumptions.txt" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

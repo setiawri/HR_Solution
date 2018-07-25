@@ -112,7 +112,7 @@ namespace HR_Desktop
 
         private void admin_attendance_Click(object sender, EventArgs e)
         {
-            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_Attendance_Form());
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_Attendances_Form());
         }
 
         private void reports_timesheets_Click(object sender, EventArgs e)
@@ -133,6 +133,11 @@ namespace HR_Desktop
         private void admin_userprofile_Click(object sender, EventArgs e)
         {
             LIBUtil.Util.displayMDIChild(new Admin.UserAccounts_Profile_Form());
+        }
+
+        private void bankAccountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_BankAccounts_Form());
         }
 
 

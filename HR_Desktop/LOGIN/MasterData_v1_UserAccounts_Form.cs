@@ -49,8 +49,8 @@ namespace LOGIN
 
         protected override void setupControlsBasedOnRoles() 
         {
-            HR_LIB.Helper.hideIfNoAccess(UserAccount.LoggedInAccount, btnRoles, false, UserAccountAccessEnum.UserAccountRoles_AddUpdate);
-            HR_LIB.Helper.hideIfNoAccess(UserAccount.LoggedInAccount, col_dgv_Active, false, UserAccountAccessEnum.UserAccountRoles_AddUpdate);
+            UserAccount.hideIfNoAccess(UserAccount.LoggedInAccount, btnRoles, false, UserAccountAccessEnum.UserAccountRoles_AddUpdate);
+            UserAccount.hideIfNoAccess(UserAccount.LoggedInAccount, col_dgv_Active, false, UserAccountAccessEnum.UserAccountRoles_AddUpdate);
         }
 
         protected override void setupFields()
@@ -216,7 +216,7 @@ namespace LOGIN
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
-            //Util.displayForm(null, new Admin.Clients_Profile_Form(selectedRowID()));
+            Util.displayForm(null, new HR_Desktop.Admin.UserAccounts_Profile_Form(selectedRowID()));
         }
 
         #endregion EVENT HANDLERS
