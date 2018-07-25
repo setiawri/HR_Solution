@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gb_Info = new System.Windows.Forms.GroupBox();
-            this.itxt_UserAccount = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.lblNotes = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.notes = new System.Windows.Forms.Label();
@@ -161,24 +160,6 @@
             this.gb_Info.Size = new System.Drawing.Size(381, 384);
             this.gb_Info.TabIndex = 0;
             this.gb_Info.TabStop = false;
-            // 
-            // itxt_UserAccount
-            // 
-            this.itxt_UserAccount.IsBrowseMode = true;
-            this.itxt_UserAccount.LabelText = "User Account";
-            this.itxt_UserAccount.Location = new System.Drawing.Point(642, 0);
-            this.itxt_UserAccount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.itxt_UserAccount.MaxLength = 32767;
-            this.itxt_UserAccount.MultiLine = false;
-            this.itxt_UserAccount.Name = "itxt_UserAccount";
-            this.itxt_UserAccount.PasswordChar = '\0';
-            this.itxt_UserAccount.RowCount = 1;
-            this.itxt_UserAccount.ShowDeleteButton = true;
-            this.itxt_UserAccount.ShowTextboxOnly = false;
-            this.itxt_UserAccount.Size = new System.Drawing.Size(146, 41);
-            this.itxt_UserAccount.TabIndex = 62;
-            this.itxt_UserAccount.ValueText = "";
-            this.itxt_UserAccount.isBrowseMode_Clicked += new System.EventHandler(this.itxt_UserAccount_isBrowseMode_Clicked);
             // 
             // lblNotes
             // 
@@ -654,6 +635,7 @@
             this.col_dgvWorkshifts_Id.HeaderText = "Id";
             this.col_dgvWorkshifts_Id.Name = "col_dgvWorkshifts_Id";
             this.col_dgvWorkshifts_Id.Visible = false;
+            this.col_dgvWorkshifts_Id.Width = 22;
             // 
             // col_dgvWorkshifts_Client_CompanyName
             // 
@@ -843,6 +825,7 @@
             this.dataGridViewTextBoxColumn1.HeaderText = "Id";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 22;
             // 
             // Column1
             // 
@@ -939,6 +922,7 @@
             this.col_dgvBankAccounts_Id.HeaderText = "Id";
             this.col_dgvBankAccounts_Id.Name = "col_dgvBankAccounts_Id";
             this.col_dgvBankAccounts_Id.Visible = false;
+            this.col_dgvBankAccounts_Id.Width = 22;
             // 
             // col_dgvBankAccounts_Name
             // 
@@ -976,7 +960,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 435);
-            this.Controls.Add(this.itxt_UserAccount);
             this.Controls.Add(this.gbBankAccounts);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gb_Workshifts);
@@ -1068,7 +1051,6 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label username;
-        private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_UserAccount;
         private System.Windows.Forms.GroupBox gbBankAccounts;
         protected System.Windows.Forms.DataGridView dgvBankAccounts;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvBankAccounts_Id;

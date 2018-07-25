@@ -100,6 +100,41 @@
       <DependentUpon>UserAccounts_Profile_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\GlobalData.cs" />
+    <Compile Include="LOGGING\ActivityLogs_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LOGGING\ActivityLogs_Form.designer.cs">
+      <DependentUpon>ActivityLogs_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIN\Login_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LOGIN\Login_Form.designer.cs">
+      <DependentUpon>Login_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIN\MasterData_v1_UserAccountRoles_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LOGIN\MasterData_v1_UserAccountRoles_Form.Designer.cs">
+      <DependentUpon>MasterData_v1_UserAccountRoles_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIN\MasterData_v1_UserAccounts_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LOGIN\MasterData_v1_UserAccounts_Form.Designer.cs">
+      <DependentUpon>MasterData_v1_UserAccounts_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LOGIN\UserAccount.cs" />
+    <Compile Include="LOGIN\UserAccountAccess.cs" />
+    <Compile Include="LOGIN\UserAccountAccessRoleAssignment.cs" />
+    <Compile Include="LOGIN\UserAccountRole.cs" />
+    <Compile Include="LOGIN\UserAccountRoleAssignment.cs" />
+    <Compile Include="LOGIN\UserAccounts_Update_Password_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LOGIN\UserAccounts_Update_Password_Form.Designer.cs">
+      <DependentUpon>UserAccounts_Update_Password_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +149,13 @@
     <Compile Include="Payroll\Timesheets_Form.Designer.cs">
       <DependentUpon>Timesheets_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="SETTINGS\DBConnection_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SETTINGS\DBConnection_Form.Designer.cs">
+      <DependentUpon>DBConnection_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SETTINGS\Settings.cs" />
     <EmbeddedResource Include="Admin\Clients_Profile_Form.resx">
       <DependentUpon>Clients_Profile_Form.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -142,6 +184,21 @@
     <EmbeddedResource Include="Admin\UserAccounts_Profile_Form.resx">
       <DependentUpon>UserAccounts_Profile_Form.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LOGGING\ActivityLogs_Form.resx">
+      <DependentUpon>ActivityLogs_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LOGIN\Login_Form.resx">
+      <DependentUpon>Login_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LOGIN\MasterData_v1_UserAccountRoles_Form.resx">
+      <DependentUpon>MasterData_v1_UserAccountRoles_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LOGIN\MasterData_v1_UserAccounts_Form.resx">
+      <DependentUpon>MasterData_v1_UserAccounts_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LOGIN\UserAccounts_Update_Password_Form.resx">
+      <DependentUpon>UserAccounts_Update_Password_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main_Form.resx">
       <DependentUpon>Main_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +213,9 @@
     </Compile>
     <EmbeddedResource Include="Payroll\Timesheets_Form.resx">
       <DependentUpon>Timesheets_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SETTINGS\DBConnection_Form.resx">
+      <DependentUpon>DBConnection_Form.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

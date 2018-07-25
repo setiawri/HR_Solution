@@ -36,8 +36,7 @@ namespace HR_Desktop.Admin
         public UserAccounts_Profile_Form(Guid? id)
         {
             InitializeComponent();
-            if (id != null)
-                _UserAccounts_Id = id;
+            _UserAccounts_Id = id;
         }
 
         #endregion CONSTRUCTOR METHODS
@@ -131,13 +130,6 @@ namespace HR_Desktop.Admin
         private void lnk_Edit_Workshift_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form());
-        }
-
-        private void itxt_UserAccount_isBrowseMode_Clicked(object sender, EventArgs e)
-        {
-            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false), ref sender);
-            _UserAccounts_Id = itxt_UserAccount.ValueGuid;
-            populateData();
         }
 
         private void rbWorkshifts_CheckedChanged(object sender, EventArgs e)
