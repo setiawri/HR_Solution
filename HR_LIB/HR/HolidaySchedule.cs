@@ -6,74 +6,68 @@ using LOGGING;
 
 namespace HR_LIB.HR
 {
-    public class BankAccount
+    public class HolidaySchedule
     {
         /*******************************************************************************************************/
         #region PUBLIC VARIABLES
 
         public Guid Id;
-        public string Name;
-        public Guid Owner_RefId;
-        public string BankName;
-        public string AccountNumber;
+        public DateTime StartDate;
+        public int DurationDays;
+        public string Description;
         public string Notes;
-
-        public string Clients_CompanyName;
-        public string UserAccounts_Fullname;
+        public bool Active;
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
         #region DATABASE FIELDS
 
         public const string COL_DB_Id = "Id";
-        public const string COL_DB_Name = "Name";
-        public const string COL_DB_Owner_RefId = "Owner_RefId";
-        public const string COL_DB_BankName = "BankName";
-        public const string COL_DB_AccountNumber = "AccountNumber";
+        public const string COL_DB_StartDate = "StartDate";
+        public const string COL_DB_DurationDays = "DurationDays";
+        public const string COL_DB_Description = "Description";
         public const string COL_DB_Notes = "Notes";
+        public const string COL_DB_Active = "Active";
 
-        public const string COL_Clients_CompanyName = "Clients_CompanyName";
-        public const string COL_UserAccounts_Fullname = "UserAccounts_Fullname";
+        public const string COL_FILTER_IncludeInactive = "FILTER_IncludeInactive";
 
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public BankAccount(Guid id)
+        public HolidaySchedule(Guid id)
         {
             DataRow row = get(id);
             Id = id;
-            Name = Util.wrapNullable<string>(row, COL_DB_Name);
-            Owner_RefId = Util.wrapNullable<Guid>(row, COL_DB_Owner_RefId);
-            BankName = Util.wrapNullable<string>(row, COL_DB_BankName);
-            AccountNumber = Util.wrapNullable<string>(row, COL_DB_AccountNumber);
+            StartDate = Util.wrapNullable<DateTime>(row, COL_DB_StartDate);
+            DurationDays = Util.wrapNullable<int>(row, COL_DB_DurationDays);
+            Description = Util.wrapNullable<string>(row, COL_DB_Description);
             Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
-
-            Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
-            UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
+            Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+            
         }
 
-        public BankAccount() { }
+        public HolidaySchedule() { }
 
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
         #region DATABASE METHODS
 
-        public static bool isCombinationExist(Guid? id, Guid owner_RefId, string accountNumber)
+        public static bool isCombinationExist(Guid? id, DateTime startDate, string description)
         {
             SqlQueryResult result = DBConnection.query(
                 QueryTypes.ExecuteNonQuery,
                 false, false, false, true, false,
-                "BankAccounts_iscombinationexist",
+                "HolidaySchedules_iscombinationexist",
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
-                    new SqlQueryParameter(COL_DB_Owner_RefId, SqlDbType.UniqueIdentifier, owner_RefId),
-                    new SqlQueryParameter(COL_DB_AccountNumber, SqlDbType.NVarChar, accountNumber)
+                    new SqlQueryParameter(COL_DB_StartDate, SqlDbType.DateTime, startDate),
+                    new SqlQueryParameter(COL_DB_Description, SqlDbType.NVarChar, description)
                 );
             return result.ValueBoolean;
         }
 
-        public static Guid add(Guid userAccountID, string name, Guid owner_RefId, string bankName, string accountNumber, string notes)
+        public static Guid add(Guid userAccountID, DateTime startDate, int durationDays, string description, string notes)
         {
             Guid id = Guid.NewGuid();
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
@@ -81,12 +75,11 @@ namespace HR_LIB.HR
                 SqlQueryResult result = DBConnection.query(
                     sqlConnection,
                     QueryTypes.ExecuteNonQuery,
-                    "BankAccounts_add",
+                    "HolidaySchedules_add",
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
-                    new SqlQueryParameter(COL_DB_Name, SqlDbType.NVarChar, name),
-                    new SqlQueryParameter(COL_DB_Owner_RefId, SqlDbType.UniqueIdentifier, owner_RefId),
-                    new SqlQueryParameter(COL_DB_BankName, SqlDbType.NVarChar, bankName),
-                    new SqlQueryParameter(COL_DB_AccountNumber, SqlDbType.NVarChar, accountNumber),
+                    new SqlQueryParameter(COL_DB_StartDate, SqlDbType.Date, startDate),
+                    new SqlQueryParameter(COL_DB_DurationDays, SqlDbType.Int, durationDays),
+                    new SqlQueryParameter(COL_DB_Description, SqlDbType.NVarChar, description),
                     new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                 );
 
@@ -97,32 +90,31 @@ namespace HR_LIB.HR
             return id;
         }
 
-        public static DataRow get(Guid id) { return Util.getFirstRow(get(id, null, null, null, null, null)); }
+        public static DataRow get(Guid id) { return Util.getFirstRow(get(false, id, null, null, null, null)); }
 
-        public static DataTable get(Guid? id, string name, Guid? owner_RefId, string bankName, string accountNumber, string notes)
+        public static DataTable get(bool filterIncludeInactive, Guid? id, DateTime? startDate, int? durationDays, string description, string notes)
         {
             SqlQueryResult result = DBConnection.query(
                 QueryTypes.FillByAdapter,
-                "BankAccounts_get",
+                "HolidaySchedules_get",
+                    new SqlQueryParameter(COL_FILTER_IncludeInactive, SqlDbType.Bit, filterIncludeInactive),
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
-                    new SqlQueryParameter(COL_DB_Name, SqlDbType.NVarChar, Util.wrapNullable(name)),
-                    new SqlQueryParameter(COL_DB_Owner_RefId, SqlDbType.UniqueIdentifier, Util.wrapNullable(owner_RefId)),
-                    new SqlQueryParameter(COL_DB_BankName, SqlDbType.NVarChar, Util.wrapNullable(bankName)),
-                    new SqlQueryParameter(COL_DB_AccountNumber, SqlDbType.NVarChar, Util.wrapNullable(accountNumber)),
+                    new SqlQueryParameter(COL_DB_StartDate, SqlDbType.Date, Util.wrapNullable(startDate)),
+                    new SqlQueryParameter(COL_DB_DurationDays, SqlDbType.Int, Util.wrapNullable(durationDays)),
+                    new SqlQueryParameter(COL_DB_Description, SqlDbType.NVarChar, Util.wrapNullable(description)),
                     new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                 );
             return result.Datatable;
         }
 
 
-        public static void update(Guid userAccountID, Guid id, string name, Guid owner_RefId, string bankName, string accountNumber, string notes)
+        public static void update(Guid userAccountID, Guid id, DateTime startDate, int durationDays, string description, string notes)
         {
-            BankAccount objOld = new BankAccount(id);
+            HolidaySchedule objOld = new HolidaySchedule(id);
             string log = "";
-            log = Util.appendChange(log, objOld.Name, name, "Name: '{0}' to '{1}'");
-            log = Util.appendChange(log, objOld.Owner_RefId, owner_RefId, "Owner Ref Id: '{0}' to '{1}'");
-            log = Util.appendChange(log, objOld.BankName, bankName, "BankName: '{0}' to '{1}'");
-            log = Util.appendChange(log, objOld.AccountNumber, accountNumber, "Account Number: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.StartDate, startDate, "StartDate: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.DurationDays, durationDays, "Owner Ref Id: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.Description, description, "Description: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Notes, notes, "Notes: '{0}' to '{1}'");
 
             if (string.IsNullOrEmpty(log))
@@ -134,12 +126,11 @@ namespace HR_LIB.HR
                     SqlQueryResult result = DBConnection.query(
                         sqlConnection,
                         QueryTypes.ExecuteNonQuery,
-                        "BankAccounts_update",
+                        "HolidaySchedules_update",
                         new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
-                        new SqlQueryParameter(COL_DB_Name, SqlDbType.NVarChar, name),
-                        new SqlQueryParameter(COL_DB_Owner_RefId, SqlDbType.UniqueIdentifier, owner_RefId),
-                        new SqlQueryParameter(COL_DB_BankName, SqlDbType.NVarChar, bankName),
-                        new SqlQueryParameter(COL_DB_AccountNumber, SqlDbType.NVarChar, accountNumber),
+                        new SqlQueryParameter(COL_DB_StartDate, SqlDbType.DateTime, startDate),
+                        new SqlQueryParameter(COL_DB_DurationDays, SqlDbType.Int, durationDays),
+                        new SqlQueryParameter(COL_DB_Description, SqlDbType.NVarChar, description),
                         new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                     );
 
@@ -149,20 +140,20 @@ namespace HR_LIB.HR
             }
         }
 
-
-        public static void delete(Guid userAccountID, Guid id)
+        public static void updateActiveStatus(Guid userAccountID, Guid id, bool value)
         {
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
             {
                 SqlQueryResult result = DBConnection.query(
                     sqlConnection,
                     QueryTypes.ExecuteNonQuery,
-                    "BankAccounts_delete",
-                    new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id)
+                    "HolidaySchedules_update_Active",
+                    new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
+                    new SqlQueryParameter(COL_DB_Active, SqlDbType.Bit, value)
                 );
 
                 if (result.IsSuccessful)
-                    ActivityLog.add(sqlConnection, userAccountID, id, String.Format("Deleted"));
+                    ActivityLog.add(sqlConnection, userAccountID, id, "Update Active Status to " + value);
             }
         }
 

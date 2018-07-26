@@ -1,6 +1,23 @@
 ﻿/**************************************************************************************************************************************************************/
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
+ALTER TABLE BankAccounts ADD Active bit 
+GO
+ALTER TABLE BankAccounts ADD Active bit NOT NULL DEFAULT 1
+GO
+
+
+CREATE TABLE [dbo].[HolidaySchedules] (
+	Id				uniqueidentifier not null,
+	StartDate		datetime not null,
+	DurationDays	int not null,
+	Description		nvarchar(max) not null,
+	Notes			nvarchar(max),
+	Active			bit not null default 1,
+    CONSTRAINT [PK_HolidaySchedules] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+GO
+
 
 
 
@@ -9,8 +26,128 @@
 
 
 /**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[HolidaySchedules_get]
+
+	@FILTER_IncludeInactive bit,
+	@Id uniqueidentifier = NULL,
+	@StartDate datetime = NULL,
+	@DurationDays int= NULL,
+	@Description nvarchar(max) = NULL,
+	@Notes nvarchar(MAX) = NULL
+
+AS
+
+BEGIN
+
+	SELECT HolidaySchedules.*
+	FROM HolidaySchedules 
+	WHERE 1=1
+		AND (@FILTER_IncludeInactive = 1 OR HolidaySchedules.Active = 1)
+		AND (@Id IS NULL OR HolidaySchedules.Id = @Id)
+		AND (@StartDate IS NULL OR CAST(HolidaySchedules.StartDate AS DATE) = CAST(@StartDate AS DATE))
+		AND (@DurationDays = 0 OR @DurationDays IS NULL OR HolidaySchedules.DurationDays = @DurationDays)
+		AND (@Description IS NULL OR HolidaySchedules.Description LIKE '%'+ @Description +'%')
+		AND (@Notes IS NULL OR HolidaySchedules.Notes LIKE '%'+ @Notes +'%')
+
+	ORDER BY HolidaySchedules.StartDate, HolidaySchedules.DurationDays
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[HolidaySchedules_iscombinationexist]
+
+	@Id uniqueidentifier = NULL,
+	@StartDate datetime,
+	@Description nvarchar(max),
+	@returnValueBoolean bit = 0 OUTPUT 
+
+AS
+
+BEGIN
+
+	IF EXISTS (	SELECT HolidaySchedules.Id 
+				FROM HolidaySchedules 
+				WHERE HolidaySchedules.StartDate = @StartDate
+					AND HolidaySchedules.Description = @Description		
+					AND (@Id IS NULL OR HolidaySchedules.Id <> @Id)
+				)
+		SET @returnValueBoolean = 1
+	ELSE
+		SET @returnValueBoolean = 0
+
+END
+GO
+
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[HolidaySchedules_add]
+
+	@Id uniqueidentifier,
+	@StartDate datetime,
+	@DurationDays int,
+	@Description nvarchar(max),
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+
+	INSERT INTO HolidaySchedules(Id,StartDate, DurationDays,Description,Notes) 
+	VALUES(@Id,CAST(@StartDate AS DATE),@DurationDays,@Description,@Notes)
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[HolidaySchedules_update]
+
+	@Id uniqueidentifier,
+	@StartDate datetime,
+	@DurationDays int,
+	@Description nvarchar(max),
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+
+	UPDATE HolidaySchedules SET
+		StartDate = @StartDate,
+		DurationDays = @DurationDays,
+		Description = @Description,
+		Notes = @Notes
+	WHERE Id = @Id 
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[HolidaySchedules_update_Active]
+
+	@Id uniqueidentifier,
+	@Active bit
+	
+AS
+
+BEGIN
+
+	UPDATE HolidaySchedules SET
+		Active = @Active
+	WHERE Id = @Id
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[BankAccounts_get]
 
+	@FILTER_IncludeInactive bit,
 	@Id uniqueidentifier = NULL,
 	@Name NVARCHAR(max) = NULL,
 	@Owner_RefId uniqueidentifier= NULL,
@@ -29,6 +166,7 @@ BEGIN
 		LEFT OUTER JOIN Clients ON BankAccounts.Owner_RefId = Clients.Id
 		LEFT OUTER JOIN UserAccounts ON UserAccounts.Id = BankAccounts.Owner_RefId
 	WHERE 1=1
+		AND (@FILTER_IncludeInactive = 1 OR BankAccounts.Active = 1)
 		AND (@Id IS NULL OR BankAccounts.Id = @Id)
 		AND (@Name IS NULL OR BankAccounts.Name LIKE '%'+ @Name +'%')
 		AND (@Owner_RefId IS NULL OR BankAccounts.Owner_RefId = @Owner_RefId)
@@ -86,6 +224,8 @@ BEGIN
 	INSERT INTO BankAccounts(Id,Name, Owner_RefId,BankName, AccountNumber, Notes) 
 	VALUES(@Id,@Name,@Owner_RefId,@BankName,@AccountNumber,@Notes)
 
+	EXEC [dbo].[BankAccounts_update_Active]@Id,1
+
 END
 GO
 
@@ -116,27 +256,30 @@ END
 GO
 
 
-
 /**************************************************************************************************************************************************************/
-ALTER PROCEDURE [dbo].[BankAccounts_delete]
+CREATE PROCEDURE [dbo].[BankAccounts_update_Active]
 
-	@Id uniqueidentifier
+	@Id uniqueidentifier,
+	@Active bit
 	
 AS
 
 BEGIN
 
-	DELETE BankAccounts WHERE Id=@Id
+	UPDATE BankAccounts SET
+		Active = @Active
+	WHERE Id = @Id
+
+	UPDATE BankAccounts set
+		Active = 0
+	WHERE Owner_RefId IN (SELECT DISTINCT Owner_RefId FROM BankAccounts WHERE ID = @Id)
+	AND Id <> @Id
 
 END
 GO
 
-
-
-
-
 /**************************************************************************************************************************************************************/
-/**************************************************************************************************************************************************************/
+
 ALTER PROCEDURE [dbo].[WorkshiftTemplates_get]
 
 	@FILTER_IncludeInactive bit,

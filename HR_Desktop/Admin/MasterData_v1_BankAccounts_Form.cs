@@ -49,7 +49,7 @@ namespace HR_Desktop.Admin
 
         protected override void setupFields()
         {
-            setColumnsDataPropertyNames(BankAccount.COL_DB_Id, null, null, null, null, null);
+            setColumnsDataPropertyNames(BankAccount.COL_DB_Id, BankAccount.COL_DB_Active, null, null, null, null);
 
             col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, BankAccount.COL_DB_Name, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Owner_Clients = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Owner_Clients", rbClient.Text, BankAccount.COL_Clients_CompanyName, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
@@ -58,8 +58,6 @@ namespace HR_Desktop.Admin
             col_dgv_AccountNumber = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_AccountNumber", itxt_AccountNumber.LabelText, BankAccount.COL_DB_AccountNumber, true, true, "", true, false, 70, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, BankAccount.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            disableFieldActive();
         }
 
         protected override void additionalSettings() { }
@@ -83,7 +81,8 @@ namespace HR_Desktop.Admin
         protected override System.Data.DataView loadGridviewDataSource()
         {
 
-            return BankAccount.get(null,
+            return BankAccount.get(chkIncludeInactive.Checked,
+                    null,
                     itxt_Name.ValueText,
                     itxt_Owner_Ref.ValueGuid,
                     itxt_BankName.ValueText,
@@ -121,6 +120,11 @@ namespace HR_Desktop.Admin
                 itxt_AccountNumber.ValueText,
                 itxt_Notes.ValueText
                 );
+        }
+
+        protected override void updateActiveStatus(Guid id, Boolean activeStatus)
+        {
+            BankAccount.updateActiveStatus(UserAccount.LoggedInAccount.Id, id, activeStatus);
         }
 
         protected override void add()
@@ -178,12 +182,6 @@ namespace HR_Desktop.Admin
         protected override void btnUpdate_Click(object sender, EventArgs e)
         {
             base.btnUpdate_Click(sender, e);
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            BankAccount.delete(UserAccount.LoggedInAccount.Id, selectedRowID());
-            populateGridViewDataSource(true);
         }
 
         private void itxt_Owner_Ref_isBrowseMode_Clicked(object sender, EventArgs e)

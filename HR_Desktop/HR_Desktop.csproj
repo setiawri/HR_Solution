@@ -57,6 +57,12 @@
     <Compile Include="Admin\MasterData_v1_Attendances_Form.Designer.cs">
       <DependentUpon>MasterData_v1_Attendances_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\MasterData_v1_HolidaySchedules_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\MasterData_v1_HolidaySchedules_Form.Designer.cs">
+      <DependentUpon>MasterData_v1_HolidaySchedules_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\MasterData_v1_Clients_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\MasterData_v1_Attendances_Form.resx">
       <DependentUpon>MasterData_v1_Attendances_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\MasterData_v1_HolidaySchedules_Form.resx">
+      <DependentUpon>MasterData_v1_HolidaySchedules_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\MasterData_v1_Clients_Form.resx">
       <DependentUpon>MasterData_v1_Clients_Form.cs</DependentUpon>
