@@ -50,19 +50,22 @@ namespace HR_LIB.HR
         public Client(Guid id)
         {
             DataRow row = get(id);
-
-            Id = id;
-            CompanyName = Util.wrapNullable<string>(row, COL_DB_CompanyName);
-            Address = Util.wrapNullable<string>(row, COL_DB_Address);
-            BillingAddress = Util.wrapNullable<string>(row, COL_DB_BillingAddress);
-            ContactPersonName = Util.wrapNullable<string>(row, COL_DB_ContactPersonName);
-            Phone1 = Util.wrapNullable<string>(row, COL_DB_Phone1);
-            Phone2 = Util.wrapNullable<string>(row, COL_DB_Phone2);
-            NPWP = Util.wrapNullable<string>(row, COL_DB_NPWP);
-            NPWPAddress = Util.wrapNullable<string>(row, COL_DB_NPWPAddress);
-            Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
-            Active = Util.wrapNullable<bool>(row, COL_DB_Active);
-
+            
+            if(row != null)
+            {
+                Id = id;
+                CompanyName = Util.wrapNullable<string>(row, COL_DB_CompanyName);
+                Address = Util.wrapNullable<string>(row, COL_DB_Address);
+                BillingAddress = Util.wrapNullable<string>(row, COL_DB_BillingAddress);
+                ContactPersonName = Util.wrapNullable<string>(row, COL_DB_ContactPersonName);
+                Phone1 = Util.wrapNullable<string>(row, COL_DB_Phone1);
+                Phone2 = Util.wrapNullable<string>(row, COL_DB_Phone2);
+                NPWP = Util.wrapNullable<string>(row, COL_DB_NPWP);
+                NPWPAddress = Util.wrapNullable<string>(row, COL_DB_NPWPAddress);
+                Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
+                Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+            }
+            return;
         }
 
         public Client() { }

@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using LIBUtil;
 using LOGGING;
+using LOGIN;
 
 namespace HR_LIB.HR
 {
@@ -47,16 +48,21 @@ namespace HR_LIB.HR
         public BankAccount(Guid id)
         {
             DataRow row = get(id);
-            Id = id;
-            Name = Util.wrapNullable<string>(row, COL_DB_Name);
-            Owner_RefId = Util.wrapNullable<Guid>(row, COL_DB_Owner_RefId);
-            BankName = Util.wrapNullable<string>(row, COL_DB_BankName);
-            AccountNumber = Util.wrapNullable<string>(row, COL_DB_AccountNumber);
-            Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
-            Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+            if (row != null)
+            {
+                Id = id;
+                Name = Util.wrapNullable<string>(row, COL_DB_Name);
+                Owner_RefId = Util.wrapNullable<Guid>(row, COL_DB_Owner_RefId);
+                BankName = Util.wrapNullable<string>(row, COL_DB_BankName);
+                AccountNumber = Util.wrapNullable<string>(row, COL_DB_AccountNumber);
+                Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
+                Active = Util.wrapNullable<bool>(row, COL_DB_Active);
 
-            Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
-            UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
+                Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
+                UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
+            }
+            return;
+            
         }
 
         public BankAccount() { }
@@ -126,10 +132,14 @@ namespace HR_LIB.HR
             BankAccount objOld = new BankAccount(id);
             string log = "";
             log = Util.appendChange(log, objOld.Name, name, "Name: '{0}' to '{1}'");
-            log = Util.appendChange(log, objOld.Owner_RefId, owner_RefId, "Owner Ref Id: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.BankName, bankName, "BankName: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.AccountNumber, accountNumber, "Account Number: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Notes, notes, "Notes: '{0}' to '{1}'");
+            if (new Client(owner_RefId).CompanyName != null)
+                log = Util.appendChange(log, objOld.Clients_CompanyName, new Client(owner_RefId).CompanyName, "Owner: '{0}' to '{1}'");
+            else
+                log = Util.appendChange(log, objOld.UserAccounts_Fullname, new UserAccount(owner_RefId).Fullname, "Owner: '{0}' to '{1}'");
+
 
             if (string.IsNullOrEmpty(log))
                 Util.displayMessageBoxError("No changes to record");

@@ -66,23 +66,27 @@ namespace HR_LIB.HR
         {
             DataRow row = get(id);
 
-            Id = id;
-            UserAccounts_Id = Util.wrapNullable<Guid>(row, COL_DB_UserAccounts_Id);
-            TimestampIn = Util.wrapNullable<DateTime>(row, COL_DB_TimestampIn);
-            TimestampOut = Util.wrapNullable<DateTime>(row, COL_DB_TimestampOut);
-            Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
-            Flag1 = Util.wrapNullable<bool>(row, COL_DB_Flag1);
-            Flag2 = Util.wrapNullable<bool>(row, COL_DB_Flag2);
-            Approved = Util.wrapNullable<bool>(row, COL_DB_Approved);
-            Clients_Id = Util.wrapNullable<Guid>(row, COL_DB_Clients_Id);
-            Workshifts_DayOfWeek = Util.parseEnum<DayOfWeek>(Util.wrapNullable<int>(row, COL_DB_Workshifts_DayOfWeek));
-            Workshifts_Start = Util.wrapNullable<TimeSpan>(row, COL_DB_Workshifts_Start);
-            Workshifts_DurationMinutes = Util.wrapNullable<int>(row, COL_DB_Workshifts_DurationMinutes);
-            EffectiveTimestampIn = Util.wrapNullable<DateTime>(row, COL_DB_EffectiveTimestampIn);
-            EffectiveTimestampOut = Util.wrapNullable<DateTime>(row, COL_DB_EffectiveTimestampOut);
-            Rejected = Util.wrapNullable<bool>(row, COL_DB_Rejected);
+            if(row != null)
+            {
+                Id = id;
+                UserAccounts_Id = Util.wrapNullable<Guid>(row, COL_DB_UserAccounts_Id);
+                TimestampIn = Util.wrapNullable<DateTime>(row, COL_DB_TimestampIn);
+                TimestampOut = Util.wrapNullable<DateTime>(row, COL_DB_TimestampOut);
+                Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
+                Flag1 = Util.wrapNullable<bool>(row, COL_DB_Flag1);
+                Flag2 = Util.wrapNullable<bool>(row, COL_DB_Flag2);
+                Approved = Util.wrapNullable<bool>(row, COL_DB_Approved);
+                Clients_Id = Util.wrapNullable<Guid>(row, COL_DB_Clients_Id);
+                Workshifts_DayOfWeek = Util.parseEnum<DayOfWeek>(Util.wrapNullable<int>(row, COL_DB_Workshifts_DayOfWeek));
+                Workshifts_Start = Util.wrapNullable<TimeSpan>(row, COL_DB_Workshifts_Start);
+                Workshifts_DurationMinutes = Util.wrapNullable<int>(row, COL_DB_Workshifts_DurationMinutes);
+                EffectiveTimestampIn = Util.wrapNullable<DateTime>(row, COL_DB_EffectiveTimestampIn);
+                EffectiveTimestampOut = Util.wrapNullable<DateTime>(row, COL_DB_EffectiveTimestampOut);
+                Rejected = Util.wrapNullable<bool>(row, COL_DB_Rejected);
 
-            UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
+                UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
+            }
+            return;
         }
 
         public Attendance() { }

@@ -130,11 +130,6 @@
     <Compile Include="LOGIN\MasterData_v1_UserAccounts_Form.Designer.cs">
       <DependentUpon>MasterData_v1_UserAccounts_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="LOGIN\UserAccount.cs" />
-    <Compile Include="LOGIN\UserAccountAccess.cs" />
-    <Compile Include="LOGIN\UserAccountAccessRoleAssignment.cs" />
-    <Compile Include="LOGIN\UserAccountRole.cs" />
-    <Compile Include="LOGIN\UserAccountRoleAssignment.cs" />
     <Compile Include="LOGIN\UserAccounts_Update_Password_Form.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,22 +1,12 @@
 ﻿/**************************************************************************************************************************************************************/
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
-ALTER TABLE BankAccounts ADD Active bit 
+
+ALTER TABLE HolidaySchedules ADD Clients_Id uniqueidentifier 
 GO
-ALTER TABLE BankAccounts ADD Active bit NOT NULL DEFAULT 1
+ALTER TABLE HolidaySchedules ALTER COLUMN Clients_Id uniqueidentifier NOT NULL
 GO
 
-
-CREATE TABLE [dbo].[HolidaySchedules] (
-	Id				uniqueidentifier not null,
-	StartDate		datetime not null,
-	DurationDays	int not null,
-	Description		nvarchar(max) not null,
-	Notes			nvarchar(max),
-	Active			bit not null default 1,
-    CONSTRAINT [PK_HolidaySchedules] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-GO
 
 
 
@@ -26,10 +16,11 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[HolidaySchedules_get]
+ALTER PROCEDURE [dbo].[HolidaySchedules_get]
 
 	@FILTER_IncludeInactive bit,
 	@Id uniqueidentifier = NULL,
+	@Clients_Id uniqueidentifier = NULL,
 	@StartDate datetime = NULL,
 	@DurationDays int= NULL,
 	@Description nvarchar(max) = NULL,
@@ -39,26 +30,28 @@ AS
 
 BEGIN
 
-	SELECT HolidaySchedules.*
+	SELECT HolidaySchedules.* , Clients.CompanyName AS Clients_CompanyName
 	FROM HolidaySchedules 
+		LEFT JOIN Clients ON HolidaySchedules.Clients_Id = Clients.Id
 	WHERE 1=1
 		AND (@FILTER_IncludeInactive = 1 OR HolidaySchedules.Active = 1)
 		AND (@Id IS NULL OR HolidaySchedules.Id = @Id)
+		AND (@Clients_Id IS NULL OR HolidaySchedules.Clients_Id = @Clients_Id)
 		AND (@StartDate IS NULL OR CAST(HolidaySchedules.StartDate AS DATE) = CAST(@StartDate AS DATE))
 		AND (@DurationDays = 0 OR @DurationDays IS NULL OR HolidaySchedules.DurationDays = @DurationDays)
 		AND (@Description IS NULL OR HolidaySchedules.Description LIKE '%'+ @Description +'%')
 		AND (@Notes IS NULL OR HolidaySchedules.Notes LIKE '%'+ @Notes +'%')
 
-	ORDER BY HolidaySchedules.StartDate, HolidaySchedules.DurationDays
+	ORDER BY Clients.CompanyName, HolidaySchedules.StartDate, HolidaySchedules.DurationDays
 
 END
 GO
 
-
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[HolidaySchedules_iscombinationexist]
+ALTER PROCEDURE [dbo].[HolidaySchedules_iscombinationexist]
 
 	@Id uniqueidentifier = NULL,
+	@Clients_Id uniqueidentifier,
 	@StartDate datetime,
 	@Description nvarchar(max),
 	@returnValueBoolean bit = 0 OUTPUT 
@@ -69,7 +62,8 @@ BEGIN
 
 	IF EXISTS (	SELECT HolidaySchedules.Id 
 				FROM HolidaySchedules 
-				WHERE HolidaySchedules.StartDate = @StartDate
+				WHERE HolidaySchedules.Clients_Id = @Clients_Id
+					AND HolidaySchedules.StartDate = @StartDate
 					AND HolidaySchedules.Description = @Description		
 					AND (@Id IS NULL OR HolidaySchedules.Id <> @Id)
 				)
@@ -83,9 +77,10 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[HolidaySchedules_add]
+ALTER PROCEDURE [dbo].[HolidaySchedules_add]
 
 	@Id uniqueidentifier,
+	@Clients_Id uniqueidentifier,
 	@StartDate datetime,
 	@DurationDays int,
 	@Description nvarchar(max),
@@ -95,15 +90,15 @@ AS
 
 BEGIN
 
-	INSERT INTO HolidaySchedules(Id,StartDate, DurationDays,Description,Notes) 
-	VALUES(@Id,CAST(@StartDate AS DATE),@DurationDays,@Description,@Notes)
+	INSERT INTO HolidaySchedules(Id,Clients_Id,StartDate, DurationDays,Description,Notes) 
+	VALUES(@Id,@Clients_Id,CAST(@StartDate AS DATE),@DurationDays,@Description,@Notes)
 
 END
 GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[HolidaySchedules_update]
+ALTER PROCEDURE [dbo].[HolidaySchedules_update]
 
 	@Id uniqueidentifier,
 	@StartDate datetime,
@@ -127,7 +122,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[HolidaySchedules_update_Active]
+ALTER PROCEDURE [dbo].[HolidaySchedules_update_Active]
 
 	@Id uniqueidentifier,
 	@Active bit

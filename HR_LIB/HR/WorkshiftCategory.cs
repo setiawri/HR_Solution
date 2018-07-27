@@ -40,10 +40,16 @@ namespace HR_LIB.HR
             else
                 row = get(sqlConnection, id);
 
-            Id = id;
-            Name = Util.wrapNullable<string>(row, COL_DB_Name);
-            Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
-            Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+
+            if(row != null)
+            {
+
+                Id = id;
+                Name = Util.wrapNullable<string>(row, COL_DB_Name);
+                Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
+                Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+            }
+            return;
         }
 
         public WorkshiftCategory() { }

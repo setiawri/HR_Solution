@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using LIBUtil;
 using LOGGING;
+using LOGIN;
 
 namespace HR_LIB.HR
 {
@@ -57,20 +58,26 @@ namespace HR_LIB.HR
         public Workshift(Guid id)
         {
             DataRow row = get(id);
-            Id = id;
-            Name = Util.wrapNullable<string>(row, COL_DB_Name);
-            Clients_Id = Util.wrapNullable<Guid>(row, COL_DB_Clients_Id);
-            UserAccounts_Id = Util.wrapNullable<Guid>(row, COL_DB_UserAccounts_Id);
-            WorkshiftCategories_Id = Util.wrapNullable<Guid>(row, COL_DB_WorkshiftCategories_Id);
-            DayOfWeek = Util.parseEnum<DayOfWeek>(Util.wrapNullable<int>(row, COL_DB_DayOfWeek));
-            Start = Util.wrapNullable<TimeSpan>(row, COL_DB_Start);
-            DurationMinutes = Util.wrapNullable<int>(row, COL_DB_DurationMinutes);
-            Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
-            Active = Util.wrapNullable<bool>(row, COL_DB_Active);
 
-            Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
-            UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
-            WorkshiftCategories_Name = Util.wrapNullable<string>(row, COL_WorkshiftCategories_Name);
+            if(row != null)
+            {
+                Id = id;
+                Name = Util.wrapNullable<string>(row, COL_DB_Name);
+                Clients_Id = Util.wrapNullable<Guid>(row, COL_DB_Clients_Id);
+                UserAccounts_Id = Util.wrapNullable<Guid>(row, COL_DB_UserAccounts_Id);
+                WorkshiftCategories_Id = Util.wrapNullable<Guid>(row, COL_DB_WorkshiftCategories_Id);
+                DayOfWeek = Util.parseEnum<DayOfWeek>(Util.wrapNullable<int>(row, COL_DB_DayOfWeek));
+                Start = Util.wrapNullable<TimeSpan>(row, COL_DB_Start);
+                DurationMinutes = Util.wrapNullable<int>(row, COL_DB_DurationMinutes);
+                Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
+                Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+
+                Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
+                UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
+                WorkshiftCategories_Name = Util.wrapNullable<string>(row, COL_WorkshiftCategories_Name);
+            }
+            return;
+            
         }
 
         public Workshift() { }
@@ -163,7 +170,8 @@ namespace HR_LIB.HR
             Workshift objOld = new Workshift(id);
             string log = "";
             log = Util.appendChange(log, objOld.Name, name, "Name: '{0}' to '{1}'");
-            log = Util.appendChange(log, objOld.WorkshiftCategories_Id, WorkshiftCategories_Id, "WorkshiftCategories_Id: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.WorkshiftCategories_Name, new WorkshiftCategory(WorkshiftCategories_Id).Name, "WorkshiftCategories_Name: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.UserAccounts_Fullname, new UserAccount(UserAccounts_Id).Fullname, "UserAccounts_Fullname: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.DayOfWeek, dayOfWeek, "Day of week: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Start.ToString(@"h\:mm"), start, "Start: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.DurationMinutes, durationMinutes, "Duration Minutes: '{0}' to '{1}'");
