@@ -379,7 +379,7 @@
             0,
             0});
             this.itxt_Height.LabelText = "Height";
-            this.itxt_Height.Location = new System.Drawing.Point(120, 86);
+            this.itxt_Height.Location = new System.Drawing.Point(120, 87);
             this.itxt_Height.MaximumValue = new decimal(new int[] {
             100,
             0,

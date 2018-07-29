@@ -76,8 +76,8 @@
             // 
             // scInputLeft.Panel1
             // 
-            this.scInputLeft.Panel1.Controls.Add(this.itxt_UserAccounts);
             this.scInputLeft.Panel1.Controls.Add(this.gb_Template);
+            this.scInputLeft.Panel1.Controls.Add(this.itxt_UserAccounts);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Name);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Clients);
             // 
@@ -268,7 +268,7 @@
             // 
             this.gb_Template.Controls.Add(this.itxt_WorkshiftTemplate);
             this.gb_Template.Enabled = false;
-            this.gb_Template.Location = new System.Drawing.Point(4, 49);
+            this.gb_Template.Location = new System.Drawing.Point(4, 51);
             this.gb_Template.Name = "gb_Template";
             this.gb_Template.Padding = new System.Windows.Forms.Padding(5, 3, 5, 5);
             this.gb_Template.Size = new System.Drawing.Size(241, 42);
@@ -320,7 +320,7 @@
             this.ClientSize = new System.Drawing.Size(567, 609);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MasterData_v1_Workshifts_Form";
-            this.Text = "Workshifts";
+            this.Text = "WORKSHIFTS";
             this.panel1.ResumeLayout(false);
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);

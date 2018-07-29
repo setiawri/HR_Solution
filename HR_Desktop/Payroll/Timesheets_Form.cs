@@ -57,12 +57,14 @@ namespace HR_Desktop.Payroll
             col_dgvEmployees_UserAccounts_Id.DataPropertyName = Workshift.COL_DB_UserAccounts_Id;
             col_dgvEmployees_UserAccounts_Fullname.DataPropertyName = Workshift.COL_UserAccounts_Fullname;
             col_dgvEmployees_Clients_Id.DataPropertyName = Workshift.COL_DB_Clients_Id;
-            col_dgvEmployees_Clients_CompanyName.DataPropertyName = Workshift.COL_Clients_CompanyName;
 
             dgvAttendance.AutoGenerateColumns = false;
             col_dgvAttendance_Id.DataPropertyName = Attendance.COL_DB_Id;
             col_dgvAttendance_In.DataPropertyName = Attendance.COL_DB_TimestampIn;
             col_dgvAttendance_Out.DataPropertyName = Attendance.COL_DB_TimestampOut;
+            col_dgvAttendance_EffectiveIn.DataPropertyName = Attendance.COL_DB_EffectiveTimestampIn;
+            col_dgvAttendance_EffectiveOut.DataPropertyName = Attendance.COL_DB_EffectiveTimestampOut;
+            col_dgvAttendances_EffectiveWorkHours.DataPropertyName = Attendance.COL_EffectiveWorkHours;
             col_dgvAttendance_Flag1.DataPropertyName = Attendance.COL_DB_Flag1;
             col_dgvAttendance_Flag2.DataPropertyName = Attendance.COL_DB_Flag2;
             col_dgvAttendance_Approved.DataPropertyName = Attendance.COL_DB_Approved;
@@ -81,10 +83,16 @@ namespace HR_Desktop.Payroll
         {
             if (isValidToPopulateData())
             {
-                if(chkFilterEmployeesByClient.Checked)
+                pnlFilterAttendance.Enabled = false;
+                dgvAttendance.DataSource = null;
+
+                if (chkFilterEmployeesByClient.Checked)
                     Util.setGridviewDataSource(dgvEmployees, true, true, Workshift.getEmployeeByClientOrName(itxt_FilterEmployee_Client.ValueGuid, idtp_FilterEmployee_StartDate.ValueAsStartDateFilter, idtp_FilterEmployee_EndDate.ValueAsEndDateFilter,null));
                 else if(chkFilterEmployeeByName.Checked)
                     Util.setGridviewDataSource(dgvEmployees, true, true, Workshift.getEmployeeByClientOrName(null, null, null, itxt_FilterEmployee_UserAccounts_Name.ValueText));
+
+                if(dgvEmployees.Rows.Count > 0)
+                    populateDgvAttendance();
             }
         }
 
@@ -95,17 +103,21 @@ namespace HR_Desktop.Payroll
 
         private void populateDgvAttendance()
         {
-            Util.setGridviewDataSource(dgvAttendance, true, true, 
-                Attendance.get(
-                    null,
-                    (Guid)Util.getSelectedRowValue(dgvEmployees, col_dgvEmployees_UserAccounts_Id), 
-                    Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue), 
-                    idtp_FilterAttendance_StartDate.ValueAsStartDateFilter,
-                    idtp_FilterAttendance_EndDate.ValueAsEndDateFilter,
-                    idtp_FilterAttendance_In.ValueTimeSpan, 
-                    idtp_FilterAttendance_Out.ValueTimeSpan, 
-                    null
-                ));
+            if (dgvEmployees.Rows.Count > 0)
+            {
+                pnlFilterAttendance.Enabled = true;
+                Util.setGridviewDataSource(dgvAttendance, true, true,
+                    Attendance.get(
+                        null,
+                        (Guid)Util.getSelectedRowValue(dgvEmployees, col_dgvEmployees_UserAccounts_Id),
+                        Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
+                        idtp_FilterAttendance_StartDate.ValueAsStartDateFilter,
+                        idtp_FilterAttendance_EndDate.ValueAsEndDateFilter,
+                        idtp_FilterAttendance_In.ValueTimeSpan,
+                        idtp_FilterAttendance_Out.ValueTimeSpan,
+                        null
+                    ));
+            }
         }
 
         private void resetData()
@@ -120,7 +132,6 @@ namespace HR_Desktop.Payroll
         private void Form_Load(object sender, EventArgs e)
         {
             setupControls();
-            populateData();
         }
 
         private void chkFilterEmployees_CheckedChanged(object sender, EventArgs e)
@@ -136,19 +147,7 @@ namespace HR_Desktop.Payroll
 
             itxt_FilterEmployee_UserAccounts_Name.Enabled = chkFilterEmployeeByName.Checked;
         }
-
-        private void dgvEmployees_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (Util.isColumnMatch(sender, e, col_dgvEmployees_UserAccounts_Fullname))
-            {
-                pnlFilterAttendance.Enabled = true;
-                iddl_DayOfWeek.reset();
-                idtp_FilterAttendance_In.reset();
-                idtp_FilterAttendance_Out.reset();
-                populateDgvAttendance();
-            }
-        }
-
+        
         private void itxt_Client_isBrowseMode_Clicked(object sender, EventArgs e)
         {
             LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse, null), ref sender);
@@ -226,7 +225,15 @@ namespace HR_Desktop.Payroll
             idtp_EffectiveTimestampOut.Value = idtp_TimestampOut.Value;
         }
 
-        
+        private void dgvEmployees_SelectionChanged(object sender, EventArgs e)
+        {
+            iddl_DayOfWeek.reset();
+            idtp_FilterAttendance_In.reset();
+            idtp_FilterAttendance_Out.reset();
+            populateDgvAttendance();
+        }
+
+
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
     }

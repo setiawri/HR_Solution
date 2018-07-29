@@ -148,7 +148,7 @@
             this.ClientSize = new System.Drawing.Size(330, 528);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MasterData_v1_AttendanceStatuses_Form";
-            this.Text = "Attendance Statuses";
+            this.Text = "ATTENDANCE STATUS";
             this.panel1.ResumeLayout(false);
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);

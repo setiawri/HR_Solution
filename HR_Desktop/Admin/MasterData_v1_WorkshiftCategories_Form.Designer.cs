@@ -120,7 +120,7 @@
             this.itxt_Name.RowCount = 1;
             this.itxt_Name.ShowDeleteButton = false;
             this.itxt_Name.ShowTextboxOnly = false;
-            this.itxt_Name.Size = new System.Drawing.Size(239, 41);
+            this.itxt_Name.Size = new System.Drawing.Size(237, 41);
             this.itxt_Name.TabIndex = 7;
             this.itxt_Name.ValueText = "";
             // 
@@ -148,7 +148,7 @@
             this.ClientSize = new System.Drawing.Size(330, 528);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MasterData_v1_WorkshiftCategories_Form";
-            this.Text = "Workshift Categories";
+            this.Text = "WORKSHIFT CATEGORIES";
             this.panel1.ResumeLayout(false);
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);

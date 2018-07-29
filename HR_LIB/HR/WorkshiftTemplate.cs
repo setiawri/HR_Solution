@@ -53,18 +53,21 @@ namespace HR_LIB.HR
         public WorkshiftTemplate(Guid id)
         {
             DataRow row = get(id);
-            Id = id;
-            Name = Util.wrapNullable<string>(row, COL_DB_Name);
-            Clients_Id = Util.wrapNullable<Guid>(row, COL_DB_Clients_Id);
-            WorkshiftCategories_Id = Util.wrapNullable<Guid>(row, COL_DB_WorkshiftCategories_Id);
-            DayOfWeek = Util.parseEnum<DayOfWeek>(Util.wrapNullable<int>(row, COL_DB_DayOfWeek));
-            Start = Util.wrapNullable<TimeSpan>(row, COL_DB_Start);
-            DurationMinutes = Util.wrapNullable<int>(row, COL_DB_DurationMinutes);
-            Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
-            Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+            if(row != null)
+            {
+                Id = id;
+                Name = Util.wrapNullable<string>(row, COL_DB_Name);
+                Clients_Id = Util.wrapNullable<Guid>(row, COL_DB_Clients_Id);
+                WorkshiftCategories_Id = Util.wrapNullable<Guid>(row, COL_DB_WorkshiftCategories_Id);
+                DayOfWeek = Util.parseEnum<DayOfWeek>(Util.wrapNullable<int>(row, COL_DB_DayOfWeek));
+                Start = Util.wrapNullable<TimeSpan>(row, COL_DB_Start);
+                DurationMinutes = Util.wrapNullable<int>(row, COL_DB_DurationMinutes);
+                Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
+                Active = Util.wrapNullable<bool>(row, COL_DB_Active);
 
-            Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
-            WorkshiftCategories_Name = Util.wrapNullable<string>(row, COL_WorkshiftCategories_Name);
+                Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
+                WorkshiftCategories_Name = Util.wrapNullable<string>(row, COL_WorkshiftCategories_Name);
+            }
         }
 
         public WorkshiftTemplate() { }
@@ -141,7 +144,7 @@ namespace HR_LIB.HR
             WorkshiftTemplate objOld = new WorkshiftTemplate(id);
             string log = "";
             log = Util.appendChange(log, objOld.Name, name, "Name: '{0}' to '{1}'");
-            log = Util.appendChange(log, objOld.WorkshiftCategories_Id, WorkshiftCategories_Id, "WorkshiftCategories_Id: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.WorkshiftCategories_Name, new WorkshiftCategory(WorkshiftCategories_Id).Name, "Workshift Category: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.DayOfWeek, dayOfWeek, "Day of week: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Start.ToString(@"h\:mm"), start, "Start: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.DurationMinutes, durationMinutes, "Duration Minutes: '{0}' to '{1}'");

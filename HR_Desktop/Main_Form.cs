@@ -135,9 +135,19 @@ namespace HR_Desktop
             LIBUtil.Util.displayMDIChild(new Admin.UserAccounts_Profile_Form());
         }
 
-        private void bankAccountToolStripMenuItem_Click(object sender, EventArgs e)
+        private void admin_bankaccounts_Click(object sender, EventArgs e)
         {
             LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_BankAccounts_Form());
+        }
+
+        private void admin_holidayschedules_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_HolidaySchedules_Form());
+        }
+
+        private void lnk_Timesheets_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Payroll.Timesheets_Form());
         }
 
 

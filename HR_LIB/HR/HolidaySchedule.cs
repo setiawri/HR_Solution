@@ -6,62 +6,79 @@ using LOGGING;
 
 namespace HR_LIB.HR
 {
-    public class AttendanceStatus
+    public class HolidaySchedule
     {
         /*******************************************************************************************************/
         #region PUBLIC VARIABLES
 
         public Guid Id;
-        public string Name = "";
-        public string Notes = "";
+        public Guid Clients_Id;
+        public DateTime StartDate;
+        public int DurationDays;
+        public string Description;
+        public string Notes;
         public bool Active;
+
+        public string Clients_CompanyName;
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
         #region DATABASE FIELDS
 
         public const string COL_DB_Id = "Id";
-        public const string COL_DB_Name = "Name";
+        public const string COL_DB_Clients_Id = "Clients_Id";
+        public const string COL_DB_StartDate = "StartDate";
+        public const string COL_DB_DurationDays = "DurationDays";
+        public const string COL_DB_Description = "Description";
         public const string COL_DB_Notes = "Notes";
         public const string COL_DB_Active = "Active";
 
         public const string COL_FILTER_IncludeInactive = "FILTER_IncludeInactive";
+        public const string COL_Clients_CompanyName = "Clients_CompanyName";
+
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
-            
-        public AttendanceStatus(Guid id)
+
+        public HolidaySchedule(Guid id)
         {
             DataRow row = get(id);
             if(row != null)
             {
                 Id = id;
-                Name = Util.wrapNullable<string>(row, COL_DB_Name);
+                Clients_Id = Util.wrapNullable<Guid>(row, COL_DB_Clients_Id);
+                StartDate = Util.wrapNullable<DateTime>(row, COL_DB_StartDate);
+                DurationDays = Util.wrapNullable<int>(row, COL_DB_DurationDays);
+                Description = Util.wrapNullable<string>(row, COL_DB_Description);
                 Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
                 Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+
+                Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
             }
         }
 
-        public AttendanceStatus() { }
+        public HolidaySchedule() { }
 
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
         #region DATABASE METHODS
 
-        public static bool isNameExist(Guid? id, string name)
+        public static bool isCombinationExist(Guid? id, Guid? Clients_Id, DateTime startDate, string description)
         {
             SqlQueryResult result = DBConnection.query(
                 QueryTypes.ExecuteNonQuery,
                 false, false, false, true, false,
-                "AttendanceStatuses_isexist_Name",
-                new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
-                new SqlQueryParameter(COL_DB_Name, SqlDbType.NVarChar, name)
+                "HolidaySchedules_iscombinationexist",
+                    new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
+                    new SqlQueryParameter(COL_DB_Clients_Id, SqlDbType.UniqueIdentifier, Clients_Id),
+                    new SqlQueryParameter(COL_DB_StartDate, SqlDbType.DateTime, startDate),
+                    new SqlQueryParameter(COL_DB_Description, SqlDbType.NVarChar, description)
                 );
             return result.ValueBoolean;
         }
 
-        public static Guid add(Guid userAccountID, string name, string notes)
+        public static Guid add(Guid userAccountID, Guid Clients_Id, DateTime startDate, int durationDays, string description, string notes)
         {
             Guid id = Guid.NewGuid();
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
@@ -69,52 +86,50 @@ namespace HR_LIB.HR
                 SqlQueryResult result = DBConnection.query(
                     sqlConnection,
                     QueryTypes.ExecuteNonQuery,
-                    "AttendanceStatuses_add",
+                    "HolidaySchedules_add",
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
-                    new SqlQueryParameter(COL_DB_Name, SqlDbType.NVarChar, name),
-                    new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, notes)
+                    new SqlQueryParameter(COL_DB_Clients_Id, SqlDbType.UniqueIdentifier, Clients_Id),
+                    new SqlQueryParameter(COL_DB_StartDate, SqlDbType.Date, startDate),
+                    new SqlQueryParameter(COL_DB_DurationDays, SqlDbType.Int, durationDays),
+                    new SqlQueryParameter(COL_DB_Description, SqlDbType.NVarChar, description),
+                    new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                 );
 
                 if (result.IsSuccessful)
                     ActivityLog.add(sqlConnection, userAccountID, id, "Added");
             }
+
             return id;
         }
 
-        public static DataRow get(SqlConnection sqlConnection, Guid id) { return Util.getFirstRow(get(sqlConnection, true, id, null, null)); }
-        public static DataRow get(Guid id)
-        {
-            DataRow row;
-            using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
-                row = Util.getFirstRow(get(sqlConnection, true, id, null, null));
-            return row;
-        }
-        public static DataTable get(bool filterIncludeInactive, Guid? id, string name, string notes)
-        {
-            DataTable datatable;
-            using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
-                datatable = get(sqlConnection, filterIncludeInactive, id, name, notes);
-            return datatable;
-        }
-        public static DataTable get(SqlConnection sqlConnection, bool filterIncludeInactive, Guid? id, string name, string notes)
+        public static DataRow get(Guid id) { return Util.getFirstRow(get(false, id, null, null, null, null, null)); }
+
+        public static DataTable get(bool filterIncludeInactive, Guid? id, Guid? Clients_Id, DateTime? startDate, int? durationDays, string description, string notes)
         {
             SqlQueryResult result = DBConnection.query(
                 QueryTypes.FillByAdapter,
-                "AttendanceStatuses_get",
+                "HolidaySchedules_get",
                     new SqlQueryParameter(COL_FILTER_IncludeInactive, SqlDbType.Bit, filterIncludeInactive),
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
-                    new SqlQueryParameter(COL_DB_Name, SqlDbType.NVarChar, Util.wrapNullable(name)),
+                    new SqlQueryParameter(COL_DB_Clients_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Clients_Id)),
+                    new SqlQueryParameter(COL_DB_StartDate, SqlDbType.Date, Util.wrapNullable(startDate)),
+                    new SqlQueryParameter(COL_DB_DurationDays, SqlDbType.Int, Util.wrapNullable(durationDays)),
+                    new SqlQueryParameter(COL_DB_Description, SqlDbType.NVarChar, Util.wrapNullable(description)),
                     new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                 );
             return result.Datatable;
         }
 
-        public static void update(Guid userAccountID, Guid id, string name, string notes)
+
+        public static void update(Guid userAccountID, Guid id, DateTime startDate, int durationDays, string description, string notes)
         {
-            AttendanceStatus objOld = new AttendanceStatus(id);
+            HolidaySchedule objOld = new HolidaySchedule(id);
             string log = "";
-            log = Util.appendChange(log, objOld.Name, name, "Name: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.StartDate, startDate, "StartDate: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.DurationDays, durationDays, "Duration Days: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.Description, description, "Description: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Notes, notes, "Notes: '{0}' to '{1}'");
+            
 
             if (string.IsNullOrEmpty(log))
                 Util.displayMessageBoxError("No changes to record");
@@ -125,10 +140,12 @@ namespace HR_LIB.HR
                     SqlQueryResult result = DBConnection.query(
                         sqlConnection,
                         QueryTypes.ExecuteNonQuery,
-                        "AttendanceStatuses_update",
+                        "HolidaySchedules_update",
                         new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
-                        new SqlQueryParameter(COL_DB_Name, SqlDbType.NVarChar, name),
-                        new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, notes)
+                        new SqlQueryParameter(COL_DB_StartDate, SqlDbType.DateTime, startDate),
+                        new SqlQueryParameter(COL_DB_DurationDays, SqlDbType.Int, durationDays),
+                        new SqlQueryParameter(COL_DB_Description, SqlDbType.NVarChar, description),
+                        new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                     );
 
                     if (result.IsSuccessful)
@@ -144,7 +161,7 @@ namespace HR_LIB.HR
                 SqlQueryResult result = DBConnection.query(
                     sqlConnection,
                     QueryTypes.ExecuteNonQuery,
-                    "AttendanceStatuses_update_Active",
+                    "HolidaySchedules_update_Active",
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
                     new SqlQueryParameter(COL_DB_Active, SqlDbType.Bit, value)
                 );
@@ -158,13 +175,9 @@ namespace HR_LIB.HR
         /*******************************************************************************************************/
         #region CLASS METHODS
 
-        public static void populateDropDownList(LIBUtil.Desktop.UserControls.InputControl_Dropdownlist dropdownlist, bool includeInactive)
-        {
-            dropdownlist.populate(get(includeInactive, null, null, null), COL_DB_Name, COL_DB_Id, null);
-        }
-
         #endregion CLASS METHODS
         /*******************************************************************************************************/
     }
 }
+
 

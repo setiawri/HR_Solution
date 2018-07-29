@@ -103,25 +103,28 @@ namespace LOGIN
         public UserAccount(Guid id)
         {
             DataRow row = get(id);
-            Id = Util.wrapNullable<Guid>(row, COL_DB_Id); 
-            Username = Util.wrapNullable<string>(row, COL_DB_Username);
-            HashedPassword = Util.wrapNullable<string>(row, COL_DB_HashedPassword);
-            Firstname = Util.wrapNullable<string>(row, COL_DB_Firstname);
-            Lastname = Util.wrapNullable<string>(row, COL_DB_Lastname);
-            Address1 = Util.wrapNullable<string>(row, COL_DB_Address1);
-            Address2 = Util.wrapNullable<string>(row, COL_DB_Address2);
-            Phone1 = Util.wrapNullable<string>(row, COL_DB_Phone1);
-            Phone2 = Util.wrapNullable<string>(row, COL_DB_Phone2);
-            Email = Util.wrapNullable<string>(row, COL_DB_Email);
-            Birthdate = Util.wrapNullable<DateTime?>(row, COL_DB_Birthdate);
-            Identification = Util.wrapNullable<string>(row, COL_DB_Identification);
-            Height = Util.wrapNullable<int>(row, COL_DB_Height);
-            Weight = Util.wrapNullable<int>(row, COL_DB_Weight);
-            Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
-            Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+            if(row != null)
+            {
+                Id = Util.wrapNullable<Guid>(row, COL_DB_Id);
+                Username = Util.wrapNullable<string>(row, COL_DB_Username);
+                HashedPassword = Util.wrapNullable<string>(row, COL_DB_HashedPassword);
+                Firstname = Util.wrapNullable<string>(row, COL_DB_Firstname);
+                Lastname = Util.wrapNullable<string>(row, COL_DB_Lastname);
+                Address1 = Util.wrapNullable<string>(row, COL_DB_Address1);
+                Address2 = Util.wrapNullable<string>(row, COL_DB_Address2);
+                Phone1 = Util.wrapNullable<string>(row, COL_DB_Phone1);
+                Phone2 = Util.wrapNullable<string>(row, COL_DB_Phone2);
+                Email = Util.wrapNullable<string>(row, COL_DB_Email);
+                Birthdate = Util.wrapNullable<DateTime?>(row, COL_DB_Birthdate);
+                Identification = Util.wrapNullable<string>(row, COL_DB_Identification);
+                Height = Util.wrapNullable<int>(row, COL_DB_Height);
+                Weight = Util.wrapNullable<int>(row, COL_DB_Weight);
+                Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
+                Active = Util.wrapNullable<bool>(row, COL_DB_Active);
 
-            Fullname = Util.wrapNullable<string>(row, COL_Fullname);
-            Special = Util.wrapNullable<bool>(row, COL_Special);
+                Fullname = Util.wrapNullable<string>(row, COL_Fullname);
+                Special = Util.wrapNullable<bool>(row, COL_Special);
+            }
         }
 
         #endregion CONSTRUCTOR METHODS
