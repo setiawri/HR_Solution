@@ -145,6 +145,11 @@ namespace HR_Desktop
             LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_HolidaySchedules_Form());
         }
 
+        private void lnk_Timesheets_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Payroll.Timesheets_Form());
+        }
+
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

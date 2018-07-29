@@ -57,18 +57,18 @@
             // 
             // panel1
             // 
-            this.panel1.Margin = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(685, 34);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(514, 28);
             // 
             // pnlActionButtons
             // 
-            this.pnlActionButtons.Location = new System.Drawing.Point(0, 252);
-            this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlActionButtons.Size = new System.Drawing.Size(685, 28);
+            this.pnlActionButtons.Location = new System.Drawing.Point(0, 227);
+            this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlActionButtons.Size = new System.Drawing.Size(514, 23);
             // 
             // scInputLeft
             // 
-            this.scInputLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.scInputLeft.Margin = new System.Windows.Forms.Padding(2);
             // 
             // scInputLeft.Panel1
             // 
@@ -82,36 +82,36 @@
             // scInputLeft.Panel2
             // 
             this.scInputLeft.Panel2.Controls.Add(this.itxt_Notes);
-            this.scInputLeft.Size = new System.Drawing.Size(500, 220);
-            this.scInputLeft.SplitterWidth = 4;
+            this.scInputLeft.Size = new System.Drawing.Size(500, 201);
+            this.scInputLeft.SplitterWidth = 3;
             // 
             // scInputRight
             // 
-            this.scInputRight.Margin = new System.Windows.Forms.Padding(5);
-            this.scInputRight.Size = new System.Drawing.Size(178, 220);
-            this.scInputRight.SplitterWidth = 7;
+            this.scInputRight.Margin = new System.Windows.Forms.Padding(4);
+            this.scInputRight.Size = new System.Drawing.Size(25, 201);
+            this.scInputRight.SplitterWidth = 5;
             // 
             // scMain
             // 
-            this.scMain.Margin = new System.Windows.Forms.Padding(5);
-            this.scMain.Size = new System.Drawing.Size(685, 750);
+            this.scMain.Margin = new System.Windows.Forms.Padding(4);
+            this.scMain.Size = new System.Drawing.Size(514, 609);
             this.scMain.SplitterDistance = 250;
-            this.scMain.SplitterWidth = 6;
+            this.scMain.SplitterWidth = 5;
             // 
             // txtQuickSearch
             // 
-            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(5);
+            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(4);
             // 
             // pnlButtons
             // 
-            this.pnlButtons.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlButtons.Size = new System.Drawing.Size(685, 32);
+            this.pnlButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlButtons.Size = new System.Drawing.Size(514, 26);
             // 
             // scInputContainer
             // 
-            this.scInputContainer.Margin = new System.Windows.Forms.Padding(5);
-            this.scInputContainer.Size = new System.Drawing.Size(685, 220);
-            this.scInputContainer.SplitterWidth = 7;
+            this.scInputContainer.Margin = new System.Windows.Forms.Padding(4);
+            this.scInputContainer.Size = new System.Drawing.Size(514, 201);
+            this.scInputContainer.SplitterWidth = 5;
             // 
             // btnLog
             // 
@@ -119,8 +119,8 @@
             // 
             // pnlQuickSearch
             // 
-            this.pnlQuickSearch.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlQuickSearch.Size = new System.Drawing.Size(645, 34);
+            this.pnlQuickSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlQuickSearch.Size = new System.Drawing.Size(484, 28);
             // 
             // iddl_DayOfWeek
             // 
@@ -128,29 +128,28 @@
             this.iddl_DayOfWeek.HideFilter = true;
             this.iddl_DayOfWeek.HideUpdateLink = true;
             this.iddl_DayOfWeek.LabelText = "*Day";
-            this.iddl_DayOfWeek.Location = new System.Drawing.Point(5, 176);
-            this.iddl_DayOfWeek.Margin = new System.Windows.Forms.Padding(5);
+            this.iddl_DayOfWeek.Location = new System.Drawing.Point(4, 131);
+            this.iddl_DayOfWeek.Margin = new System.Windows.Forms.Padding(4);
             this.iddl_DayOfWeek.Name = "iddl_DayOfWeek";
             this.iddl_DayOfWeek.SelectedItem = null;
             this.iddl_DayOfWeek.SelectedValue = null;
             this.iddl_DayOfWeek.ShowDropdownlistOnly = false;
-            this.iddl_DayOfWeek.Size = new System.Drawing.Size(121, 50);
+            this.iddl_DayOfWeek.Size = new System.Drawing.Size(91, 41);
             this.iddl_DayOfWeek.TabIndex = 0;
             // 
             // itxt_Notes
             // 
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
-            this.itxt_Notes.Location = new System.Drawing.Point(4, 6);
-            this.itxt_Notes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Notes.Location = new System.Drawing.Point(3, 5);
             this.itxt_Notes.MaxLength = 32767;
             this.itxt_Notes.MultiLine = true;
             this.itxt_Notes.Name = "itxt_Notes";
             this.itxt_Notes.PasswordChar = '\0';
-            this.itxt_Notes.RowCount = 3;
+            this.itxt_Notes.RowCount = 4;
             this.itxt_Notes.ShowDeleteButton = false;
             this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(321, 75);
+            this.itxt_Notes.Size = new System.Drawing.Size(241, 86);
             this.itxt_Notes.TabIndex = 4;
             this.itxt_Notes.ValueText = "";
             // 
@@ -158,8 +157,8 @@
             // 
             this.itxt_Clients.IsBrowseMode = true;
             this.itxt_Clients.LabelText = "*Client";
-            this.itxt_Clients.Location = new System.Drawing.Point(5, 10);
-            this.itxt_Clients.Margin = new System.Windows.Forms.Padding(5);
+            this.itxt_Clients.Location = new System.Drawing.Point(4, 8);
+            this.itxt_Clients.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Clients.MaxLength = 32767;
             this.itxt_Clients.MultiLine = false;
             this.itxt_Clients.Name = "itxt_Clients";
@@ -167,7 +166,7 @@
             this.itxt_Clients.RowCount = 1;
             this.itxt_Clients.ShowDeleteButton = false;
             this.itxt_Clients.ShowTextboxOnly = false;
-            this.itxt_Clients.Size = new System.Drawing.Size(321, 50);
+            this.itxt_Clients.Size = new System.Drawing.Size(241, 41);
             this.itxt_Clients.TabIndex = 7;
             this.itxt_Clients.ValueText = "";
             this.itxt_Clients.isBrowseMode_Clicked += new System.EventHandler(this.itxt_Clients_isBrowseMode_Clicked);
@@ -176,8 +175,8 @@
             // 
             this.itxt_WorkshiftCategories.IsBrowseMode = true;
             this.itxt_WorkshiftCategories.LabelText = "*Category";
-            this.itxt_WorkshiftCategories.Location = new System.Drawing.Point(5, 120);
-            this.itxt_WorkshiftCategories.Margin = new System.Windows.Forms.Padding(5);
+            this.itxt_WorkshiftCategories.Location = new System.Drawing.Point(4, 90);
+            this.itxt_WorkshiftCategories.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_WorkshiftCategories.MaxLength = 32767;
             this.itxt_WorkshiftCategories.MultiLine = false;
             this.itxt_WorkshiftCategories.Name = "itxt_WorkshiftCategories";
@@ -185,7 +184,7 @@
             this.itxt_WorkshiftCategories.RowCount = 1;
             this.itxt_WorkshiftCategories.ShowDeleteButton = true;
             this.itxt_WorkshiftCategories.ShowTextboxOnly = false;
-            this.itxt_WorkshiftCategories.Size = new System.Drawing.Size(321, 50);
+            this.itxt_WorkshiftCategories.Size = new System.Drawing.Size(241, 41);
             this.itxt_WorkshiftCategories.TabIndex = 8;
             this.itxt_WorkshiftCategories.ValueText = "";
             this.itxt_WorkshiftCategories.isBrowseMode_Clicked += new System.EventHandler(this.itxt_WorkshiftCategories_isBrowseMode_Clicked);
@@ -194,8 +193,8 @@
             // 
             this.itxt_Name.IsBrowseMode = false;
             this.itxt_Name.LabelText = "*Name";
-            this.itxt_Name.Location = new System.Drawing.Point(5, 65);
-            this.itxt_Name.Margin = new System.Windows.Forms.Padding(5);
+            this.itxt_Name.Location = new System.Drawing.Point(4, 49);
+            this.itxt_Name.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Name.MaxLength = 32767;
             this.itxt_Name.MultiLine = false;
             this.itxt_Name.Name = "itxt_Name";
@@ -203,7 +202,7 @@
             this.itxt_Name.RowCount = 1;
             this.itxt_Name.ShowDeleteButton = false;
             this.itxt_Name.ShowTextboxOnly = false;
-            this.itxt_Name.Size = new System.Drawing.Size(321, 50);
+            this.itxt_Name.Size = new System.Drawing.Size(241, 41);
             this.itxt_Name.TabIndex = 9;
             this.itxt_Name.ValueText = "";
             // 
@@ -214,12 +213,12 @@
             this.idtp_Start.DefaultCheckedValue = false;
             this.idtp_Start.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_Start.LabelText = "*Start";
-            this.idtp_Start.Location = new System.Drawing.Point(133, 176);
-            this.idtp_Start.Margin = new System.Windows.Forms.Padding(5);
+            this.idtp_Start.Location = new System.Drawing.Point(100, 131);
+            this.idtp_Start.Margin = new System.Windows.Forms.Padding(4);
             this.idtp_Start.Name = "idtp_Start";
             this.idtp_Start.ShowCheckBox = false;
             this.idtp_Start.ShowUpAndDown = true;
-            this.idtp_Start.Size = new System.Drawing.Size(93, 50);
+            this.idtp_Start.Size = new System.Drawing.Size(70, 41);
             this.idtp_Start.TabIndex = 0;
             this.idtp_Start.Value = null;
             this.idtp_Start.ValueTimeSpan = null;
@@ -235,8 +234,8 @@
             0,
             0});
             this.in_DurationMinutes.LabelText = "*Minutes";
-            this.in_DurationMinutes.Location = new System.Drawing.Point(233, 176);
-            this.in_DurationMinutes.Margin = new System.Windows.Forms.Padding(5);
+            this.in_DurationMinutes.Location = new System.Drawing.Point(175, 131);
+            this.in_DurationMinutes.Margin = new System.Windows.Forms.Padding(4);
             this.in_DurationMinutes.MaximumValue = new decimal(new int[] {
             1440,
             0,
@@ -250,7 +249,7 @@
             this.in_DurationMinutes.Name = "in_DurationMinutes";
             this.in_DurationMinutes.ShowCheckbox = false;
             this.in_DurationMinutes.ShowTextboxOnly = false;
-            this.in_DurationMinutes.Size = new System.Drawing.Size(93, 50);
+            this.in_DurationMinutes.Size = new System.Drawing.Size(70, 41);
             this.in_DurationMinutes.TabIndex = 0;
             this.in_DurationMinutes.Value = new decimal(new int[] {
             0,
@@ -260,12 +259,12 @@
             // 
             // MasterData_v1_WorkshiftTemplates_Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 750);
-            this.Margin = new System.Windows.Forms.Padding(5);
+            this.ClientSize = new System.Drawing.Size(514, 609);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MasterData_v1_WorkshiftTemplates_Form";
-            this.Text = "WorkshiftTemplates";
+            this.Text = "WORKSHIFT TEMPLATES";
             this.panel1.ResumeLayout(false);
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);

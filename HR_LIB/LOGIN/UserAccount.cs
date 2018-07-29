@@ -103,7 +103,6 @@ namespace LOGIN
         public UserAccount(Guid id)
         {
             DataRow row = get(id);
-
             if(row != null)
             {
                 Id = Util.wrapNullable<Guid>(row, COL_DB_Id);
@@ -126,7 +125,6 @@ namespace LOGIN
                 Fullname = Util.wrapNullable<string>(row, COL_Fullname);
                 Special = Util.wrapNullable<bool>(row, COL_Special);
             }
-            return;
         }
 
         #endregion CONSTRUCTOR METHODS

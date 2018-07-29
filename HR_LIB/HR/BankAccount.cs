@@ -61,8 +61,6 @@ namespace HR_LIB.HR
                 Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
                 UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
             }
-            return;
-            
         }
 
         public BankAccount() { }
@@ -132,7 +130,7 @@ namespace HR_LIB.HR
             BankAccount objOld = new BankAccount(id);
             string log = "";
             log = Util.appendChange(log, objOld.Name, name, "Name: '{0}' to '{1}'");
-            log = Util.appendChange(log, objOld.BankName, bankName, "BankName: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.BankName, bankName, "Bank Name: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.AccountNumber, accountNumber, "Account Number: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Notes, notes, "Notes: '{0}' to '{1}'");
             if (new Client(owner_RefId).CompanyName != null)

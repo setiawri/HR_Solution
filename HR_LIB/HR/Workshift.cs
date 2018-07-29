@@ -58,7 +58,6 @@ namespace HR_LIB.HR
         public Workshift(Guid id)
         {
             DataRow row = get(id);
-
             if(row != null)
             {
                 Id = id;
@@ -76,8 +75,6 @@ namespace HR_LIB.HR
                 UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
                 WorkshiftCategories_Name = Util.wrapNullable<string>(row, COL_WorkshiftCategories_Name);
             }
-            return;
-            
         }
 
         public Workshift() { }
@@ -170,8 +167,8 @@ namespace HR_LIB.HR
             Workshift objOld = new Workshift(id);
             string log = "";
             log = Util.appendChange(log, objOld.Name, name, "Name: '{0}' to '{1}'");
-            log = Util.appendChange(log, objOld.WorkshiftCategories_Name, new WorkshiftCategory(WorkshiftCategories_Id).Name, "WorkshiftCategories_Name: '{0}' to '{1}'");
-            log = Util.appendChange(log, objOld.UserAccounts_Fullname, new UserAccount(UserAccounts_Id).Fullname, "UserAccounts_Fullname: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.WorkshiftCategories_Name, new WorkshiftCategory(WorkshiftCategories_Id).Name, "Workshift Category: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.UserAccounts_Fullname, new UserAccount(UserAccounts_Id).Fullname, "User: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.DayOfWeek, dayOfWeek, "Day of week: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Start.ToString(@"h\:mm"), start, "Start: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.DurationMinutes, durationMinutes, "Duration Minutes: '{0}' to '{1}'");

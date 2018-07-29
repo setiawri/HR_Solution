@@ -65,7 +65,6 @@ namespace HR_LIB.HR
                 Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
                 Active = Util.wrapNullable<bool>(row, COL_DB_Active);
             }
-            return;
         }
 
         public Client() { }

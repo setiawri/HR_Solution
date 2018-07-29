@@ -41,7 +41,7 @@ namespace HR_Desktop.Admin
         {
             InitializeComponent();
             if (Employee_Id != null)
-                    _UserAccounts_Id = (Guid)Employee_Id;
+                _UserAccounts_Id = (Guid)Employee_Id;
 
         }
 

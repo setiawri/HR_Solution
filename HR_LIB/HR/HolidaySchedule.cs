@@ -56,9 +56,6 @@ namespace HR_LIB.HR
 
                 Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
             }
-            return;
-            
-            
         }
 
         public HolidaySchedule() { }

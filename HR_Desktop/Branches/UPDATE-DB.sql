@@ -2,12 +2,6 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
-ALTER TABLE HolidaySchedules ADD Clients_Id uniqueidentifier 
-GO
-ALTER TABLE HolidaySchedules ALTER COLUMN Clients_Id uniqueidentifier NOT NULL
-GO
-
-
 
 
 
@@ -252,7 +246,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[BankAccounts_update_Active]
+ALTER PROCEDURE [dbo].[BankAccounts_update_Active]
 
 	@Id uniqueidentifier,
 	@Active bit
@@ -481,7 +475,8 @@ AS
 BEGIN
 
 	SELECT Attendances.*,
-		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname
+		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname,
+		COALESCE(DATEDIFF(MINUTE,Attendances.EffectiveTimestampIn, Attendances.EffectiveTimestampOut),0)/60 AS EffectiveWorkHours
 	FROM Attendances 
 		LEFT OUTER JOIN UserAccounts ON Attendances.UserAccounts_Id = UserAccounts.ID
 	WHERE 1=1
@@ -498,7 +493,6 @@ BEGIN
 END
 GO
 
-
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Workshifts_getEmployeeByClientOrName]
 
@@ -511,24 +505,24 @@ AS
 BEGIN
 	SELECT * 
 	FROM (
-		SELECT DISTINCT Workshifts.UserAccounts_Id,
-			UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname,
-			Clients.CompanyName AS Clients_CompanyName
-		FROM Workshifts 
-			LEFT OUTER JOIN Clients ON Workshifts.Clients_Id = Clients.Id
-			LEFT OUTER JOIN UserAccounts ON Workshifts.UserAccounts_Id = UserAccounts.Id
-		WHERE 1=1
-			AND (@Clients_Id IS NULL OR Workshifts.Clients_Id = @Clients_Id)
-			OR Workshifts.UserAccounts_Id IN (
-					SELECT DISTINCT Attendances.UserAccounts_Id 
-					FROM Attendances
-					WHERE 1=1 
-					AND (@FILTER_StartDate IS NULL OR Attendances.TimestampIn >= @FILTER_StartDate)
-					AND (@FILTER_EndDate IS NULL OR Attendances.TimestampIn <= @FILTER_EndDate)
-				)		
-	) Employee 
+			SELECT DISTINCT Workshifts.UserAccounts_Id,
+				UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname,
+				Clients.CompanyName AS Clients_CompanyName
+			FROM Workshifts 
+				LEFT OUTER JOIN Clients ON Workshifts.Clients_Id = Clients.Id
+				LEFT OUTER JOIN UserAccounts ON Workshifts.UserAccounts_Id = UserAccounts.Id
+			WHERE 1=1
+				AND (@Clients_Id IS NULL OR Workshifts.Clients_Id = @Clients_Id)
+				OR Workshifts.UserAccounts_Id IN (
+						SELECT DISTINCT Attendances.UserAccounts_Id 
+						FROM Attendances
+						WHERE 1=1 
+						AND (@FILTER_StartDate IS NULL OR Attendances.TimestampIn >= @FILTER_StartDate)
+						AND (@FILTER_EndDate IS NULL OR Attendances.TimestampIn <= @FILTER_EndDate)
+					)		
+		) Employee 
 	WHERE 1=1
-	AND (@UserAccounts_Fullname IS NULL OR Employee.UserAccounts_Fullname LIKE '%' + @UserAccounts_Fullname +'%')
+		AND (@UserAccounts_Fullname IS NULL OR Employee.UserAccounts_Fullname LIKE '%' + @UserAccounts_Fullname +'%')
 	ORDER BY  Employee.UserAccounts_Id, Employee.Clients_CompanyName
 END
 GO

@@ -50,6 +50,7 @@ namespace HR_LIB.HR
         public const string COL_DB_EffectiveTimestampOut = "EffectiveTimestampOut";
         public const string COL_DB_Rejected = "Rejected";
 
+        public const string COL_EffectiveWorkHours = "EffectiveWorkHours";
         public const string COL_UserAccounts_Fullname = "UserAccounts_Fullname";
         public const string COL_Workshifts_Id = "Workshifts_Id";
         public const string FILTER_DayOfWeek = "FILTER_DayOfWeek";
@@ -86,7 +87,6 @@ namespace HR_LIB.HR
 
                 UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
             }
-            return;
         }
 
         public Attendance() { }

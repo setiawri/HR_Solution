@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using HR_LIB.HR;
 using LIBUtil;
+using System.Linq;
 using LOGIN;
 
 namespace HR_Desktop.Admin
@@ -25,8 +26,6 @@ namespace HR_Desktop.Admin
         #region PRIVATE VARIABLES
 
         private Guid? _Clients_Id =  null;
-        private DayOfWeek _dgvWorkshifts_FilterDayOfWeek;
-        private DayOfWeek _dgvWorkshiftTemplates_FilterDayOfWeek;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
@@ -48,12 +47,7 @@ namespace HR_Desktop.Admin
         {
             this.ShowIcon = false;
             setupControlsBasedOnRoles();
-
-            rbWorkshifts_Monday.Checked = true;
-            _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Monday;
-            rbWorkshiftTemplates_Monday.Checked = true;
-            _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Monday;
-
+            
             dgvWorkshifts.AutoGenerateColumns = false;
             col_dgvWorkshifts_Id.DataPropertyName = Workshift.COL_DB_Id;
             col_dgvWorkshifts_Name.DataPropertyName = Workshift.COL_DB_Name;
@@ -73,6 +67,14 @@ namespace HR_Desktop.Admin
             col_dgvBankAccounts_BankName.DataPropertyName = BankAccount.COL_DB_BankName;
             col_dgvBankAccounts_AccountNumber.DataPropertyName = BankAccount.COL_DB_AccountNumber;
             col_dgvBankAccounts_Notes.DataPropertyName = BankAccount.COL_DB_Notes;
+
+            rbWorkshifts_Monday.Tag = rbWorkshiftTemplates_Monday.Tag = DayOfWeek.Monday;
+            rbWorkshifts_Tuesday.Tag = rbWorkshiftTemplates_Tuesday.Tag = DayOfWeek.Tuesday;
+            rbWorkshifts_Wednesday.Tag = rbWorkshiftTemplates_Wednesday.Tag = DayOfWeek.Wednesday;
+            rbWorkshifts_Thursday.Tag = rbWorkshiftTemplates_Thursday.Tag = DayOfWeek.Thursday;
+            rbWorkshifts_Friday.Tag = rbWorkshiftTemplates_Friday.Tag = DayOfWeek.Friday;
+            rbWorkshifts_Saturday.Tag = rbWorkshiftTemplates_Saturday.Tag = DayOfWeek.Saturday;
+            rbWorkshifts_Sunday.Tag = rbWorkshiftTemplates_Sunday.Tag = DayOfWeek.Sunday;
         }
 
         private void setupControlsBasedOnRoles()
@@ -95,20 +97,20 @@ namespace HR_Desktop.Admin
                 lblNpwpAddress.Text = client.NPWPAddress;
                 lblNotes.Text = client.Notes;
 
-                populateDgvWorkshifts();
-                populateDgvWorkshiftTemplates();
                 populateDgvBankAccounts();
-           }
+                rbWorkshifts_Monday.Checked = true;
+                rbWorkshiftTemplates_Monday.Checked = true;
+            }
         }
 
         private void populateDgvWorkshifts()
         {
-            Util.populateDataGridView(dgvWorkshifts, Workshift.get(false, null, null, _Clients_Id, null, null, (int)_dgvWorkshifts_FilterDayOfWeek, null, null, null));
+            Util.populateDataGridView(dgvWorkshifts, Workshift.get(false, null, null, _Clients_Id, null, null, (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshifts), null, null, null));
         }
 
         private void populateDgvWorkshiftTemplates()
         {
-            Util.populateDataGridView(dgvWorkshiftTemplates, WorkshiftTemplate.get(false, null, null, _Clients_Id, null, (int)_dgvWorkshiftTemplates_FilterDayOfWeek, null, null, null));
+            Util.populateDataGridView(dgvWorkshiftTemplates, WorkshiftTemplate.get(false, null, null, _Clients_Id, null, (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshiftTemplates), null, null, null));
         }
 
         private void populateDgvBankAccounts()
@@ -144,44 +146,14 @@ namespace HR_Desktop.Admin
             LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form(FormModes.Add, _Clients_Id));
             populateDgvWorkshifts();
         }
-
+        
         private void rbWorkshifts_CheckedChanged(object sender, EventArgs e)
         {
-            if (sender == rbWorkshifts_Monday)
-                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Monday;
-            else if (sender == rbWorkshifts_Tuesday)
-                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Tuesday;
-            else if (sender == rbWorkshifts_Wednesday)
-                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Wednesday;
-            else if (sender == rbWorkshifts_Thursday)
-                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Thursday;
-            else if (sender == rbWorkshifts_Friday)
-                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Friday;
-            else if (sender == rbWorkshifts_Saturday)
-                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Saturday;
-            else if (sender == rbWorkshifts_Sunday)
-                _dgvWorkshifts_FilterDayOfWeek = DayOfWeek.Sunday;
-
             populateDgvWorkshifts();
         }
 
         private void rbWorkshiftTemplates_CheckedChanged(object sender, EventArgs e)
         {
-            if (sender == rbWorkshiftTemplates_Monday)
-                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Monday;
-            else if (sender == rbWorkshiftTemplates_Tuesday)
-                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Tuesday;
-            else if (sender == rbWorkshiftTemplates_Wednesday)
-                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Wednesday;
-            else if (sender == rbWorkshiftTemplates_Thursday)
-                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Thursday;
-            else if (sender == rbWorkshiftTemplates_Friday)
-                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Friday;
-            else if (sender == rbWorkshiftTemplates_Saturday)
-                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Saturday;
-            else if (sender == rbWorkshiftTemplates_Sunday)
-                _dgvWorkshiftTemplates_FilterDayOfWeek = DayOfWeek.Sunday;
-
             populateDgvWorkshiftTemplates();
         }
 

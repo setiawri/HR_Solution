@@ -30,16 +30,10 @@ namespace HR_LIB.HR
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
-
-        public AttendanceStatus(Guid id) : this(null, id) { }
-        public AttendanceStatus(SqlConnection sqlConnection, Guid id)
+            
+        public AttendanceStatus(Guid id)
         {
-            DataRow row;
-            if (sqlConnection == null)
-                row = get(id);
-            else
-                row = get(sqlConnection, id);
-
+            DataRow row = get(id);
             if(row != null)
             {
                 Id = id;
@@ -47,8 +41,6 @@ namespace HR_LIB.HR
                 Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
                 Active = Util.wrapNullable<bool>(row, COL_DB_Active);
             }
-            return;
-            
         }
 
         public AttendanceStatus() { }

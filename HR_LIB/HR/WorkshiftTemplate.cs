@@ -68,7 +68,6 @@ namespace HR_LIB.HR
                 Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
                 WorkshiftCategories_Name = Util.wrapNullable<string>(row, COL_WorkshiftCategories_Name);
             }
-            return;
         }
 
         public WorkshiftTemplate() { }
@@ -145,7 +144,7 @@ namespace HR_LIB.HR
             WorkshiftTemplate objOld = new WorkshiftTemplate(id);
             string log = "";
             log = Util.appendChange(log, objOld.Name, name, "Name: '{0}' to '{1}'");
-            log = Util.appendChange(log, objOld.WorkshiftCategories_Name, new WorkshiftCategory(WorkshiftCategories_Id).Name, "WorkshiftCategories_Name: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.WorkshiftCategories_Name, new WorkshiftCategory(WorkshiftCategories_Id).Name, "Workshift Category: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.DayOfWeek, dayOfWeek, "Day of week: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Start.ToString(@"h\:mm"), start, "Start: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.DurationMinutes, durationMinutes, "Duration Minutes: '{0}' to '{1}'");
