@@ -142,6 +142,12 @@
     <Compile Include="Main_Form.Designer.cs">
       <DependentUpon>Main_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Payroll\Payroll_Main_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payroll\Payroll_Main_Form.Designer.cs">
+      <DependentUpon>Payroll_Main_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Payroll\Timesheets_Form.cs">
@@ -246,7 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Branches\Chintia.txt" />
-    <Content Include="Branches\NewMasterDataHolidaySchedules\Info.txt" />
+    <Content Include="Branches\PayrollTABLEandFORMS\Info.txt" />
     <Content Include="Branches\To Do List.txt" />
     <Content Include="Branches\UPDATE-DB.sql" />
   </ItemGroup>

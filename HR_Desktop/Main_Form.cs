@@ -32,7 +32,8 @@ namespace HR_Desktop
 
         private void setupControls()
         {
-            LIBUtil.Util.setAsMDIParent(this, pnlMDIChildren);
+            LIBUtil.Util.setAsMDIParent(this);
+
             this.ShowIcon = false;
 
             this.Text += " (" + LOGIN.UserAccount.LoggedInAccount.Fullname + ")";
