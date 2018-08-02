@@ -70,6 +70,7 @@ namespace HR_Desktop.Payroll
             col_dgvAttendance_Approved.DataPropertyName = Attendance.COL_DB_Approved;
             col_dgvAttendance_Rejected.DataPropertyName = Attendance.COL_DB_Rejected;
             col_dgvAttendance_Notes.DataPropertyName = Attendance.COL_DB_Notes;
+            col_dgvAttendance_PayrollItems_Id.DataPropertyName = Attendance.COL_DB_PayrollItems_Id;
 
             pnlFilterAttendance.Enabled = false;
         }
@@ -183,7 +184,11 @@ namespace HR_Desktop.Payroll
 
         private void dgvAttendance_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (Util.isColumnMatch(sender, e, col_dgvAttendance_Flag1))
+            if(Util.getSelectedRowValue(dgvAttendance,col_dgvAttendance_PayrollItems_Id) != null)
+            {
+                populateDgvAttendance();
+            }
+            else if (Util.isColumnMatch(sender, e, col_dgvAttendance_Flag1))
             {
                 Attendance.updateFlag1Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendance, col_dgvAttendance_Id), !Util.getCheckboxValue(sender, e));
                 populateDgvAttendance();
@@ -203,6 +208,7 @@ namespace HR_Desktop.Payroll
                 Attendance.updateRejectedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendance, col_dgvAttendance_Id), !Util.getCheckboxValue(sender, e));
                 populateDgvAttendance();
             }
+            
         }
 
         private void btnFilterAttendance_Click(object sender, EventArgs e)

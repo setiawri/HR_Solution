@@ -26,6 +26,7 @@ namespace HR_LIB.HR
         public DateTime EffectiveTimestampIn;
         public DateTime EffectiveTimestampOut;
         public bool Rejected;
+        public Guid PayrollItems_Id;
 
         public string UserAccounts_Fullname;
 
@@ -49,6 +50,7 @@ namespace HR_LIB.HR
         public const string COL_DB_EffectiveTimestampIn = "EffectiveTimestampIn";
         public const string COL_DB_EffectiveTimestampOut = "EffectiveTimestampOut";
         public const string COL_DB_Rejected = "Rejected";
+        public const string COL_DB_PayrollItems_Id = "PayrollItems_Id";
 
         public const string COL_EffectiveWorkHours = "EffectiveWorkHours";
         public const string COL_UserAccounts_Fullname = "UserAccounts_Fullname";
@@ -84,6 +86,7 @@ namespace HR_LIB.HR
                 EffectiveTimestampIn = Util.wrapNullable<DateTime>(row, COL_DB_EffectiveTimestampIn);
                 EffectiveTimestampOut = Util.wrapNullable<DateTime>(row, COL_DB_EffectiveTimestampOut);
                 Rejected = Util.wrapNullable<bool>(row, COL_DB_Rejected);
+                PayrollItems_Id = Util.wrapNullable<Guid>(row, COL_DB_PayrollItems_Id);
 
                 UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
             }

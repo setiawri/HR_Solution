@@ -26,6 +26,7 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_Flag2;
         private DataGridViewColumn col_dgv_Approved;
         private DataGridViewColumn col_dgv_Notes;
+        private DataGridViewColumn col_dgv_Payrolls_Id;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
@@ -61,7 +62,7 @@ namespace HR_Desktop.Admin
             col_dgv_Approved = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Approved", Attendance.COL_DB_Approved, Attendance.COL_DB_Approved, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Attendance.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
+            col_dgv_Payrolls_Id = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Payrolls_Id", "" , Attendance.COL_DB_PayrollItems_Id, true, false, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             ptInputPanel.PerformClick();
         }
 
@@ -92,10 +93,20 @@ namespace HR_Desktop.Admin
         protected override void populateInputFields()
         {
             Attendance obj = new Attendance(selectedRowID());
+
             itxt_UserAccount.setValue(obj.UserAccounts_Fullname, obj.UserAccounts_Id);
             idtp_TimestampIn.Value = obj.TimestampIn;
             idtp_TimestampOut.Value = obj.TimestampOut;
             itxt_Notes.ValueText = obj.Notes;
+
+            if (obj.PayrollItems_Id != null)
+            {
+                itxt_UserAccount.Enabled = false;
+                idtp_TimestampIn.Enabled = false;
+                idtp_TimestampOut.Enabled = false;
+                itxt_Notes.Enabled = false;
+            }
+            
         }
 
         protected override void update()
@@ -154,7 +165,11 @@ namespace HR_Desktop.Admin
 
         protected override void virtual_dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (Util.isColumnMatch(sender, e, col_dgv_Flag1))
+            if (Util.getSelectedRowValue(dgv, col_dgv_Payrolls_Id) != null)
+            {
+                populateGridViewDataSource(true);
+            }
+            else if (Util.isColumnMatch(sender, e, col_dgv_Flag1))
             {
                 Attendance.updateFlag1Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
                 populateGridViewDataSource(true);
