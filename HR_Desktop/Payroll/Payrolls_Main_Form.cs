@@ -14,7 +14,7 @@ using HR_LIB.HR;
 
 namespace HR_Desktop.Payroll
 {
-    public partial class Payroll_Main_Form : Form
+    public partial class Payrolls_Main_Form : Form
     {/*******************************************************************************************************/
         #region SETTINGS
 
@@ -37,9 +37,9 @@ namespace HR_Desktop.Payroll
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public Payroll_Main_Form() : this(FormModes.Normal, null) { }
-        public Payroll_Main_Form(FormModes formMode) : this(formMode, null) { }
-        public Payroll_Main_Form(FormModes formMode, Guid? id)
+        public Payrolls_Main_Form() : this(FormModes.Normal, null) { }
+        public Payrolls_Main_Form(FormModes formMode) : this(formMode, null) { }
+        public Payrolls_Main_Form(FormModes formMode, Guid? id)
         {
             InitializeComponent();
 

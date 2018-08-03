@@ -153,7 +153,7 @@ namespace HR_Desktop
 
         private void reports_payrolls_Click(object sender, EventArgs e)
         {
-            LIBUtil.Util.displayMDIChild(new Payroll.Payroll_Main_Form());
+            LIBUtil.Util.displayMDIChild(new Payroll.Payrolls_Main_Form());
         }
 
 

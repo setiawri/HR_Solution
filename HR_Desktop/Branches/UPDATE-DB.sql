@@ -1,34 +1,12 @@
 ﻿/**************************************************************************************************************************************************************/
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
-CREATE TABLE [dbo].[Payrolls] (
-    Id							UNIQUEIDENTIFIER NOT NULL,
-    Timestamp					DATETIME NOT NULL,
-    Employee_UserAccounts_Id	UNIQUEIDENTIFIER NOT NULL,
-	Amount			DECIMAL(10,0) NOT NULL,
-    CONSTRAINT [PK_Payrolls] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
 
-CREATE TABLE [dbo].[PayrollItems] (
-    Id				UNIQUEIDENTIFIER NOT NULL,
-	Payrolls_Id		UNIQUEIDENTIFIER NOT NULL,
-	RefId			UNIQUEIDENTIFIER NOT NULL,
-	Description		NVARCHAR(MAX) NOT NULL,
-	Amount			DECIMAL(10,0) NOT NULL,
-	Notes			NVARCHAR(MAX),
-    CONSTRAINT [PK_PayrollItems] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-GO
-
-
-
-ALTER TABLE Attendances ADD PayrollItems_Id UNIQUEIDENTIFIER;
-GO
 
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Payrolls_get]
+ALTER PROCEDURE [dbo].[Payrolls_get]
 
 	@Id uniqueidentifier = NULL,
 	@Employee_UserAccounts_Id uniqueidentifier = NULL,
@@ -53,7 +31,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[PayrollItems_get]
+ALTER PROCEDURE [dbo].[PayrollItems_get]
 
 	@ARRAY_Payrolls_Id AS Array READONLY
 	
