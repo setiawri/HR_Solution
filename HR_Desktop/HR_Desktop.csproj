@@ -142,11 +142,11 @@
     <Compile Include="Main_Form.Designer.cs">
       <DependentUpon>Main_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Payroll\Payroll_Main_Form.cs">
+    <Compile Include="Payroll\Payrolls_Main_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Payroll\Payroll_Main_Form.Designer.cs">
-      <DependentUpon>Payroll_Main_Form.cs</DependentUpon>
+    <Compile Include="Payroll\Payrolls_Main_Form.Designer.cs">
+      <DependentUpon>Payrolls_Main_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,6 +212,9 @@
     <EmbeddedResource Include="Main_Form.resx">
       <DependentUpon>Main_Form.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Payroll\Payrolls_Main_Form.resx">
+      <DependentUpon>Payrolls_Main_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -220,6 +223,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Payroll\Timesheets_Form.resx">
       <DependentUpon>Timesheets_Form.cs</DependentUpon>
@@ -252,9 +256,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Branches\Chintia.txt" />
-    <Content Include="Branches\PayrollTABLEandFORMS\Info.txt" />
+    <Content Include="Branches\Payments\Info.txt" />
     <Content Include="Branches\To Do List.txt" />
     <Content Include="Branches\UPDATE-DB.sql" />
+    <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Reports\" />

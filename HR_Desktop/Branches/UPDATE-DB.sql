@@ -5,6 +5,54 @@
 
 
 
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[Payrolls_get]
+
+	@Id uniqueidentifier = NULL,
+	@Employee_UserAccounts_Id uniqueidentifier = NULL,
+	@StartDate datetime = NULL, 
+	@EndDate datetime = NULL
+AS
+
+BEGIN
+
+	SELECT Payrolls.*,
+		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS Employee_UserAccounts_Fullname
+	FROM Payrolls 
+		LEFT OUTER JOIN UserAccounts ON UserAccounts.Id = Payrolls.Employee_UserAccounts_Id
+	WHERE 1=1
+		AND (@Id IS NULL OR Payrolls.Id = @Id)
+		AND (@Employee_UserAccounts_Id IS NULL OR Payrolls.Employee_UserAccounts_Id = @Employee_UserAccounts_Id)
+		AND (@StartDate IS NULL OR Payrolls.Timestamp >= @StartDate)
+		AND (@EndDate IS NULL OR Payrolls.Timestamp <= @EndDate)
+	ORDER BY Payrolls.Timestamp DESC, UserAccounts.Firstname
+
+END
+GO
+
+/**************************************************************************************************************************************************************/
+ALTER PROCEDURE [dbo].[PayrollItems_get]
+
+	@ARRAY_Payrolls_Id AS Array READONLY
+	
+AS
+
+BEGIN
+
+	SELECT PayrollItems.*,
+		RTRIM(PayrollItems.Description + CHAR(13)+CHAR(10) + ISNULL(PayrollItems.Notes,'')) AS DescriptionAndNotes,
+		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS Employee_UserAccounts_Fullname,
+		Attendances.TimestampIn as Attendances_TimestampIn
+	FROM PayrollItems
+		LEFT OUTER JOIN Payrolls ON Payrolls.Id = PayrollItems.Payrolls_Id
+		LEFT OUTER JOIN UserAccounts ON UserAccounts.Id = Payrolls.Employee_UserAccounts_Id
+		LEFT OUTER JOIN Attendances ON Attendances.Id = PayrollItems.RefId
+	WHERE 1=1
+		AND ((SELECT TOP(1)value_str FROM @ARRAY_Payrolls_Id) = '00000000-0000-0000-0000-000000000000' OR PayrollItems.Payrolls_Id IN (SELECT value_str FROM @ARRAY_Payrolls_Id))
+	ORDER BY Payrolls.Timestamp DESC, Attendances.TimestampIn DESC
+
+END
+GO
 
 
 

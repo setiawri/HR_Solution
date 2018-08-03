@@ -12,23 +12,18 @@
 		> add parameter to filter to current Clients_Id when calling MasterData_v1_Workshifts_Form 
 
 
-
-> TABLE Payments
-	- Id (guid)
-	- Timestamp (datetime)
-	- Transaction_RefId (guid) --> bisa Payrolls_Id, PO_Id, etc
-	- Target_RefId (guid)
-	- Source_BankAccounts_Id (guid)
-	- Target_BankAccounts_Id (guid)
-	- Amount (decimal(10))
-	- ConfirmationNumber (nvarchar(MAX))
-	- Notes (nvarchar(MAX))
-	- 
-
+		
+> Verify TABLE Attendance
+	- if not null, locked (no further modification is allowed). 
 
 > 
 
 
+> Payments_Print_Form
+	- slip gaji?
+	- 
+
+> TABLE Kasbon
 
 
 
