@@ -32,14 +32,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.scSaleInvoices = new System.Windows.Forms.SplitContainer();
             this.btnFilter = new System.Windows.Forms.Button();
             this.pbRefresh = new System.Windows.Forms.PictureBox();
-            this.itxt_Employee_UserAccount = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
-            this.idtp_EndDate = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
-            this.idtp_StartDate = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menu_add = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_log = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,17 +49,18 @@
             this.col_dgvPayrolls_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.scDetails = new System.Windows.Forms.SplitContainer();
-            this.dgvPayrollItems = new System.Windows.Forms.DataGridView();
-            this.col_dgvPayrollItems_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvPayrollItems_Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvPayrollItems_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvPayrollItems_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pbRefreshCalculation = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTotalAmount = new System.Windows.Forms.Label();
-            this.lblPayableAmount = new System.Windows.Forms.Label();
             this.btnPayment = new System.Windows.Forms.Button();
+            this.itxt_Employee_UserAccount = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
+            this.idtp_EndDate = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
+            this.idtp_StartDate = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
+            this.col_dgvPayrollItems_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvPayrollItems_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvPayrollItems_Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvPayrollItems_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvPayrollItems = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.scSaleInvoices)).BeginInit();
             this.scSaleInvoices.Panel1.SuspendLayout();
             this.scSaleInvoices.Panel2.SuspendLayout();
@@ -78,8 +76,8 @@
             this.scDetails.Panel1.SuspendLayout();
             this.scDetails.Panel2.SuspendLayout();
             this.scDetails.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPayrollItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRefreshCalculation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPayrollItems)).BeginInit();
             this.SuspendLayout();
             // 
             // scSaleInvoices
@@ -88,6 +86,7 @@
             this.scSaleInvoices.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.scSaleInvoices.IsSplitterFixed = true;
             this.scSaleInvoices.Location = new System.Drawing.Point(0, 0);
+            this.scSaleInvoices.Margin = new System.Windows.Forms.Padding(4);
             this.scSaleInvoices.Name = "scSaleInvoices";
             // 
             // scSaleInvoices.Panel1
@@ -102,17 +101,17 @@
             // scSaleInvoices.Panel2
             // 
             this.scSaleInvoices.Panel2.Controls.Add(this.dgvPayrolls);
-            this.scSaleInvoices.Size = new System.Drawing.Size(758, 245);
+            this.scSaleInvoices.Size = new System.Drawing.Size(1011, 245);
             this.scSaleInvoices.SplitterDistance = 200;
             this.scSaleInvoices.SplitterWidth = 1;
             this.scSaleInvoices.TabIndex = 0;
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(72, 138);
-            this.btnFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFilter.Location = new System.Drawing.Point(96, 170);
+            this.btnFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(56, 22);
+            this.btnFilter.Size = new System.Drawing.Size(75, 27);
             this.btnFilter.TabIndex = 21;
             this.btnFilter.Text = "FILTER";
             this.btnFilter.UseVisualStyleBackColor = true;
@@ -123,66 +122,13 @@
             this.pbRefresh.BackColor = System.Drawing.Color.Transparent;
             this.pbRefresh.BackgroundImage = global::HR_Desktop.Properties.Resources.refresh;
             this.pbRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbRefresh.Location = new System.Drawing.Point(170, 27);
+            this.pbRefresh.Location = new System.Drawing.Point(227, 33);
+            this.pbRefresh.Margin = new System.Windows.Forms.Padding(4);
             this.pbRefresh.Name = "pbRefresh";
-            this.pbRefresh.Size = new System.Drawing.Size(25, 23);
+            this.pbRefresh.Size = new System.Drawing.Size(33, 28);
             this.pbRefresh.TabIndex = 10;
             this.pbRefresh.TabStop = false;
             this.pbRefresh.Click += new System.EventHandler(this.pbRefresh_Click);
-            // 
-            // itxt_Employee_UserAccount
-            // 
-            this.itxt_Employee_UserAccount.IsBrowseMode = true;
-            this.itxt_Employee_UserAccount.LabelText = "Employee";
-            this.itxt_Employee_UserAccount.Location = new System.Drawing.Point(3, 35);
-            this.itxt_Employee_UserAccount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.itxt_Employee_UserAccount.MaxLength = 32767;
-            this.itxt_Employee_UserAccount.MultiLine = false;
-            this.itxt_Employee_UserAccount.Name = "itxt_Employee_UserAccount";
-            this.itxt_Employee_UserAccount.PasswordChar = '\0';
-            this.itxt_Employee_UserAccount.RowCount = 1;
-            this.itxt_Employee_UserAccount.ShowDeleteButton = true;
-            this.itxt_Employee_UserAccount.ShowTextboxOnly = false;
-            this.itxt_Employee_UserAccount.Size = new System.Drawing.Size(191, 41);
-            this.itxt_Employee_UserAccount.TabIndex = 16;
-            this.itxt_Employee_UserAccount.ValueText = "";
-            this.itxt_Employee_UserAccount.isBrowseMode_Clicked += new System.EventHandler(this.itxt_UserAccount_isBrowseMode_Clicked);
-            // 
-            // idtp_EndDate
-            // 
-            this.idtp_EndDate.Checked = false;
-            this.idtp_EndDate.CustomFormat = "dd/MM/yy";
-            this.idtp_EndDate.DefaultCheckedValue = false;
-            this.idtp_EndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.idtp_EndDate.LabelText = "End";
-            this.idtp_EndDate.Location = new System.Drawing.Point(103, 84);
-            this.idtp_EndDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.idtp_EndDate.Name = "idtp_EndDate";
-            this.idtp_EndDate.ShowCheckBox = true;
-            this.idtp_EndDate.ShowUpAndDown = false;
-            this.idtp_EndDate.Size = new System.Drawing.Size(92, 41);
-            this.idtp_EndDate.TabIndex = 19;
-            this.idtp_EndDate.Value = null;
-            this.idtp_EndDate.ValueTimeSpan = null;
-            this.idtp_EndDate.ValueChanged += new System.EventHandler(this.idtp_Date_ValueChanged);
-            // 
-            // idtp_StartDate
-            // 
-            this.idtp_StartDate.Checked = true;
-            this.idtp_StartDate.CustomFormat = "dd/MM/yy";
-            this.idtp_StartDate.DefaultCheckedValue = false;
-            this.idtp_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.idtp_StartDate.LabelText = "Start";
-            this.idtp_StartDate.Location = new System.Drawing.Point(4, 84);
-            this.idtp_StartDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.idtp_StartDate.Name = "idtp_StartDate";
-            this.idtp_StartDate.ShowCheckBox = true;
-            this.idtp_StartDate.ShowUpAndDown = false;
-            this.idtp_StartDate.Size = new System.Drawing.Size(92, 41);
-            this.idtp_StartDate.TabIndex = 18;
-            this.idtp_StartDate.Value = new System.DateTime(1753, 1, 1, 17, 39, 17, 439);
-            this.idtp_StartDate.ValueTimeSpan = System.TimeSpan.Parse("17:39:17.4390000");
-            this.idtp_StartDate.ValueChanged += new System.EventHandler(this.idtp_Date_ValueChanged);
             // 
             // menuStrip1
             // 
@@ -193,28 +139,30 @@
             this.menu_payments});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(200, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(200, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // menu_add
             // 
             this.menu_add.Name = "menu_add";
-            this.menu_add.Size = new System.Drawing.Size(43, 20);
+            this.menu_add.Size = new System.Drawing.Size(53, 24);
             this.menu_add.Text = "ADD";
             // 
             // menu_log
             // 
             this.menu_log.Name = "menu_log";
-            this.menu_log.Size = new System.Drawing.Size(42, 20);
+            this.menu_log.Size = new System.Drawing.Size(48, 24);
             this.menu_log.Text = "LOG";
             this.menu_log.Click += new System.EventHandler(this.menu_log_Click);
             // 
             // menu_payments
             // 
             this.menu_payments.Name = "menu_payments";
-            this.menu_payments.Size = new System.Drawing.Size(78, 20);
+            this.menu_payments.Size = new System.Drawing.Size(93, 24);
             this.menu_payments.Text = "PAYMENTS";
+            this.menu_payments.Click += new System.EventHandler(this.menu_payment_Click);
             // 
             // dgvPayrolls
             // 
@@ -240,11 +188,12 @@
             this.col_dgvPayrolls_Amount});
             this.dgvPayrolls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPayrolls.Location = new System.Drawing.Point(0, 0);
+            this.dgvPayrolls.Margin = new System.Windows.Forms.Padding(4);
             this.dgvPayrolls.MultiSelect = false;
             this.dgvPayrolls.Name = "dgvPayrolls";
             this.dgvPayrolls.RowHeadersVisible = false;
             this.dgvPayrolls.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPayrolls.Size = new System.Drawing.Size(557, 245);
+            this.dgvPayrolls.Size = new System.Drawing.Size(810, 245);
             this.dgvPayrolls.TabIndex = 8;
             this.dgvPayrolls.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPayrolls_CellContentClick);
             // 
@@ -266,6 +215,7 @@
             this.col_dgvPayrolls_Id.Name = "col_dgvPayrolls_Id";
             this.col_dgvPayrolls_Id.ReadOnly = true;
             this.col_dgvPayrolls_Id.Visible = false;
+            this.col_dgvPayrolls_Id.Width = 5;
             // 
             // col_dgvPayrolls_Timestamp
             // 
@@ -304,6 +254,7 @@
             this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.scMain.Location = new System.Drawing.Point(0, 0);
+            this.scMain.Margin = new System.Windows.Forms.Padding(4);
             this.scMain.Name = "scMain";
             this.scMain.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -314,7 +265,7 @@
             // scMain.Panel2
             // 
             this.scMain.Panel2.Controls.Add(this.scDetails);
-            this.scMain.Size = new System.Drawing.Size(758, 381);
+            this.scMain.Size = new System.Drawing.Size(1011, 469);
             this.scMain.SplitterDistance = 245;
             this.scMain.SplitterWidth = 1;
             this.scMain.TabIndex = 1;
@@ -325,6 +276,7 @@
             this.scDetails.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.scDetails.IsSplitterFixed = true;
             this.scDetails.Location = new System.Drawing.Point(0, 0);
+            this.scDetails.Margin = new System.Windows.Forms.Padding(4);
             this.scDetails.Name = "scDetails";
             // 
             // scDetails.Panel1
@@ -334,15 +286,149 @@
             // scDetails.Panel2
             // 
             this.scDetails.Panel2.Controls.Add(this.pbRefreshCalculation);
-            this.scDetails.Panel2.Controls.Add(this.label2);
             this.scDetails.Panel2.Controls.Add(this.label1);
             this.scDetails.Panel2.Controls.Add(this.lblTotalAmount);
-            this.scDetails.Panel2.Controls.Add(this.lblPayableAmount);
             this.scDetails.Panel2.Controls.Add(this.btnPayment);
-            this.scDetails.Size = new System.Drawing.Size(758, 135);
-            this.scDetails.SplitterDistance = 590;
+            this.scDetails.Size = new System.Drawing.Size(1011, 223);
+            this.scDetails.SplitterDistance = 849;
             this.scDetails.SplitterWidth = 1;
             this.scDetails.TabIndex = 0;
+            // 
+            // pbRefreshCalculation
+            // 
+            this.pbRefreshCalculation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbRefreshCalculation.BackColor = System.Drawing.Color.Transparent;
+            this.pbRefreshCalculation.BackgroundImage = global::HR_Desktop.Properties.Resources.refresh;
+            this.pbRefreshCalculation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbRefreshCalculation.Location = new System.Drawing.Point(100, 72);
+            this.pbRefreshCalculation.Margin = new System.Windows.Forms.Padding(4);
+            this.pbRefreshCalculation.Name = "pbRefreshCalculation";
+            this.pbRefreshCalculation.Size = new System.Drawing.Size(33, 28);
+            this.pbRefreshCalculation.TabIndex = 11;
+            this.pbRefreshCalculation.TabStop = false;
+            this.pbRefreshCalculation.Click += new System.EventHandler(this.pbRefreshCalculation_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 24);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Total:";
+            // 
+            // lblTotalAmount
+            // 
+            this.lblTotalAmount.Location = new System.Drawing.Point(80, 18);
+            this.lblTotalAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalAmount.Name = "lblTotalAmount";
+            this.lblTotalAmount.Size = new System.Drawing.Size(133, 28);
+            this.lblTotalAmount.TabIndex = 2;
+            this.lblTotalAmount.Text = "lblTotalAmount";
+            this.lblTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnPayment
+            // 
+            this.btnPayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPayment.Location = new System.Drawing.Point(141, 72);
+            this.btnPayment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(100, 28);
+            this.btnPayment.TabIndex = 0;
+            this.btnPayment.Text = "PAY";
+            this.btnPayment.UseVisualStyleBackColor = true;
+            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
+            // 
+            // itxt_Employee_UserAccount
+            // 
+            this.itxt_Employee_UserAccount.IsBrowseMode = true;
+            this.itxt_Employee_UserAccount.LabelText = "Employee";
+            this.itxt_Employee_UserAccount.Location = new System.Drawing.Point(4, 43);
+            this.itxt_Employee_UserAccount.Margin = new System.Windows.Forms.Padding(5);
+            this.itxt_Employee_UserAccount.MaxLength = 32767;
+            this.itxt_Employee_UserAccount.MultiLine = false;
+            this.itxt_Employee_UserAccount.Name = "itxt_Employee_UserAccount";
+            this.itxt_Employee_UserAccount.PasswordChar = '\0';
+            this.itxt_Employee_UserAccount.RowCount = 1;
+            this.itxt_Employee_UserAccount.ShowDeleteButton = true;
+            this.itxt_Employee_UserAccount.ShowTextboxOnly = false;
+            this.itxt_Employee_UserAccount.Size = new System.Drawing.Size(255, 50);
+            this.itxt_Employee_UserAccount.TabIndex = 16;
+            this.itxt_Employee_UserAccount.ValueText = "";
+            this.itxt_Employee_UserAccount.isBrowseMode_Clicked += new System.EventHandler(this.itxt_UserAccount_isBrowseMode_Clicked);
+            // 
+            // idtp_EndDate
+            // 
+            this.idtp_EndDate.Checked = false;
+            this.idtp_EndDate.CustomFormat = "dd/MM/yy";
+            this.idtp_EndDate.DefaultCheckedValue = false;
+            this.idtp_EndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.idtp_EndDate.LabelText = "End";
+            this.idtp_EndDate.Location = new System.Drawing.Point(137, 103);
+            this.idtp_EndDate.Margin = new System.Windows.Forms.Padding(5);
+            this.idtp_EndDate.Name = "idtp_EndDate";
+            this.idtp_EndDate.ShowCheckBox = true;
+            this.idtp_EndDate.ShowUpAndDown = false;
+            this.idtp_EndDate.Size = new System.Drawing.Size(123, 50);
+            this.idtp_EndDate.TabIndex = 19;
+            this.idtp_EndDate.Value = null;
+            this.idtp_EndDate.ValueTimeSpan = null;
+            this.idtp_EndDate.ValueChanged += new System.EventHandler(this.idtp_Date_ValueChanged);
+            // 
+            // idtp_StartDate
+            // 
+            this.idtp_StartDate.Checked = true;
+            this.idtp_StartDate.CustomFormat = "dd/MM/yy";
+            this.idtp_StartDate.DefaultCheckedValue = false;
+            this.idtp_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.idtp_StartDate.LabelText = "Start";
+            this.idtp_StartDate.Location = new System.Drawing.Point(5, 103);
+            this.idtp_StartDate.Margin = new System.Windows.Forms.Padding(5);
+            this.idtp_StartDate.Name = "idtp_StartDate";
+            this.idtp_StartDate.ShowCheckBox = true;
+            this.idtp_StartDate.ShowUpAndDown = false;
+            this.idtp_StartDate.Size = new System.Drawing.Size(123, 50);
+            this.idtp_StartDate.TabIndex = 18;
+            this.idtp_StartDate.Value = new System.DateTime(1753, 1, 1, 17, 39, 17, 439);
+            this.idtp_StartDate.ValueTimeSpan = System.TimeSpan.Parse("17:39:17.4390000");
+            this.idtp_StartDate.ValueChanged += new System.EventHandler(this.idtp_Date_ValueChanged);
+            // 
+            // col_dgvPayrollItems_Notes
+            // 
+            this.col_dgvPayrollItems_Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_dgvPayrollItems_Notes.HeaderText = "Notes";
+            this.col_dgvPayrollItems_Notes.MinimumWidth = 60;
+            this.col_dgvPayrollItems_Notes.Name = "col_dgvPayrollItems_Notes";
+            // 
+            // col_dgvPayrollItems_Amount
+            // 
+            this.col_dgvPayrollItems_Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N0";
+            this.col_dgvPayrollItems_Amount.DefaultCellStyle = dataGridViewCellStyle10;
+            this.col_dgvPayrollItems_Amount.HeaderText = "Amount";
+            this.col_dgvPayrollItems_Amount.MinimumWidth = 60;
+            this.col_dgvPayrollItems_Amount.Name = "col_dgvPayrollItems_Amount";
+            this.col_dgvPayrollItems_Amount.ReadOnly = true;
+            this.col_dgvPayrollItems_Amount.Width = 60;
+            // 
+            // col_dgvPayrollItems_Description
+            // 
+            this.col_dgvPayrollItems_Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvPayrollItems_Description.HeaderText = "Description";
+            this.col_dgvPayrollItems_Description.MinimumWidth = 80;
+            this.col_dgvPayrollItems_Description.Name = "col_dgvPayrollItems_Description";
+            this.col_dgvPayrollItems_Description.ReadOnly = true;
+            this.col_dgvPayrollItems_Description.Width = 80;
+            // 
+            // col_dgvPayrollItems_Id
+            // 
+            this.col_dgvPayrollItems_Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvPayrollItems_Id.HeaderText = "Id";
+            this.col_dgvPayrollItems_Id.Name = "col_dgvPayrollItems_Id";
+            this.col_dgvPayrollItems_Id.ReadOnly = true;
+            this.col_dgvPayrollItems_Id.Visible = false;
             // 
             // dgvPayrollItems
             // 
@@ -367,116 +453,22 @@
             this.col_dgvPayrollItems_Notes});
             this.dgvPayrollItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPayrollItems.Location = new System.Drawing.Point(0, 0);
+            this.dgvPayrollItems.Margin = new System.Windows.Forms.Padding(4);
             this.dgvPayrollItems.MultiSelect = false;
             this.dgvPayrollItems.Name = "dgvPayrollItems";
             this.dgvPayrollItems.RowHeadersVisible = false;
             this.dgvPayrollItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPayrollItems.Size = new System.Drawing.Size(590, 135);
+            this.dgvPayrollItems.Size = new System.Drawing.Size(849, 223);
             this.dgvPayrollItems.TabIndex = 11;
             // 
-            // col_dgvPayrollItems_Id
+            // Payrolls_Main_Form
             // 
-            this.col_dgvPayrollItems_Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.col_dgvPayrollItems_Id.HeaderText = "Id";
-            this.col_dgvPayrollItems_Id.Name = "col_dgvPayrollItems_Id";
-            this.col_dgvPayrollItems_Id.ReadOnly = true;
-            this.col_dgvPayrollItems_Id.Visible = false;
-            // 
-            // col_dgvPayrollItems_Description
-            // 
-            this.col_dgvPayrollItems_Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.col_dgvPayrollItems_Description.HeaderText = "Description";
-            this.col_dgvPayrollItems_Description.MinimumWidth = 80;
-            this.col_dgvPayrollItems_Description.Name = "col_dgvPayrollItems_Description";
-            this.col_dgvPayrollItems_Description.ReadOnly = true;
-            this.col_dgvPayrollItems_Description.Width = 80;
-            // 
-            // col_dgvPayrollItems_Amount
-            // 
-            this.col_dgvPayrollItems_Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N0";
-            this.col_dgvPayrollItems_Amount.DefaultCellStyle = dataGridViewCellStyle10;
-            this.col_dgvPayrollItems_Amount.HeaderText = "Amount";
-            this.col_dgvPayrollItems_Amount.MinimumWidth = 60;
-            this.col_dgvPayrollItems_Amount.Name = "col_dgvPayrollItems_Amount";
-            this.col_dgvPayrollItems_Amount.ReadOnly = true;
-            this.col_dgvPayrollItems_Amount.Width = 60;
-            // 
-            // col_dgvPayrollItems_Notes
-            // 
-            this.col_dgvPayrollItems_Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_dgvPayrollItems_Notes.HeaderText = "Notes";
-            this.col_dgvPayrollItems_Notes.MinimumWidth = 60;
-            this.col_dgvPayrollItems_Notes.Name = "col_dgvPayrollItems_Notes";
-            // 
-            // pbRefreshCalculation
-            // 
-            this.pbRefreshCalculation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbRefreshCalculation.BackColor = System.Drawing.Color.Transparent;
-            this.pbRefreshCalculation.BackgroundImage = global::HR_Desktop.Properties.Resources.refresh;
-            this.pbRefreshCalculation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbRefreshCalculation.Location = new System.Drawing.Point(54, 88);
-            this.pbRefreshCalculation.Name = "pbRefreshCalculation";
-            this.pbRefreshCalculation.Size = new System.Drawing.Size(25, 23);
-            this.pbRefreshCalculation.TabIndex = 11;
-            this.pbRefreshCalculation.TabStop = false;
-            this.pbRefreshCalculation.Click += new System.EventHandler(this.pbRefreshCalculation_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "DUE:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Total:";
-            // 
-            // lblTotalAmount
-            // 
-            this.lblTotalAmount.Location = new System.Drawing.Point(60, 30);
-            this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(100, 23);
-            this.lblTotalAmount.TabIndex = 2;
-            this.lblTotalAmount.Text = "lblTotalAmount";
-            this.lblTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblPayableAmount
-            // 
-            this.lblPayableAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPayableAmount.Location = new System.Drawing.Point(60, 60);
-            this.lblPayableAmount.Name = "lblPayableAmount";
-            this.lblPayableAmount.Size = new System.Drawing.Size(100, 23);
-            this.lblPayableAmount.TabIndex = 1;
-            this.lblPayableAmount.Text = "lblPayableAmount";
-            this.lblPayableAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnPayment
-            // 
-            this.btnPayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPayment.Location = new System.Drawing.Point(85, 88);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(75, 23);
-            this.btnPayment.TabIndex = 0;
-            this.btnPayment.Text = "PAY";
-            this.btnPayment.UseVisualStyleBackColor = true;
-            // 
-            // Payroll_Main_Form
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 381);
+            this.ClientSize = new System.Drawing.Size(1011, 469);
             this.Controls.Add(this.scMain);
-            this.Name = "Payroll_Main_Form";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "Payrolls_Main_Form";
             this.Text = "PAYROLL";
             this.Load += new System.EventHandler(this.Form_Load);
             this.scSaleInvoices.Panel1.ResumeLayout(false);
@@ -497,8 +489,8 @@
             this.scDetails.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scDetails)).EndInit();
             this.scDetails.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPayrollItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRefreshCalculation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPayrollItems)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -514,9 +506,6 @@
         private System.Windows.Forms.SplitContainer scDetails;
         private System.Windows.Forms.Button btnPayment;
         private System.Windows.Forms.Label lblTotalAmount;
-        private System.Windows.Forms.Label lblPayableAmount;
-        protected System.Windows.Forms.DataGridView dgvPayrollItems;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem menu_payments;
         private System.Windows.Forms.PictureBox pbRefresh;
@@ -530,6 +519,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvPayrolls_Timestamp;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvPayrolls_UserAccounts_Fullname;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvPayrolls_Amount;
+        protected System.Windows.Forms.DataGridView dgvPayrollItems;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvPayrollItems_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvPayrollItems_Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvPayrollItems_Amount;

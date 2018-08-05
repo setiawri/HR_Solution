@@ -19,6 +19,7 @@ namespace HR_LIB.HR
         public decimal Amount;
         public string Notes;
 
+        public String Payrolls_No;
         public Guid Employee_UserAccounts_Id;
         public DateTime Attendance_TimestampIn;
 
@@ -34,6 +35,7 @@ namespace HR_LIB.HR
         public const string COL_DB_Notes = "Notes";
         public const string ARRAY_Payrolls_Id = "ARRAY_Payrolls_Id";
 
+        public const string COL_Payrolls_No = "Payrolls_No";
         public const string COL_Employee_UserAccounts_Id = "Employee_UserAccounts_Id";
         public const string COL_DescriptionAndNotes = "DescriptionAndNotes";
         public const string COL_Attendances_TimestampIn = "Attendances_TimestampIn";

@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper.cs" />
+    <Compile Include="HR\Payment.cs" />
+    <Compile Include="HR\PaymentItem.cs" />
     <Compile Include="HR\PayrollItem.cs" />
     <Compile Include="HR\Payroll.cs" />
     <Compile Include="HR\AttendanceStatus.cs" />

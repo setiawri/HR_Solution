@@ -1,9 +1,182 @@
 ﻿/**************************************************************************************************************************************************************/
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
+CREATE TABLE [dbo].[Payments] (
+	Id						UNIQUEIDENTIFIER NOT NULL,
+	No						NVARCHAR (MAX)   NOT NULL,
+	Timestamp				DATETIME         NOT NULL,
+	Source_BankAccounts_Id	UNIQUEIDENTIFIER,
+	Target_BankAccounts_Id	UNIQUEIDENTIFIER,
+	Amount					DECIMAL(10,0) NOT NULL,
+	ConfirmationNumber		NVARCHAR(MAX),
+	Notes			        NVARCHAR(MAX),
+	Approved				BIT DEFAULT 0 NOT NULL,
+	Rejected				BIT DEFAULT 0 NOT NULL,
+	PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+	
+CREATE TABLE [dbo].[PaymentItems] (
+	Id					UNIQUEIDENTIFIER NOT NULL,
+	Payments_Id			UNIQUEIDENTIFIER NOT NULL,
+	Transaction_RefId	UNIQUEIDENTIFIER NOT NULL,
+	Amount				DECIMAL(10,0) NOT NULL,
+	Notes				NVARCHAR(MAX),
+	PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+ALTER TABLE dbo.BankAccounts ADD Internal BIT DEFAULT 0 NOT NULL;
+ALTER TABLE dbo.Payrolls ADD No NVARCHAR(MAX);
+ALTER TABLE dbo.Payrolls ALTER COLUMN No NVARCHAR(MAX) NOT NULL;
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[PaymentItems_add]
+
+	@Id uniqueidentifier,
+	@Payments_Id uniqueidentifier,
+	@Transaction_RefId uniqueidentifier,
+	@Amount decimal,
+	@Notes nvarchar(max) = NULL
+	
+AS
+
+BEGIN
+
+	INSERT INTO PaymentItems(Id,Payments_Id,Transaction_RefId,Amount,Notes) 
+	VALUES(@Id,@Payments_Id,@Transaction_RefId,@Amount,@Notes)
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[PaymentItems_get]
+
+	@Payments_Id uniqueidentifier
+
+AS
+
+BEGIN
+
+	SELECT PaymentItems.*,
+		Payrolls.No AS Payrolls_No,
+		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS Employee_UserAccounts_Fullname,
+		Payrolls.Amount AS Payrolls_Amount
+	FROM PaymentItems 
+		LEFT OUTER JOIN Payments ON Payments.Id = PaymentItems.Payments_Id
+		LEFT OUTER JOIN Payrolls ON Payrolls.Id = PaymentItems.Transaction_RefId
+		LEFT OUTER JOIN UserAccounts ON Useraccounts.Id = Payrolls.Employee_UserAccounts_Id
+	WHERE PaymentItems.Payments_Id = @Payments_Id
 
 
 
+END
+GO
+	
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[Payments_add]
+
+	@Id uniqueidentifier,
+	@Source_BankAccounts_Id uniqueidentifier = NULL,
+	@Target_BankAccounts_Id uniqueidentifier = NULL,
+	@Amount decimal,
+	@ConfirmationNumber nvarchar(max) = NULL,
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+	
+	-- INCREMENT LAST HEX NUMBER
+	DECLARE @HexLength int = 5, @LastHex_String varchar(5), @NewNo varchar(5)
+	SELECT @LastHex_String = ISNULL(MAX(No),'') From Payments	
+	EXEC UTIL_IncrementHex @HexLength, @LastHex_String, @NewNo OUTPUT
+
+	INSERT INTO Payments(Id,No,Timestamp,Source_BankAccounts_Id,Target_BankAccounts_Id,Amount,ConfirmationNumber,Notes) 
+	VALUES(@Id,@NewNo,CURRENT_TIMESTAMP,@Source_BankAccounts_Id,@Target_BankAccounts_Id,@Amount,@ConfirmationNumber,@Notes)
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[Payments_get]
+
+	@Id uniqueidentifier = NULL,
+	@Source_BankAccounts_Id uniqueidentifier = NULL,
+	@Target_BankAccounts_Id uniqueidentifier = NULL,
+	@FILTER_Employee_UserAccounts_Id uniqueidentifier = NULL,
+	@FILTER_Payrolls_Id uniqueidentifier = NULL,
+	@StartDate Datetime = NULL,
+	@EndDate Datetime = NULL
+AS
+
+BEGIN
+
+	SELECT Payments.*, Source_BankAccounts.Name AS Source_BankAccounts_Name, Target_BankAccounts.Name AS Target_BankAccounts_Name
+	FROM Payments 
+		LEFT JOIN BankAccounts Source_BankAccounts ON Source_BankAccounts.Id = Payments.Source_BankAccounts_Id
+		LEFT JOIN BankAccounts Target_BankAccounts ON Target_BankAccounts.Id = Payments.Target_BankAccounts_Id
+	WHERE 1=1
+		AND (@Id IS NULL OR Payments.Id = @Id) 
+		AND (@Source_BankAccounts_Id IS NULL OR Payments.Source_BankAccounts_Id = @Source_BankAccounts_Id) 
+		AND (@Target_BankAccounts_Id IS NULL OR Payments.Target_BankAccounts_Id = @Target_BankAccounts_Id) 
+		AND (@FILTER_Employee_UserAccounts_Id IS NULL OR Payments.Id IN (
+				SELECT DISTINCT(PaymentItems.Payments_Id)
+				FROM PaymentItems 
+					LEFT OUTER JOIN Payrolls ON Payrolls.Id = PaymentItems.Transaction_RefId
+				WHERE Payrolls.Employee_UserAccounts_Id = @FILTER_Employee_UserAccounts_Id
+			))
+		AND (@FILTER_Payrolls_Id IS NULL OR Payments.Id IN (
+				SELECT DISTINCT(PaymentItems.Payments_Id)
+				FROM PaymentItems 
+					LEFT OUTER JOIN Payrolls ON Payrolls.Id = PaymentItems.Transaction_RefId
+				WHERE Payrolls.Id = @FILTER_Payrolls_Id
+			))
+		AND (@StartDate IS NULL OR Payments.Timestamp >= @StartDate)
+		AND (@EndDate IS NULL OR Payments.Timestamp <= @EndDate)
+	ORDER BY Payments.Timestamp DESC
+
+END	
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[Payments_update_Approved]
+
+	@Id uniqueidentifier,
+	@Approved bit
+	
+AS
+
+BEGIN
+
+	UPDATE Payments SET
+		Approved = @Approved
+	WHERE Id = @Id
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[Payments_update_Rejected]
+
+	@Id uniqueidentifier,
+	@Rejected bit
+	
+AS
+
+BEGIN
+
+	UPDATE Payments SET
+		Rejected = @Rejected
+	WHERE Id = @Id
+
+END
+GO
 
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Payrolls_get]
@@ -41,6 +214,7 @@ BEGIN
 
 	SELECT PayrollItems.*,
 		RTRIM(PayrollItems.Description + CHAR(13)+CHAR(10) + ISNULL(PayrollItems.Notes,'')) AS DescriptionAndNotes,
+		Payrolls.No AS Payrolls_No,
 		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS Employee_UserAccounts_Fullname,
 		Attendances.TimestampIn as Attendances_TimestampIn
 	FROM PayrollItems
@@ -190,7 +364,9 @@ ALTER PROCEDURE [dbo].[BankAccounts_get]
 	@Owner_RefId uniqueidentifier= NULL,
 	@BankName nvarchar(max) = NULL,
 	@AccountNumber nvarchar(max) = NULL,
-	@Notes nvarchar(MAX) = NULL
+	@Notes nvarchar(MAX) = NULL,
+	@Internal bit = NULL,
+	@Filter_Employee bit = NULL
 
 AS
 
@@ -210,6 +386,8 @@ BEGIN
 		AND (@BankName IS NULL OR BankAccounts.BankName LIKE '%'+ @BankName +'%')
 		AND (@AccountNumber IS NULL OR BankAccounts.AccountNumber = @AccountNumber)
 		AND (@Notes IS NULL OR BankAccounts.Notes LIKE '%'+ @Notes +'%')
+		AND (@Internal IS NULL OR BankAccounts.Internal = @Internal)
+		AND (@FILTER_Employee IS NULL OR (@FILTER_Employee = 1 AND UserAccounts.Id IS NOT NULL))
 
 	ORDER BY BankAccounts.Name, BankAccounts.Owner_RefId, BankName
 
@@ -314,6 +492,25 @@ BEGIN
 
 END
 GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[BankAccounts_update_Internal]
+
+	@Id uniqueidentifier,
+	@Internal bit
+	
+AS
+
+BEGIN
+
+	UPDATE BankAccounts SET
+		Internal = @Internal
+	WHERE Id = @Id
+
+END
+GO
+
 
 /**************************************************************************************************************************************************************/
 
