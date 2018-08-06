@@ -55,7 +55,7 @@ namespace HR_Desktop.Payroll
             in_BankAmount.Value = _amount;
 
             BankAccount.populateDropDownList(iddl_Source_BankAccounts,false,true, null);
-            BankAccount.populateDropDownList(iddl_Target_BankAccounts, false, false, true);
+            BankAccount.populateDropDownList(iddl_Target_BankAccounts, false, false, null);
 
             setupControlsBasedOnRoles();
         }

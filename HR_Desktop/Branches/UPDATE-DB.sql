@@ -1,38 +1,14 @@
 ﻿/**************************************************************************************************************************************************************/
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
-CREATE TABLE [dbo].[Payments] (
-	Id						UNIQUEIDENTIFIER NOT NULL,
-	No						NVARCHAR (MAX)   NOT NULL,
-	Timestamp				DATETIME         NOT NULL,
-	Source_BankAccounts_Id	UNIQUEIDENTIFIER,
-	Target_BankAccounts_Id	UNIQUEIDENTIFIER,
-	Amount					DECIMAL(10,0) NOT NULL,
-	ConfirmationNumber		NVARCHAR(MAX),
-	Notes			        NVARCHAR(MAX),
-	Approved				BIT DEFAULT 0 NOT NULL,
-	Rejected				BIT DEFAULT 0 NOT NULL,
-	PRIMARY KEY CLUSTERED ([Id] ASC)
-);
 
-	
-CREATE TABLE [dbo].[PaymentItems] (
-	Id					UNIQUEIDENTIFIER NOT NULL,
-	Payments_Id			UNIQUEIDENTIFIER NOT NULL,
-	Transaction_RefId	UNIQUEIDENTIFIER NOT NULL,
-	Amount				DECIMAL(10,0) NOT NULL,
-	Notes				NVARCHAR(MAX),
-	PRIMARY KEY CLUSTERED ([Id] ASC)
-);
 
-ALTER TABLE dbo.BankAccounts ADD Internal BIT DEFAULT 0 NOT NULL;
-ALTER TABLE dbo.Payrolls ADD No NVARCHAR(MAX);
-ALTER TABLE dbo.Payrolls ALTER COLUMN No NVARCHAR(MAX) NOT NULL;
-GO
+
+
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[PaymentItems_add]
+ALTER PROCEDURE [dbo].[PaymentItems_add]
 
 	@Id uniqueidentifier,
 	@Payments_Id uniqueidentifier,
@@ -50,9 +26,8 @@ BEGIN
 END
 GO
 
-
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[PaymentItems_get]
+ALTER PROCEDURE [dbo].[PaymentItems_get]
 
 	@Payments_Id uniqueidentifier
 
@@ -76,7 +51,7 @@ END
 GO
 	
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Payments_add]
+ALTER PROCEDURE [dbo].[Payments_add]
 
 	@Id uniqueidentifier,
 	@Source_BankAccounts_Id uniqueidentifier = NULL,
@@ -102,7 +77,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Payments_get]
+ALTER PROCEDURE [dbo].[Payments_get]
 
 	@Id uniqueidentifier = NULL,
 	@Source_BankAccounts_Id uniqueidentifier = NULL,
@@ -144,7 +119,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Payments_update_Approved]
+ALTER PROCEDURE [dbo].[Payments_update_Approved]
 
 	@Id uniqueidentifier,
 	@Approved bit
@@ -162,7 +137,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Payments_update_Rejected]
+ALTER PROCEDURE [dbo].[Payments_update_Rejected]
 
 	@Id uniqueidentifier,
 	@Rejected bit
@@ -376,7 +351,7 @@ BEGIN
 		Clients.CompanyName AS Clients_CompanyName,
 		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname
 	FROM BankAccounts 
-		LEFT OUTER JOIN Clients ON BankAccounts.Owner_RefId = Clients.Id
+		LEFT OUTER JOIN Clients ON Clients.Id = BankAccounts.Owner_RefId
 		LEFT OUTER JOIN UserAccounts ON UserAccounts.Id = BankAccounts.Owner_RefId
 	WHERE 1=1
 		AND (@FILTER_IncludeInactive = 1 OR BankAccounts.Active = 1)
@@ -495,7 +470,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[BankAccounts_update_Internal]
+ALTER PROCEDURE [dbo].[BankAccounts_update_Internal]
 
 	@Id uniqueidentifier,
 	@Internal bit

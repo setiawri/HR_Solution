@@ -6,7 +6,7 @@ using LIBUtil;
 using LOGIN;
 namespace HR_Desktop.Payroll
 {
-    public partial class Timesheets_Form : Form
+    public partial class Timesheets_Form2 : Form
     {
         /*******************************************************************************************************/
         #region SETTINGS
@@ -27,8 +27,8 @@ namespace HR_Desktop.Payroll
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public Timesheets_Form() : this(null) { }
-        public Timesheets_Form(Guid? id) { InitializeComponent(); }
+        public Timesheets_Form2() : this(null) { }
+        public Timesheets_Form2(Guid? id) { InitializeComponent(); }
 
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
@@ -243,11 +243,6 @@ namespace HR_Desktop.Payroll
         {
             Util.displayForm(null, new Admin.MasterData_v1_Attendances_Form(), false);
             populateDgvAttendance();
-        }
-
-        private void itxt_UserAccount_isBrowseMode_Clicked(object sender, EventArgs e)
-        {
-
         }
 
 
