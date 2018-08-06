@@ -29,7 +29,7 @@ namespace HR_Desktop.Payroll
         /*******************************************************************************************************/
         #region PRIVATE VARIABLES
 
-        //private List<PaymentInfo> _selectedPayrolls_PaymentInfo = new List<PaymentInfo>();
+        private List<PaymentInfo> _selectedPayrolls_PaymentInfo = new List<PaymentInfo>();
 
         private FormModes _formMode;
 
@@ -112,8 +112,27 @@ namespace HR_Desktop.Payroll
 
         private void calculateTotals()
         {
-            lblTotalAmount.Text = string.Format("{0:N0}", Util.compute((DataTable)dgvPayrollItems.DataSource, "SUM", PayrollItem.COL_DB_Amount, null));
-            lblPayableAmount.Text = string.Format("{0:N0}", lblTotalAmount.Text);
+            decimal totalAmount = Util.compute((DataTable)dgvPayrollItems.DataSource, "SUM", PayrollItem.COL_DB_Amount, null);
+            lblTotalAmount.Text = string.Format("{0:N0}", totalAmount);
+
+            _selectedPayrolls_PaymentInfo.Clear();
+
+            foreach (DataGridViewRow row in dgvPayrolls.Rows)
+            {
+                if (Util.getCheckboxValue(row, col_dgvPayrolls_Selected.Index))
+                {
+                    _selectedPayrolls_PaymentInfo.Add(new PaymentInfo(
+                            (Guid)row.Cells[col_dgvPayrolls_Id.Name].Value,
+                            (decimal)row.Cells[col_dgvPayrolls_Amount.Name].Value,
+                            (DateTime)row.Cells[col_dgvPayrolls_Timestamp.Name].Value
+                        ));
+                }
+            }
+
+            if (totalAmount == 0)
+                btnPayment.Enabled = false;
+            else
+                btnPayment.Enabled = true;
         }
 
         #endregion METHODS
@@ -129,6 +148,11 @@ namespace HR_Desktop.Payroll
         private void menu_log_Click(object sender, EventArgs e)
         {
             ActivityLogs_Form.show( UserAccount.LoggedInAccount, dgvPayrolls, col_dgvPayrolls_Id);
+        }
+
+        private void menu_payment_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Payroll.Payments_Main_Form());
         }
 
         private void dgvPayrolls_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -171,6 +195,11 @@ namespace HR_Desktop.Payroll
         private void pbRefreshCalculation_Click(object sender, EventArgs e)
         {
             populateDgvPayrollItems();
+        }
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            Util.displayForm(null, new Payroll.Payments_Add_Form(_selectedPayrolls_PaymentInfo));
         }
 
         #endregion EVENT HANDLERS

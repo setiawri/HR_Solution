@@ -25,6 +25,7 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_BankName;
         private DataGridViewColumn col_dgv_AccountNumber;
         private DataGridViewColumn col_dgv_Notes;
+        private DataGridViewColumn col_dgv_Internal;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
@@ -56,8 +57,10 @@ namespace HR_Desktop.Admin
             col_dgv_Owner_UserAccounts = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Owner_UserAccounts", rbUserAccount.Text, BankAccount.COL_UserAccounts_Fullname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_BankName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_BankName", itxt_BankName.LabelText, BankAccount.COL_DB_BankName, true, true, "", true, false, 70, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_AccountNumber = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_AccountNumber", itxt_AccountNumber.LabelText, BankAccount.COL_DB_AccountNumber, true, true, "", true, false, 70, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, BankAccount.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, BankAccount.COL_DB_Notes, true, true, "", true, false, 30, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Internal = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Internal", "Internal", BankAccount.COL_DB_Internal, true, true, "", false, true, 50, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
         }
 
         protected override void additionalSettings() { }
@@ -87,7 +90,8 @@ namespace HR_Desktop.Admin
                     itxt_Owner_Ref.ValueGuid,
                     itxt_BankName.ValueText,
                     itxt_AccountNumber.ValueText,
-                    itxt_Notes.ValueText
+                    itxt_Notes.ValueText,
+                    null, null
                     ).DefaultView;
         }
 
@@ -172,6 +176,15 @@ namespace HR_Desktop.Admin
                 Util.getSelectedRowValue(dgv, col_dgv_Owner_UserAccounts),
                 Util.getSelectedRowValue(dgv, col_dgv_AccountNumber)
                 );
+        }
+
+        protected override void virtual_dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Util.isColumnMatch(sender, e, col_dgv_Internal))
+            {
+                BankAccount.updateInternalStatus(UserAccount.LoggedInAccount.Id, selectedRowID(), !Util.getCheckboxValue(sender, e));
+                populateGridViewDataSource(true);
+            }
         }
 
 

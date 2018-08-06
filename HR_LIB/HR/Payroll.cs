@@ -12,6 +12,7 @@ namespace HR_LIB.HR
         #region PUBLIC VARIABLES
 
         public Guid Id;
+        public string No;
         public DateTime Timestamp;
         public decimal Amount;
         public Guid Employee_UserAccounts_Id;
@@ -23,6 +24,7 @@ namespace HR_LIB.HR
         #region DATABASE FIELDS
 
         public const string COL_DB_Id = "Id";
+        public const string COL_DB_No = "No";
         public const string COL_DB_Timestamp = "Timestamp";
         public const string COL_DB_Employee_UserAccounts_Id = "Employee_UserAccounts_Id";
         public const string COL_DB_Amount = "Amount";
@@ -43,6 +45,7 @@ namespace HR_LIB.HR
                 row = get(sqlConnection, id);
 
             Id = id;
+            No = Util.wrapNullable<string>(row, COL_DB_No);
             Timestamp = Util.wrapNullable<DateTime>(row, COL_DB_Timestamp);
             Amount = Util.wrapNullable<decimal>(row, COL_DB_Amount);
             Employee_UserAccounts_Id = Util.wrapNullable<Guid>(row, COL_DB_Employee_UserAccounts_Id);

@@ -19,6 +19,7 @@ namespace HR_LIB.HR
         public string AccountNumber;
         public string Notes;
         public bool Active;
+        public bool Internal;
 
 
         public string Clients_CompanyName;
@@ -35,8 +36,10 @@ namespace HR_LIB.HR
         public const string COL_DB_AccountNumber = "AccountNumber";
         public const string COL_DB_Notes = "Notes";
         public const string COL_DB_Active = "Active";
+        public const string COL_DB_Internal = "Internal";
 
         public const string COL_FILTER_IncludeInactive = "FILTER_IncludeInactive";
+        public const string COL_FILTER_Employee = "FILTER_Employee";
         public const string COL_Clients_CompanyName = "Clients_CompanyName";
         public const string COL_UserAccounts_Fullname = "UserAccounts_Fullname";
 
@@ -57,6 +60,7 @@ namespace HR_LIB.HR
                 AccountNumber = Util.wrapNullable<string>(row, COL_DB_AccountNumber);
                 Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
                 Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+                Internal = Util.wrapNullable<bool>(row, COL_DB_Internal);
 
                 Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
                 UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
@@ -106,9 +110,9 @@ namespace HR_LIB.HR
             return id;
         }
 
-        public static DataRow get(Guid id) { return Util.getFirstRow(get(false, id, null, null, null, null, null)); }
+        public static DataRow get(Guid id) { return Util.getFirstRow(get(false, id, null, null, null, null, null, null, null)); }
 
-        public static DataTable get(bool filterIncludeInactive, Guid? id, string name, Guid? owner_RefId, string bankName, string accountNumber, string notes)
+        public static DataTable get(bool filterIncludeInactive, Guid? id, string name, Guid? owner_RefId, string bankName, string accountNumber, string notes, bool? Internal, bool? filterEmployee)
         {
             SqlQueryResult result = DBConnection.query(
                 QueryTypes.FillByAdapter,
@@ -119,7 +123,10 @@ namespace HR_LIB.HR
                     new SqlQueryParameter(COL_DB_Owner_RefId, SqlDbType.UniqueIdentifier, Util.wrapNullable(owner_RefId)),
                     new SqlQueryParameter(COL_DB_BankName, SqlDbType.NVarChar, Util.wrapNullable(bankName)),
                     new SqlQueryParameter(COL_DB_AccountNumber, SqlDbType.NVarChar, Util.wrapNullable(accountNumber)),
-                    new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
+                    new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes)),
+                    new SqlQueryParameter(COL_DB_Internal, SqlDbType.Bit, Internal),
+                    new SqlQueryParameter(COL_FILTER_Employee, SqlDbType.Bit, filterEmployee)
+
                 );
             return result.Datatable;
         }
@@ -180,9 +187,31 @@ namespace HR_LIB.HR
             }
         }
 
+        public static void updateInternalStatus(Guid userAccountID, Guid id, bool value)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlQueryResult result = DBConnection.query(
+                    sqlConnection,
+                    QueryTypes.ExecuteNonQuery,
+                    "BankAccounts_update_Internal",
+                    new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
+                    new SqlQueryParameter(COL_DB_Internal, SqlDbType.Bit, value)
+                );
+
+                if (result.IsSuccessful)
+                    ActivityLog.add(sqlConnection, userAccountID, id, "Update Internal Status to " + value);
+            }
+        }
+
         #endregion DATABASE METHODS
         /*******************************************************************************************************/
         #region CLASS METHODS
+
+        public static void populateDropDownList(LIBUtil.Desktop.UserControls.InputControl_Dropdownlist dropdownlist, bool includeInactive, bool? Internal, bool? filterEmployee)
+        {
+            dropdownlist.populate(get(includeInactive, null, null, null, null, null, null, Internal, filterEmployee), COL_DB_Name, COL_DB_Id, null);
+        }
 
         #endregion CLASS METHODS
         /*******************************************************************************************************/

@@ -30,6 +30,7 @@
         {
             this.menu_reports = new System.Windows.Forms.ToolStripMenuItem();
             this.reports_timesheets = new System.Windows.Forms.ToolStripMenuItem();
+            this.reports_payrolls = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlShortcuts = new System.Windows.Forms.Panel();
             this.gbShortcuts = new System.Windows.Forms.GroupBox();
             this.flpShortcuts = new System.Windows.Forms.FlowLayoutPanel();
@@ -50,7 +51,7 @@
             this.admin_holidayschedules = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_account = new System.Windows.Forms.ToolStripMenuItem();
             this.expandCollapseToggle1 = new LIBUtil.Desktop.UserControls.PanelToggle();
-            this.reports_payrolls = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_payments = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlShortcuts.SuspendLayout();
             this.gbShortcuts.SuspendLayout();
             this.flpShortcuts.SuspendLayout();
@@ -62,7 +63,8 @@
             // 
             this.menu_reports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reports_timesheets,
-            this.reports_payrolls});
+            this.reports_payrolls,
+            this.menu_payments});
             this.menu_reports.Name = "menu_reports";
             this.menu_reports.Size = new System.Drawing.Size(72, 24);
             this.menu_reports.Text = "Reports";
@@ -74,13 +76,20 @@
             this.reports_timesheets.Text = "Timesheets";
             this.reports_timesheets.Click += new System.EventHandler(this.reports_timesheets_Click);
             // 
+            // reports_payrolls
+            // 
+            this.reports_payrolls.Name = "reports_payrolls";
+            this.reports_payrolls.Size = new System.Drawing.Size(216, 26);
+            this.reports_payrolls.Text = "Payrolls";
+            this.reports_payrolls.Click += new System.EventHandler(this.reports_payrolls_Click);
+            // 
             // pnlShortcuts
             // 
             this.pnlShortcuts.BackColor = System.Drawing.Color.White;
             this.pnlShortcuts.Controls.Add(this.gbShortcuts);
             this.pnlShortcuts.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlShortcuts.Location = new System.Drawing.Point(0, 28);
-            this.pnlShortcuts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlShortcuts.Margin = new System.Windows.Forms.Padding(4);
             this.pnlShortcuts.Name = "pnlShortcuts";
             this.pnlShortcuts.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.pnlShortcuts.Size = new System.Drawing.Size(193, 526);
@@ -93,9 +102,9 @@
             this.gbShortcuts.Controls.Add(this.flpShortcuts);
             this.gbShortcuts.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbShortcuts.Location = new System.Drawing.Point(7, 6);
-            this.gbShortcuts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbShortcuts.Margin = new System.Windows.Forms.Padding(4);
             this.gbShortcuts.Name = "gbShortcuts";
-            this.gbShortcuts.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbShortcuts.Padding = new System.Windows.Forms.Padding(4);
             this.gbShortcuts.Size = new System.Drawing.Size(179, 113);
             this.gbShortcuts.TabIndex = 14;
             this.gbShortcuts.TabStop = false;
@@ -110,7 +119,7 @@
             this.flpShortcuts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpShortcuts.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpShortcuts.Location = new System.Drawing.Point(4, 19);
-            this.flpShortcuts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flpShortcuts.Margin = new System.Windows.Forms.Padding(4);
             this.flpShortcuts.Name = "flpShortcuts";
             this.flpShortcuts.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.flpShortcuts.Size = new System.Drawing.Size(171, 90);
@@ -142,7 +151,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 39);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(100, 41);
@@ -277,20 +286,21 @@
             // 
             // expandCollapseToggle1
             // 
+            this.expandCollapseToggle1.AdjustLocationOnClick = false;
             this.expandCollapseToggle1.InitialArrowDirection = System.Windows.Forms.ArrowDirection.Left;
             this.expandCollapseToggle1.Location = new System.Drawing.Point(193, 30);
-            this.expandCollapseToggle1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.expandCollapseToggle1.Margin = new System.Windows.Forms.Padding(5);
             this.expandCollapseToggle1.Name = "expandCollapseToggle1";
             this.expandCollapseToggle1.Size = new System.Drawing.Size(27, 25);
             this.expandCollapseToggle1.TabIndex = 17;
             this.expandCollapseToggle1.TogglePanel = this.pnlShortcuts;
             // 
-            // reports_payrolls
+            // menu_payments
             // 
-            this.reports_payrolls.Name = "reports_payrolls";
-            this.reports_payrolls.Size = new System.Drawing.Size(216, 26);
-            this.reports_payrolls.Text = "Payrolls";
-            this.reports_payrolls.Click += new System.EventHandler(this.reports_payrolls_Click);
+            this.menu_payments.Name = "menu_payments";
+            this.menu_payments.Size = new System.Drawing.Size(216, 26);
+            this.menu_payments.Text = "Payments";
+            this.menu_payments.Click += new System.EventHandler(this.menu_payments_Click);
             // 
             // Main_Form
             // 
@@ -300,7 +310,7 @@
             this.Controls.Add(this.expandCollapseToggle1);
             this.Controls.Add(this.pnlShortcuts);
             this.Controls.Add(this.msMain);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Main_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LUCKY STAR SECURITY";
@@ -345,5 +355,6 @@
         private System.Windows.Forms.LinkLabel lnk_Timesheets;
         private LIBUtil.Desktop.UserControls.PanelToggle expandCollapseToggle1;
         private System.Windows.Forms.ToolStripMenuItem reports_payrolls;
+        private System.Windows.Forms.ToolStripMenuItem menu_payments;
     }
 }

@@ -156,6 +156,11 @@ namespace HR_Desktop
             LIBUtil.Util.displayMDIChild(new Payroll.Payrolls_Main_Form());
         }
 
+        private void menu_payments_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Payroll.Payments_Main_Form());
+        }
+
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

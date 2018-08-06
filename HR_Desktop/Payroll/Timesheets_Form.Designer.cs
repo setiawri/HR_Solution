@@ -28,52 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.pnlContainer = new System.Windows.Forms.Panel();
-            this.ptFilterAttendance = new LIBUtil.Desktop.UserControls.PanelToggle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilterAttendance = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.idtp_FilterAttendance_Out = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
             this.idtp_FilterAttendance_StartDate = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
             this.idtp_FilterAttendance_EndDate = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
             this.btnFilterAttendance = new System.Windows.Forms.Button();
             this.iddl_DayOfWeek = new LIBUtil.Desktop.UserControls.InputControl_Dropdownlist();
             this.idtp_FilterAttendance_In = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.itxt_Notes = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
-            this.idtp_EffectiveTimestampOut = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
-            this.idtp_EffectiveTimestampIn = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
-            this.idtp_TimestampOut = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
-            this.itxt_Workshift = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
-            this.itxt_Attendance_Client = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
-            this.idtp_TimestampIn = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
             this.iddl_AttendanceStatuses = new LIBUtil.Desktop.UserControls.InputControl_Dropdownlist();
-            this.btnSubmitAttendance = new System.Windows.Forms.Button();
             this.dgvAttendance = new System.Windows.Forms.DataGridView();
-            this.pnlEmployees = new System.Windows.Forms.Panel();
-            this.ptFilterEmployee = new LIBUtil.Desktop.UserControls.PanelToggle();
-            this.dgvEmployees = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvEmployees_UserAccounts_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvEmployees_Clients_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvEmployees_UserAccounts_Fullname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlFilterEmployees = new System.Windows.Forms.Panel();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.chkFilterEmployeeByName = new System.Windows.Forms.CheckBox();
-            this.itxt_FilterEmployee_UserAccounts_Name = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.chkFilterEmployeesByClient = new System.Windows.Forms.CheckBox();
-            this.itxt_FilterEmployee_Client = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
-            this.idtp_FilterEmployee_StartDate = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
-            this.idtp_FilterEmployee_EndDate = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
-            this.btnFilterEmployees = new System.Windows.Forms.Button();
             this.col_dgvAttendance_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvAttendance_PayrollItems_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvAttendance_In = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,72 +57,30 @@
             this.col_dgvAttendance_Flag1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col_dgvAttendance_Flag2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col_dgvAttendance_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlContainer.SuspendLayout();
+            this.itxt_FilterEmployee_Client = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
+            this.btnAddAttendance = new System.Windows.Forms.Button();
+            this.itxt_UserAccount = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.pnlFilterAttendance.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAttendance)).BeginInit();
-            this.pnlEmployees.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
-            this.pnlFilterEmployees.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContainer
-            // 
-            this.pnlContainer.Controls.Add(this.ptFilterAttendance);
-            this.pnlContainer.Controls.Add(this.dgvAttendance);
-            this.pnlContainer.Controls.Add(this.pnlFilterAttendance);
-            this.pnlContainer.Controls.Add(this.pnlEmployees);
-            this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContainer.Location = new System.Drawing.Point(0, 0);
-            this.pnlContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(1445, 629);
-            this.pnlContainer.TabIndex = 0;
-            // 
-            // ptFilterAttendance
-            // 
-            this.ptFilterAttendance.AdjustLocationOnClick = false;
-            this.ptFilterAttendance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ptFilterAttendance.BackColor = System.Drawing.SystemColors.Control;
-            this.ptFilterAttendance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ptFilterAttendance.InitialArrowDirection = System.Windows.Forms.ArrowDirection.Up;
-            this.ptFilterAttendance.Location = new System.Drawing.Point(1419, 181);
-            this.ptFilterAttendance.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.ptFilterAttendance.Name = "ptFilterAttendance";
-            this.ptFilterAttendance.Size = new System.Drawing.Size(26, 24);
-            this.ptFilterAttendance.TabIndex = 6;
-            this.ptFilterAttendance.TogglePanel = this.pnlFilterAttendance;
             // 
             // pnlFilterAttendance
             // 
-            this.pnlFilterAttendance.Controls.Add(this.groupBox2);
-            this.pnlFilterAttendance.Controls.Add(this.groupBox1);
+            this.pnlFilterAttendance.Controls.Add(this.idtp_FilterAttendance_Out);
+            this.pnlFilterAttendance.Controls.Add(this.itxt_UserAccount);
+            this.pnlFilterAttendance.Controls.Add(this.idtp_FilterAttendance_StartDate);
+            this.pnlFilterAttendance.Controls.Add(this.btnAddAttendance);
+            this.pnlFilterAttendance.Controls.Add(this.idtp_FilterAttendance_EndDate);
+            this.pnlFilterAttendance.Controls.Add(this.itxt_FilterEmployee_Client);
+            this.pnlFilterAttendance.Controls.Add(this.iddl_DayOfWeek);
+            this.pnlFilterAttendance.Controls.Add(this.iddl_AttendanceStatuses);
+            this.pnlFilterAttendance.Controls.Add(this.btnFilterAttendance);
+            this.pnlFilterAttendance.Controls.Add(this.idtp_FilterAttendance_In);
             this.pnlFilterAttendance.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFilterAttendance.Location = new System.Drawing.Point(367, 0);
-            this.pnlFilterAttendance.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlFilterAttendance.Location = new System.Drawing.Point(0, 0);
             this.pnlFilterAttendance.Name = "pnlFilterAttendance";
-            this.pnlFilterAttendance.Size = new System.Drawing.Size(1078, 178);
+            this.pnlFilterAttendance.Size = new System.Drawing.Size(1028, 139);
             this.pnlFilterAttendance.TabIndex = 1;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.idtp_FilterAttendance_Out);
-            this.groupBox2.Controls.Add(this.idtp_FilterAttendance_StartDate);
-            this.groupBox2.Controls.Add(this.idtp_FilterAttendance_EndDate);
-            this.groupBox2.Controls.Add(this.btnFilterAttendance);
-            this.groupBox2.Controls.Add(this.iddl_DayOfWeek);
-            this.groupBox2.Controls.Add(this.idtp_FilterAttendance_In);
-            this.groupBox2.Location = new System.Drawing.Point(5, 5);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(249, 170);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "FILTER";
             // 
             // idtp_FilterAttendance_Out
             // 
@@ -161,12 +89,12 @@
             this.idtp_FilterAttendance_Out.DefaultCheckedValue = false;
             this.idtp_FilterAttendance_Out.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_FilterAttendance_Out.LabelText = "OUT";
-            this.idtp_FilterAttendance_Out.Location = new System.Drawing.Point(9, 64);
-            this.idtp_FilterAttendance_Out.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.idtp_FilterAttendance_Out.Location = new System.Drawing.Point(265, 45);
+            this.idtp_FilterAttendance_Out.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.idtp_FilterAttendance_Out.Name = "idtp_FilterAttendance_Out";
             this.idtp_FilterAttendance_Out.ShowCheckBox = true;
             this.idtp_FilterAttendance_Out.ShowUpAndDown = true;
-            this.idtp_FilterAttendance_Out.Size = new System.Drawing.Size(97, 50);
+            this.idtp_FilterAttendance_Out.Size = new System.Drawing.Size(73, 41);
             this.idtp_FilterAttendance_Out.TabIndex = 9;
             this.idtp_FilterAttendance_Out.TabStop = false;
             this.idtp_FilterAttendance_Out.Value = null;
@@ -179,12 +107,12 @@
             this.idtp_FilterAttendance_StartDate.DefaultCheckedValue = false;
             this.idtp_FilterAttendance_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_FilterAttendance_StartDate.LabelText = "Start";
-            this.idtp_FilterAttendance_StartDate.Location = new System.Drawing.Point(111, 14);
-            this.idtp_FilterAttendance_StartDate.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.idtp_FilterAttendance_StartDate.Location = new System.Drawing.Point(158, 4);
+            this.idtp_FilterAttendance_StartDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.idtp_FilterAttendance_StartDate.Name = "idtp_FilterAttendance_StartDate";
             this.idtp_FilterAttendance_StartDate.ShowCheckBox = false;
             this.idtp_FilterAttendance_StartDate.ShowUpAndDown = false;
-            this.idtp_FilterAttendance_StartDate.Size = new System.Drawing.Size(132, 50);
+            this.idtp_FilterAttendance_StartDate.Size = new System.Drawing.Size(99, 41);
             this.idtp_FilterAttendance_StartDate.TabIndex = 14;
             this.idtp_FilterAttendance_StartDate.TabStop = false;
             this.idtp_FilterAttendance_StartDate.Value = null;
@@ -197,12 +125,12 @@
             this.idtp_FilterAttendance_EndDate.DefaultCheckedValue = false;
             this.idtp_FilterAttendance_EndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_FilterAttendance_EndDate.LabelText = "End";
-            this.idtp_FilterAttendance_EndDate.Location = new System.Drawing.Point(111, 64);
-            this.idtp_FilterAttendance_EndDate.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.idtp_FilterAttendance_EndDate.Location = new System.Drawing.Point(158, 45);
+            this.idtp_FilterAttendance_EndDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.idtp_FilterAttendance_EndDate.Name = "idtp_FilterAttendance_EndDate";
             this.idtp_FilterAttendance_EndDate.ShowCheckBox = false;
             this.idtp_FilterAttendance_EndDate.ShowUpAndDown = false;
-            this.idtp_FilterAttendance_EndDate.Size = new System.Drawing.Size(132, 50);
+            this.idtp_FilterAttendance_EndDate.Size = new System.Drawing.Size(99, 41);
             this.idtp_FilterAttendance_EndDate.TabIndex = 15;
             this.idtp_FilterAttendance_EndDate.TabStop = false;
             this.idtp_FilterAttendance_EndDate.Value = null;
@@ -210,10 +138,9 @@
             // 
             // btnFilterAttendance
             // 
-            this.btnFilterAttendance.Location = new System.Drawing.Point(145, 138);
-            this.btnFilterAttendance.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFilterAttendance.Location = new System.Drawing.Point(156, 108);
             this.btnFilterAttendance.Name = "btnFilterAttendance";
-            this.btnFilterAttendance.Size = new System.Drawing.Size(97, 28);
+            this.btnFilterAttendance.Size = new System.Drawing.Size(73, 23);
             this.btnFilterAttendance.TabIndex = 12;
             this.btnFilterAttendance.TabStop = false;
             this.btnFilterAttendance.Text = "FILTER";
@@ -226,13 +153,13 @@
             this.iddl_DayOfWeek.HideFilter = true;
             this.iddl_DayOfWeek.HideUpdateLink = true;
             this.iddl_DayOfWeek.LabelText = "Day";
-            this.iddl_DayOfWeek.Location = new System.Drawing.Point(9, 114);
-            this.iddl_DayOfWeek.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.iddl_DayOfWeek.Location = new System.Drawing.Point(346, 4);
+            this.iddl_DayOfWeek.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.iddl_DayOfWeek.Name = "iddl_DayOfWeek";
             this.iddl_DayOfWeek.SelectedItem = null;
             this.iddl_DayOfWeek.SelectedValue = null;
             this.iddl_DayOfWeek.ShowDropdownlistOnly = false;
-            this.iddl_DayOfWeek.Size = new System.Drawing.Size(127, 50);
+            this.iddl_DayOfWeek.Size = new System.Drawing.Size(111, 41);
             this.iddl_DayOfWeek.TabIndex = 11;
             this.iddl_DayOfWeek.TabStop = false;
             // 
@@ -243,188 +170,31 @@
             this.idtp_FilterAttendance_In.DefaultCheckedValue = false;
             this.idtp_FilterAttendance_In.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_FilterAttendance_In.LabelText = "IN";
-            this.idtp_FilterAttendance_In.Location = new System.Drawing.Point(9, 14);
-            this.idtp_FilterAttendance_In.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.idtp_FilterAttendance_In.Location = new System.Drawing.Point(265, 4);
+            this.idtp_FilterAttendance_In.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.idtp_FilterAttendance_In.Name = "idtp_FilterAttendance_In";
             this.idtp_FilterAttendance_In.ShowCheckBox = true;
             this.idtp_FilterAttendance_In.ShowUpAndDown = true;
-            this.idtp_FilterAttendance_In.Size = new System.Drawing.Size(97, 50);
+            this.idtp_FilterAttendance_In.Size = new System.Drawing.Size(73, 41);
             this.idtp_FilterAttendance_In.TabIndex = 8;
             this.idtp_FilterAttendance_In.TabStop = false;
             this.idtp_FilterAttendance_In.Value = null;
             this.idtp_FilterAttendance_In.ValueTimeSpan = null;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.Controls.Add(this.itxt_Notes);
-            this.groupBox1.Controls.Add(this.idtp_EffectiveTimestampOut);
-            this.groupBox1.Controls.Add(this.idtp_EffectiveTimestampIn);
-            this.groupBox1.Controls.Add(this.idtp_TimestampOut);
-            this.groupBox1.Controls.Add(this.itxt_Workshift);
-            this.groupBox1.Controls.Add(this.itxt_Attendance_Client);
-            this.groupBox1.Controls.Add(this.idtp_TimestampIn);
-            this.groupBox1.Controls.Add(this.iddl_AttendanceStatuses);
-            this.groupBox1.Controls.Add(this.btnSubmitAttendance);
-            this.groupBox1.Location = new System.Drawing.Point(259, 5);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(592, 170);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "ATTENDANCE";
-            // 
-            // itxt_Notes
-            // 
-            this.itxt_Notes.IsBrowseMode = false;
-            this.itxt_Notes.LabelText = "Notes";
-            this.itxt_Notes.Location = new System.Drawing.Point(385, 64);
-            this.itxt_Notes.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.itxt_Notes.MaxLength = 32767;
-            this.itxt_Notes.MultiLine = true;
-            this.itxt_Notes.Name = "itxt_Notes";
-            this.itxt_Notes.PasswordChar = '\0';
-            this.itxt_Notes.RowCount = 2;
-            this.itxt_Notes.ShowDeleteButton = false;
-            this.itxt_Notes.ShowTextboxOnly = false;
-            this.itxt_Notes.Size = new System.Drawing.Size(197, 69);
-            this.itxt_Notes.TabIndex = 7;
-            this.itxt_Notes.TabStop = false;
-            this.itxt_Notes.ValueText = "";
-            // 
-            // idtp_EffectiveTimestampOut
-            // 
-            this.idtp_EffectiveTimestampOut.Checked = false;
-            this.idtp_EffectiveTimestampOut.CustomFormat = "dd/MM/yyyy HH:mm";
-            this.idtp_EffectiveTimestampOut.DefaultCheckedValue = false;
-            this.idtp_EffectiveTimestampOut.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.idtp_EffectiveTimestampOut.LabelText = "Effective OUT";
-            this.idtp_EffectiveTimestampOut.Location = new System.Drawing.Point(197, 116);
-            this.idtp_EffectiveTimestampOut.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.idtp_EffectiveTimestampOut.Name = "idtp_EffectiveTimestampOut";
-            this.idtp_EffectiveTimestampOut.ShowCheckBox = false;
-            this.idtp_EffectiveTimestampOut.ShowUpAndDown = false;
-            this.idtp_EffectiveTimestampOut.Size = new System.Drawing.Size(177, 50);
-            this.idtp_EffectiveTimestampOut.TabIndex = 6;
-            this.idtp_EffectiveTimestampOut.Value = null;
-            this.idtp_EffectiveTimestampOut.ValueTimeSpan = null;
-            // 
-            // idtp_EffectiveTimestampIn
-            // 
-            this.idtp_EffectiveTimestampIn.Checked = false;
-            this.idtp_EffectiveTimestampIn.CustomFormat = "dd/MM/yyyy HH:mm";
-            this.idtp_EffectiveTimestampIn.DefaultCheckedValue = false;
-            this.idtp_EffectiveTimestampIn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.idtp_EffectiveTimestampIn.LabelText = "Effective IN";
-            this.idtp_EffectiveTimestampIn.Location = new System.Drawing.Point(9, 116);
-            this.idtp_EffectiveTimestampIn.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.idtp_EffectiveTimestampIn.Name = "idtp_EffectiveTimestampIn";
-            this.idtp_EffectiveTimestampIn.ShowCheckBox = false;
-            this.idtp_EffectiveTimestampIn.ShowUpAndDown = false;
-            this.idtp_EffectiveTimestampIn.Size = new System.Drawing.Size(177, 50);
-            this.idtp_EffectiveTimestampIn.TabIndex = 5;
-            this.idtp_EffectiveTimestampIn.Value = null;
-            this.idtp_EffectiveTimestampIn.ValueTimeSpan = null;
-            // 
-            // idtp_TimestampOut
-            // 
-            this.idtp_TimestampOut.Checked = false;
-            this.idtp_TimestampOut.CustomFormat = "dd/MM/yyyy HH:mm";
-            this.idtp_TimestampOut.DefaultCheckedValue = false;
-            this.idtp_TimestampOut.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.idtp_TimestampOut.LabelText = "OUT";
-            this.idtp_TimestampOut.Location = new System.Drawing.Point(197, 64);
-            this.idtp_TimestampOut.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.idtp_TimestampOut.Name = "idtp_TimestampOut";
-            this.idtp_TimestampOut.ShowCheckBox = false;
-            this.idtp_TimestampOut.ShowUpAndDown = false;
-            this.idtp_TimestampOut.Size = new System.Drawing.Size(177, 50);
-            this.idtp_TimestampOut.TabIndex = 4;
-            this.idtp_TimestampOut.Value = null;
-            this.idtp_TimestampOut.ValueTimeSpan = null;
-            this.idtp_TimestampOut.ValueChanged += new System.EventHandler(this.idtp_TimestampOut_ValueChanged);
-            // 
-            // itxt_Workshift
-            // 
-            this.itxt_Workshift.IsBrowseMode = true;
-            this.itxt_Workshift.LabelText = "Workshift";
-            this.itxt_Workshift.Location = new System.Drawing.Point(221, 14);
-            this.itxt_Workshift.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.itxt_Workshift.MaxLength = 32767;
-            this.itxt_Workshift.MultiLine = false;
-            this.itxt_Workshift.Name = "itxt_Workshift";
-            this.itxt_Workshift.PasswordChar = '\0';
-            this.itxt_Workshift.RowCount = 1;
-            this.itxt_Workshift.ShowDeleteButton = true;
-            this.itxt_Workshift.ShowTextboxOnly = false;
-            this.itxt_Workshift.Size = new System.Drawing.Size(213, 50);
-            this.itxt_Workshift.TabIndex = 1;
-            this.itxt_Workshift.ValueText = "";
-            this.itxt_Workshift.isBrowseMode_Clicked += new System.EventHandler(this.itxt_Workshift_isBrowseMode_Clicked);
-            // 
-            // itxt_Attendance_Client
-            // 
-            this.itxt_Attendance_Client.IsBrowseMode = true;
-            this.itxt_Attendance_Client.LabelText = "*Client";
-            this.itxt_Attendance_Client.Location = new System.Drawing.Point(8, 14);
-            this.itxt_Attendance_Client.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.itxt_Attendance_Client.MaxLength = 32767;
-            this.itxt_Attendance_Client.MultiLine = false;
-            this.itxt_Attendance_Client.Name = "itxt_Attendance_Client";
-            this.itxt_Attendance_Client.PasswordChar = '\0';
-            this.itxt_Attendance_Client.RowCount = 1;
-            this.itxt_Attendance_Client.ShowDeleteButton = true;
-            this.itxt_Attendance_Client.ShowTextboxOnly = false;
-            this.itxt_Attendance_Client.Size = new System.Drawing.Size(213, 50);
-            this.itxt_Attendance_Client.TabIndex = 0;
-            this.itxt_Attendance_Client.ValueText = "";
-            this.itxt_Attendance_Client.isBrowseMode_Clicked += new System.EventHandler(this.itxt_Attendance_Client_isBrowseMode_Clicked);
-            // 
-            // idtp_TimestampIn
-            // 
-            this.idtp_TimestampIn.Checked = false;
-            this.idtp_TimestampIn.CustomFormat = "dd/MM/yyyy HH:mm";
-            this.idtp_TimestampIn.DefaultCheckedValue = false;
-            this.idtp_TimestampIn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.idtp_TimestampIn.LabelText = "IN";
-            this.idtp_TimestampIn.Location = new System.Drawing.Point(9, 64);
-            this.idtp_TimestampIn.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.idtp_TimestampIn.Name = "idtp_TimestampIn";
-            this.idtp_TimestampIn.ShowCheckBox = false;
-            this.idtp_TimestampIn.ShowUpAndDown = false;
-            this.idtp_TimestampIn.Size = new System.Drawing.Size(177, 50);
-            this.idtp_TimestampIn.TabIndex = 3;
-            this.idtp_TimestampIn.Value = null;
-            this.idtp_TimestampIn.ValueTimeSpan = null;
-            this.idtp_TimestampIn.ValueChanged += new System.EventHandler(this.idtp_TimestampIn_ValueChanged);
             // 
             // iddl_AttendanceStatuses
             // 
             this.iddl_AttendanceStatuses.DisableTextInput = false;
             this.iddl_AttendanceStatuses.HideFilter = true;
             this.iddl_AttendanceStatuses.HideUpdateLink = true;
-            this.iddl_AttendanceStatuses.LabelText = "*Status";
-            this.iddl_AttendanceStatuses.Location = new System.Drawing.Point(436, 14);
-            this.iddl_AttendanceStatuses.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.iddl_AttendanceStatuses.LabelText = "Status";
+            this.iddl_AttendanceStatuses.Location = new System.Drawing.Point(346, 45);
+            this.iddl_AttendanceStatuses.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.iddl_AttendanceStatuses.Name = "iddl_AttendanceStatuses";
             this.iddl_AttendanceStatuses.SelectedItem = null;
             this.iddl_AttendanceStatuses.SelectedValue = null;
             this.iddl_AttendanceStatuses.ShowDropdownlistOnly = false;
-            this.iddl_AttendanceStatuses.Size = new System.Drawing.Size(148, 50);
+            this.iddl_AttendanceStatuses.Size = new System.Drawing.Size(111, 41);
             this.iddl_AttendanceStatuses.TabIndex = 2;
-            // 
-            // btnSubmitAttendance
-            // 
-            this.btnSubmitAttendance.Location = new System.Drawing.Point(435, 138);
-            this.btnSubmitAttendance.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnSubmitAttendance.Name = "btnSubmitAttendance";
-            this.btnSubmitAttendance.Size = new System.Drawing.Size(100, 28);
-            this.btnSubmitAttendance.TabIndex = 8;
-            this.btnSubmitAttendance.Text = "SUBMIT";
-            this.btnSubmitAttendance.UseVisualStyleBackColor = true;
-            this.btnSubmitAttendance.Click += new System.EventHandler(this.btnSubmitAttendance_Click);
             // 
             // dgvAttendance
             // 
@@ -433,14 +203,14 @@
             this.dgvAttendance.AllowUserToResizeRows = false;
             this.dgvAttendance.BackgroundColor = System.Drawing.Color.White;
             this.dgvAttendance.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAttendance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAttendance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAttendance.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_dgvAttendance_Id,
@@ -457,261 +227,15 @@
             this.col_dgvAttendance_Flag2,
             this.col_dgvAttendance_Notes});
             this.dgvAttendance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAttendance.Location = new System.Drawing.Point(367, 178);
-            this.dgvAttendance.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvAttendance.Location = new System.Drawing.Point(0, 139);
             this.dgvAttendance.MultiSelect = false;
             this.dgvAttendance.Name = "dgvAttendance";
             this.dgvAttendance.RowHeadersVisible = false;
             this.dgvAttendance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAttendance.Size = new System.Drawing.Size(1078, 451);
+            this.dgvAttendance.Size = new System.Drawing.Size(1028, 372);
             this.dgvAttendance.TabIndex = 4;
             this.dgvAttendance.TabStop = false;
             this.dgvAttendance.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAttendance_CellContentClick);
-            // 
-            // pnlEmployees
-            // 
-            this.pnlEmployees.Controls.Add(this.ptFilterEmployee);
-            this.pnlEmployees.Controls.Add(this.dgvEmployees);
-            this.pnlEmployees.Controls.Add(this.pnlFilterEmployees);
-            this.pnlEmployees.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlEmployees.Location = new System.Drawing.Point(0, 0);
-            this.pnlEmployees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlEmployees.Name = "pnlEmployees";
-            this.pnlEmployees.Size = new System.Drawing.Size(367, 629);
-            this.pnlEmployees.TabIndex = 5;
-            // 
-            // ptFilterEmployee
-            // 
-            this.ptFilterEmployee.AdjustLocationOnClick = false;
-            this.ptFilterEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ptFilterEmployee.BackColor = System.Drawing.SystemColors.Control;
-            this.ptFilterEmployee.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ptFilterEmployee.InitialArrowDirection = System.Windows.Forms.ArrowDirection.Up;
-            this.ptFilterEmployee.Location = new System.Drawing.Point(340, 181);
-            this.ptFilterEmployee.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.ptFilterEmployee.Name = "ptFilterEmployee";
-            this.ptFilterEmployee.Size = new System.Drawing.Size(26, 24);
-            this.ptFilterEmployee.TabIndex = 7;
-            this.ptFilterEmployee.TogglePanel = this.pnlFilterAttendance;
-            // 
-            // dgvEmployees
-            // 
-            this.dgvEmployees.AllowUserToAddRows = false;
-            this.dgvEmployees.AllowUserToDeleteRows = false;
-            this.dgvEmployees.AllowUserToResizeRows = false;
-            this.dgvEmployees.BackgroundColor = System.Drawing.Color.White;
-            this.dgvEmployees.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEmployees.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.col_dgvEmployees_UserAccounts_Id,
-            this.col_dgvEmployees_Clients_Id,
-            this.col_dgvEmployees_UserAccounts_Fullname});
-            this.dgvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvEmployees.Location = new System.Drawing.Point(0, 178);
-            this.dgvEmployees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dgvEmployees.MultiSelect = false;
-            this.dgvEmployees.Name = "dgvEmployees";
-            this.dgvEmployees.RowHeadersVisible = false;
-            this.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEmployees.Size = new System.Drawing.Size(367, 451);
-            this.dgvEmployees.TabIndex = 5;
-            this.dgvEmployees.TabStop = false;
-            this.dgvEmployees.SelectionChanged += new System.EventHandler(this.dgvEmployees_SelectionChanged);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // col_dgvEmployees_UserAccounts_Id
-            // 
-            this.col_dgvEmployees_UserAccounts_Id.HeaderText = "UserAccounts_Id";
-            this.col_dgvEmployees_UserAccounts_Id.Name = "col_dgvEmployees_UserAccounts_Id";
-            this.col_dgvEmployees_UserAccounts_Id.ReadOnly = true;
-            this.col_dgvEmployees_UserAccounts_Id.Visible = false;
-            this.col_dgvEmployees_UserAccounts_Id.Width = 5;
-            // 
-            // col_dgvEmployees_Clients_Id
-            // 
-            this.col_dgvEmployees_Clients_Id.HeaderText = "Clients_Id";
-            this.col_dgvEmployees_Clients_Id.Name = "col_dgvEmployees_Clients_Id";
-            this.col_dgvEmployees_Clients_Id.ReadOnly = true;
-            this.col_dgvEmployees_Clients_Id.Visible = false;
-            this.col_dgvEmployees_Clients_Id.Width = 5;
-            // 
-            // col_dgvEmployees_UserAccounts_Fullname
-            // 
-            this.col_dgvEmployees_UserAccounts_Fullname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_dgvEmployees_UserAccounts_Fullname.HeaderText = "Employee";
-            this.col_dgvEmployees_UserAccounts_Fullname.MinimumWidth = 60;
-            this.col_dgvEmployees_UserAccounts_Fullname.Name = "col_dgvEmployees_UserAccounts_Fullname";
-            this.col_dgvEmployees_UserAccounts_Fullname.ReadOnly = true;
-            this.col_dgvEmployees_UserAccounts_Fullname.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_dgvEmployees_UserAccounts_Fullname.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // pnlFilterEmployees
-            // 
-            this.pnlFilterEmployees.Controls.Add(this.groupBox4);
-            this.pnlFilterEmployees.Controls.Add(this.groupBox3);
-            this.pnlFilterEmployees.Controls.Add(this.btnFilterEmployees);
-            this.pnlFilterEmployees.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFilterEmployees.Location = new System.Drawing.Point(0, 0);
-            this.pnlFilterEmployees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlFilterEmployees.Name = "pnlFilterEmployees";
-            this.pnlFilterEmployees.Size = new System.Drawing.Size(367, 178);
-            this.pnlFilterEmployees.TabIndex = 6;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.chkFilterEmployeeByName);
-            this.groupBox4.Controls.Add(this.itxt_FilterEmployee_UserAccounts_Name);
-            this.groupBox4.Location = new System.Drawing.Point(220, 5);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox4.Size = new System.Drawing.Size(143, 81);
-            this.groupBox4.TabIndex = 14;
-            this.groupBox4.TabStop = false;
-            // 
-            // chkFilterEmployeeByName
-            // 
-            this.chkFilterEmployeeByName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkFilterEmployeeByName.AutoSize = true;
-            this.chkFilterEmployeeByName.Location = new System.Drawing.Point(125, 10);
-            this.chkFilterEmployeeByName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.chkFilterEmployeeByName.Name = "chkFilterEmployeeByName";
-            this.chkFilterEmployeeByName.Size = new System.Drawing.Size(18, 17);
-            this.chkFilterEmployeeByName.TabIndex = 7;
-            this.chkFilterEmployeeByName.TabStop = false;
-            this.chkFilterEmployeeByName.UseVisualStyleBackColor = true;
-            this.chkFilterEmployeeByName.CheckedChanged += new System.EventHandler(this.chkFilterEmployees_CheckedChanged);
-            // 
-            // itxt_FilterEmployee_UserAccounts_Name
-            // 
-            this.itxt_FilterEmployee_UserAccounts_Name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.itxt_FilterEmployee_UserAccounts_Name.IsBrowseMode = false;
-            this.itxt_FilterEmployee_UserAccounts_Name.LabelText = "Employee";
-            this.itxt_FilterEmployee_UserAccounts_Name.Location = new System.Drawing.Point(5, 14);
-            this.itxt_FilterEmployee_UserAccounts_Name.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.itxt_FilterEmployee_UserAccounts_Name.MaxLength = 32767;
-            this.itxt_FilterEmployee_UserAccounts_Name.MultiLine = false;
-            this.itxt_FilterEmployee_UserAccounts_Name.Name = "itxt_FilterEmployee_UserAccounts_Name";
-            this.itxt_FilterEmployee_UserAccounts_Name.PasswordChar = '\0';
-            this.itxt_FilterEmployee_UserAccounts_Name.RowCount = 1;
-            this.itxt_FilterEmployee_UserAccounts_Name.ShowDeleteButton = false;
-            this.itxt_FilterEmployee_UserAccounts_Name.ShowTextboxOnly = false;
-            this.itxt_FilterEmployee_UserAccounts_Name.Size = new System.Drawing.Size(131, 50);
-            this.itxt_FilterEmployee_UserAccounts_Name.TabIndex = 10;
-            this.itxt_FilterEmployee_UserAccounts_Name.TabStop = false;
-            this.itxt_FilterEmployee_UserAccounts_Name.ValueText = "";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.chkFilterEmployeesByClient);
-            this.groupBox3.Controls.Add(this.itxt_FilterEmployee_Client);
-            this.groupBox3.Controls.Add(this.idtp_FilterEmployee_StartDate);
-            this.groupBox3.Controls.Add(this.idtp_FilterEmployee_EndDate);
-            this.groupBox3.Location = new System.Drawing.Point(4, 5);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Size = new System.Drawing.Size(212, 171);
-            this.groupBox3.TabIndex = 7;
-            this.groupBox3.TabStop = false;
-            // 
-            // chkFilterEmployeesByClient
-            // 
-            this.chkFilterEmployeesByClient.AutoSize = true;
-            this.chkFilterEmployeesByClient.Location = new System.Drawing.Point(191, 10);
-            this.chkFilterEmployeesByClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.chkFilterEmployeesByClient.Name = "chkFilterEmployeesByClient";
-            this.chkFilterEmployeesByClient.Size = new System.Drawing.Size(18, 17);
-            this.chkFilterEmployeesByClient.TabIndex = 7;
-            this.chkFilterEmployeesByClient.TabStop = false;
-            this.chkFilterEmployeesByClient.UseVisualStyleBackColor = true;
-            this.chkFilterEmployeesByClient.CheckedChanged += new System.EventHandler(this.chkFilterEmployees_CheckedChanged);
-            // 
-            // itxt_FilterEmployee_Client
-            // 
-            this.itxt_FilterEmployee_Client.IsBrowseMode = true;
-            this.itxt_FilterEmployee_Client.LabelText = "Client";
-            this.itxt_FilterEmployee_Client.Location = new System.Drawing.Point(8, 14);
-            this.itxt_FilterEmployee_Client.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.itxt_FilterEmployee_Client.MaxLength = 32767;
-            this.itxt_FilterEmployee_Client.MultiLine = false;
-            this.itxt_FilterEmployee_Client.Name = "itxt_FilterEmployee_Client";
-            this.itxt_FilterEmployee_Client.PasswordChar = '\0';
-            this.itxt_FilterEmployee_Client.RowCount = 1;
-            this.itxt_FilterEmployee_Client.ShowDeleteButton = true;
-            this.itxt_FilterEmployee_Client.ShowTextboxOnly = false;
-            this.itxt_FilterEmployee_Client.Size = new System.Drawing.Size(195, 50);
-            this.itxt_FilterEmployee_Client.TabIndex = 9;
-            this.itxt_FilterEmployee_Client.TabStop = false;
-            this.itxt_FilterEmployee_Client.ValueText = "";
-            this.itxt_FilterEmployee_Client.isBrowseMode_Clicked += new System.EventHandler(this.itxt_Client_isBrowseMode_Clicked);
-            // 
-            // idtp_FilterEmployee_StartDate
-            // 
-            this.idtp_FilterEmployee_StartDate.Checked = false;
-            this.idtp_FilterEmployee_StartDate.CustomFormat = "dd/MM/yyyy";
-            this.idtp_FilterEmployee_StartDate.DefaultCheckedValue = false;
-            this.idtp_FilterEmployee_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.idtp_FilterEmployee_StartDate.LabelText = "Start";
-            this.idtp_FilterEmployee_StartDate.Location = new System.Drawing.Point(9, 64);
-            this.idtp_FilterEmployee_StartDate.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.idtp_FilterEmployee_StartDate.Name = "idtp_FilterEmployee_StartDate";
-            this.idtp_FilterEmployee_StartDate.ShowCheckBox = false;
-            this.idtp_FilterEmployee_StartDate.ShowUpAndDown = false;
-            this.idtp_FilterEmployee_StartDate.Size = new System.Drawing.Size(195, 50);
-            this.idtp_FilterEmployee_StartDate.TabIndex = 12;
-            this.idtp_FilterEmployee_StartDate.TabStop = false;
-            this.idtp_FilterEmployee_StartDate.Value = null;
-            this.idtp_FilterEmployee_StartDate.ValueTimeSpan = null;
-            // 
-            // idtp_FilterEmployee_EndDate
-            // 
-            this.idtp_FilterEmployee_EndDate.Checked = false;
-            this.idtp_FilterEmployee_EndDate.CustomFormat = "dd/MM/yyyy";
-            this.idtp_FilterEmployee_EndDate.DefaultCheckedValue = false;
-            this.idtp_FilterEmployee_EndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.idtp_FilterEmployee_EndDate.LabelText = "End";
-            this.idtp_FilterEmployee_EndDate.Location = new System.Drawing.Point(9, 114);
-            this.idtp_FilterEmployee_EndDate.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.idtp_FilterEmployee_EndDate.Name = "idtp_FilterEmployee_EndDate";
-            this.idtp_FilterEmployee_EndDate.ShowCheckBox = false;
-            this.idtp_FilterEmployee_EndDate.ShowUpAndDown = false;
-            this.idtp_FilterEmployee_EndDate.Size = new System.Drawing.Size(195, 50);
-            this.idtp_FilterEmployee_EndDate.TabIndex = 13;
-            this.idtp_FilterEmployee_EndDate.TabStop = false;
-            this.idtp_FilterEmployee_EndDate.Value = null;
-            this.idtp_FilterEmployee_EndDate.ValueTimeSpan = null;
-            // 
-            // btnFilterEmployees
-            // 
-            this.btnFilterEmployees.Location = new System.Drawing.Point(241, 143);
-            this.btnFilterEmployees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnFilterEmployees.Name = "btnFilterEmployees";
-            this.btnFilterEmployees.Size = new System.Drawing.Size(100, 28);
-            this.btnFilterEmployees.TabIndex = 11;
-            this.btnFilterEmployees.TabStop = false;
-            this.btnFilterEmployees.Text = "FILTER";
-            this.btnFilterEmployees.UseVisualStyleBackColor = true;
-            this.btnFilterEmployees.Click += new System.EventHandler(this.btnFilterEmployees_Click);
             // 
             // col_dgvAttendance_Id
             // 
@@ -729,9 +253,9 @@
             // col_dgvAttendance_In
             // 
             this.col_dgvAttendance_In.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Format = "MM/dd/yy HH:mm";
-            this.col_dgvAttendance_In.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.Format = "MM/dd/yy HH:mm";
+            this.col_dgvAttendance_In.DefaultCellStyle = dataGridViewCellStyle16;
             this.col_dgvAttendance_In.HeaderText = "IN";
             this.col_dgvAttendance_In.MinimumWidth = 30;
             this.col_dgvAttendance_In.Name = "col_dgvAttendance_In";
@@ -741,9 +265,9 @@
             // col_dgvAttendance_Out
             // 
             this.col_dgvAttendance_Out.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Format = "MM/dd/yy HH:mm";
-            this.col_dgvAttendance_Out.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.Format = "MM/dd/yy HH:mm";
+            this.col_dgvAttendance_Out.DefaultCellStyle = dataGridViewCellStyle17;
             this.col_dgvAttendance_Out.HeaderText = "OUT";
             this.col_dgvAttendance_Out.MinimumWidth = 35;
             this.col_dgvAttendance_Out.Name = "col_dgvAttendance_Out";
@@ -753,9 +277,9 @@
             // col_dgvAttendance_EffectiveIn
             // 
             this.col_dgvAttendance_EffectiveIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Format = "MM/dd/yy HH:mm";
-            this.col_dgvAttendance_EffectiveIn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.Format = "MM/dd/yy HH:mm";
+            this.col_dgvAttendance_EffectiveIn.DefaultCellStyle = dataGridViewCellStyle18;
             this.col_dgvAttendance_EffectiveIn.HeaderText = "Effective IN";
             this.col_dgvAttendance_EffectiveIn.MinimumWidth = 100;
             this.col_dgvAttendance_EffectiveIn.Name = "col_dgvAttendance_EffectiveIn";
@@ -764,9 +288,9 @@
             // col_dgvAttendance_EffectiveOut
             // 
             this.col_dgvAttendance_EffectiveOut.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Format = "MM/dd/yy HH:mm";
-            this.col_dgvAttendance_EffectiveOut.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle19.Format = "MM/dd/yy HH:mm";
+            this.col_dgvAttendance_EffectiveOut.DefaultCellStyle = dataGridViewCellStyle19;
             this.col_dgvAttendance_EffectiveOut.HeaderText = "Effective OUT";
             this.col_dgvAttendance_EffectiveOut.MinimumWidth = 100;
             this.col_dgvAttendance_EffectiveOut.Name = "col_dgvAttendance_EffectiveOut";
@@ -774,9 +298,9 @@
             // 
             // col_dgvAttendances_EffectiveWorkHours
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            this.col_dgvAttendances_EffectiveWorkHours.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle20.Format = "N2";
+            this.col_dgvAttendances_EffectiveWorkHours.DefaultCellStyle = dataGridViewCellStyle20;
             this.col_dgvAttendances_EffectiveWorkHours.HeaderText = "Hours";
             this.col_dgvAttendances_EffectiveWorkHours.Name = "col_dgvAttendances_EffectiveWorkHours";
             this.col_dgvAttendances_EffectiveWorkHours.ReadOnly = true;
@@ -784,9 +308,9 @@
             // col_dgvAttendances_PayableAmount
             // 
             this.col_dgvAttendances_PayableAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
-            this.col_dgvAttendances_PayableAmount.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.Format = "N2";
+            this.col_dgvAttendances_PayableAmount.DefaultCellStyle = dataGridViewCellStyle21;
             this.col_dgvAttendances_PayableAmount.HeaderText = "Payable";
             this.col_dgvAttendances_PayableAmount.MinimumWidth = 50;
             this.col_dgvAttendances_PayableAmount.Name = "col_dgvAttendances_PayableAmount";
@@ -833,73 +357,82 @@
             this.col_dgvAttendance_Notes.Name = "col_dgvAttendance_Notes";
             this.col_dgvAttendance_Notes.ReadOnly = true;
             // 
+            // itxt_FilterEmployee_Client
+            // 
+            this.itxt_FilterEmployee_Client.IsBrowseMode = true;
+            this.itxt_FilterEmployee_Client.LabelText = "Client";
+            this.itxt_FilterEmployee_Client.Location = new System.Drawing.Point(4, 45);
+            this.itxt_FilterEmployee_Client.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_FilterEmployee_Client.MaxLength = 32767;
+            this.itxt_FilterEmployee_Client.MultiLine = false;
+            this.itxt_FilterEmployee_Client.Name = "itxt_FilterEmployee_Client";
+            this.itxt_FilterEmployee_Client.PasswordChar = '\0';
+            this.itxt_FilterEmployee_Client.RowCount = 1;
+            this.itxt_FilterEmployee_Client.ShowDeleteButton = true;
+            this.itxt_FilterEmployee_Client.ShowTextboxOnly = false;
+            this.itxt_FilterEmployee_Client.Size = new System.Drawing.Size(146, 41);
+            this.itxt_FilterEmployee_Client.TabIndex = 9;
+            this.itxt_FilterEmployee_Client.TabStop = false;
+            this.itxt_FilterEmployee_Client.ValueText = "";
+            this.itxt_FilterEmployee_Client.isBrowseMode_Clicked += new System.EventHandler(this.itxt_Client_isBrowseMode_Clicked);
+            // 
+            // btnAddAttendance
+            // 
+            this.btnAddAttendance.Location = new System.Drawing.Point(4, 108);
+            this.btnAddAttendance.Name = "btnAddAttendance";
+            this.btnAddAttendance.Size = new System.Drawing.Size(146, 23);
+            this.btnAddAttendance.TabIndex = 9;
+            this.btnAddAttendance.Text = "ADD ATTENDANCE";
+            this.btnAddAttendance.UseVisualStyleBackColor = true;
+            this.btnAddAttendance.Click += new System.EventHandler(this.btnAddAttendance_Click);
+            // 
+            // itxt_UserAccount
+            // 
+            this.itxt_UserAccount.IsBrowseMode = true;
+            this.itxt_UserAccount.LabelText = "Employee";
+            this.itxt_UserAccount.Location = new System.Drawing.Point(4, 4);
+            this.itxt_UserAccount.Margin = new System.Windows.Forms.Padding(4);
+            this.itxt_UserAccount.MaxLength = 32767;
+            this.itxt_UserAccount.MultiLine = false;
+            this.itxt_UserAccount.Name = "itxt_UserAccount";
+            this.itxt_UserAccount.PasswordChar = '\0';
+            this.itxt_UserAccount.RowCount = 1;
+            this.itxt_UserAccount.ShowDeleteButton = true;
+            this.itxt_UserAccount.ShowTextboxOnly = false;
+            this.itxt_UserAccount.Size = new System.Drawing.Size(146, 41);
+            this.itxt_UserAccount.TabIndex = 13;
+            this.itxt_UserAccount.TabStop = false;
+            this.itxt_UserAccount.ValueText = "";
+            this.itxt_UserAccount.isBrowseMode_Clicked += new System.EventHandler(this.itxt_UserAccount_isBrowseMode_Clicked);
+            // 
             // Timesheets_Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1445, 629);
-            this.Controls.Add(this.pnlContainer);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClientSize = new System.Drawing.Size(1028, 511);
+            this.Controls.Add(this.dgvAttendance);
+            this.Controls.Add(this.pnlFilterAttendance);
             this.Name = "Timesheets_Form";
             this.Text = "TIMESHEET";
             this.Load += new System.EventHandler(this.Form_Load);
-            this.pnlContainer.ResumeLayout(false);
             this.pnlFilterAttendance.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAttendance)).EndInit();
-            this.pnlEmployees.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
-            this.pnlFilterEmployees.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlContainer;
         protected System.Windows.Forms.DataGridView dgvAttendance;
         private System.Windows.Forms.Panel pnlFilterAttendance;
-        private System.Windows.Forms.Panel pnlEmployees;
-        protected System.Windows.Forms.DataGridView dgvEmployees;
-        private System.Windows.Forms.Panel pnlFilterEmployees;
         private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_FilterEmployee_Client;
-        private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_Notes;
-        private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_TimestampOut;
-        private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_TimestampIn;
-        private LIBUtil.Desktop.UserControls.PanelToggle ptFilterAttendance;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnSubmitAttendance;
         private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_FilterAttendance_In;
         private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_FilterAttendance_Out;
         private LIBUtil.Desktop.UserControls.InputControl_Numeric in_DurationMinutes;
-        private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_FilterEmployee_UserAccounts_Name;
-        private System.Windows.Forms.Button btnFilterEmployees;
-        private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_FilterEmployee_StartDate;
-        private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_FilterEmployee_EndDate;
-        private LIBUtil.Desktop.UserControls.PanelToggle ptFilterEmployee;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox chkFilterEmployeesByClient;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.CheckBox chkFilterEmployeeByName;
         private System.Windows.Forms.Button btnFilterAttendance;
         private LIBUtil.Desktop.UserControls.InputControl_Dropdownlist iddl_AttendanceStatuses;
-        private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_Attendance_Client;
-        private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_Workshift;
         private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_FilterAttendance_StartDate;
         private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_FilterAttendance_EndDate;
         private LIBUtil.Desktop.UserControls.InputControl_Dropdownlist iddl_DayOfWeek;
-        private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_EffectiveTimestampIn;
-        private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_EffectiveTimestampOut;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvEmployees_UserAccounts_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvEmployees_Clients_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvEmployees_UserAccounts_Fullname;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendance_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendance_PayrollItems_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendance_In;
@@ -913,5 +446,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvAttendance_Flag1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvAttendance_Flag2;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendance_Notes;
+        private System.Windows.Forms.Button btnAddAttendance;
+        private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_UserAccount;
     }
 }

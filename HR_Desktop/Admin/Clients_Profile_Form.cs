@@ -115,7 +115,7 @@ namespace HR_Desktop.Admin
 
         private void populateDgvBankAccounts()
         {
-            Util.populateDataGridView(dgvBankAccounts, BankAccount.get(false, null, null, _Clients_Id, null, null, null));
+            Util.populateDataGridView(dgvBankAccounts, BankAccount.get(false, null, null, _Clients_Id, null, null, null, null, null));
         }
 
         private bool isValidToPopulateData()

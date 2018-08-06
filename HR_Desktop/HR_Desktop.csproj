@@ -142,11 +142,29 @@
     <Compile Include="Main_Form.Designer.cs">
       <DependentUpon>Main_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Payroll\Payments_Add_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payroll\Payments_Add_Form.Designer.cs">
+      <DependentUpon>Payments_Add_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Payroll\Payments_Main_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payroll\Payments_Main_Form.Designer.cs">
+      <DependentUpon>Payments_Main_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Payroll\Payrolls_Main_Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Payroll\Payrolls_Main_Form.Designer.cs">
       <DependentUpon>Payrolls_Main_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Payroll\Timesheets_Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payroll\Timesheets_Form2.Designer.cs">
+      <DependentUpon>Timesheets_Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,8 +230,17 @@
     <EmbeddedResource Include="Main_Form.resx">
       <DependentUpon>Main_Form.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Payroll\Payments_Add_Form.resx">
+      <DependentUpon>Payments_Add_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Payroll\Payments_Main_Form.resx">
+      <DependentUpon>Payments_Main_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Payroll\Payrolls_Main_Form.resx">
       <DependentUpon>Payrolls_Main_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Payroll\Timesheets_Form2.resx">
+      <DependentUpon>Timesheets_Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -256,7 +283,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Branches\Chintia.txt" />
-    <Content Include="Branches\Payments\Info.txt" />
+    <Content Include="Branches\TimesheetAndAttendanceFormsUpdate\Info.txt" />
     <Content Include="Branches\To Do List.txt" />
     <Content Include="Branches\UPDATE-DB.sql" />
     <None Include="Resources\refresh.png" />
