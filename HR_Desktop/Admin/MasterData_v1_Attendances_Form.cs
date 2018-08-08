@@ -53,7 +53,7 @@ namespace HR_Desktop.Admin
             idtp_TimestampOut.Value = DateTime.Now;
 
             setColumnsDataPropertyNames(Attendance.COL_DB_Id, null, null, null, null, null);
-
+            dgv.AutoGenerateColumns = false;
             col_dgv_UserAccounts_FullName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_UserAccounts_FullName", itxt_UserAccount.LabelText, Attendance.COL_UserAccounts_Fullname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_TimestampIn = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_TimestampIn", idtp_TimestampIn.LabelText, Attendance.COL_DB_TimestampIn, true, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_TimestampOut = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_TimestampOut", idtp_TimestampOut.LabelText, Attendance.COL_DB_TimestampOut, true, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
@@ -62,8 +62,10 @@ namespace HR_Desktop.Admin
             col_dgv_Approved = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Approved", Attendance.COL_DB_Approved, Attendance.COL_DB_Approved, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Attendance.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            col_dgv_Payrolls_Id = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Payrolls_Id", "" , Attendance.COL_DB_PayrollItems_Id, true, false, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Payrolls_Id = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Payrolls_Id", "" , Attendance.COL_DB_PayrollItems_Id, false, false, "", false, false, 30, DataGridViewContentAlignment.MiddleLeft);
             ptInputPanel.PerformClick();
+
+            AttendanceStatus.populateDropDownList(iddl_AttendanceStatuses, false);
         }
 
         protected override void additionalSettings() { }
@@ -72,8 +74,20 @@ namespace HR_Desktop.Admin
         {
             itxt_UserAccount.reset();
             itxt_UserAccount.Enabled = true;
+            itxt_Client.reset();
+            itxt_Client.Enabled = true;
+            itxt_Workshift.reset();
+            itxt_Workshift.Enabled = true;
+            iddl_AttendanceStatuses.reset();
+            iddl_AttendanceStatuses.Enabled = true;
             idtp_TimestampIn.Value = DateTime.Now;
+            idtp_TimestampIn.Enabled = true;
             idtp_TimestampOut.Value = DateTime.Now;
+            idtp_TimestampOut.Enabled = true;
+            idtp_EffectiveTimestampIn.Value = DateTime.Now;
+            idtp_EffectiveTimestampIn.Enabled = true;
+            idtp_EffectiveTimestampOut.Value = DateTime.Now;
+            idtp_EffectiveTimestampOut.Enabled = true;
             itxt_Notes.reset();
         }
 
@@ -84,9 +98,15 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            return Attendance.get(null,
+            
+            return Attendance.get(
+                null,
                 itxt_UserAccount.ValueGuid,
-                null, null, null, null, null, itxt_Notes.ValueText
+                itxt_Client.ValueGuid,
+                itxt_Workshift.ValueGuid,
+                null, null, null, null, null, null,
+                itxt_Notes.ValueText,
+                (Guid?)iddl_AttendanceStatuses.SelectedValue
                 ).DefaultView;
         }
 
@@ -95,15 +115,25 @@ namespace HR_Desktop.Admin
             Attendance obj = new Attendance(selectedRowID());
 
             itxt_UserAccount.setValue(obj.UserAccounts_Fullname, obj.UserAccounts_Id);
+            itxt_Client.setValue(obj.Clients_CompanyName, obj.Clients_Id);
+            itxt_Workshift.setValue(obj.Workshifts_Name, obj.Workshifts_Id);
+            iddl_AttendanceStatuses.SelectedValue = obj.AttendanceStatuses_Name;
             idtp_TimestampIn.Value = obj.TimestampIn;
             idtp_TimestampOut.Value = obj.TimestampOut;
+            idtp_EffectiveTimestampIn.Value = obj.EffectiveTimestampIn;
+            idtp_EffectiveTimestampOut.Value = obj.EffectiveTimestampOut;
             itxt_Notes.ValueText = obj.Notes;
 
             if (obj.PayrollItems_Id != null)
             {
                 itxt_UserAccount.Enabled = false;
+                itxt_Client.Enabled = false;
+                itxt_Workshift.Enabled = false;
+                iddl_AttendanceStatuses.Enabled = false;
                 idtp_TimestampIn.Enabled = false;
                 idtp_TimestampOut.Enabled = false;
+                idtp_EffectiveTimestampIn.Enabled = false;
+                idtp_EffectiveTimestampOut.Enabled = false;
                 itxt_Notes.Enabled = false;
             }
             
@@ -122,10 +152,14 @@ namespace HR_Desktop.Admin
         {   
             Attendance.add(UserAccount.LoggedInAccount.Id,
                 (Guid)itxt_UserAccount.ValueGuid,
+                (Guid)itxt_Client.ValueGuid,
+                (Guid?)itxt_Workshift.ValueGuid,
                 (DateTime)idtp_TimestampIn.Value,
                 (DateTime)idtp_TimestampOut.Value,
-                null, null, null, null,
-                itxt_Notes.ValueText);
+                (DateTime?)idtp_EffectiveTimestampIn.Value,
+                (DateTime?)idtp_EffectiveTimestampOut.Value,
+                itxt_Notes.ValueText,
+                (Guid)iddl_AttendanceStatuses.SelectedValue);
         }
 
         protected override Boolean isInputFieldsValid()
@@ -133,6 +167,10 @@ namespace HR_Desktop.Admin
             Util.sanitize(itxt_Notes);
             if (itxt_UserAccount.ValueGuid == null)
                 return itxt_UserAccount.isValueError("Please select a User");
+            else if (itxt_Client.ValueGuid == null)
+                return itxt_Client.isValueError("Please select a Client");
+            else if (!iddl_AttendanceStatuses.hasSelectedValue())
+                return iddl_AttendanceStatuses.SelectedValueError("Please select Attendance Status");
             else if (idtp_TimestampIn.Value == null)
                 return idtp_TimestampIn.ValueError("Please fill Timestamp In");
             else if (idtp_TimestampOut.Value == null)
@@ -143,8 +181,6 @@ namespace HR_Desktop.Admin
 
             return true;
         }
-
-
 
         protected override void btnLog_Click(object sender, EventArgs e)
         {
@@ -165,9 +201,10 @@ namespace HR_Desktop.Admin
 
         protected override void virtual_dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (Util.getSelectedRowValue(dgv, col_dgv_Payrolls_Id) != null)
+            if (!String.IsNullOrEmpty(Util.getSelectedRowValue(dgv, col_dgv_Payrolls_Id).ToString()))
             {
                 populateGridViewDataSource(true);
+                Util.displayMessageBox("Warning!", "Attendance already have Payroll. Can not update Attendance!");
             }
             else if (Util.isColumnMatch(sender, e, col_dgv_Flag1))
             {
@@ -211,6 +248,16 @@ namespace HR_Desktop.Admin
         private void idtp_TimestampIn_ValueChanged(object sender, EventArgs e)
         {
             idtp_TimestampOut.Value = idtp_TimestampIn.Value;
+        }
+
+        private void itxt_Client_isBrowseMode_Clicked(object sender, EventArgs e)
+        {
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse, itxt_UserAccount.ValueGuid), ref sender);
+        }
+
+        private void itxt_Workshift_isBrowseMode_Clicked(object sender, EventArgs e)
+        {
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Workshifts_Form(FormModes.Browse, itxt_Client.ValueGuid), ref sender);
         }
 
         #endregion EVENT HANDLERS

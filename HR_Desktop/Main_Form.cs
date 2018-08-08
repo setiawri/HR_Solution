@@ -161,6 +161,11 @@ namespace HR_Desktop
             LIBUtil.Util.displayMDIChild(new Payroll.Payments_Main_Form());
         }
 
+        private void admin_attendances_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_Attendances_Form());
+        }
+
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

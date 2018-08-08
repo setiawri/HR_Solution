@@ -111,11 +111,14 @@ namespace HR_Desktop.Payroll
                     Attendance.get(
                         null,
                         (Guid)Util.getSelectedRowValue(dgvEmployees, col_dgvEmployees_UserAccounts_Id),
+                        itxt_FilterEmployee_Client.ValueGuid,
+                        null,
                         Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
                         idtp_FilterAttendance_StartDate.ValueAsStartDateFilter,
                         idtp_FilterAttendance_EndDate.ValueAsEndDateFilter,
                         idtp_FilterAttendance_In.ValueTimeSpan,
                         idtp_FilterAttendance_Out.ValueTimeSpan,
+                        null, 
                         null
                     ));
             }
@@ -171,13 +174,14 @@ namespace HR_Desktop.Payroll
         {
             Attendance.add(UserAccount.LoggedInAccount.Id,
                 (Guid)Util.getSelectedRowValue(dgvEmployees, col_dgvEmployees_UserAccounts_Id),
-                (DateTime)idtp_TimestampIn.Value,
-                (DateTime)idtp_TimestampOut.Value,
                 itxt_Attendance_Client.ValueGuid,
                 itxt_Workshift.ValueGuid,
+                (DateTime)idtp_TimestampIn.Value,
+                (DateTime)idtp_TimestampOut.Value,
                 (DateTime)idtp_EffectiveTimestampIn.Value,
                 (DateTime)idtp_EffectiveTimestampOut.Value,
-                itxt_Notes.ValueText);
+                itxt_Notes.ValueText,
+                (Guid)iddl_AttendanceStatuses.SelectedValue);
 
             populateDgvAttendance();
         }
@@ -241,7 +245,7 @@ namespace HR_Desktop.Payroll
 
         private void btnAddAttendance_Click(object sender, EventArgs e)
         {
-            Util.displayForm(null, new Admin.MasterData_v1_Attendances_Form(), false);
+            Util.displayForm(null, new Admin.MasterData_v1_Attendances_Form());
             populateDgvAttendance();
         }
 

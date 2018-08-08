@@ -27,14 +27,18 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_Notes;
         private DataGridViewColumn col_dgv_Internal;
 
+        private bool _internal;
+
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_BankAccounts_Form() : this(FormModes.Add) { }
-        public MasterData_v1_BankAccounts_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD)
+        public MasterData_v1_BankAccounts_Form() : this(FormModes.Add, null) { }
+        public MasterData_v1_BankAccounts_Form(FormModes startingMode, bool? @internal) : base(startingMode, FORM_SHOWDATAONLOAD)
         {
             InitializeComponent();
+            if(@internal != null)
+                _internal = (bool)@internal;
         }
         
         #endregion CONSTRUCTOR METHODS
@@ -91,7 +95,7 @@ namespace HR_Desktop.Admin
                     itxt_BankName.ValueText,
                     itxt_AccountNumber.ValueText,
                     itxt_Notes.ValueText,
-                    null, null
+                    _internal, null
                     ).DefaultView;
         }
 

@@ -54,9 +54,6 @@ namespace HR_Desktop.Payroll
             lblAmount.Text = string.Format("{0:N0}", _amount);
             in_BankAmount.Value = _amount;
 
-            BankAccount.populateDropDownList(iddl_Source_BankAccounts,false,true, null);
-            BankAccount.populateDropDownList(iddl_Target_BankAccounts, false, false, null);
-
             setupControlsBasedOnRoles();
         }
 
@@ -90,7 +87,7 @@ namespace HR_Desktop.Payroll
             if (isInputValid())
             {
                 Guid Payments_Id = HR_LIB.HR.Payment.add(LOGIN.UserAccount.LoggedInAccount.Id,
-                   _paymentInfoList, (Guid)iddl_Source_BankAccounts.SelectedValue, (Guid)iddl_Target_BankAccounts.SelectedValue,
+                   _paymentInfoList, (Guid)itxt_Source_BankAccounts.ValueGuid, (Guid)itxt_Target_BankAccounts.ValueGuid,
                    in_BankAmount.ValueLong, itxt_ConfirmationNumber.ValueText, itxt_Notes.ValueText);
                 // Util.displayForm(null, new SharedForms.Payments_Print_Form(Payments_Id));
 
@@ -113,6 +110,16 @@ namespace HR_Desktop.Payroll
                 btnSubmit.Enabled = false;
             else
                 btnSubmit.Enabled = true;
+        }
+
+        private void itxt_Target_BankAccounts_isBrowseMode_Clicked(object sender, EventArgs e)
+        {
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_BankAccounts_Form(FormModes.Browse, false), ref sender);
+        }
+
+        private void itxt_Source_BankAccounts_isBrowseMode_Clicked(object sender, EventArgs e)
+        {
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_BankAccounts_Form(FormModes.Browse, true), ref sender);
         }
 
         #endregion EVENT HANDLERS

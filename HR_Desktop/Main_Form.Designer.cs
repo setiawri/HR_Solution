@@ -31,6 +31,7 @@
             this.menu_reports = new System.Windows.Forms.ToolStripMenuItem();
             this.reports_timesheets = new System.Windows.Forms.ToolStripMenuItem();
             this.reports_payrolls = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_payments = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlShortcuts = new System.Windows.Forms.Panel();
             this.gbShortcuts = new System.Windows.Forms.GroupBox();
             this.flpShortcuts = new System.Windows.Forms.FlowLayoutPanel();
@@ -51,7 +52,7 @@
             this.admin_holidayschedules = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_account = new System.Windows.Forms.ToolStripMenuItem();
             this.expandCollapseToggle1 = new LIBUtil.Desktop.UserControls.PanelToggle();
-            this.menu_payments = new System.Windows.Forms.ToolStripMenuItem();
+            this.admin_attendances = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlShortcuts.SuspendLayout();
             this.gbShortcuts.SuspendLayout();
             this.flpShortcuts.SuspendLayout();
@@ -72,16 +73,23 @@
             // reports_timesheets
             // 
             this.reports_timesheets.Name = "reports_timesheets";
-            this.reports_timesheets.Size = new System.Drawing.Size(216, 26);
+            this.reports_timesheets.Size = new System.Drawing.Size(158, 26);
             this.reports_timesheets.Text = "Timesheets";
             this.reports_timesheets.Click += new System.EventHandler(this.reports_timesheets_Click);
             // 
             // reports_payrolls
             // 
             this.reports_payrolls.Name = "reports_payrolls";
-            this.reports_payrolls.Size = new System.Drawing.Size(216, 26);
+            this.reports_payrolls.Size = new System.Drawing.Size(158, 26);
             this.reports_payrolls.Text = "Payrolls";
             this.reports_payrolls.Click += new System.EventHandler(this.reports_payrolls_Click);
+            // 
+            // menu_payments
+            // 
+            this.menu_payments.Name = "menu_payments";
+            this.menu_payments.Size = new System.Drawing.Size(158, 26);
+            this.menu_payments.Text = "Payments";
+            this.menu_payments.Click += new System.EventHandler(this.menu_payments_Click);
             // 
             // pnlShortcuts
             // 
@@ -210,6 +218,7 @@
             this.admin_workshiftcategories,
             this.admin_workshifttemplates,
             this.admin_workshifts,
+            this.admin_attendances,
             this.admin_attendance_statuses,
             this.admin_bankaccounts,
             this.admin_holidayschedules});
@@ -295,12 +304,12 @@
             this.expandCollapseToggle1.TabIndex = 17;
             this.expandCollapseToggle1.TogglePanel = this.pnlShortcuts;
             // 
-            // menu_payments
+            // admin_attendances
             // 
-            this.menu_payments.Name = "menu_payments";
-            this.menu_payments.Size = new System.Drawing.Size(216, 26);
-            this.menu_payments.Text = "Payments";
-            this.menu_payments.Click += new System.EventHandler(this.menu_payments_Click);
+            this.admin_attendances.Name = "admin_attendances";
+            this.admin_attendances.Size = new System.Drawing.Size(221, 26);
+            this.admin_attendances.Text = "Attendances";
+            this.admin_attendances.Click += new System.EventHandler(this.admin_attendances_Click);
             // 
             // Main_Form
             // 
@@ -356,5 +365,6 @@
         private LIBUtil.Desktop.UserControls.PanelToggle expandCollapseToggle1;
         private System.Windows.Forms.ToolStripMenuItem reports_payrolls;
         private System.Windows.Forms.ToolStripMenuItem menu_payments;
+        private System.Windows.Forms.ToolStripMenuItem admin_attendances;
     }
 }

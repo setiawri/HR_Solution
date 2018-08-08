@@ -2,7 +2,9 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
-
+ALTER TABLE Attendances ADD AttendanceStatuses_Id uniqueidentifier;
+ALTER TABLE Attendances ALTER COLUMN AttendanceStatuses_Id uniqueidentifier NOT NULL;
+GO
 
 
 
@@ -684,31 +686,45 @@ ALTER PROCEDURE [dbo].[Attendances_get]
 
 	@Id uniqueidentifier = NULL,
 	@UserAccounts_Id uniqueidentifier = NULL,
+	@Clients_Id uniqueidentifier = NULL,
+	@Workshifts_Id uniqueidentifier = NULL,
 	@FILTER_DayOfWeek tinyint= NULL,
 	@FILTER_StartDate Datetime = NULL,
 	@FILTER_EndDate Datetime = NULL,
 	@FILTER_StartTime Time(7) = NULL,
 	@FILTER_EndTime Time(7) = NULL,
-	@Notes nvarchar(MAX) = NULL
+	@Notes nvarchar(MAX) = NULL,
+	@AttendanceStatuses_Id uniqueidentifier = NULL
 AS
 
 BEGIN
 
 	SELECT Attendances.*,
 		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname,
-		COALESCE(DATEDIFF(MINUTE,Attendances.EffectiveTimestampIn, Attendances.EffectiveTimestampOut),0)/60 AS EffectiveWorkHours
+		Clients.CompanyName AS Clients_CompanyName,
+		AttendanceStatuses.Name AS AttendanceStatuses_Name,
+		COALESCE(DATEDIFF(MINUTE,Attendances.EffectiveTimestampIn, Attendances.EffectiveTimestampOut),0)/60 AS EffectiveWorkHours,
+		Workshifts.Id AS Workshifts_Id, Workshifts.Name AS Workshifts_Name,
+		[dbo].[DayOfWeekName](Attendances.Workshifts_DayOfWeek) AS Workshifts_DayofWeek_Name
 	FROM Attendances 
 		LEFT OUTER JOIN UserAccounts ON Attendances.UserAccounts_Id = UserAccounts.ID
+		LEFT OUTER JOIN Clients ON Attendances.Clients_Id = Clients.Id
+		LEFT OUTER JOIN AttendanceStatuses ON Attendances.AttendanceStatuses_Id = AttendanceStatuses.Id
+		LEFT OUTER JOIN Workshifts ON Attendances.Workshifts_DayOfWeek = Workshifts.DayOfWeek 
+						AND CAST(Attendances.Workshifts_Start AS Time) = Workshifts.Start 
+						AND Attendances.Workshifts_DurationMinutes = Workshifts.DurationMinutes 
 	WHERE 1=1
 		AND (@Id IS NULL OR Attendances.Id = @Id)
 		AND (@UserAccounts_Id IS NULL OR Attendances.UserAccounts_Id = @UserAccounts_Id)
+		AND (@Clients_Id IS NULL OR Attendances.Clients_Id = @Clients_Id)
+		AND (@Workshifts_Id IS NULL OR Workshifts.Id = @Workshifts_Id)
 		AND (@FILTER_DayOfWeek IS NULL OR (DATEPART(weekday,Attendances.TimestampIn) - 1) = @FILTER_DayOfWeek OR (DATEPART(weekday,Attendances.TimestampOut) - 1) = @FILTER_DayOfWeek)
 		AND (@FILTER_StartDate IS NULL OR Attendances.TimestampIn >= @FILTER_StartDate)
 		AND (@FILTER_EndDate IS NULL OR Attendances.TimestampOut <= @FILTER_EndDate)
 		AND (@FILTER_StartTime IS NULL OR CAST(Attendances.TimestampIn AS time)>= @FILTER_StartTime)
 		AND (@FILTER_EndTime IS NULL OR CAST(Attendances.TimestampOut AS time)<= @FILTER_EndTime)
 		AND (@Notes IS NULL OR Attendances.Notes LIKE '%'+ @Notes+'%')
-
+		AND (@AttendanceStatuses_Id IS NULL OR Attendances.AttendanceStatuses_Id = @AttendanceStatuses_Id)
 
 END
 GO
@@ -752,24 +768,24 @@ ALTER PROCEDURE [dbo].[Attendances_add]
 
 	@Id uniqueidentifier,
 	@UserAccounts_Id uniqueidentifier,
-	@TimestampIn DATETIME,
-	@TimestampOut DATETIME,
 	@Clients_Id uniqueidentifier,
 	@Workshifts_Id uniqueidentifier = NULL,
+	@TimestampIn DATETIME,
+	@TimestampOut DATETIME,
 	@EffectiveTimestampIn datetime = NULL,
 	@EffectiveTimestampOut datetime = NULL,
-	@Notes nvarchar(MAX) = NULL
-	
+	@Notes nvarchar(MAX) = NULL,
+	@AttendanceStatuses_Id uniqueidentifier = NULL
 AS
 
 BEGIN
 	WITH 
 	Attendances_Data AS
-	(SELECT @Id AS Id, @UserAccounts_Id AS UserAccounts_Id, @TimestampIn AS TimestampIn, @TimestampOut AS TimestampOut ,@Clients_Id AS Clients_Id, @Workshifts_Id AS Workshifts_Id, @EffectiveTimestampIn AS EffectiveTimestampIn, @EffectiveTimestampOut AS EffectiveTimestampOut, @Notes AS Notes),
+	(SELECT @Id AS Id, @UserAccounts_Id AS UserAccounts_Id, @TimestampIn AS TimestampIn, @TimestampOut AS TimestampOut ,@Clients_Id AS Clients_Id, @Workshifts_Id AS Workshifts_Id, @EffectiveTimestampIn AS EffectiveTimestampIn, @EffectiveTimestampOut AS EffectiveTimestampOut, @Notes AS Notes, @AttendanceStatuses_Id AS AttendanceStatuses_Id),
 	Workshift_Data AS 
 	(SELECT TOP 1 Workshifts.* FROM Workshifts WHERE Id = @Workshifts_Id)
-	INSERT INTO Attendances(Id,UserAccounts_Id,TimestampIn,TimestampOut,Clients_Id, Workshifts_DayOfWeek, Workshifts_Start, Workshifts_DurationMinutes, EffectiveTimestampIn, EffectiveTimestampOut , Notes)
-	SELECT Attendances_Data.Id, Attendances_Data.UserAccounts_Id, Attendances_Data.TimestampIn, Attendances_Data.TimestampOut,Attendances_Data.Clients_Id, Workshift_Data.DayOfWeek, Workshift_Data.Start, Workshift_Data.DurationMinutes, Attendances_Data.EffectiveTimestampIn, Attendances_Data.EffectiveTimestampOut, Attendances_Data.Notes
+	INSERT INTO Attendances(Id,UserAccounts_Id,TimestampIn,TimestampOut,Clients_Id, Workshifts_DayOfWeek, Workshifts_Start, Workshifts_DurationMinutes, EffectiveTimestampIn, EffectiveTimestampOut , Notes, AttendanceStatuses_Id)
+	SELECT Attendances_Data.Id, Attendances_Data.UserAccounts_Id, Attendances_Data.TimestampIn, Attendances_Data.TimestampOut,Attendances_Data.Clients_Id, Workshift_Data.DayOfWeek, Workshift_Data.Start, Workshift_Data.DurationMinutes, Attendances_Data.EffectiveTimestampIn, Attendances_Data.EffectiveTimestampOut, Attendances_Data.Notes, Attendances_Data.AttendanceStatuses_Id
 	FROM 
 	Attendances_Data left join Workshift_Data ON Attendances_Data.Workshifts_Id = Workshift_Data.Id
 END
