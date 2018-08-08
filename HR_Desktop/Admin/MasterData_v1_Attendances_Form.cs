@@ -97,10 +97,8 @@ namespace HR_Desktop.Admin
         }
 
         protected override System.Data.DataView loadGridviewDataSource()
-        {
-            
+        {            
             return Attendance.get(
-                null,
                 itxt_UserAccount.ValueGuid,
                 itxt_Client.ValueGuid,
                 itxt_Workshift.ValueGuid,
@@ -201,12 +199,13 @@ namespace HR_Desktop.Admin
 
         protected override void virtual_dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (!String.IsNullOrEmpty(Util.getSelectedRowValue(dgv, col_dgv_Payrolls_Id).ToString()))
-            {
-                populateGridViewDataSource(true);
-                Util.displayMessageBox("Warning!", "Attendance already have Payroll. Can not update Attendance!");
-            }
-            else if (Util.isColumnMatch(sender, e, col_dgv_Flag1))
+            //if (!String.IsNullOrEmpty(Util.getSelectedRowValue(dgv, col_dgv_Payrolls_Id).ToString()))
+            //{
+            //    populateGridViewDataSource(true);
+            //    Util.displayMessageBox("Warning!", "Attendance already have Payroll. Can not update Attendance!");
+            //}
+            //else 
+            if (Util.isColumnMatch(sender, e, col_dgv_Flag1))
             {
                 Attendance.updateFlag1Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
                 populateGridViewDataSource(true);

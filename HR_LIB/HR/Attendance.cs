@@ -21,12 +21,12 @@ namespace HR_LIB.HR
         public bool Approved;
         public Guid Clients_Id;
         public DayOfWeek Workshifts_DayOfWeek;
-        public DateTime Workshifts_Start;
+        public TimeSpan Workshifts_Start;
         public int Workshifts_DurationMinutes;
         public DateTime EffectiveTimestampIn;
         public DateTime EffectiveTimestampOut;
         public bool Rejected;
-        public Guid PayrollItems_Id;
+        public Guid? PayrollItems_Id;
         public Guid AttendanceStatuses_Id;
 
         public string UserAccounts_Fullname;
@@ -90,12 +90,12 @@ namespace HR_LIB.HR
                 Approved = Util.wrapNullable<bool>(row, COL_DB_Approved);
                 Clients_Id = Util.wrapNullable<Guid>(row, COL_DB_Clients_Id);
                 Workshifts_DayOfWeek = Util.parseEnum<DayOfWeek>(Util.wrapNullable<int>(row, COL_DB_Workshifts_DayOfWeek));
-                Workshifts_Start = Util.wrapNullable<DateTime>(row, COL_DB_Workshifts_Start);
+                Workshifts_Start = Util.wrapNullable<TimeSpan>(row, COL_DB_Workshifts_Start);
                 Workshifts_DurationMinutes = Util.wrapNullable<int>(row, COL_DB_Workshifts_DurationMinutes);
                 EffectiveTimestampIn = Util.wrapNullable<DateTime>(row, COL_DB_EffectiveTimestampIn);
                 EffectiveTimestampOut = Util.wrapNullable<DateTime>(row, COL_DB_EffectiveTimestampOut);
                 Rejected = Util.wrapNullable<bool>(row, COL_DB_Rejected);
-                PayrollItems_Id = Util.wrapNullable<Guid>(row, COL_DB_PayrollItems_Id);
+                PayrollItems_Id = Util.wrapNullable<Guid?>(row, COL_DB_PayrollItems_Id);
                 AttendanceStatuses_Id = Util.wrapNullable<Guid>(row, COL_DB_AttendanceStatuses_Id);
 
                 UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
@@ -178,6 +178,7 @@ namespace HR_LIB.HR
             DateTime? startDate, DateTime? endDate, TimeSpan? startTime, TimeSpan? endTime, string notes, Guid? AttendanceStatuses_Id)
         {
             SqlQueryResult result = DBConnection.query(
+                sqlConnection,
                 QueryTypes.FillByAdapter,
                 "Attendances_get",
                 new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),

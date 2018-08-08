@@ -2,10 +2,6 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
-ALTER TABLE Attendances ADD AttendanceStatuses_Id uniqueidentifier;
-ALTER TABLE Attendances ALTER COLUMN AttendanceStatuses_Id uniqueidentifier NOT NULL;
-GO
-
 
 
 
