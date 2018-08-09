@@ -60,7 +60,7 @@
             // panel1
             // 
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(780, 34);
+            this.panel1.Size = new System.Drawing.Size(1439, 34);
             // 
             // label1
             // 
@@ -80,7 +80,7 @@
             // 
             this.pnlActionButtons.Location = new System.Drawing.Point(0, 232);
             this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlActionButtons.Size = new System.Drawing.Size(780, 28);
+            this.pnlActionButtons.Size = new System.Drawing.Size(1439, 28);
             // 
             // scInputLeft
             // 
@@ -106,7 +106,7 @@
             // scInputRight
             // 
             this.scInputRight.Margin = new System.Windows.Forms.Padding(5);
-            this.scInputRight.Size = new System.Drawing.Size(273, 200);
+            this.scInputRight.Size = new System.Drawing.Size(932, 200);
             // 
             // btnAdd
             // 
@@ -135,7 +135,7 @@
             // scMain
             // 
             this.scMain.Margin = new System.Windows.Forms.Padding(5);
-            this.scMain.Size = new System.Drawing.Size(780, 750);
+            this.scMain.Size = new System.Drawing.Size(1439, 750);
             this.scMain.SplitterDistance = 260;
             this.scMain.SplitterWidth = 10;
             // 
@@ -148,12 +148,12 @@
             // pnlButtons
             // 
             this.pnlButtons.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlButtons.Size = new System.Drawing.Size(780, 32);
+            this.pnlButtons.Size = new System.Drawing.Size(1439, 32);
             // 
             // scInputContainer
             // 
             this.scInputContainer.Margin = new System.Windows.Forms.Padding(5);
-            this.scInputContainer.Size = new System.Drawing.Size(780, 200);
+            this.scInputContainer.Size = new System.Drawing.Size(1439, 200);
             this.scInputContainer.SplitterWidth = 7;
             // 
             // btnLog
@@ -167,7 +167,7 @@
             // pnlQuickSearch
             // 
             this.pnlQuickSearch.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlQuickSearch.Size = new System.Drawing.Size(740, 34);
+            this.pnlQuickSearch.Size = new System.Drawing.Size(1399, 34);
             // 
             // itxt_Notes
             // 
@@ -329,7 +329,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 750);
+            this.ClientSize = new System.Drawing.Size(1439, 750);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MasterData_v1_Attendances_Form";
             this.Text = "ATTENDANCE";

@@ -34,6 +34,7 @@ namespace HR_LIB.HR
         public string AttendanceStatuses_Name;
         public Guid Workshifts_Id;
         public string Workshifts_Name;
+        public string Payrolls_No;
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
@@ -64,6 +65,7 @@ namespace HR_LIB.HR
         public const string COL_Workshifts_Name = "Workshifts_Name";
         public const string COL_AttendanceStatuses_Name = "AttendanceStatuses_Name";
         public const string COL_Workshifts_DayOfWeek_Name = "Workshifts_DayOfWeek_Name";
+        public const string COL_Payrolls_No = "Payrolls_No";
         public const string FILTER_DayOfWeek = "FILTER_DayOfWeek";
         public const string FILTER_StartDate = "FILTER_StartDate";
         public const string FILTER_EndDate = "FILTER_EndDate";
@@ -103,6 +105,7 @@ namespace HR_LIB.HR
                 AttendanceStatuses_Name = Util.wrapNullable<string>(row, COL_AttendanceStatuses_Name);
                 Workshifts_Id = Util.wrapNullable<Guid>(row, COL_Workshifts_Id);
                 Workshifts_Name = Util.wrapNullable<string>(row, COL_Workshifts_Name);
+                Payrolls_No = Util.wrapNullable<string>(row, COL_Payrolls_No);
             }
         }
 

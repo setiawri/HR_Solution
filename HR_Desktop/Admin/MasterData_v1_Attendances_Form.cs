@@ -20,13 +20,22 @@ namespace HR_Desktop.Admin
         #region PRIVATE VARIABLES
 
         private DataGridViewColumn col_dgv_UserAccounts_FullName;
+        private DataGridViewColumn col_dgv_Clients_CompanyName;
+        private DataGridViewColumn col_dgv_Workshifts_Name;
+        private DataGridViewColumn col_dgv_Workshifts_Start;
+        private DataGridViewColumn col_dgv_Workshifts_Duration;
+        private DataGridViewColumn col_dgv_Workshifts_DayOfWeek;
+        private DataGridViewColumn col_dgv_AttendanceStatuses;
         private DataGridViewColumn col_dgv_TimestampIn;
         private DataGridViewColumn col_dgv_TimestampOut;
+        private DataGridViewColumn col_dgv_EffectiveTimestampIn;
+        private DataGridViewColumn col_dgv_EffectiveTimestampOut;
         private DataGridViewColumn col_dgv_Flag1;
         private DataGridViewColumn col_dgv_Flag2;
         private DataGridViewColumn col_dgv_Approved;
         private DataGridViewColumn col_dgv_Notes;
-        private DataGridViewColumn col_dgv_Payrolls_Id;
+        private DataGridViewColumn col_dgv_PayrollItems_Id;
+        private DataGridViewColumn col_dgv_Payrolls_No;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
@@ -55,14 +64,23 @@ namespace HR_Desktop.Admin
             setColumnsDataPropertyNames(Attendance.COL_DB_Id, null, null, null, null, null);
             dgv.AutoGenerateColumns = false;
             col_dgv_UserAccounts_FullName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_UserAccounts_FullName", itxt_UserAccount.LabelText, Attendance.COL_UserAccounts_Fullname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Clients_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Clients_CompanyName", itxt_Client.LabelText, Attendance.COL_Clients_CompanyName, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Workshifts_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Name", itxt_Workshift.LabelText, Attendance.COL_Workshifts_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Workshifts_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_DayOfWeek", "Day Of Week", Attendance.COL_Workshifts_DayOfWeek_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Workshifts_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Start", "Start", Attendance.COL_DB_Workshifts_Start, true, true, @"HH:mm", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Workshifts_Duration = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Duration", "Duration", Attendance.COL_DB_Workshifts_DurationMinutes, true, true, "", true, false, 40, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_AttendanceStatuses = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_AttendanceStatuses", iddl_AttendanceStatuses.LabelText, Attendance.COL_AttendanceStatuses_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_TimestampIn = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_TimestampIn", idtp_TimestampIn.LabelText, Attendance.COL_DB_TimestampIn, true, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_TimestampOut = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_TimestampOut", idtp_TimestampOut.LabelText, Attendance.COL_DB_TimestampOut, true, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_EffectiveTimestampIn = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_EffectiveTimestampIn", idtp_EffectiveTimestampIn.LabelText, Attendance.COL_DB_EffectiveTimestampIn, true, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_EffectiveTimestampOut = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_EffectiveTimestampOut", idtp_EffectiveTimestampOut.LabelText, Attendance.COL_DB_EffectiveTimestampOut, true, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Flag1 = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Flag1", Attendance.COL_DB_Flag1, Attendance.COL_DB_Flag1, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Flag2 = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Flag2", Attendance.COL_DB_Flag2, Attendance.COL_DB_Flag2, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Approved = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Approved", Attendance.COL_DB_Approved, Attendance.COL_DB_Approved, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_PayrollItems_Id = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_PayrollItems_Id", "", Attendance.COL_DB_PayrollItems_Id, false, false, "", false, false, 30, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Payrolls_No = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Payrolls_No", "Payrolls", Attendance.COL_Payrolls_No, false, true, "", false, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Attendance.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            col_dgv_Payrolls_Id = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Payrolls_Id", "" , Attendance.COL_DB_PayrollItems_Id, false, false, "", false, false, 30, DataGridViewContentAlignment.MiddleLeft);
             ptInputPanel.PerformClick();
 
             AttendanceStatus.populateDropDownList(iddl_AttendanceStatuses, false);
@@ -199,28 +217,30 @@ namespace HR_Desktop.Admin
 
         protected override void virtual_dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (!String.IsNullOrEmpty(Util.getSelectedRowValue(dgv, col_dgv_Payrolls_Id).ToString()))
-            //{
-            //    populateGridViewDataSource(true);
-            //    Util.displayMessageBox("Warning!", "Attendance already have Payroll. Can not update Attendance!");
-            //}
-            //else 
             if (Util.isColumnMatch(sender, e, col_dgv_Flag1))
             {
-                Attendance.updateFlag1Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
-                populateGridViewDataSource(true);
+                if(isValidToUpdate())
+                    Attendance.updateFlag1Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
+                    populateGridViewDataSource(true);
             }
             else if (Util.isColumnMatch(sender, e, col_dgv_Flag2))
             {
-                Attendance.updateFlag2Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
-                populateGridViewDataSource(true);
+                if (isValidToUpdate())
+                    Attendance.updateFlag2Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
+                    populateGridViewDataSource(true);
             }
             else if (Util.isColumnMatch(sender, e, col_dgv_Approved))
             {
-                Attendance.updateApprovedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
-                populateGridViewDataSource(true);
+                if (isValidToUpdate())
+                    Attendance.updateApprovedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
+                    populateGridViewDataSource(true);
             }
             base.virtual_dgv_CellContentClick(sender, e);
+        }
+
+        private bool isValidToUpdate()
+        {
+            return (Util.getSelectedRowValue(dgv, col_dgv_PayrollItems_Id) == null);
         }
 
         #endregion METHODS

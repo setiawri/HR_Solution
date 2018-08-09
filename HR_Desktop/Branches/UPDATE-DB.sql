@@ -701,7 +701,8 @@ BEGIN
 		AttendanceStatuses.Name AS AttendanceStatuses_Name,
 		COALESCE(DATEDIFF(MINUTE,Attendances.EffectiveTimestampIn, Attendances.EffectiveTimestampOut),0)/60 AS EffectiveWorkHours,
 		Workshifts.Id AS Workshifts_Id, Workshifts.Name AS Workshifts_Name,
-		[dbo].[DayOfWeekName](Attendances.Workshifts_DayOfWeek) AS Workshifts_DayofWeek_Name
+		[dbo].[DayOfWeekName](Attendances.Workshifts_DayOfWeek) AS Workshifts_DayofWeek_Name,
+		Payrolls.No AS Payrolls_No
 	FROM Attendances 
 		LEFT OUTER JOIN UserAccounts ON Attendances.UserAccounts_Id = UserAccounts.ID
 		LEFT OUTER JOIN Clients ON Attendances.Clients_Id = Clients.Id
@@ -709,6 +710,8 @@ BEGIN
 		LEFT OUTER JOIN Workshifts ON Attendances.Workshifts_DayOfWeek = Workshifts.DayOfWeek 
 						AND CAST(Attendances.Workshifts_Start AS Time) = Workshifts.Start 
 						AND Attendances.Workshifts_DurationMinutes = Workshifts.DurationMinutes 
+		LEFT OUTER JOIN PayrollItems ON PayrollItems.Id = Attendances.PayrollItems_Id
+		LEFT OUTER JOIN Payrolls ON Payrolls.Id = PayrollItems.Payrolls_Id
 	WHERE 1=1
 		AND (@Id IS NULL OR Attendances.Id = @Id)
 		AND (@UserAccounts_Id IS NULL OR Attendances.UserAccounts_Id = @UserAccounts_Id)
