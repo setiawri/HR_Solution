@@ -23,6 +23,8 @@ namespace HR_Desktop.Payroll
         /*******************************************************************************************************/
         #region PRIVATE VARIABLES
 
+        protected CheckBox _headerCheckbox;
+
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
@@ -61,7 +63,6 @@ namespace HR_Desktop.Payroll
             col_dgvAttendances_Employee_UserAccounts_Fullname.DataPropertyName = Attendance.COL_UserAccounts_Fullname;
             col_dgvAttendances_Clients_Name.DataPropertyName = Attendance.COL_Clients_CompanyName;
             col_dgvAttendances_Workshifts_DayOfWeek.DataPropertyName = Attendance.COL_Workshifts_DayOfWeek_Name;
-
         }
 
         private void setupControlsBasedOnRoles()
@@ -84,20 +85,22 @@ namespace HR_Desktop.Payroll
 
         private void populateDgvAttendance()
         {
-                Util.setGridviewDataSource(dgvAttendance, true, true,
-                    Attendance.get(
-                        null,
-                        itxt_UserAccount.ValueGuid,
-                        itxt_FilterEmployee_Client.ValueGuid,
-                        null,
-                        Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
-                        idtp_FilterAttendance_StartDate.ValueAsStartDateFilter,
-                        idtp_FilterAttendance_EndDate.ValueAsEndDateFilter,
-                        idtp_FilterAttendance_In.ValueTimeSpan,
-                        idtp_FilterAttendance_Out.ValueTimeSpan,
-                        null,
-                        (Guid?)(iddl_AttendanceStatuses.SelectedValue)
-                    ));
+            Util.setGridviewDataSource(dgvAttendance, true, true,
+                Attendance.get(
+                    null,
+                    itxt_UserAccount.ValueGuid,
+                    itxt_FilterEmployee_Client.ValueGuid,
+                    null,
+                    Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
+                    idtp_FilterAttendance_StartDate.ValueAsStartDateFilter,
+                    idtp_FilterAttendance_EndDate.ValueAsEndDateFilter,
+                    idtp_FilterAttendance_In.ValueTimeSpan,
+                    idtp_FilterAttendance_Out.ValueTimeSpan,
+                    null,
+                    (Guid?)(iddl_AttendanceStatuses.SelectedValue)
+                ));
+
+            if (_headerCheckbox != null) _headerCheckbox.Checked = false;
         }
 
         private void resetData()
@@ -165,6 +168,15 @@ namespace HR_Desktop.Payroll
             populateDgvAttendance();
         }
 
+        private void Form_Shown(object sender, EventArgs e)
+        {
+            _headerCheckbox = Util.addHeaderCheckbox(dgvAttendance, col_dgvAttendance_Checkbox, "_headerCheckbox", selectCheckboxHeader_CheckedChanged);
+        }
+        
+        private void selectCheckboxHeader_CheckedChanged(object sender, EventArgs e)
+        {
+            Util.toggleCheckboxColumn(dgvAttendance, col_dgvAttendance_Checkbox, _headerCheckbox);
+        }
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

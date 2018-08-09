@@ -15,7 +15,7 @@
 
 		
 > Verify TABLE Attendance
-	- if not null, locked (no further modification is allowed). 
+	- if PaymentItems_Id not null, locked (no further modification is allowed). 
 
 > 
 

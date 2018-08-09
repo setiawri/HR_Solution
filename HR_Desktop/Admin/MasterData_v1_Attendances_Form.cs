@@ -47,6 +47,12 @@ namespace HR_Desktop.Admin
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
         #region METHODS
+
+        private bool isValidToUpdate()
+        {
+            return (Util.getSelectedRowValue(dgv, col_dgv_PayrollItems_Id) == null);
+        }
+
         #endregion METHODS
         /*******************************************************************************************************/
         #region OVERRIDE METHODS
@@ -236,11 +242,6 @@ namespace HR_Desktop.Admin
                     populateGridViewDataSource(true);
             }
             base.virtual_dgv_CellContentClick(sender, e);
-        }
-
-        private bool isValidToUpdate()
-        {
-            return (Util.getSelectedRowValue(dgv, col_dgv_PayrollItems_Id) == null);
         }
 
         #endregion METHODS

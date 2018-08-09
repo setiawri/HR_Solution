@@ -2,18 +2,5 @@
 > PULL HR & LibUtil
 > run UPDATE-DB.sql
 
-> Payments_Add_Form
-	- change dropdownlist 
-
-> Admin.MasterData_v1_Attendances_Form
-	> copy input fields in gbAttendance in Timesheets_Form2.cs 
-	> update code to add/update
-
-> Timesheet_Form.cs
-	- dgvAttendance
-		> Add column Employee name, Client name, DayOfWeek
-		> 
-	- implement filter button
-
-
+> 
 
