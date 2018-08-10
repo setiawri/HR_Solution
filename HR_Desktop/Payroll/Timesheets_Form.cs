@@ -47,7 +47,7 @@ namespace HR_Desktop.Payroll
             idtp_FilterAttendance_StartDate.Value = DateTime.Today.AddMonths(-3);
             idtp_FilterAttendance_EndDate.Value = DateTime.Today;
 
-            dgvAttendance.AutoGenerateColumns = false;
+            dgvAttendances.AutoGenerateColumns = false;
             col_dgvAttendances_Id.DataPropertyName = Attendance.COL_DB_Id;
             col_dgvAttendances_In.DataPropertyName = Attendance.COL_DB_TimestampIn;
             col_dgvAttendances_Out.DataPropertyName = Attendance.COL_DB_TimestampOut;
@@ -85,7 +85,7 @@ namespace HR_Desktop.Payroll
 
         private void populateDgvAttendance()
         {
-            Util.setGridviewDataSource(dgvAttendance, true, true,
+            Util.setGridviewDataSource(dgvAttendances, true, true,
                 Attendance.get(
                     null,
                     itxt_UserAccount.ValueGuid,
@@ -128,30 +128,30 @@ namespace HR_Desktop.Payroll
             LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse, itxt_UserAccount.ValueGuid), ref sender);   
         }
 
-        private void dgvAttendance_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvAttendances_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(Util.getSelectedRowValue(dgvAttendance,col_dgvAttendances_PayrollItems_Id) != null)
+            if(Util.getSelectedRowValue(dgvAttendances,col_dgvAttendances_PayrollItems_Id) != null)
             {
                 populateDgvAttendance();
             }
             else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Flag1))
             {
-                Attendance.updateFlag1Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendance, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
+                Attendance.updateFlag1Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
                 populateDgvAttendance();
             }
             else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Flag2))
             {
-                Attendance.updateFlag2Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendance, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
+                Attendance.updateFlag2Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
                 populateDgvAttendance();
             }
             else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Approved))
             {
-                Attendance.updateApprovedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendance, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
+                Attendance.updateApprovedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
                 populateDgvAttendance();
             }
             else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Rejected))
             {
-                Attendance.updateRejectedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendance, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
+                Attendance.updateRejectedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
                 populateDgvAttendance();
             }
             
@@ -170,12 +170,12 @@ namespace HR_Desktop.Payroll
 
         private void Form_Shown(object sender, EventArgs e)
         {
-            _headerCheckbox = Util.addHeaderCheckbox(dgvAttendance, col_dgvAttendance_Checkbox, "_headerCheckbox", selectCheckboxHeader_CheckedChanged);
+            _headerCheckbox = Util.addHeaderCheckbox(dgvAttendances, col_dgvAttendances_Checkbox, "_headerCheckbox", selectCheckboxHeader_CheckedChanged);
         }
         
         private void selectCheckboxHeader_CheckedChanged(object sender, EventArgs e)
         {
-            Util.toggleCheckboxColumn(dgvAttendance, col_dgvAttendance_Checkbox, _headerCheckbox);
+            Util.toggleCheckboxColumn(dgvAttendances, col_dgvAttendances_Checkbox, _headerCheckbox);
         }
 
         #endregion EVENT HANDLERS
