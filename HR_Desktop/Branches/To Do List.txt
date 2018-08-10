@@ -31,8 +31,6 @@
 	- autofill target bank account
 
 
-> TABLE Attendance ADD PayableAmount (decimal(10,0), not null, default 0)
-
 > Timesheets_Form
 	- create form to show AttendanceItems
 		> 

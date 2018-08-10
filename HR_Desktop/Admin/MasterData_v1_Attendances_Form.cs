@@ -280,6 +280,16 @@ namespace HR_Desktop.Admin
             LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Workshifts_Form(FormModes.Browse, itxt_Client.ValueGuid), ref sender);
         }
 
+        private void idtp_TimestampIn_ValueChanged_1(object sender, EventArgs e)
+        {
+            idtp_EffectiveTimestampIn.Value = idtp_TimestampIn.Value;
+        }
+
+        private void idtp_TimestampOut_ValueChanged(object sender, EventArgs e)
+        {
+            idtp_EffectiveTimestampOut.Value = idtp_TimestampOut.Value;
+        }
+
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
     }

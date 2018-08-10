@@ -1,0 +1,17 @@
+﻿
+> PULL HR & LibUtil
+> run UPDATE-DB.sql
+
+
+> TABLE Attendance ADD PayableAmount (decimal(10,0), not null, default 0)
+	- add column to dgvAttendances in timesheet form
+	- we will do calculation for this field in later task. Now, we just use the default value 0.
+
+> Timesheet Form
+	- col_dgvAttendances_Checkbox
+		> on checked changed to true, if col_dgvAttendances_PayrollItems_Id is true, show error "Item was already processed" and set checkbox to false
+	- btnGeneratePayroll (See Sale submission in iSpeak)
+		> create payrolls
+		> create payrollItems
+
+> Make sure everything works in Payrolls_Main_Form
