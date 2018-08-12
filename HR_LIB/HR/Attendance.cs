@@ -28,6 +28,7 @@ namespace HR_LIB.HR
         public bool Rejected;
         public Guid? PayrollItems_Id;
         public Guid AttendanceStatuses_Id;
+        public decimal PayableAmount;
 
         public string UserAccounts_Fullname;
         public string Clients_CompanyName;
@@ -57,6 +58,7 @@ namespace HR_LIB.HR
         public const string COL_DB_Rejected = "Rejected";
         public const string COL_DB_PayrollItems_Id = "PayrollItems_Id";
         public const string COL_DB_AttendanceStatuses_Id = "AttendanceStatuses_Id";
+        public const string COL_DB_PayableAmount = "PayableAmount";
 
         public const string COL_EffectiveWorkHours = "EffectiveWorkHours";
         public const string COL_UserAccounts_Fullname = "UserAccounts_Fullname";
@@ -99,7 +101,7 @@ namespace HR_LIB.HR
                 Rejected = Util.wrapNullable<bool>(row, COL_DB_Rejected);
                 PayrollItems_Id = Util.wrapNullable<Guid?>(row, COL_DB_PayrollItems_Id);
                 AttendanceStatuses_Id = Util.wrapNullable<Guid>(row, COL_DB_AttendanceStatuses_Id);
-
+                PayableAmount = Util.wrapNullable<decimal>(row, COL_DB_PayableAmount);
                 UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
                 Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
                 AttendanceStatuses_Name = Util.wrapNullable<string>(row, COL_AttendanceStatuses_Name);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 
 using HR_LIB.HR;
@@ -24,6 +25,7 @@ namespace HR_Desktop.Payroll
         #region PRIVATE VARIABLES
 
         protected CheckBox _headerCheckbox;
+        private DataTable _PayrollItem;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
@@ -60,9 +62,12 @@ namespace HR_Desktop.Payroll
             col_dgvAttendances_Rejected.DataPropertyName = Attendance.COL_DB_Rejected;
             col_dgvAttendances_Notes.DataPropertyName = Attendance.COL_DB_Notes;
             col_dgvAttendances_PayrollItems_Id.DataPropertyName = Attendance.COL_DB_PayrollItems_Id;
+            col_dgvAttendances_Employee_UserAccounts_Id.DataPropertyName = Attendance.COL_DB_UserAccounts_Id;
             col_dgvAttendances_Employee_UserAccounts_Fullname.DataPropertyName = Attendance.COL_UserAccounts_Fullname;
             col_dgvAttendances_Clients_Name.DataPropertyName = Attendance.COL_Clients_CompanyName;
             col_dgvAttendances_Workshifts_DayOfWeek.DataPropertyName = Attendance.COL_Workshifts_DayOfWeek_Name;
+            col_dgvAttendances_PayableAmount.DataPropertyName = Attendance.COL_DB_PayableAmount;
+            col_dgvAttendances_Payrolls_No.DataPropertyName = Attendance.COL_Payrolls_No;
         }
 
         private void setupControlsBasedOnRoles()
@@ -108,6 +113,50 @@ namespace HR_Desktop.Payroll
 
         }
 
+        private bool isValidToUpdate()
+        {
+            return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString()));
+        }
+
+        private bool isValidToSubmit()
+        {
+            if (_PayrollItem == null || _PayrollItem.Rows.Count == 0)
+                return Util.displayMessageBoxError("Please choose Attendance");
+
+            return true;
+        }
+
+        private string getSelectedItemDescription()
+        {
+            return string.Format("{0} - In :{1:dd/MM/yyyy HH:mm} - Out : {2:dd/MM/yyyy HH:mm}",
+                Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Employee_UserAccounts_Fullname),
+                (DateTime)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_In),
+                (DateTime)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Out)
+                );
+        }
+
+        private void addPayrollItem(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Util.getCheckboxValue(sender, e))
+                _PayrollItem = PayrollItem.addRow(
+                                    _PayrollItem,
+                                    (Guid)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Employee_UserAccounts_Id),
+                                    Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id),
+                                    getSelectedItemDescription(),
+                                    (decimal)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayableAmount),
+                                    Convert.ToString(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Notes))
+                                    );
+            else
+            {
+                for (int i = _PayrollItem.Rows.Count - 1; i >= 0; i--)
+                {
+                    DataRow dr = _PayrollItem.Rows[i];
+                    if ((Guid)dr[PayrollItem.COL_DB_RefId] == (Guid)Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id))
+                        dr.Delete();
+                }
+            }
+            
+        }
         #endregion METHODS
         /*******************************************************************************************************/
         #region EVENT HANDLERS
@@ -130,29 +179,40 @@ namespace HR_Desktop.Payroll
 
         private void dgvAttendances_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(Util.getSelectedRowValue(dgvAttendances,col_dgvAttendances_PayrollItems_Id) != null)
+            if (Util.isColumnMatch(sender, e, col_dgvAttendances_Checkbox))
             {
-                populateDgvAttendance();
+                if (!isValidToUpdate())
+                    Util.displayMessageBoxError("Item was already processed");
+                else
+                {
+                    Util.clickDataGridViewCheckbox(sender, e);
+                    addPayrollItem(sender, e);
+                }
             }
             else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Flag1))
             {
-                Attendance.updateFlag1Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
-                populateDgvAttendance();
+                if (isValidToUpdate())
+                    Attendance.updateFlag1Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
+                    populateDgvAttendance();
+                    
             }
             else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Flag2))
             {
-                Attendance.updateFlag2Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
-                populateDgvAttendance();
+                if (isValidToUpdate())
+                    Attendance.updateFlag2Status(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
+                    populateDgvAttendance();
             }
             else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Approved))
             {
-                Attendance.updateApprovedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
-                populateDgvAttendance();
+                if (isValidToUpdate())
+                    Attendance.updateApprovedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
+                    populateDgvAttendance();
             }
             else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Rejected))
             {
-                Attendance.updateRejectedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
-                populateDgvAttendance();
+                if (isValidToUpdate())
+                    Attendance.updateRejectedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
+                    populateDgvAttendance(); 
             }
             
         }
@@ -176,6 +236,22 @@ namespace HR_Desktop.Payroll
         private void selectCheckboxHeader_CheckedChanged(object sender, EventArgs e)
         {
             Util.toggleCheckboxColumn(dgvAttendances, col_dgvAttendances_Checkbox, _headerCheckbox);
+        }
+
+        private void btnGeneratePayroll_Click(object sender, EventArgs e)
+        {
+            if (isValidToSubmit())
+            {
+                HR_LIB.HR.Payroll.add(LOGIN.UserAccount.LoggedInAccount.Id, _PayrollItem);
+
+                //show payment form
+                //PaymentInfo paymentInfo = new PaymentInfo(DateTime.Now, Payrolls_Id, (int)Util.compute((DataTable)dgv.DataSource, "SUM", PayrollItem.COL_Amount, null));
+                //Util.displayForm(null, new SharedForms.Payments_Add_Form(paymentInfo));
+
+                //resetData();
+                //this.Close();
+                populateData();
+            }
         }
 
         #endregion EVENT HANDLERS

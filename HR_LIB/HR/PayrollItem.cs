@@ -51,6 +51,33 @@ namespace HR_LIB.HR
         /*******************************************************************************************************/
         #region DATABASE METHODS
 
+        public static DataTable addRow(DataTable datatable, Guid? employee_UserAccounts_Id, Guid? refId, string description, decimal amount, string notes)
+        {
+            DataRow row;
+
+            //populate using random id to get columns structure with no rows
+            if (datatable == null)
+            {
+                datatable = get(Guid.NewGuid());
+                Util.setDataTablePrimaryKey(datatable, COL_DB_Id);
+            }
+
+            row = datatable.NewRow();
+
+            //create row
+            row[COL_DB_Id] = Guid.NewGuid();
+            row[COL_Employee_UserAccounts_Id] = employee_UserAccounts_Id;
+            row[COL_DB_RefId] = refId;
+            row[COL_DB_Description] = description;
+            row[COL_DB_Amount] = amount;
+            row[COL_DB_Notes] = notes;
+            row[COL_DescriptionAndNotes] = Util.append(row[COL_DB_Description].ToString(), notes, Environment.NewLine);
+
+            datatable.Rows.Add(row);
+
+            return datatable;
+        }
+
         public static DataTable get(Guid Payrolls_Id)
         {
             return get(new List<Guid?>() { Payrolls_Id});

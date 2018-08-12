@@ -50,7 +50,7 @@ namespace HR_Desktop.Admin
 
         private bool isValidToUpdate()
         {
-            return (Util.getSelectedRowValue(dgv, col_dgv_PayrollItems_Id) == null);
+            return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgv, col_dgv_PayrollItems_Id).ToString()));
         }
 
         #endregion METHODS

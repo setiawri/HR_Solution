@@ -56,6 +56,7 @@ namespace HR_Desktop.Payroll
 
             dgvPayrolls.AutoGenerateColumns = false;
             col_dgvPayrolls_Id.DataPropertyName = HR_LIB.HR.Payroll.COL_DB_Id;
+            col_dgvPayrolls_No.DataPropertyName = HR_LIB.HR.Payroll.COL_DB_No;
             col_dgvPayrolls_UserAccounts_Fullname.DataPropertyName = HR_LIB.HR.Payroll.COL_Employee_UserAccounts_Fullname;
             col_dgvPayrolls_Amount.DataPropertyName = HR_LIB.HR.Payroll.COL_DB_Amount;
             col_dgvPayrolls_Timestamp.DataPropertyName = HR_LIB.HR.Payroll.COL_DB_Timestamp;
