@@ -6,31 +6,10 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Payrolls_create_temp]
-	
-AS
-
-BEGIN
-
-	DROP TABLE IF EXISTS TEMP_PayrollItems;
-	CREATE TABLE TEMP_PayrollItems
-	(
-		Id uniqueidentifier not null,
-		Employee_UserAccounts_Id uniqueidentifier not null,
-		RefId uniqueidentifier not null,
-		Description nvarchar(MAX) not null,
-		Amount decimal not null,
-		Notes nvarchar(MAX)
-	)
-
-END
-GO
-
-/**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Payrolls_add_temp]
+CREATE PROCEDURE [dbo].[PayrollItems_add]
 
 	@Id uniqueidentifier,
-	@Employee_UserAccounts_Id uniqueidentifier,
+	@Payrolls_Id uniqueidentifier,
 	@RefId uniqueidentifier,
 	@Description nvarchar(MAX),
 	@Amount decimal,
@@ -39,10 +18,15 @@ CREATE PROCEDURE [dbo].[Payrolls_add_temp]
 AS
 
 BEGIN
-	--insert temporary table payroll items
-	INSERT INTO TEMP_PayrollItems(Id, Employee_UserAccounts_Id, RefId, Description, Amount, Notes)
-	VALUES (@Id, @Employee_UserAccounts_Id, @RefId, @Description, @Amount, @Notes);
 
+	--insert payrollitems
+	INSERT INTO PayrollItems(Id, Payrolls_Id, RefId, Description, Amount, Notes)
+	VALUES (@Id, @Payrolls_Id, @RefId, @Description, @Amount, @Notes);
+
+	--update attendances
+	UPDATE Attendances
+			SET PayrollItems_Id = @Id
+	WHERE Attendances.Id = @RefId
 
 END
 GO
@@ -51,61 +35,20 @@ GO
 /**************************************************************************************************************************************************************/
 CREATE PROCEDURE [dbo].[Payrolls_add]
 	
-@UserAccounts_Id uniqueidentifier
+	@Id uniqueidentifier,
+	@Employee_UserAccounts_Id uniqueidentifier,
+	@Amount decimal
 
 AS
 
 BEGIN
 
-	DROP TABLE IF EXISTS TEMP_Payrolls;
-
 	DECLARE @HexLength int = 5
-	DECLARE @CountPayrolls int;
-
-	/*	insert temporary table payrolls
-	RowNumber user for generate atribute "No" in table Payrolls */
-	SELECT DISTINCT NEWID() AS Payrolls_Id, Employee_UserAccounts_Id, SUM(Amount) AS Amount, ROW_NUMBER() OVER(ORDER BY Employee_UserAccounts_Id) as RowNumber
-	INTO TEMP_Payrolls
-	FROM TEMP_PayrollItems
-	GROUP BY Employee_UserAccounts_Id
-
 	
-	--insert table payrolls 
+
 	INSERT INTO Payrolls(Id, No, Timestamp, Employee_UserAccounts_Id, Amount)
-	SELECT Payrolls_Id,RIGHT(CONVERT(NVARCHAR(10), CONVERT(VARBINARY(8), ISNULL(CONVERT(INT, (SELECT MAX(No) FROM Payrolls)),0) + CONVERT(INT,RowNumber)), 1),5), 
-	CURRENT_TIMESTAMP, Employee_UserAccounts_Id, Amount
-	FROM TEMP_Payrolls 
-
-	--insert activity log for inserting payrolls
-	INSERT INTO ActivityLogs(Id, Timestamp, AssociatedId, Description, UserAccounts_Id)
-	SELECT NEWID(), CURRENT_TIMESTAMP, Payrolls_Id, 'Added', @UserAccounts_Id
-	FROM TEMP_Payrolls
-
-	--insert table payroll items
-	INSERT INTO PayrollItems(Id, Payrolls_Id, RefId, Description, Amount, Notes)
-	SELECT TEMP_PayrollItems.Id, TEMP_Payrolls.Payrolls_Id, TEMP_PayrollItems.RefId, TEMP_PayrollItems.Description, TEMP_PayrollItems.Amount, TEMP_PayrollItems.Notes
-	FROM TEMP_PayrollItems TEMP_PayrollItems
-	LEFT OUTER JOIN TEMP_Payrolls TEMP_Payrolls ON TEMP_PayrollItems.Employee_UserAccounts_Id = TEMP_Payrolls.Employee_UserAccounts_Id
-
-	--insert activity log for inserting payroll items
-	INSERT INTO ActivityLogs(Id, Timestamp, AssociatedId, Description, UserAccounts_Id)
-	SELECT NEWID(), CURRENT_TIMESTAMP, Id, 'Added', @UserAccounts_Id
-	FROM TEMP_PayrollItems
-
-	--update attendances
-	UPDATE Attendances
-			SET PayrollItems_Id = TEMP_PayrollItems.Id
-	FROM TEMP_PayrollItems 
-	WHERE Attendances.Id = TEMP_PayrollItems.RefId
-
-	--insert activity log for updating attendances
-	INSERT INTO ActivityLogs(Id, Timestamp, AssociatedId, Description, UserAccounts_Id)
-	SELECT NEWID(), CURRENT_TIMESTAMP, RefId, 'Update Payroll ', @UserAccounts_Id
-	FROM TEMP_PayrollItems
-	
-
-	DROP TABLE IF EXISTS TEMP_Payrolls;
-	DROP TABLE IF EXISTS TEMP_PayrollItems;
+	VALUES (@Id,RIGHT('00000'+ CAST (ISNULL(CONVERT(INT, (SELECT MAX(No) FROM Payrolls)),0) + 1 AS VARCHAR(10)),@HexLength), 
+	CURRENT_TIMESTAMP, @Employee_UserAccounts_Id, @Amount)
 
 END
 GO
@@ -833,6 +776,7 @@ BEGIN
 		AND (@FILTER_EndTime IS NULL OR CAST(Attendances.TimestampOut AS time)<= @FILTER_EndTime)
 		AND (@Notes IS NULL OR Attendances.Notes LIKE '%'+ @Notes+'%')
 		AND (@AttendanceStatuses_Id IS NULL OR Attendances.AttendanceStatuses_Id = @AttendanceStatuses_Id)
+	ORDER BY Attendances.TimestampIn, UserAccounts.Firstname
 
 END
 GO

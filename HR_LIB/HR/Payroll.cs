@@ -59,36 +59,58 @@ namespace HR_LIB.HR
         /*******************************************************************************************************/
         #region DATABASE METHODS
 
-        public static void add(SqlConnection sqlConnection, Guid userAccountID)
+        public static DataTable addRow(DataTable datatable, Guid id, Guid employee_UserAccounts_Id, decimal amount)
         {
-            SqlQueryResult result = DBConnection.query(
-                sqlConnection,
-                QueryTypes.ExecuteNonQuery,
-                "Payrolls_add",
-                 new SqlQueryParameter(ActivityLog.COL_DB_UserAccounts_Id, SqlDbType.UniqueIdentifier, userAccountID)
-            );
+            DataRow row;
 
+            //populate using random id to get columns structure with no rows
+            if (datatable == null)
+            {
+                datatable =  get(Guid.NewGuid(), null, null,null);
+                Util.setDataTablePrimaryKey(datatable, COL_DB_Id);
+            }
+
+            row = datatable.NewRow();
+
+            //create row
+            row[COL_DB_Id] = id;
+            row[COL_DB_Employee_UserAccounts_Id] = employee_UserAccounts_Id;
+            row[COL_DB_Amount] = amount;
+
+            datatable.Rows.Add(row);
+
+            return datatable;
         }
 
-        public static void add(Guid userAccountID, DataTable PayrollItems)
+        public static void add(Guid userAccountID, DataTable Payrolls, DataTable PayrollItems)
         {
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
                 {
-                    DBConnection.query(
+                    foreach (DataRow row in Payrolls.Rows)
+                    {
+                        SqlQueryResult result = DBConnection.query(
                             sqlConnection,
                             QueryTypes.ExecuteNonQuery,
-                            "Payrolls_create_temp");
+                            "Payrolls_add",
+                            new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable<Guid>(row, COL_DB_Id)),
+                            new SqlQueryParameter(COL_DB_Employee_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable<Guid>(row, COL_DB_Employee_UserAccounts_Id)),
+                           new SqlQueryParameter(COL_DB_Amount, SqlDbType.Decimal, Util.wrapNullable<decimal?>(row, PayrollItem.COL_DB_Amount))
+                        );
+
+                        if (result.IsSuccessful)
+                            ActivityLog.add(sqlConnection, userAccountID, Util.wrapNullable<Guid>(row, Payroll.COL_DB_Id), "Added");
+                    }
 
                     foreach (DataRow row in PayrollItems.Rows)
                     {
                         SqlQueryResult result = DBConnection.query(
                             sqlConnection,
                             QueryTypes.ExecuteNonQuery,
-                            "Payrolls_add_temp",
+                            "PayrollItems_add",
                             new SqlQueryParameter(PayrollItem.COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable<Guid>(row, COL_DB_Id)),
-                            new SqlQueryParameter(PayrollItem.COL_Employee_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable<Guid>(row, COL_DB_Employee_UserAccounts_Id)),
+                            new SqlQueryParameter(PayrollItem.COL_DB_Payrolls_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable<Guid>(row, PayrollItem.COL_DB_Payrolls_Id)),
                             new SqlQueryParameter(PayrollItem.COL_DB_RefId, SqlDbType.UniqueIdentifier, Util.wrapNullable<Guid>(row, PayrollItem.COL_DB_RefId)),
                             new SqlQueryParameter(PayrollItem.COL_DB_Description, SqlDbType.NVarChar, Util.wrapNullable<string>(row, PayrollItem.COL_DB_Description)),
                             new SqlQueryParameter(PayrollItem.COL_DB_Amount, SqlDbType.Decimal, Util.wrapNullable<decimal?>(row, PayrollItem.COL_DB_Amount)),
@@ -98,8 +120,6 @@ namespace HR_LIB.HR
                         if (result.IsSuccessful)
                             ActivityLog.add(sqlConnection, userAccountID, Util.wrapNullable<Guid>(row, PayrollItem.COL_DB_Id), "Added");
                     }
-
-                    Payroll.add(sqlConnection, userAccountID);
                 }
             }
             catch (Exception ex) { Util.displayMessageBoxError(ex.Message); }

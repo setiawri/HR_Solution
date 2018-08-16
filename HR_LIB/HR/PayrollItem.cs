@@ -51,7 +51,7 @@ namespace HR_LIB.HR
         /*******************************************************************************************************/
         #region DATABASE METHODS
 
-        public static DataTable addRow(DataTable datatable, Guid? employee_UserAccounts_Id, Guid? refId, string description, decimal amount, string notes)
+        public static DataTable addRow(DataTable datatable, Guid? payrolls_Id, Guid? employee_UserAccounts_Id, Guid? refId, string description, decimal amount, string notes)
         {
             DataRow row;
 
@@ -66,6 +66,7 @@ namespace HR_LIB.HR
 
             //create row
             row[COL_DB_Id] = Guid.NewGuid();
+            row[COL_DB_Payrolls_Id] = payrolls_Id;
             row[COL_Employee_UserAccounts_Id] = employee_UserAccounts_Id;
             row[COL_DB_RefId] = refId;
             row[COL_DB_Description] = description;

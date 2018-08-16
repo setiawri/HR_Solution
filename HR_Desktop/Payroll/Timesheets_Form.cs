@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
 using System.Windows.Forms;
 
@@ -25,6 +26,7 @@ namespace HR_Desktop.Payroll
         #region PRIVATE VARIABLES
 
         protected CheckBox _headerCheckbox;
+        private DataTable _Payroll;
         private DataTable _PayrollItem;
 
         #endregion PRIVATE VARIABLES
@@ -80,6 +82,8 @@ namespace HR_Desktop.Payroll
             if (isValidToPopulateData())
             {
                 populateDgvAttendance();
+                _Payroll = null;
+                _PayrollItem = null;
             }
         }
 
@@ -135,11 +139,37 @@ namespace HR_Desktop.Payroll
                 );
         }
 
+        private Guid addPayroll(Guid employee_UserAccounts_Id, decimal amount)
+        {
+            Guid? payrolls_Id = null;
+
+            if(_Payroll != null)
+                foreach (DataRow dr in _Payroll.Rows)
+                {
+                    if ((Guid)dr[HR_LIB.HR.Payroll.COL_DB_Employee_UserAccounts_Id] == employee_UserAccounts_Id)
+                    {
+                        payrolls_Id = (Guid)dr[HR_LIB.HR.Payroll.COL_DB_Id];
+                        dr[HR_LIB.HR.Payroll.COL_DB_Amount] = (decimal)dr[HR_LIB.HR.Payroll.COL_DB_Amount] + amount;
+                        break;
+                    }
+                }
+
+            if (payrolls_Id == null)
+            {
+                payrolls_Id = Guid.NewGuid();
+                _Payroll = HR_LIB.HR.Payroll.addRow(_Payroll, (Guid)payrolls_Id, employee_UserAccounts_Id, amount);
+            }
+
+            return (Guid)payrolls_Id;
+        }
+
         private void addPayrollItem(object sender, DataGridViewCellEventArgs e)
         {
+
             if (Util.getCheckboxValue(sender, e))
                 _PayrollItem = PayrollItem.addRow(
                                     _PayrollItem,
+                                    addPayroll((Guid)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Employee_UserAccounts_Id), (decimal)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayableAmount)),
                                     (Guid)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Employee_UserAccounts_Id),
                                     Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id),
                                     getSelectedItemDescription(),
@@ -153,6 +183,17 @@ namespace HR_Desktop.Payroll
                     DataRow dr = _PayrollItem.Rows[i];
                     if ((Guid)dr[PayrollItem.COL_DB_RefId] == (Guid)Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id))
                         dr.Delete();
+                }
+
+                foreach (DataRow dr in _Payroll.Rows)
+                {
+                    if ((Guid)dr[HR_LIB.HR.Payroll.COL_DB_Employee_UserAccounts_Id] == (Guid)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Employee_UserAccounts_Id))
+                    {
+                        dr[HR_LIB.HR.Payroll.COL_DB_Amount] = (decimal)dr[HR_LIB.HR.Payroll.COL_DB_Amount] - (decimal)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayableAmount);
+                        if ((decimal)dr[HR_LIB.HR.Payroll.COL_DB_Amount] == 0)
+                            dr.Delete();
+                        break;
+                    }
                 }
             }
             
@@ -242,8 +283,8 @@ namespace HR_Desktop.Payroll
         {
             if (isValidToSubmit())
             {
-                HR_LIB.HR.Payroll.add(LOGIN.UserAccount.LoggedInAccount.Id, _PayrollItem);
-
+                HR_LIB.HR.Payroll.add(LOGIN.UserAccount.LoggedInAccount.Id, _Payroll, _PayrollItem);
+                
                 //show payment form
                 //PaymentInfo paymentInfo = new PaymentInfo(DateTime.Now, Payrolls_Id, (int)Util.compute((DataTable)dgv.DataSource, "SUM", PayrollItem.COL_Amount, null));
                 //Util.displayForm(null, new SharedForms.Payments_Add_Form(paymentInfo));
