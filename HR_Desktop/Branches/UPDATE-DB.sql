@@ -2,6 +2,9 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 ALTER TABLE Attendances ADD PayableAmount decimal(10,0) DEFAULT 0 NOT NULL;
+ALTER TABLE Payments ADD RefId uniqueidentifier;
+ALTER TABLE Payments ALTER COLUMN RefId uniqueidentifier not null;
+
 GO
 
 
@@ -9,7 +12,7 @@ GO
 CREATE PROCEDURE [dbo].[PayrollItems_add]
 
 	@Id uniqueidentifier,
-	@Payrolls_Id uniqueidentifier,
+	@Employee_UserAccounts_Id uniqueidentifier,
 	@RefId uniqueidentifier,
 	@Description nvarchar(MAX),
 	@Amount decimal,
@@ -18,18 +21,45 @@ CREATE PROCEDURE [dbo].[PayrollItems_add]
 AS
 
 BEGIN
+	DECLARE @Payrolls_Id uniqueidentifier = null;
+
+	--check payroll
+	SELECT TOP 1 @Payrolls_Id =  ID
+	FROM Payrolls
+	WHERE 1=1
+		AND Payrolls.Employee_UserAccounts_Id = @Employee_UserAccounts_Id
+		AND Payrolls.Id NOT IN
+		(
+			SELECT DISTINCT (Payments.RefId)
+			FROM Payments
+			LEFT OUTER JOIN Payrolls ON Payments.RefId = Payrolls.Id
+			WHERE Payrolls.Employee_UserAccounts_Id = @Employee_UserAccounts_Id		
+		);
+	
+	--insert payroll
+	IF @Payrolls_Id IS NULL
+	BEGIN
+		SET @Payrolls_Id = NEWID();
+		EXEC Payrolls_add @Payrolls_Id, @Employee_UserAccounts_Id, 0
+	END
 
 	--insert payrollitems
 	INSERT INTO PayrollItems(Id, Payrolls_Id, RefId, Description, Amount, Notes)
 	VALUES (@Id, @Payrolls_Id, @RefId, @Description, @Amount, @Notes);
 
+	--update payroll amount
+	UPDATE Payrolls 
+		SET Amount = Amount + @Amount
+	WHERE Id = @Payrolls_Id;
+
 	--update attendances
 	UPDATE Attendances
 			SET PayrollItems_Id = @Id
-	WHERE Attendances.Id = @RefId
+	WHERE Attendances.Id = @RefId;
 
 END
 GO
+
 
 
 /**************************************************************************************************************************************************************/
@@ -43,12 +73,11 @@ AS
 
 BEGIN
 
-	DECLARE @HexLength int = 5
-	
+	DECLARE @HexLength int = 5, @LastHex_String varchar(5), @NewNo varchar(5)
+	EXEC UTIL_IncrementHex @HexLength, @LastHex_String, @NewNo OUTPUT
 
 	INSERT INTO Payrolls(Id, No, Timestamp, Employee_UserAccounts_Id, Amount)
-	VALUES (@Id,RIGHT('00000'+ CAST (ISNULL(CONVERT(INT, (SELECT MAX(No) FROM Payrolls)),0) + 1 AS VARCHAR(10)),@HexLength), 
-	CURRENT_TIMESTAMP, @Employee_UserAccounts_Id, @Amount)
+	VALUES (@Id,@NewNo, CURRENT_TIMESTAMP, @Employee_UserAccounts_Id, @Amount)
 
 END
 GO

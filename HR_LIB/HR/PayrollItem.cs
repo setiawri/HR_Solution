@@ -51,32 +51,55 @@ namespace HR_LIB.HR
         /*******************************************************************************************************/
         #region DATABASE METHODS
 
-        public static DataTable addRow(DataTable datatable, Guid? payrolls_Id, Guid? employee_UserAccounts_Id, Guid? refId, string description, decimal amount, string notes)
-        {
-            DataRow row;
+        //public static DataTable addRow(DataTable datatable, Guid? payrolls_Id, Guid? employee_UserAccounts_Id, Guid? refId, string description, decimal amount, string notes)
+        //{
+        //    DataRow row;
 
-            //populate using random id to get columns structure with no rows
-            if (datatable == null)
+        //    //populate using random id to get columns structure with no rows
+        //    if (datatable == null)
+        //    {
+        //        datatable = get(Guid.NewGuid());
+        //        Util.setDataTablePrimaryKey(datatable, COL_DB_Id);
+        //    }
+
+        //    row = datatable.NewRow();
+
+        //    //create row
+        //    row[COL_DB_Id] = Guid.NewGuid();
+        //    row[COL_DB_Payrolls_Id] = payrolls_Id;
+        //    row[COL_Employee_UserAccounts_Id] = employee_UserAccounts_Id;
+        //    row[COL_DB_RefId] = refId;
+        //    row[COL_DB_Description] = description;
+        //    row[COL_DB_Amount] = amount;
+        //    row[COL_DB_Notes] = notes;
+        //    row[COL_DescriptionAndNotes] = Util.append(row[COL_DB_Description].ToString(), notes, Environment.NewLine);
+
+        //    datatable.Rows.Add(row);
+
+        //    return datatable;
+        //}
+
+        public static void add(Guid userAccountID, Guid employee_UserAccounts_Id, Guid refId, string description, decimal amounts, string notes)
+        {
+            Guid id = Guid.NewGuid();
+            using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
             {
-                datatable = get(Guid.NewGuid());
-                Util.setDataTablePrimaryKey(datatable, COL_DB_Id);
+                SqlQueryResult result = DBConnection.query(
+                    sqlConnection,
+                    QueryTypes.ExecuteNonQuery,
+                    "PayrollItems_add",
+                    new SqlQueryParameter(PayrollItem.COL_DB_Id, SqlDbType.UniqueIdentifier, id),
+                    new SqlQueryParameter(PayrollItem.COL_Employee_UserAccounts_Id, SqlDbType.UniqueIdentifier, employee_UserAccounts_Id),
+                    new SqlQueryParameter(PayrollItem.COL_DB_RefId, SqlDbType.UniqueIdentifier, refId),
+                    new SqlQueryParameter(PayrollItem.COL_DB_Description, SqlDbType.NVarChar, description),
+                    new SqlQueryParameter(PayrollItem.COL_DB_Amount, SqlDbType.Decimal, amounts),
+                    new SqlQueryParameter(PayrollItem.COL_DB_Notes, SqlDbType.NVarChar, notes)
+                );
+
+                if (result.IsSuccessful)
+                    ActivityLog.add(sqlConnection, userAccountID, id, "Added");
             }
 
-            row = datatable.NewRow();
-
-            //create row
-            row[COL_DB_Id] = Guid.NewGuid();
-            row[COL_DB_Payrolls_Id] = payrolls_Id;
-            row[COL_Employee_UserAccounts_Id] = employee_UserAccounts_Id;
-            row[COL_DB_RefId] = refId;
-            row[COL_DB_Description] = description;
-            row[COL_DB_Amount] = amount;
-            row[COL_DB_Notes] = notes;
-            row[COL_DescriptionAndNotes] = Util.append(row[COL_DB_Description].ToString(), notes, Environment.NewLine);
-
-            datatable.Rows.Add(row);
-
-            return datatable;
         }
 
         public static DataTable get(Guid Payrolls_Id)
