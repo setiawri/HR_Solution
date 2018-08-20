@@ -1,15 +1,15 @@
 ﻿/**************************************************************************************************************************************************************/
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
-ALTER TABLE Attendances ADD PayableAmount decimal(10,0) DEFAULT 0 NOT NULL;
-ALTER TABLE Payments ADD RefId uniqueidentifier;
-ALTER TABLE Payments ALTER COLUMN RefId uniqueidentifier not null;
 
-GO
+
+
+
+
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[PayrollItems_add]
+ALTER PROCEDURE [dbo].[PayrollItems_add]
 
 	@Id uniqueidentifier,
 	@Employee_UserAccounts_Id uniqueidentifier,
@@ -63,7 +63,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[Payrolls_add]
+ALTER PROCEDURE [dbo].[Payrolls_add]
 	
 	@Id uniqueidentifier,
 	@Employee_UserAccounts_Id uniqueidentifier,
@@ -73,8 +73,11 @@ AS
 
 BEGIN
 
+	-- INCREMENT LAST HEX NUMBER
 	DECLARE @HexLength int = 5, @LastHex_String varchar(5), @NewNo varchar(5)
+	SELECT @LastHex_String = ISNULL(MAX(No),'') From Payrolls	
 	EXEC UTIL_IncrementHex @HexLength, @LastHex_String, @NewNo OUTPUT
+
 
 	INSERT INTO Payrolls(Id, No, Timestamp, Employee_UserAccounts_Id, Amount)
 	VALUES (@Id,@NewNo, CURRENT_TIMESTAMP, @Employee_UserAccounts_Id, @Amount)

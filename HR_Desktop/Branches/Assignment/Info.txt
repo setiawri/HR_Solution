@@ -1,0 +1,26 @@
+﻿
+> PULL HR & LibUtil
+> run UPDATE-DB.sql
+
+
+> Payrolls_Main_Form
+	- add filter itxt_Payrolls_No
+
+> Timesheet Form
+	- add LINK column "Payroll" -> shows Payrolls_No
+	- contentclick on the column displays form Payrolls_Main_Form, populate filter itxt_Payrolls_No
+
+> TABLE WorkshiftTemplates
+	- add column PayableAmount decimal(12,2) DEFAULT 0 NOT NULL
+	- MasterData_v1_WorkshiftTemplates_Form
+		=> add input and column PayableAmount (Use inputcontrol_numeric)
+
+> TABLE Workshifts
+	- add column PayableAmount decimal(12,2) DEFAULT 0 NOT NULL
+	- MasterData_v1_Workshifts_Form
+		=> add input and column PayableAmount (Use inputcontrol_numeric)
+	
+
+
+
+

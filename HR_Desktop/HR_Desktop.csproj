@@ -274,7 +274,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Branches\Chintia.txt" />
-    <Content Include="Branches\Timesheet Form Update\Info.txt" />
+    <Content Include="Branches\Assignment\Info.txt" />
     <Content Include="Branches\To Do List.txt" />
     <Content Include="Branches\UPDATE-DB.sql" />
     <None Include="Resources\refresh.png" />
