@@ -118,14 +118,6 @@ namespace HR_Desktop.Payroll
             return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString()));
         }
 
-        private bool isValidToSubmit()
-        {
-            //if (_PayrollItem == null || _PayrollItem.Rows.Count == 0)
-            //    return Util.displayMessageBoxError("Please choose Attendance");
-
-            return true;
-        }
-
         private string getSelectedItemDescription()
         {
             return string.Format("{0} - In :{1:dd/MM/yyyy HH:mm} - Out : {2:dd/MM/yyyy HH:mm}",
@@ -135,65 +127,7 @@ namespace HR_Desktop.Payroll
                 );
         }
 
-        //private Guid addPayroll(Guid employee_UserAccounts_Id, decimal amount)
-        //{
-        //    Guid? payrolls_Id = null;
 
-        //    if(_Payroll != null)
-        //        foreach (DataRow dr in _Payroll.Rows)
-        //        {
-        //            if ((Guid)dr[HR_LIB.HR.Payroll.COL_DB_Employee_UserAccounts_Id] == employee_UserAccounts_Id)
-        //            {
-        //                payrolls_Id = (Guid)dr[HR_LIB.HR.Payroll.COL_DB_Id];
-        //                dr[HR_LIB.HR.Payroll.COL_DB_Amount] = (decimal)dr[HR_LIB.HR.Payroll.COL_DB_Amount] + amount;
-        //                break;
-        //            }
-        //        }
-
-        //    if (payrolls_Id == null)
-        //    {
-        //        payrolls_Id = Guid.NewGuid();
-        //        _Payroll = HR_LIB.HR.Payroll.addRow(_Payroll, (Guid)payrolls_Id, employee_UserAccounts_Id, amount);
-        //    }
-
-        //    return (Guid)payrolls_Id;
-        //}
-
-        //private void addPayrollItem(object sender, DataGridViewCellEventArgs e)
-        //{
-
-        //    if (Util.getCheckboxValue(sender, e))
-        //        _PayrollItem = PayrollItem.addRow(
-        //                            _PayrollItem,
-        //                            addPayroll((Guid)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Employee_UserAccounts_Id), (decimal)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayableAmount)),
-        //                            (Guid)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Employee_UserAccounts_Id),
-        //                            Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id),
-        //                            getSelectedItemDescription(),
-        //                            (decimal)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayableAmount),
-        //                            Convert.ToString(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Notes))
-        //                            );
-        //    else
-        //    {
-        //        for (int i = _PayrollItem.Rows.Count - 1; i >= 0; i--)
-        //        {
-        //            DataRow dr = _PayrollItem.Rows[i];
-        //            if ((Guid)dr[PayrollItem.COL_DB_RefId] == (Guid)Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id))
-        //                dr.Delete();
-        //        }
-
-        //        foreach (DataRow dr in _Payroll.Rows)
-        //        {
-        //            if ((Guid)dr[HR_LIB.HR.Payroll.COL_DB_Employee_UserAccounts_Id] == (Guid)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Employee_UserAccounts_Id))
-        //            {
-        //                dr[HR_LIB.HR.Payroll.COL_DB_Amount] = (decimal)dr[HR_LIB.HR.Payroll.COL_DB_Amount] - (decimal)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayableAmount);
-        //                if ((decimal)dr[HR_LIB.HR.Payroll.COL_DB_Amount] == 0)
-        //                    dr.Delete();
-        //                break;
-        //            }
-        //        }
-        //    }
-            
-        //}
         #endregion METHODS
         /*******************************************************************************************************/
         #region EVENT HANDLERS
@@ -276,38 +210,25 @@ namespace HR_Desktop.Payroll
 
         private void btnGeneratePayroll_Click(object sender, EventArgs e)
         {
-            if (isValidToSubmit())
+            foreach (DataGridViewRow dr in dgvAttendances.Rows)
             {
-                foreach (DataGridViewRow dr in dgvAttendances.Rows)
+                if (dr.Cells[col_dgvAttendances_Checkbox.Name].Value != null && (bool)dr.Cells[col_dgvAttendances_Checkbox.Name].Value)
                 {
-                    if (dr.Cells[col_dgvAttendances_Checkbox.Name].Value != null && (bool)dr.Cells[col_dgvAttendances_Checkbox.Name].Value)
-                    {
-                        HR_LIB.HR.PayrollItem.add(
-                            LOGIN.UserAccount.LoggedInAccount.Id,
-                            (Guid)dr.Cells[col_dgvAttendances_Employee_UserAccounts_Id.Name].Value,
-                            (Guid)dr.Cells[col_dgvAttendances_Id.Name].Value,
-                            string.Format("{0} - In :{1:dd/MM/yyyy HH:mm} - Out : {2:dd/MM/yyyy HH:mm}",
-                                (string)dr.Cells[col_dgvAttendances_Employee_UserAccounts_Fullname.Name].Value,
-                                (DateTime)dr.Cells[col_dgvAttendances_In.Name].Value,
-                                (DateTime)dr.Cells[col_dgvAttendances_Out.Name].Value
-                                ),
-                            (decimal)dr.Cells[col_dgvAttendances_PayableAmount.Name].Value,
-                            Convert.ToString(dr.Cells[col_dgvAttendances_Notes.Name].Value)
-                            );
-                    }
+                    HR_LIB.HR.PayrollItem.add(
+                        LOGIN.UserAccount.LoggedInAccount.Id,
+                        (Guid)dr.Cells[col_dgvAttendances_Employee_UserAccounts_Id.Name].Value,
+                        (Guid)dr.Cells[col_dgvAttendances_Id.Name].Value,
+                        string.Format("{0} - In :{1:dd/MM/yyyy HH:mm} - Out : {2:dd/MM/yyyy HH:mm}",
+                            (string)dr.Cells[col_dgvAttendances_Employee_UserAccounts_Fullname.Name].Value,
+                            (DateTime)dr.Cells[col_dgvAttendances_In.Name].Value,
+                            (DateTime)dr.Cells[col_dgvAttendances_Out.Name].Value
+                            ),
+                        (decimal)dr.Cells[col_dgvAttendances_PayableAmount.Name].Value,
+                        Convert.ToString(dr.Cells[col_dgvAttendances_Notes.Name].Value)
+                        );
                 }
-
-
-                //HR_LIB.HR.Payroll.add(LOGIN.UserAccount.LoggedInAccount.Id, _Payroll, _PayrollItem);
-
-                //show payment form
-                //PaymentInfo paymentInfo = new PaymentInfo(DateTime.Now, Payrolls_Id, (int)Util.compute((DataTable)dgv.DataSource, "SUM", PayrollItem.COL_Amount, null));
-                //Util.displayForm(null, new SharedForms.Payments_Add_Form(paymentInfo));
-
-                //resetData();
-                //this.Close();
-                populateData();
             }
+            populateData();
         }
 
         #endregion EVENT HANDLERS
