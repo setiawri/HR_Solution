@@ -66,7 +66,7 @@
             this.col_dgvAttendances_Rejected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col_dgvAttendances_Flag1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col_dgvAttendances_Flag2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.col_dgvAttendances_Payrolls_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvAttendances_Payrolls_No = new System.Windows.Forms.DataGridViewLinkColumn();
             this.col_dgvAttendances_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFilterAttendance.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -491,7 +491,7 @@
             // col_dgvAttendances_Payrolls_No
             // 
             this.col_dgvAttendances_Payrolls_No.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.col_dgvAttendances_Payrolls_No.HeaderText = "Payroll";
+            this.col_dgvAttendances_Payrolls_No.HeaderText = "Payrolls";
             this.col_dgvAttendances_Payrolls_No.MinimumWidth = 50;
             this.col_dgvAttendances_Payrolls_No.Name = "col_dgvAttendances_Payrolls_No";
             this.col_dgvAttendances_Payrolls_No.Width = 50;
@@ -555,7 +555,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvAttendances_Rejected;
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvAttendances_Flag1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvAttendances_Flag2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_Payrolls_No;
+        private System.Windows.Forms.DataGridViewLinkColumn col_dgvAttendances_Payrolls_No;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_Notes;
     }
 }

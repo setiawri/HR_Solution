@@ -30,8 +30,8 @@ namespace HR_Desktop.Payroll
         #region PRIVATE VARIABLES
 
         private List<PaymentInfo> _selectedPayrolls_PaymentInfo = new List<PaymentInfo>();
-
         private FormModes _formMode;
+        private string _No;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
@@ -39,11 +39,11 @@ namespace HR_Desktop.Payroll
 
         public Payrolls_Main_Form() : this(FormModes.Normal, null) { }
         public Payrolls_Main_Form(FormModes formMode) : this(formMode, null) { }
-        public Payrolls_Main_Form(FormModes formMode, Guid? id)
+        public Payrolls_Main_Form(FormModes formMode, string no)
         {
             InitializeComponent();
-
             _formMode = formMode;
+            _No = no;
         }
 
         #endregion CONSTRUCTOR METHODS
@@ -80,6 +80,8 @@ namespace HR_Desktop.Payroll
             {
                 menuStrip1.Visible = false;
                 btnPayment.Visible = false;
+                itxt_Payrolls_No.ValueText = _No;
+                itxt_Payrolls_No.Enabled = false;
             }
         }
 
@@ -90,7 +92,7 @@ namespace HR_Desktop.Payroll
 
         private void populateData()
         {
-            Util.setGridviewDataSource(dgvPayrolls, true, true, HR_LIB.HR.Payroll.get(null, itxt_Employee_UserAccount.ValueGuid, idtp_StartDate.ValueAsStartDateFilter, idtp_EndDate.ValueAsEndDateFilter));
+            Util.setGridviewDataSource(dgvPayrolls, true, true, HR_LIB.HR.Payroll.get(null, itxt_Payrolls_No.ValueText, itxt_Employee_UserAccount.ValueGuid, idtp_StartDate.ValueAsStartDateFilter, idtp_EndDate.ValueAsEndDateFilter));
             populateDgvPayrollItems();
         }
 
@@ -168,10 +170,7 @@ namespace HR_Desktop.Payroll
      
         private void itxt_UserAccount_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            var form = new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false);
-            Util.displayForm(null, form);
-            if (form.DialogResult == DialogResult.OK)
-                itxt_Employee_UserAccount.setValue(form.BrowsedItemSelectionDescription, form.BrowsedItemSelectionId);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false), ref sender);
         }
 
         private void idtp_Date_ValueChanged(object sender, EventArgs e)

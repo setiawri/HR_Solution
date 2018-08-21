@@ -28,6 +28,7 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_DayOfWeek;
         private DataGridViewColumn col_dgv_Start;
         private DataGridViewColumn col_dgv_Duration;
+        private DataGridViewColumn col_dgv_PayableAmount;
         private DataGridViewColumn col_dgv_Notes;
 
         #endregion PRIVATE VARIABLES
@@ -66,6 +67,7 @@ namespace HR_Desktop.Admin
             col_dgv_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_DayOfWeek", iddl_DayOfWeek.LabelText, WorkshiftTemplate.COL_DayOfWeekName, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Start", idtp_Start.LabelText, WorkshiftTemplate.COL_DB_Start, true, true, @"h\:mm", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Duration = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Duration", in_DurationMinutes.LabelText, WorkshiftTemplate.COL_DB_DurationMinutes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_PayableAmount = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_PayableAmount", in_PayableAmount.LabelText, WorkshiftTemplate.COL_DB_PayableAmount, true, true, "N0", true, false, 50, DataGridViewContentAlignment.MiddleRight);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, WorkshiftTemplate.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
@@ -87,6 +89,8 @@ namespace HR_Desktop.Admin
             idtp_Start.reset();
             in_DurationMinutes.Enabled = true;
             in_DurationMinutes.reset();
+            in_PayableAmount.Enabled = true;
+            in_PayableAmount.reset();
             itxt_Notes.reset();
         }
 
@@ -99,7 +103,7 @@ namespace HR_Desktop.Admin
         {
             if (_Clients_Id != null)
                 return WorkshiftTemplate.get(chkIncludeInactive.Checked, null, null,
-                    _Clients_Id, null, null, null, null, null
+                    _Clients_Id, null, null, null, null, null, null
                     ).DefaultView;
 
             return WorkshiftTemplate.get(chkIncludeInactive.Checked, null,
@@ -109,6 +113,7 @@ namespace HR_Desktop.Admin
                     Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
                     Util.wrapNullable<string>(idtp_Start.Value.ToString()),
                     null,
+                    Util.wrapNullable<decimal>(in_PayableAmount.Value),
                     Util.wrapNullable<string>(itxt_Notes.ValueText)
                     ).DefaultView;
         }
@@ -122,6 +127,7 @@ namespace HR_Desktop.Admin
             iddl_DayOfWeek.SelectedItem = obj.DayOfWeek;
             idtp_Start.ValueTimeSpan = obj.Start;
             in_DurationMinutes.Value = obj.DurationMinutes;
+            in_PayableAmount.Value = obj.PayableAmount;
             itxt_Notes.ValueText = obj.Notes;
         }
 
@@ -134,6 +140,7 @@ namespace HR_Desktop.Admin
                 (DayOfWeek)iddl_DayOfWeek.SelectedValue,
                 idtp_Start.ValueTimeSpan.ToString(),
                 in_DurationMinutes.ValueInt,
+                in_PayableAmount.Value,
                 itxt_Notes.ValueText);
         }
 
@@ -146,6 +153,7 @@ namespace HR_Desktop.Admin
                 (DayOfWeek)iddl_DayOfWeek.SelectedValue,
                 idtp_Start.ValueTimeSpan.ToString(),
                 in_DurationMinutes.ValueInt,
+                in_PayableAmount.Value,
                 itxt_Notes.ValueText);
         }
 

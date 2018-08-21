@@ -1,13 +1,14 @@
 ﻿/**************************************************************************************************************************************************************/
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
+ALTER TABLE WorkshiftTemplates ADD PayableAmount DECIMAL(12,2) DEFAULT 0 NOT NULL;
+ALTER TABLE Workshifts ADD PayableAmount DECIMAL(12,2) DEFAULT 0 NOT NULL;
 
 
 
 
 
-
-
+GO
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[PayrollItems_add]
 
@@ -238,6 +239,7 @@ GO
 ALTER PROCEDURE [dbo].[Payrolls_get]
 
 	@Id uniqueidentifier = NULL,
+	@No nvarchar(max) = NULL,
 	@Employee_UserAccounts_Id uniqueidentifier = NULL,
 	@StartDate datetime = NULL, 
 	@EndDate datetime = NULL
@@ -251,6 +253,7 @@ BEGIN
 		LEFT OUTER JOIN UserAccounts ON UserAccounts.Id = Payrolls.Employee_UserAccounts_Id
 	WHERE 1=1
 		AND (@Id IS NULL OR Payrolls.Id = @Id)
+		AND (@No IS NULL OR Payrolls.No = @No)
 		AND (@Employee_UserAccounts_Id IS NULL OR Payrolls.Employee_UserAccounts_Id = @Employee_UserAccounts_Id)
 		AND (@StartDate IS NULL OR Payrolls.Timestamp >= @StartDate)
 		AND (@EndDate IS NULL OR Payrolls.Timestamp <= @EndDate)
@@ -581,6 +584,7 @@ ALTER PROCEDURE [dbo].[WorkshiftTemplates_get]
 	@DayOfWeek tinyint= NULL,
 	@Start time(7) = NULL,
 	@DurationMinutes int = NULL,
+	@PayableAmount decimal = NULL,
 	@Notes nvarchar(MAX) = NULL
 
 AS
@@ -601,6 +605,7 @@ BEGIN
 		AND (@DayOfWeek IS NULL OR WorkshiftTemplates.DayOfWeek = @DayOfWeek)
 		AND (@Start IS NULL OR WorkshiftTemplates.Start = @Start)
 		AND (@DurationMinutes IS NULL OR WorkshiftTemplates.DurationMinutes = @DurationMinutes)
+		AND (@PayableAmount = 0 OR @PayableAmount IS NULL OR WorkshiftTemplates.PayableAmount = @PayableAmount)
 		AND (@Notes IS NULL OR WorkshiftTemplates.Notes LIKE '%'+ @Notes +'%')
 
 	ORDER BY Clients.CompanyName DESC, WorkshiftTemplates.DayOfWeek ASC, WorkshiftTemplates.Start ASC
@@ -647,14 +652,15 @@ ALTER PROCEDURE [dbo].[WorkshiftTemplates_add]
 	@DayOfWeek int,
 	@Start nvarchar(MAX) = NULL,
 	@DurationMinutes int = NULL,
+	@PayableAmount decimal = NULL,
 	@Notes nvarchar(MAX) = NULL
 	
 AS
 
 BEGIN
 
-	INSERT INTO WorkshiftTemplates(Id,Name, Clients_Id,WorkshiftCategories_Id, DayOfWeek, Start, DurationMinutes, Notes) 
-	VALUES(@Id,@Name,@Clients_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@DurationMinutes,@Notes)
+	INSERT INTO WorkshiftTemplates(Id,Name, Clients_Id,WorkshiftCategories_Id, DayOfWeek, Start, DurationMinutes, PayableAmount, Notes) 
+	VALUES(@Id,@Name,@Clients_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@DurationMinutes,@PayableAmount,@Notes)
 
 END
 GO
@@ -669,6 +675,7 @@ ALTER PROCEDURE [dbo].[WorkshiftTemplates_update]
 	@DayOfWeek INT,
 	@Start nvarchar(MAX) = NULL,
 	@DurationMinutes int = NULL,
+	@PayableAmount decimal = NULL,
 	@Notes nvarchar(MAX) = NULL
 	
 AS
@@ -681,6 +688,7 @@ BEGIN
 		DayOfWeek = @DayOfWeek,
 		Start = @Start,
 		DurationMinutes = @DurationMinutes,
+		PayableAmount = @PayableAmount,
 		Notes = @Notes
 	WHERE Id = @Id 
 
@@ -1018,6 +1026,7 @@ ALTER PROCEDURE [dbo].[Workshifts_get]
 	@DayOfWeek tinyint= NULL,
 	@Start time(7) = NULL,
 	@DurationMinutes int = NULL,
+	@PayableAmount decimal = NULL,
 	@Notes nvarchar(MAX) = NULL
 
 AS
@@ -1042,6 +1051,7 @@ BEGIN
 		AND (@DayOfWeek IS NULL OR Workshifts.DayOfWeek = @DayOfWeek)
 		AND (@Start IS NULL OR Workshifts.Start = @Start)
 		AND (@DurationMinutes IS NULL OR Workshifts.DurationMinutes = @DurationMinutes)
+		AND (@PayableAmount = 0 OR @PayableAmount IS NULL OR Workshifts.PayableAmount = @PayableAmount)
 		AND (@Notes IS NULL OR Workshifts.Notes LIKE '%'+ @Notes +'%')
 
 	ORDER BY Clients.CompanyName DESC, Workshifts.DayOfWeek ASC, Workshifts.Start ASC
@@ -1092,14 +1102,15 @@ ALTER PROCEDURE [dbo].[Workshifts_add]
 	@DayOfWeek int,
 	@Start nvarchar(MAX) = NULL,
 	@DurationMinutes int = NULL,
+	@PayableAmount decimal = NULL,
 	@Notes nvarchar(MAX) = NULL
 	
 AS
 
 BEGIN
 
-	INSERT INTO Workshifts(Id,Name, Clients_Id, UserAccounts_Id, WorkshiftCategories_Id, DayOfWeek, Start, DurationMinutes, Notes) 
-	VALUES(@Id,@Name,@Clients_Id,@UserAccounts_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@DurationMinutes,@Notes)
+	INSERT INTO Workshifts(Id,Name, Clients_Id, UserAccounts_Id, WorkshiftCategories_Id, DayOfWeek, Start, DurationMinutes, PayableAmount, Notes) 
+	VALUES(@Id,@Name,@Clients_Id,@UserAccounts_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@DurationMinutes,@PayableAmount,@Notes)
 
 END
 GO
@@ -1116,6 +1127,7 @@ ALTER PROCEDURE [dbo].[Workshifts_update]
 	@DayOfWeek INT,
 	@Start nvarchar(MAX) = NULL,
 	@DurationMinutes int = NULL,
+	@PayableAmount decimal = NULL,
 	@Notes nvarchar(MAX) = NULL
 	
 AS
@@ -1129,6 +1141,7 @@ BEGIN
 		DayOfWeek = @DayOfWeek,
 		Start = @Start,
 		DurationMinutes = @DurationMinutes,
+		PayableAmount = @PayableAmount,
 		Notes = @Notes
 	WHERE Id = @Id 
 

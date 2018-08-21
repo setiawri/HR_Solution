@@ -20,6 +20,7 @@ namespace HR_LIB.HR
         public DayOfWeek DayOfWeek;
         public TimeSpan Start;
         public int DurationMinutes;
+        public decimal PayableAmount;
         public string Notes;
         public bool Active;
 
@@ -39,6 +40,7 @@ namespace HR_LIB.HR
         public const string COL_DB_DayOfWeek = "DayOfWeek";
         public const string COL_DB_Start = "Start";
         public const string COL_DB_DurationMinutes = "DurationMinutes";
+        public const string COL_DB_PayableAmount = "PayableAmount";
         public const string COL_DB_Notes = "Notes";
         public const string COL_DB_Active = "Active";
 
@@ -68,6 +70,7 @@ namespace HR_LIB.HR
                 DayOfWeek = Util.parseEnum<DayOfWeek>(Util.wrapNullable<int>(row, COL_DB_DayOfWeek));
                 Start = Util.wrapNullable<TimeSpan>(row, COL_DB_Start);
                 DurationMinutes = Util.wrapNullable<int>(row, COL_DB_DurationMinutes);
+                PayableAmount = Util.wrapNullable<decimal>(row, COL_DB_PayableAmount);
                 Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
                 Active = Util.wrapNullable<bool>(row, COL_DB_Active);
 
@@ -99,7 +102,7 @@ namespace HR_LIB.HR
             return result.ValueBoolean;
         }
 
-        public static Guid add(Guid userAccountID, string name, Guid Clients_Id, Guid? UserAccounts_Id, Guid WorkshiftCategories_Id, DayOfWeek dayOfWeek, string start, int durationMinutes, string notes)
+        public static Guid add(Guid userAccountID, string name, Guid Clients_Id, Guid? UserAccounts_Id, Guid WorkshiftCategories_Id, DayOfWeek dayOfWeek, string start, int durationMinutes, decimal? payableAmount, string notes)
         {
             Guid id = Guid.NewGuid();
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
@@ -116,6 +119,7 @@ namespace HR_LIB.HR
                     new SqlQueryParameter(COL_DB_DayOfWeek, SqlDbType.Int, (int)dayOfWeek),
                     new SqlQueryParameter(COL_DB_Start, SqlDbType.Time, Util.wrapNullable<TimeSpan?>(start)),
                     new SqlQueryParameter(COL_DB_DurationMinutes, SqlDbType.Int, Util.wrapNullable<int>(durationMinutes)),
+                    new SqlQueryParameter(COL_DB_PayableAmount, SqlDbType.Decimal, Util.wrapNullable<decimal>(payableAmount)),
                     new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                 );
 
@@ -126,10 +130,10 @@ namespace HR_LIB.HR
             return id;
         }
 
-        public static DataRow get(Guid id) { return Util.getFirstRow(get(true, id, null, null, null, null, null, null, null, null)); }
+        public static DataRow get(Guid id) { return Util.getFirstRow(get(true, id, null, null, null, null, null, null, null, null, null)); }
 
         public static DataTable get(bool filterIncludeInactive, Guid? id, string name, Guid? Clients_Id, Guid? UserAccounts_Id, Guid? WorkshiftCategories_Id, int? dayOfWeek, 
-            string start, int? durationMinutes, string notes)
+            string start, int? durationMinutes, decimal? payableAmount, string notes)
         {
             SqlQueryResult result = DBConnection.query(
                 QueryTypes.FillByAdapter,
@@ -143,6 +147,7 @@ namespace HR_LIB.HR
                     new SqlQueryParameter(COL_DB_DayOfWeek, SqlDbType.TinyInt, Util.wrapNullable<int?>(dayOfWeek)),
                     new SqlQueryParameter(COL_DB_Start, SqlDbType.Time, Util.wrapNullable<TimeSpan?>(start)),
                     new SqlQueryParameter(COL_DB_DurationMinutes, SqlDbType.Int, Util.wrapNullable<int?>(durationMinutes)),
+                    new SqlQueryParameter(COL_DB_PayableAmount, SqlDbType.Decimal, Util.wrapNullable<decimal?>(payableAmount)),
                     new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                 );
             return result.Datatable;
@@ -162,7 +167,7 @@ namespace HR_LIB.HR
         }
 
 
-        public static void update(Guid userAccountID, Guid id, string name, Guid UserAccounts_Id, Guid WorkshiftCategories_Id, DayOfWeek dayOfWeek, string start, int durationMinutes, string notes)
+        public static void update(Guid userAccountID, Guid id, string name, Guid UserAccounts_Id, Guid WorkshiftCategories_Id, DayOfWeek dayOfWeek, string start, int durationMinutes, decimal payableAmount, string notes)
         {
             Workshift objOld = new Workshift(id);
             string log = "";
@@ -172,6 +177,7 @@ namespace HR_LIB.HR
             log = Util.appendChange(log, objOld.DayOfWeek, dayOfWeek, "Day of week: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Start.ToString(@"h\:mm"), start, "Start: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.DurationMinutes, durationMinutes, "Duration Minutes: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.PayableAmount, payableAmount, "Payable Amount: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Notes, notes, "Notes: '{0}' to '{1}'");
 
             if (string.IsNullOrEmpty(log))
@@ -191,6 +197,7 @@ namespace HR_LIB.HR
                         new SqlQueryParameter(COL_DB_DayOfWeek, SqlDbType.Int, (int)dayOfWeek),
                         new SqlQueryParameter(COL_DB_Start, SqlDbType.Time, Util.wrapNullable<TimeSpan?>(start)),
                         new SqlQueryParameter(COL_DB_DurationMinutes, SqlDbType.Int, Util.wrapNullable<int>(durationMinutes)),
+                        new SqlQueryParameter(COL_DB_PayableAmount, SqlDbType.Decimal, Util.wrapNullable<decimal>(payableAmount)),
                         new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
                     );
 

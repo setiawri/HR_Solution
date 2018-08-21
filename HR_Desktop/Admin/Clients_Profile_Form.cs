@@ -105,12 +105,12 @@ namespace HR_Desktop.Admin
 
         private void populateDgvWorkshifts()
         {
-            Util.populateDataGridView(dgvWorkshifts, Workshift.get(false, null, null, _Clients_Id, null, null, (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshifts), null, null, null));
+            Util.populateDataGridView(dgvWorkshifts, Workshift.get(false, null, null, _Clients_Id, null, null, (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshifts), null, null, null, null));
         }
 
         private void populateDgvWorkshiftTemplates()
         {
-            Util.populateDataGridView(dgvWorkshiftTemplates, WorkshiftTemplate.get(false, null, null, _Clients_Id, null, (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshiftTemplates), null, null, null));
+            Util.populateDataGridView(dgvWorkshiftTemplates, WorkshiftTemplate.get(false, null, null, _Clients_Id, null, (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshiftTemplates), null, null, null, null));
         }
 
         private void populateDgvBankAccounts()

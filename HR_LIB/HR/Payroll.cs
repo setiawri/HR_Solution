@@ -59,28 +59,29 @@ namespace HR_LIB.HR
         /*******************************************************************************************************/
         #region DATABASE METHODS
 
-        public static DataRow get(SqlConnection sqlConnection, Guid id) { return Util.getFirstRow(get(sqlConnection, id, null, null, null)); }
+        public static DataRow get(SqlConnection sqlConnection, Guid id) { return Util.getFirstRow(get(sqlConnection, id, null, null, null, null)); }
         public static DataRow get(Guid id)
         {
             DataRow row;
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
-                row = Util.getFirstRow(get(sqlConnection, id, null, null, null));
+                row = Util.getFirstRow(get(sqlConnection, id, null, null, null, null));
             return row;
         }
-        public static DataTable get(Guid? id, Guid? Employee_UserAccounts_Id, DateTime? startDate, DateTime? endDate)
+        public static DataTable get(Guid? id, string no, Guid? Employee_UserAccounts_Id, DateTime? startDate, DateTime? endDate)
         {
             DataTable datatable;
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
-                datatable = get(sqlConnection, id, Employee_UserAccounts_Id, startDate, endDate);
+                datatable = get(sqlConnection, id, no, Employee_UserAccounts_Id, startDate, endDate);
             return datatable;
         }
-        public static DataTable get(SqlConnection sqlConnection, Guid? id, Guid? Employee_UserAccounts_Id, DateTime? startDate, DateTime? endDate)
+        public static DataTable get(SqlConnection sqlConnection, Guid? id, string no, Guid? Employee_UserAccounts_Id, DateTime? startDate, DateTime? endDate)
         {
             SqlQueryResult result = DBConnection.query(
                 sqlConnection,
                 QueryTypes.FillByAdapter,
                 "Payrolls_get",
                 new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
+                new SqlQueryParameter(COL_DB_No, SqlDbType.NVarChar, Util.wrapNullable(no)),
                 new SqlQueryParameter(COL_DB_Employee_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Employee_UserAccounts_Id)),
                 new SqlQueryParameter("StartDate", SqlDbType.DateTime, Util.wrapNullable(startDate)),
                 new SqlQueryParameter("EndDate", SqlDbType.DateTime, Util.wrapNullable(endDate))

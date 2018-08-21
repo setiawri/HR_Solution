@@ -184,7 +184,12 @@ namespace HR_Desktop.Payroll
                     Attendance.updateRejectedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
                     populateDgvAttendance(); 
             }
-            
+            else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Payrolls_No))
+            {
+                if(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Payrolls_No) != null)
+                    Util.displayForm(null,new Payroll.Payrolls_Main_Form(FormModes.Browse, (string)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Payrolls_No)));
+            }
+
         }
 
         private void btnFilterAttendance_Click(object sender, EventArgs e)
