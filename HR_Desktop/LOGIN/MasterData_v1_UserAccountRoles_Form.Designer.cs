@@ -72,6 +72,10 @@
             // 
             this.panel1.Size = new System.Drawing.Size(512, 28);
             // 
+            // lnkClearQuickSearch
+            // 
+            this.lnkClearQuickSearch.TabStop = false;
+            // 
             // pnlActionButtons
             // 
             this.pnlActionButtons.Location = new System.Drawing.Point(0, 427);
@@ -96,6 +100,10 @@
             // 
             this.scInputRight.Size = new System.Drawing.Size(25, 401);
             this.scInputRight.SplitterDistance = 248;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Text = "FILTER";
             // 
             // scMain
             // 

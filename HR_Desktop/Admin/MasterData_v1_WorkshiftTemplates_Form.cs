@@ -111,7 +111,7 @@ namespace HR_Desktop.Admin
                     itxt_Clients.ValueGuid,
                     itxt_WorkshiftCategories.ValueGuid,
                     Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
-                    Util.wrapNullable<string>(idtp_Start.Value.ToString()),
+                    idtp_Start.ValueTimeSpan,
                     null,
                     Util.wrapNullable<decimal>(in_PayableAmount.Value),
                     Util.wrapNullable<string>(itxt_Notes.ValueText)

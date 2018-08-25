@@ -72,6 +72,10 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Size = new System.Drawing.Size(760, 28);
             // 
+            // lnkClearQuickSearch
+            // 
+            this.lnkClearQuickSearch.TabStop = false;
+            // 
             // pnlActionButtons
             // 
             this.pnlActionButtons.Location = new System.Drawing.Point(0, 277);
@@ -112,6 +116,10 @@
             this.scInputRight.Panel1.Controls.Add(this.gbUserAccountRoles);
             this.scInputRight.Size = new System.Drawing.Size(255, 251);
             this.scInputRight.SplitterWidth = 5;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Text = "FILTER";
             // 
             // scMain
             // 
@@ -391,6 +399,7 @@
             0,
             0});
             this.itxt_Height.Name = "itxt_Height";
+            this.itxt_Height.ShowAllowDecimalCheckbox = false;
             this.itxt_Height.ShowCheckbox = false;
             this.itxt_Height.ShowTextboxOnly = false;
             this.itxt_Height.Size = new System.Drawing.Size(110, 41);
@@ -424,6 +433,7 @@
             0,
             0});
             this.itxt_Weight.Name = "itxt_Weight";
+            this.itxt_Weight.ShowAllowDecimalCheckbox = false;
             this.itxt_Weight.ShowCheckbox = false;
             this.itxt_Weight.ShowTextboxOnly = false;
             this.itxt_Weight.Size = new System.Drawing.Size(110, 41);
@@ -441,6 +451,7 @@
             this.btnProfile.Name = "btnProfile";
             this.btnProfile.Size = new System.Drawing.Size(75, 26);
             this.btnProfile.TabIndex = 15;
+            this.btnProfile.TabStop = false;
             this.btnProfile.Text = "PROFILE";
             this.btnProfile.UseVisualStyleBackColor = true;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);

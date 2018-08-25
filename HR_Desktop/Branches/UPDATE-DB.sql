@@ -1,14 +1,22 @@
 ﻿/**************************************************************************************************************************************************************/
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
-ALTER TABLE WorkshiftTemplates ADD PayableAmount DECIMAL(12,2) DEFAULT 0 NOT NULL;
-ALTER TABLE Workshifts ADD PayableAmount DECIMAL(12,2) DEFAULT 0 NOT NULL;
 
-
-
-
-
+CREATE TABLE [dbo].[AttendancePayRates] (
+    [Id]                    UNIQUEIDENTIFIER NOT NULL,
+    [RefId]                 UNIQUEIDENTIFIER NOT NULL,
+    [AttendanceStatuses_Id] UNIQUEIDENTIFIER NOT NULL,
+    [Amount]                DECIMAL (12, 2)  NOT NULL,
+    [Notes] NVARCHAR(MAX) NULL, 
+    [Active]                BIT              DEFAULT ((1)) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
 GO
+
+
+
+
+
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[PayrollItems_add]
 

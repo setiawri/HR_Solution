@@ -54,6 +54,10 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Size = new System.Drawing.Size(330, 28);
             // 
+            // lnkClearQuickSearch
+            // 
+            this.lnkClearQuickSearch.TabStop = false;
+            // 
             // pnlActionButtons
             // 
             this.pnlActionButtons.Location = new System.Drawing.Point(0, 207);
@@ -76,6 +80,10 @@
             this.scInputRight.Margin = new System.Windows.Forms.Padding(4);
             this.scInputRight.Size = new System.Drawing.Size(25, 181);
             this.scInputRight.SplitterWidth = 5;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Text = "FILTER";
             // 
             // scMain
             // 

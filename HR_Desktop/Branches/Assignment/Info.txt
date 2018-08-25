@@ -2,23 +2,23 @@
 > PULL HR & LibUtil
 > run UPDATE-DB.sql
 
+> modify all forms extending MasterData_v1_Form to accomodate filtering.
+	- see example in MasterData_v1_Workshifts_Form
 
-> Payrolls_Main_Form
-	- add filter itxt_Payrolls_No
+> Client profile form
+	- clicking on workshift edit link: pass user account id and use as filter. See example in UserAccount_Profile_Form
+	- do the same in workshift templates form
 
-> Timesheet Form
-	- add LINK column "Payroll" -> shows Payrolls_No
-	- contentclick on the column displays form Payrolls_Main_Form, populate filter itxt_Payrolls_No
+> Implement MasterData_v1_AttendancePayRates_Form
+	- Use table AttendancePayRates (see update-db.sql)
 
-> TABLE WorkshiftTemplates
-	- add column PayableAmount decimal(12,2) DEFAULT 0 NOT NULL
-	- MasterData_v1_WorkshiftTemplates_Form
-		=> add input and column PayableAmount (Use inputcontrol_numeric)
+> MasterData_v1_Workshifts_Form
+	- TABLE Workshifts ADD WorkshiftTemplates_Id NULL 
+	- If template is selected, save to WorkshiftTemplates_Id
+	- when update button is clicked, populate template field if not null.
 
-> TABLE Workshifts
-	- add column PayableAmount decimal(12,2) DEFAULT 0 NOT NULL
-	- MasterData_v1_Workshifts_Form
-		=> add input and column PayableAmount (Use inputcontrol_numeric)
+> 
+
 	
 
 

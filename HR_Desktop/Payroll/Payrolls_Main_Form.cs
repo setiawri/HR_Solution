@@ -81,7 +81,6 @@ namespace HR_Desktop.Payroll
                 menuStrip1.Visible = false;
                 btnPayment.Visible = false;
                 itxt_Payrolls_No.ValueText = _No;
-                itxt_Payrolls_No.Enabled = false;
             }
         }
 

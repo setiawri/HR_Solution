@@ -24,7 +24,7 @@ namespace HR_Desktop
         static void runApplication()
         {
             LOGIN.Login_Form loginform = new LOGIN.Login_Form();
-            LIBUtil.Util.displayForm(null, loginform);
+            LIBUtil.Util.displayForm(null, loginform, true);
             if (loginform.isAuthenticated)
                 Application.Run(new Main_Form());
         }

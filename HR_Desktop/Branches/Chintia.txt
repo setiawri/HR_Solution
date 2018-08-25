@@ -3,12 +3,14 @@
 NEW ASSIGNMENTS
 ===============
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
-21/08/18: Add payable amount to Workshifts, WorkshiftTemplates. Update Timesheet and Payroll Main Form. 5(five), TOTAL: 29(twenty nine)
+24/08/18: Update all forms to accomodate filtering, create MasterData_v1_AttendancePayRates_Form & table, other updates: 5(five), TOTAL: 34(thirty four)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 COMPLETED ASSIGNMENTS
 =====================
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+21/08/18: Add payable amount to Workshifts, WorkshiftTemplates. Update Timesheet and Payroll Main Form. 5(five), TOTAL: 29(twenty nine)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 10/08/18: Implement Generate Payroll button in Timesheet form, add field to attendance table: 5(five), TOTAL: 24(twenty four) 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------

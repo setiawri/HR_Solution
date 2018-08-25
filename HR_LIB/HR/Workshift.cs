@@ -133,7 +133,7 @@ namespace HR_LIB.HR
         public static DataRow get(Guid id) { return Util.getFirstRow(get(true, id, null, null, null, null, null, null, null, null, null)); }
 
         public static DataTable get(bool filterIncludeInactive, Guid? id, string name, Guid? Clients_Id, Guid? UserAccounts_Id, Guid? WorkshiftCategories_Id, int? dayOfWeek, 
-            string start, int? durationMinutes, decimal? payableAmount, string notes)
+            TimeSpan? start, int? durationMinutes, decimal? payableAmount, string notes)
         {
             SqlQueryResult result = DBConnection.query(
                 QueryTypes.FillByAdapter,

@@ -112,18 +112,29 @@ namespace HR_Desktop.Admin
                     _Clients_Id, null, null, null, null, null, null, null
                     ).DefaultView;
 
+            DateTime? x = getFilterValue<DateTime?>(idtp_Start);
 
             return Workshift.get(chkIncludeInactive.Checked, null,
                     itxt_Name.ValueText,
-                    itxt_Clients.ValueGuid, 
-                    itxt_UserAccounts.ValueGuid,
-                    itxt_WorkshiftCategories.ValueGuid,
-                    Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
-                    Util.wrapNullable<string>(idtp_Start.Value.ToString()),
-                    null,
-                    Util.wrapNullable<decimal>(in_PayableAmount.Value),
-                    Util.wrapNullable<string>(itxt_Notes.ValueText)
+                    getFilterValue<Guid?>(itxt_Clients),
+                    getFilterValue<Guid?>(itxt_UserAccounts),
+                    getFilterValue<Guid?>(itxt_WorkshiftCategories),
+                    getFilterValue<int?>(iddl_DayOfWeek),
+                    getFilterValue<TimeSpan?>(idtp_Start),
+                    getFilterValue<int?>(in_DurationMinutes),
+                    getFilterValue<decimal>(in_PayableAmount),
+                    getFilterValue<string>(itxt_Notes)
                     ).DefaultView;
+        }
+
+        protected override void updateInputPanelControls()
+        {
+            in_DurationMinutes.ShowCheckbox = (Mode == FormModes.Search);
+            in_PayableAmount.ShowCheckbox = (Mode == FormModes.Search);
+
+            idtp_Start.ShowCheckBox = (Mode == FormModes.Search);
+            //this is a quick fix to a bug where the value keeps get set to current time when ShowCheckBox value is set
+            idtp_Start.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
         }
 
         protected override void populateInputFields()
@@ -243,23 +254,21 @@ namespace HR_Desktop.Admin
 
         private void itxt_Clients_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            InputControl_Textbox.browseForm(new Admin.MasterData_v1_Clients_Form(FormModes.Browse, null), ref sender);
-            if (itxt_Clients.ValueGuid != null)
-                gb_Template.Enabled = true;
+            InputControl_Textbox.browseForm(new MasterData_v1_Clients_Form(FormModes.Browse, null), ref sender);
         }
 
         private void itxt_WorkshiftCategories_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_WorkshiftCategories_Form(FormModes.Browse), ref sender);
+            InputControl_Textbox.browseForm(new MasterData_v1_WorkshiftCategories_Form(FormModes.Browse), ref sender);
         }
 
         private void itxt_WorkshiftTemplate_isBrowseMode_Clicked(object sender, EventArgs e)
         {
             Admin.MasterData_v1_WorkshiftTemplates_Form form;
-            form = (Admin.MasterData_v1_WorkshiftTemplates_Form)InputControl_Textbox.browseForm(new Admin.MasterData_v1_WorkshiftTemplates_Form(FormModes.Browse, itxt_Clients.ValueGuid), ref sender);
-            if(form.BrowsedItemSelectionValue != null)
+            form = (MasterData_v1_WorkshiftTemplates_Form)InputControl_Textbox.browseForm(new MasterData_v1_WorkshiftTemplates_Form(FormModes.Browse, itxt_Clients.ValueGuid), ref sender);
+            if(form.BrowsedItemSelectionId != null)
             {
-                itxt_WorkshiftTemplate.ValueGuid = form.BrowsedItemSelectionValue;
+                itxt_WorkshiftTemplate.ValueGuid = form.BrowsedItemSelectionId;
                 populateInputFieldsWorkshiftTemplate();
             }
         }
@@ -267,6 +276,11 @@ namespace HR_Desktop.Admin
         private void itxt_UserAccounts_isBrowseMode_Clicked(object sender, EventArgs e)
         {
             LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new LOGIN.MasterData_v1_UserAccounts_Form(FormModes.Browse, false), ref sender);
+        }
+
+        private void itxt_Clients_onTextChanged(object sender, EventArgs e)
+        {
+            gb_Template.Enabled = itxt_Clients.ValueGuid != null && Mode == FormModes.Add;
         }
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

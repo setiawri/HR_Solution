@@ -58,6 +58,10 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Size = new System.Drawing.Size(514, 28);
             // 
+            // lnkClearQuickSearch
+            // 
+            this.lnkClearQuickSearch.TabStop = false;
+            // 
             // pnlActionButtons
             // 
             this.pnlActionButtons.Location = new System.Drawing.Point(0, 237);
@@ -86,6 +90,10 @@
             this.scInputRight.Margin = new System.Windows.Forms.Padding(4);
             this.scInputRight.Size = new System.Drawing.Size(25, 211);
             this.scInputRight.SplitterWidth = 5;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Text = "FILTER";
             // 
             // scMain
             // 
@@ -173,6 +181,7 @@
             0,
             0});
             this.itxt_DurationDays.Name = "itxt_DurationDays";
+            this.itxt_DurationDays.ShowAllowDecimalCheckbox = false;
             this.itxt_DurationDays.ShowCheckbox = false;
             this.itxt_DurationDays.ShowTextboxOnly = false;
             this.itxt_DurationDays.Size = new System.Drawing.Size(241, 41);

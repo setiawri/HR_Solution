@@ -59,7 +59,7 @@
             // 
             // panel1
             // 
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Size = new System.Drawing.Size(1028, 28);
             // 
             // label1
@@ -70,21 +70,22 @@
             // lnkClearQuickSearch
             // 
             this.lnkClearQuickSearch.Location = new System.Drawing.Point(183, 8);
+            this.lnkClearQuickSearch.TabStop = false;
             // 
             // chkIncludeInactive
             // 
             this.chkIncludeInactive.Location = new System.Drawing.Point(202, 6);
-            this.chkIncludeInactive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkIncludeInactive.Margin = new System.Windows.Forms.Padding(4);
             // 
             // pnlActionButtons
             // 
             this.pnlActionButtons.Location = new System.Drawing.Point(0, 237);
-            this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(4);
             this.pnlActionButtons.Size = new System.Drawing.Size(1028, 23);
             // 
             // scInputLeft
             // 
-            this.scInputLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.scInputLeft.Margin = new System.Windows.Forms.Padding(2);
             // 
             // scInputLeft.Panel1
             // 
@@ -106,7 +107,7 @@
             // 
             // scInputRight
             // 
-            this.scInputRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.scInputRight.Margin = new System.Windows.Forms.Padding(4);
             this.scInputRight.Size = new System.Drawing.Size(523, 211);
             this.scInputRight.SplitterWidth = 3;
             // 
@@ -121,6 +122,7 @@
             // btnSearch
             // 
             this.btnSearch.TabStop = false;
+            this.btnSearch.Text = "FILTER";
             // 
             // btnSubmit
             // 
@@ -136,7 +138,7 @@
             // 
             // scMain
             // 
-            this.scMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.scMain.Margin = new System.Windows.Forms.Padding(4);
             this.scMain.Size = new System.Drawing.Size(1028, 609);
             this.scMain.SplitterDistance = 260;
             this.scMain.SplitterWidth = 8;
@@ -144,17 +146,17 @@
             // txtQuickSearch
             // 
             this.txtQuickSearch.Location = new System.Drawing.Point(79, 4);
-            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtQuickSearch.TabStop = false;
             // 
             // pnlButtons
             // 
-            this.pnlButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlButtons.Margin = new System.Windows.Forms.Padding(4);
             this.pnlButtons.Size = new System.Drawing.Size(1028, 26);
             // 
             // scInputContainer
             // 
-            this.scInputContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.scInputContainer.Margin = new System.Windows.Forms.Padding(4);
             this.scInputContainer.Size = new System.Drawing.Size(1028, 211);
             this.scInputContainer.SplitterWidth = 5;
             // 
@@ -168,7 +170,7 @@
             // 
             // pnlQuickSearch
             // 
-            this.pnlQuickSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlQuickSearch.Margin = new System.Windows.Forms.Padding(4);
             this.pnlQuickSearch.Size = new System.Drawing.Size(998, 28);
             // 
             // itxt_Notes
@@ -176,7 +178,7 @@
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
             this.itxt_Notes.Location = new System.Drawing.Point(2, 98);
-            this.itxt_Notes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Notes.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Notes.MaxLength = 32767;
             this.itxt_Notes.MultiLine = true;
             this.itxt_Notes.Name = "itxt_Notes";
@@ -194,7 +196,7 @@
             this.itxt_UserAccount.IsBrowseMode = true;
             this.itxt_UserAccount.LabelText = "*Employee";
             this.itxt_UserAccount.Location = new System.Drawing.Point(4, 8);
-            this.itxt_UserAccount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_UserAccount.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_UserAccount.MaxLength = 32767;
             this.itxt_UserAccount.MultiLine = false;
             this.itxt_UserAccount.Name = "itxt_UserAccount";
@@ -216,7 +218,7 @@
             this.idtp_EffectiveTimestampOut.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_EffectiveTimestampOut.LabelText = "Effective OUT";
             this.idtp_EffectiveTimestampOut.Location = new System.Drawing.Point(142, 49);
-            this.idtp_EffectiveTimestampOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.idtp_EffectiveTimestampOut.Margin = new System.Windows.Forms.Padding(4);
             this.idtp_EffectiveTimestampOut.Name = "idtp_EffectiveTimestampOut";
             this.idtp_EffectiveTimestampOut.ShowCheckBox = false;
             this.idtp_EffectiveTimestampOut.ShowUpAndDown = false;
@@ -233,7 +235,7 @@
             this.idtp_EffectiveTimestampIn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_EffectiveTimestampIn.LabelText = "Effective IN";
             this.idtp_EffectiveTimestampIn.Location = new System.Drawing.Point(2, 49);
-            this.idtp_EffectiveTimestampIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.idtp_EffectiveTimestampIn.Margin = new System.Windows.Forms.Padding(4);
             this.idtp_EffectiveTimestampIn.Name = "idtp_EffectiveTimestampIn";
             this.idtp_EffectiveTimestampIn.ShowCheckBox = false;
             this.idtp_EffectiveTimestampIn.ShowUpAndDown = false;
@@ -250,7 +252,7 @@
             this.idtp_TimestampOut.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_TimestampOut.LabelText = "OUT";
             this.idtp_TimestampOut.Location = new System.Drawing.Point(143, 5);
-            this.idtp_TimestampOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.idtp_TimestampOut.Margin = new System.Windows.Forms.Padding(4);
             this.idtp_TimestampOut.Name = "idtp_TimestampOut";
             this.idtp_TimestampOut.ShowCheckBox = false;
             this.idtp_TimestampOut.ShowUpAndDown = false;
@@ -268,7 +270,7 @@
             this.idtp_TimestampIn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_TimestampIn.LabelText = "IN";
             this.idtp_TimestampIn.Location = new System.Drawing.Point(2, 5);
-            this.idtp_TimestampIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.idtp_TimestampIn.Margin = new System.Windows.Forms.Padding(4);
             this.idtp_TimestampIn.Name = "idtp_TimestampIn";
             this.idtp_TimestampIn.ShowCheckBox = false;
             this.idtp_TimestampIn.ShowUpAndDown = false;
@@ -283,7 +285,7 @@
             this.itxt_Client.IsBrowseMode = true;
             this.itxt_Client.LabelText = "*Client";
             this.itxt_Client.Location = new System.Drawing.Point(4, 52);
-            this.itxt_Client.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Client.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Client.MaxLength = 32767;
             this.itxt_Client.MultiLine = false;
             this.itxt_Client.Name = "itxt_Client";
@@ -301,7 +303,7 @@
             this.itxt_Workshift.IsBrowseMode = true;
             this.itxt_Workshift.LabelText = "Workshift";
             this.itxt_Workshift.Location = new System.Drawing.Point(4, 97);
-            this.itxt_Workshift.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itxt_Workshift.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Workshift.MaxLength = 32767;
             this.itxt_Workshift.MultiLine = false;
             this.itxt_Workshift.Name = "itxt_Workshift";
@@ -321,9 +323,10 @@
             this.iddl_AttendanceStatuses.HideUpdateLink = true;
             this.iddl_AttendanceStatuses.LabelText = "*Status";
             this.iddl_AttendanceStatuses.Location = new System.Drawing.Point(4, 141);
-            this.iddl_AttendanceStatuses.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iddl_AttendanceStatuses.Margin = new System.Windows.Forms.Padding(4);
             this.iddl_AttendanceStatuses.Name = "iddl_AttendanceStatuses";
             this.iddl_AttendanceStatuses.SelectedItem = null;
+            this.iddl_AttendanceStatuses.SelectedItemText = "";
             this.iddl_AttendanceStatuses.SelectedValue = null;
             this.iddl_AttendanceStatuses.ShowDropdownlistOnly = false;
             this.iddl_AttendanceStatuses.Size = new System.Drawing.Size(205, 41);
@@ -334,7 +337,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 609);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MasterData_v1_Attendances_Form";
             this.Text = "ATTENDANCE";
             this.panel1.ResumeLayout(false);

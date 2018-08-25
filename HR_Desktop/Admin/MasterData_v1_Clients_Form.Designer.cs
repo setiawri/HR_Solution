@@ -64,6 +64,10 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Size = new System.Drawing.Size(765, 28);
             // 
+            // lnkClearQuickSearch
+            // 
+            this.lnkClearQuickSearch.TabStop = false;
+            // 
             // pnlActionButtons
             // 
             this.pnlActionButtons.Location = new System.Drawing.Point(0, 227);
@@ -99,6 +103,10 @@
             this.scInputRight.Panel1.Controls.Add(this.itxt_NPWPAddress);
             this.scInputRight.Size = new System.Drawing.Size(260, 201);
             this.scInputRight.SplitterWidth = 5;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Text = "FILTER";
             // 
             // scMain
             // 
@@ -296,6 +304,7 @@
             this.btnProfile.Name = "btnProfile";
             this.btnProfile.Size = new System.Drawing.Size(75, 26);
             this.btnProfile.TabIndex = 14;
+            this.btnProfile.TabStop = false;
             this.btnProfile.Text = "PROFILE";
             this.btnProfile.UseVisualStyleBackColor = true;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
