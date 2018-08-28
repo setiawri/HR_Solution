@@ -123,12 +123,12 @@ namespace HR_Desktop.Admin
         protected override System.Data.DataView loadGridviewDataSource()
         {            
             return Attendance.get(
-                itxt_UserAccount.ValueGuid,
-                itxt_Client.ValueGuid,
-                itxt_Workshift.ValueGuid,
+                getFilterValue<Guid?>(itxt_UserAccount),
+                getFilterValue<Guid?>(itxt_Client),
+                getFilterValue<Guid?>(itxt_Workshift),
                 null, null, null, null, null, null,
-                itxt_Notes.ValueText,
-                (Guid?)iddl_AttendanceStatuses.SelectedValue
+                getFilterValue<string>(itxt_Notes),
+                getFilterValue<Guid?>(iddl_AttendanceStatuses)
                 ).DefaultView;
         }
 
@@ -277,7 +277,7 @@ namespace HR_Desktop.Admin
 
         private void itxt_Workshift_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Workshifts_Form(FormModes.Browse, itxt_Client.ValueGuid), ref sender);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Workshifts_Form(FormModes.Browse, itxt_Client.ValueGuid, itxt_UserAccount.ValueGuid), ref sender);
         }
 
         private void idtp_TimestampIn_ValueChanged_1(object sender, EventArgs e)

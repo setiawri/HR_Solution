@@ -90,11 +90,11 @@ namespace HR_Desktop.Admin
 
             return BankAccount.get(chkIncludeInactive.Checked,
                     null,
-                    itxt_Name.ValueText,
-                    itxt_Owner_Ref.ValueGuid,
-                    itxt_BankName.ValueText,
-                    itxt_AccountNumber.ValueText,
-                    itxt_Notes.ValueText,
+                    getFilterValue<string>(itxt_Name),
+                    getFilterValue<Guid?>(itxt_Owner_Ref),
+                    getFilterValue<string>(itxt_BankName),
+                    getFilterValue<string>(itxt_AccountNumber),
+                    getFilterValue<string>(itxt_Notes),
                     _internal, null
                     ).DefaultView;
         }

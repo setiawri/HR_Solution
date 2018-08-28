@@ -97,9 +97,18 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-                return Client.get(chkIncludeInactive.Checked, null, itxt_CompanyName.ValueText, itxt_Address.ValueText, itxt_BillingAddress.ValueText,
-                    itxt_ContactPersonName.ValueText, itxt_Phone1.ValueText, itxt_Phone2.ValueText, itxt_NPWP.ValueText, itxt_NPWPAddress.ValueText,
-                    itxt_Notes.ValueText, _UserAccounts_Id).DefaultView;
+                return Client.get(chkIncludeInactive.Checked, null,
+                    getFilterValue<string>(itxt_CompanyName),
+                    getFilterValue<string>(itxt_Address),
+                    getFilterValue<string>(itxt_BillingAddress),
+                    getFilterValue<string>(itxt_ContactPersonName),
+                    getFilterValue<string>(itxt_Phone1),
+                    getFilterValue<string>(itxt_Phone2),
+                    getFilterValue<string>(itxt_NPWP),
+                    getFilterValue<string>(itxt_NPWPAddress),
+                    getFilterValue<string>(itxt_Notes),
+                    _UserAccounts_Id
+                    ).DefaultView;
         }
 
         protected override void populateInputFields()

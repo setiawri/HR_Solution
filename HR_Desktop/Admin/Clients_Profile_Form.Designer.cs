@@ -63,11 +63,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvWorkshifts = new System.Windows.Forms.DataGridView();
-            this.col_dgvWorkshifts_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvWorkshifts_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvWorkshifts_UserAccounts_Fullname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvWorkshifts_Start = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvWorkshifts_Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flpWorkshifts = new System.Windows.Forms.FlowLayoutPanel();
             this.lnk_Edit_Workshifts = new System.Windows.Forms.LinkLabel();
             this.rbWorkshifts_Monday = new System.Windows.Forms.RadioButton();
@@ -108,6 +103,12 @@
             this.col_dgvBankAccounts_BankName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvBankAccounts_AccountNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvBankAccounts_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvWorkshifts_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvWorkshifts_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvWorkshifts_UserAccounts_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvWorkshifts_UserAccounts_Fullname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvWorkshifts_Start = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvWorkshifts_Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_Info.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -150,275 +151,252 @@
             this.gb_Info.Controls.Add(this.address);
             this.gb_Info.Controls.Add(this.billingAddress);
             this.gb_Info.Controls.Add(this.contactPerson);
-            this.gb_Info.Location = new System.Drawing.Point(20, 37);
+            this.gb_Info.Location = new System.Drawing.Point(27, 46);
+            this.gb_Info.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gb_Info.Name = "gb_Info";
-            this.gb_Info.Size = new System.Drawing.Size(381, 384);
+            this.gb_Info.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gb_Info.Size = new System.Drawing.Size(508, 473);
             this.gb_Info.TabIndex = 0;
             this.gb_Info.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(81, 277);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(108, 341);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(10, 13);
+            this.label1.Size = new System.Drawing.Size(12, 17);
             this.label1.TabIndex = 27;
             this.label1.Text = ":";
             // 
             // lblNotes
             // 
             this.lblNotes.AutoSize = true;
-            this.lblNotes.Location = new System.Drawing.Point(95, 277);
-            this.lblNotes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblNotes.MinimumSize = new System.Drawing.Size(75, 45);
+            this.lblNotes.Location = new System.Drawing.Point(127, 341);
+            this.lblNotes.MinimumSize = new System.Drawing.Size(100, 55);
             this.lblNotes.Name = "lblNotes";
-            this.lblNotes.Size = new System.Drawing.Size(75, 45);
+            this.lblNotes.Size = new System.Drawing.Size(100, 55);
             this.lblNotes.TabIndex = 26;
             this.lblNotes.Text = "notes";
             // 
             // lblNpwpAddress
             // 
             this.lblNpwpAddress.AutoSize = true;
-            this.lblNpwpAddress.Location = new System.Drawing.Point(95, 223);
-            this.lblNpwpAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblNpwpAddress.MinimumSize = new System.Drawing.Size(75, 45);
+            this.lblNpwpAddress.Location = new System.Drawing.Point(127, 274);
+            this.lblNpwpAddress.MinimumSize = new System.Drawing.Size(100, 55);
             this.lblNpwpAddress.Name = "lblNpwpAddress";
-            this.lblNpwpAddress.Size = new System.Drawing.Size(75, 45);
+            this.lblNpwpAddress.Size = new System.Drawing.Size(100, 55);
             this.lblNpwpAddress.TabIndex = 25;
             this.lblNpwpAddress.Text = "npwpAddress";
             // 
             // lblNpwp
             // 
             this.lblNpwp.AutoSize = true;
-            this.lblNpwp.Location = new System.Drawing.Point(95, 197);
-            this.lblNpwp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblNpwp.MinimumSize = new System.Drawing.Size(75, 20);
+            this.lblNpwp.Location = new System.Drawing.Point(127, 242);
+            this.lblNpwp.MinimumSize = new System.Drawing.Size(100, 25);
             this.lblNpwp.Name = "lblNpwp";
-            this.lblNpwp.Size = new System.Drawing.Size(75, 20);
+            this.lblNpwp.Size = new System.Drawing.Size(100, 25);
             this.lblNpwp.TabIndex = 24;
             this.lblNpwp.Text = "npwp";
             // 
             // lblPhone2
             // 
             this.lblPhone2.AutoSize = true;
-            this.lblPhone2.Location = new System.Drawing.Point(95, 169);
-            this.lblPhone2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPhone2.MinimumSize = new System.Drawing.Size(75, 20);
+            this.lblPhone2.Location = new System.Drawing.Point(127, 208);
+            this.lblPhone2.MinimumSize = new System.Drawing.Size(100, 25);
             this.lblPhone2.Name = "lblPhone2";
-            this.lblPhone2.Size = new System.Drawing.Size(75, 20);
+            this.lblPhone2.Size = new System.Drawing.Size(100, 25);
             this.lblPhone2.TabIndex = 23;
             this.lblPhone2.Text = "phone2";
             // 
             // lblPhone1
             // 
             this.lblPhone1.AutoSize = true;
-            this.lblPhone1.Location = new System.Drawing.Point(95, 140);
-            this.lblPhone1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPhone1.MinimumSize = new System.Drawing.Size(75, 20);
+            this.lblPhone1.Location = new System.Drawing.Point(127, 172);
+            this.lblPhone1.MinimumSize = new System.Drawing.Size(100, 25);
             this.lblPhone1.Name = "lblPhone1";
-            this.lblPhone1.Size = new System.Drawing.Size(75, 20);
+            this.lblPhone1.Size = new System.Drawing.Size(100, 25);
             this.lblPhone1.TabIndex = 22;
             this.lblPhone1.Text = "phone1";
             // 
             // lblContactPerson
             // 
             this.lblContactPerson.AutoSize = true;
-            this.lblContactPerson.Location = new System.Drawing.Point(95, 114);
-            this.lblContactPerson.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblContactPerson.MinimumSize = new System.Drawing.Size(75, 20);
+            this.lblContactPerson.Location = new System.Drawing.Point(127, 140);
+            this.lblContactPerson.MinimumSize = new System.Drawing.Size(100, 25);
             this.lblContactPerson.Name = "lblContactPerson";
-            this.lblContactPerson.Size = new System.Drawing.Size(76, 20);
+            this.lblContactPerson.Size = new System.Drawing.Size(100, 25);
             this.lblContactPerson.TabIndex = 21;
             this.lblContactPerson.Text = "contactPerson";
             // 
             // lblBillingAddress
             // 
             this.lblBillingAddress.AutoSize = true;
-            this.lblBillingAddress.Location = new System.Drawing.Point(95, 65);
-            this.lblBillingAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblBillingAddress.MinimumSize = new System.Drawing.Size(75, 45);
+            this.lblBillingAddress.Location = new System.Drawing.Point(127, 80);
+            this.lblBillingAddress.MinimumSize = new System.Drawing.Size(100, 55);
             this.lblBillingAddress.Name = "lblBillingAddress";
-            this.lblBillingAddress.Size = new System.Drawing.Size(75, 45);
+            this.lblBillingAddress.Size = new System.Drawing.Size(100, 55);
             this.lblBillingAddress.TabIndex = 20;
             this.lblBillingAddress.Text = "billingAddress";
             // 
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(95, 14);
-            this.lblAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblAddress.MinimumSize = new System.Drawing.Size(75, 45);
+            this.lblAddress.Location = new System.Drawing.Point(127, 17);
+            this.lblAddress.MinimumSize = new System.Drawing.Size(100, 55);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(75, 45);
+            this.lblAddress.Size = new System.Drawing.Size(100, 55);
             this.lblAddress.TabIndex = 19;
             this.lblAddress.Text = "address";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(81, 223);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Location = new System.Drawing.Point(108, 274);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(10, 13);
+            this.label17.Size = new System.Drawing.Size(12, 17);
             this.label17.TabIndex = 17;
             this.label17.Text = ":";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(81, 201);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Location = new System.Drawing.Point(108, 247);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(10, 13);
+            this.label16.Size = new System.Drawing.Size(12, 17);
             this.label16.TabIndex = 16;
             this.label16.Text = ":";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(81, 169);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Location = new System.Drawing.Point(108, 208);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(10, 13);
+            this.label15.Size = new System.Drawing.Size(12, 17);
             this.label15.TabIndex = 15;
             this.label15.Text = ":";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(81, 140);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Location = new System.Drawing.Point(108, 172);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(10, 13);
+            this.label14.Size = new System.Drawing.Size(12, 17);
             this.label14.TabIndex = 14;
             this.label14.Text = ":";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(81, 114);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Location = new System.Drawing.Point(108, 140);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(10, 13);
+            this.label13.Size = new System.Drawing.Size(12, 17);
             this.label13.TabIndex = 13;
             this.label13.Text = ":";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(81, 114);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Location = new System.Drawing.Point(108, 140);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(10, 13);
+            this.label12.Size = new System.Drawing.Size(12, 17);
             this.label12.TabIndex = 12;
             this.label12.Text = ":";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(81, 65);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Location = new System.Drawing.Point(108, 80);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(10, 13);
+            this.label11.Size = new System.Drawing.Size(12, 17);
             this.label11.TabIndex = 11;
             this.label11.Text = ":";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(81, 14);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Location = new System.Drawing.Point(108, 17);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(10, 13);
+            this.label10.Size = new System.Drawing.Size(12, 17);
             this.label10.TabIndex = 10;
             this.label10.Text = ":";
             // 
             // npwpAddress
             // 
             this.npwpAddress.AutoSize = true;
-            this.npwpAddress.Location = new System.Drawing.Point(2, 223);
-            this.npwpAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.npwpAddress.MinimumSize = new System.Drawing.Size(75, 20);
+            this.npwpAddress.Location = new System.Drawing.Point(3, 274);
+            this.npwpAddress.MinimumSize = new System.Drawing.Size(100, 25);
             this.npwpAddress.Name = "npwpAddress";
-            this.npwpAddress.Size = new System.Drawing.Size(81, 20);
+            this.npwpAddress.Size = new System.Drawing.Size(105, 25);
             this.npwpAddress.TabIndex = 8;
             this.npwpAddress.Text = "NPWP Address";
             // 
             // npwp
             // 
             this.npwp.AutoSize = true;
-            this.npwp.Location = new System.Drawing.Point(2, 197);
-            this.npwp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.npwp.MinimumSize = new System.Drawing.Size(75, 20);
+            this.npwp.Location = new System.Drawing.Point(3, 242);
+            this.npwp.MinimumSize = new System.Drawing.Size(100, 25);
             this.npwp.Name = "npwp";
-            this.npwp.Size = new System.Drawing.Size(75, 20);
+            this.npwp.Size = new System.Drawing.Size(100, 25);
             this.npwp.TabIndex = 7;
             this.npwp.Text = "NPWP";
             // 
             // phone1
             // 
             this.phone1.AutoSize = true;
-            this.phone1.Location = new System.Drawing.Point(2, 140);
-            this.phone1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.phone1.MinimumSize = new System.Drawing.Size(75, 20);
+            this.phone1.Location = new System.Drawing.Point(3, 172);
+            this.phone1.MinimumSize = new System.Drawing.Size(100, 25);
             this.phone1.Name = "phone1";
-            this.phone1.Size = new System.Drawing.Size(75, 20);
+            this.phone1.Size = new System.Drawing.Size(100, 25);
             this.phone1.TabIndex = 6;
             this.phone1.Text = "Phone 1";
             // 
             // phone2
             // 
             this.phone2.AutoSize = true;
-            this.phone2.Location = new System.Drawing.Point(3, 169);
-            this.phone2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.phone2.MinimumSize = new System.Drawing.Size(75, 20);
+            this.phone2.Location = new System.Drawing.Point(4, 208);
+            this.phone2.MinimumSize = new System.Drawing.Size(100, 25);
             this.phone2.Name = "phone2";
-            this.phone2.Size = new System.Drawing.Size(75, 20);
+            this.phone2.Size = new System.Drawing.Size(100, 25);
             this.phone2.TabIndex = 5;
             this.phone2.Text = "Phone 2";
             // 
             // notess
             // 
             this.notess.AutoSize = true;
-            this.notess.Location = new System.Drawing.Point(2, 277);
-            this.notess.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.notess.MinimumSize = new System.Drawing.Size(75, 20);
+            this.notess.Location = new System.Drawing.Point(3, 341);
+            this.notess.MinimumSize = new System.Drawing.Size(100, 25);
             this.notess.Name = "notess";
-            this.notess.Size = new System.Drawing.Size(75, 20);
+            this.notess.Size = new System.Drawing.Size(100, 25);
             this.notess.TabIndex = 4;
             this.notess.Text = "Notes";
             // 
             // address
             // 
             this.address.AutoSize = true;
-            this.address.Location = new System.Drawing.Point(2, 14);
-            this.address.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.address.MinimumSize = new System.Drawing.Size(75, 20);
+            this.address.Location = new System.Drawing.Point(3, 17);
+            this.address.MinimumSize = new System.Drawing.Size(100, 25);
             this.address.Name = "address";
-            this.address.Size = new System.Drawing.Size(75, 20);
+            this.address.Size = new System.Drawing.Size(100, 25);
             this.address.TabIndex = 0;
             this.address.Text = "Address";
             // 
             // billingAddress
             // 
             this.billingAddress.AutoSize = true;
-            this.billingAddress.Location = new System.Drawing.Point(2, 65);
-            this.billingAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.billingAddress.MinimumSize = new System.Drawing.Size(75, 20);
+            this.billingAddress.Location = new System.Drawing.Point(3, 80);
+            this.billingAddress.MinimumSize = new System.Drawing.Size(100, 25);
             this.billingAddress.Name = "billingAddress";
-            this.billingAddress.Size = new System.Drawing.Size(75, 20);
+            this.billingAddress.Size = new System.Drawing.Size(101, 25);
             this.billingAddress.TabIndex = 0;
             this.billingAddress.Text = "Billing Address";
             // 
             // contactPerson
             // 
             this.contactPerson.AutoSize = true;
-            this.contactPerson.Location = new System.Drawing.Point(2, 114);
-            this.contactPerson.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.contactPerson.MinimumSize = new System.Drawing.Size(75, 20);
+            this.contactPerson.Location = new System.Drawing.Point(3, 140);
+            this.contactPerson.MinimumSize = new System.Drawing.Size(100, 25);
             this.contactPerson.Name = "contactPerson";
-            this.contactPerson.Size = new System.Drawing.Size(80, 20);
+            this.contactPerson.Size = new System.Drawing.Size(105, 25);
             this.contactPerson.TabIndex = 1;
             this.contactPerson.Text = "Contact Person";
             // 
@@ -426,18 +404,21 @@
             // 
             this.lblCompany_Name.AutoSize = true;
             this.lblCompany_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCompany_Name.Location = new System.Drawing.Point(14, 9);
+            this.lblCompany_Name.Location = new System.Drawing.Point(19, 11);
+            this.lblCompany_Name.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCompany_Name.Name = "lblCompany_Name";
-            this.lblCompany_Name.Size = new System.Drawing.Size(208, 25);
+            this.lblCompany_Name.Size = new System.Drawing.Size(259, 31);
             this.lblCompany_Name.TabIndex = 1;
             this.lblCompany_Name.Text = "lblCompany_Name";
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.tabControl1);
-            this.groupBox3.Location = new System.Drawing.Point(407, 37);
+            this.groupBox3.Location = new System.Drawing.Point(543, 46);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(381, 202);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Size = new System.Drawing.Size(508, 249);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "WORKSHIFTS";
@@ -447,20 +428,22 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(3, 16);
+            this.tabControl1.Location = new System.Drawing.Point(4, 19);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(375, 183);
+            this.tabControl1.Size = new System.Drawing.Size(500, 226);
             this.tabControl1.TabIndex = 9;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dgvWorkshifts);
             this.tabPage1.Controls.Add(this.flpWorkshifts);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(367, 157);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Size = new System.Drawing.Size(492, 197);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Assigned";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -484,52 +467,19 @@
             this.dgvWorkshifts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_dgvWorkshifts_Id,
             this.col_dgvWorkshifts_Name,
+            this.col_dgvWorkshifts_UserAccounts_Id,
             this.col_dgvWorkshifts_UserAccounts_Fullname,
             this.col_dgvWorkshifts_Start,
             this.col_dgvWorkshifts_Duration});
             this.dgvWorkshifts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvWorkshifts.Location = new System.Drawing.Point(3, 26);
+            this.dgvWorkshifts.Location = new System.Drawing.Point(4, 32);
+            this.dgvWorkshifts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvWorkshifts.MultiSelect = false;
             this.dgvWorkshifts.Name = "dgvWorkshifts";
             this.dgvWorkshifts.RowHeadersVisible = false;
             this.dgvWorkshifts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvWorkshifts.Size = new System.Drawing.Size(361, 128);
+            this.dgvWorkshifts.Size = new System.Drawing.Size(484, 161);
             this.dgvWorkshifts.TabIndex = 5;
-            // 
-            // col_dgvWorkshifts_Id
-            // 
-            this.col_dgvWorkshifts_Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.col_dgvWorkshifts_Id.HeaderText = "Id";
-            this.col_dgvWorkshifts_Id.Name = "col_dgvWorkshifts_Id";
-            this.col_dgvWorkshifts_Id.Visible = false;
-            // 
-            // col_dgvWorkshifts_Name
-            // 
-            this.col_dgvWorkshifts_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_dgvWorkshifts_Name.HeaderText = "Name";
-            this.col_dgvWorkshifts_Name.MinimumWidth = 50;
-            this.col_dgvWorkshifts_Name.Name = "col_dgvWorkshifts_Name";
-            // 
-            // col_dgvWorkshifts_UserAccounts_Fullname
-            // 
-            this.col_dgvWorkshifts_UserAccounts_Fullname.HeaderText = "Employee";
-            this.col_dgvWorkshifts_UserAccounts_Fullname.Name = "col_dgvWorkshifts_UserAccounts_Fullname";
-            // 
-            // col_dgvWorkshifts_Start
-            // 
-            this.col_dgvWorkshifts_Start.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.col_dgvWorkshifts_Start.HeaderText = "Start";
-            this.col_dgvWorkshifts_Start.MinimumWidth = 40;
-            this.col_dgvWorkshifts_Start.Name = "col_dgvWorkshifts_Start";
-            this.col_dgvWorkshifts_Start.Width = 40;
-            // 
-            // col_dgvWorkshifts_Duration
-            // 
-            this.col_dgvWorkshifts_Duration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.col_dgvWorkshifts_Duration.HeaderText = "Duration";
-            this.col_dgvWorkshifts_Duration.MinimumWidth = 50;
-            this.col_dgvWorkshifts_Duration.Name = "col_dgvWorkshifts_Duration";
-            this.col_dgvWorkshifts_Duration.Width = 50;
             // 
             // flpWorkshifts
             // 
@@ -542,9 +492,10 @@
             this.flpWorkshifts.Controls.Add(this.rbWorkshifts_Saturday);
             this.flpWorkshifts.Controls.Add(this.rbWorkshifts_Sunday);
             this.flpWorkshifts.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flpWorkshifts.Location = new System.Drawing.Point(3, 3);
+            this.flpWorkshifts.Location = new System.Drawing.Point(4, 4);
+            this.flpWorkshifts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flpWorkshifts.Name = "flpWorkshifts";
-            this.flpWorkshifts.Size = new System.Drawing.Size(361, 23);
+            this.flpWorkshifts.Size = new System.Drawing.Size(484, 28);
             this.flpWorkshifts.TabIndex = 9;
             // 
             // lnk_Edit_Workshifts
@@ -553,9 +504,10 @@
             this.lnk_Edit_Workshifts.Dock = System.Windows.Forms.DockStyle.Right;
             this.lnk_Edit_Workshifts.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnk_Edit_Workshifts.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnk_Edit_Workshifts.Location = new System.Drawing.Point(3, 0);
+            this.lnk_Edit_Workshifts.Location = new System.Drawing.Point(4, 0);
+            this.lnk_Edit_Workshifts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnk_Edit_Workshifts.Name = "lnk_Edit_Workshifts";
-            this.lnk_Edit_Workshifts.Size = new System.Drawing.Size(29, 23);
+            this.lnk_Edit_Workshifts.Size = new System.Drawing.Size(36, 29);
             this.lnk_Edit_Workshifts.TabIndex = 1;
             this.lnk_Edit_Workshifts.TabStop = true;
             this.lnk_Edit_Workshifts.Text = "Edit";
@@ -565,9 +517,10 @@
             // rbWorkshifts_Monday
             // 
             this.rbWorkshifts_Monday.AutoSize = true;
-            this.rbWorkshifts_Monday.Location = new System.Drawing.Point(38, 3);
+            this.rbWorkshifts_Monday.Location = new System.Drawing.Point(48, 4);
+            this.rbWorkshifts_Monday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshifts_Monday.Name = "rbWorkshifts_Monday";
-            this.rbWorkshifts_Monday.Size = new System.Drawing.Size(34, 17);
+            this.rbWorkshifts_Monday.Size = new System.Drawing.Size(40, 21);
             this.rbWorkshifts_Monday.TabIndex = 8;
             this.rbWorkshifts_Monday.Text = "M";
             this.rbWorkshifts_Monday.UseVisualStyleBackColor = true;
@@ -576,9 +529,10 @@
             // rbWorkshifts_Tuesday
             // 
             this.rbWorkshifts_Tuesday.AutoSize = true;
-            this.rbWorkshifts_Tuesday.Location = new System.Drawing.Point(78, 3);
+            this.rbWorkshifts_Tuesday.Location = new System.Drawing.Point(96, 4);
+            this.rbWorkshifts_Tuesday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshifts_Tuesday.Name = "rbWorkshifts_Tuesday";
-            this.rbWorkshifts_Tuesday.Size = new System.Drawing.Size(38, 17);
+            this.rbWorkshifts_Tuesday.Size = new System.Drawing.Size(46, 21);
             this.rbWorkshifts_Tuesday.TabIndex = 9;
             this.rbWorkshifts_Tuesday.Text = "Tu";
             this.rbWorkshifts_Tuesday.UseVisualStyleBackColor = true;
@@ -587,9 +541,10 @@
             // rbWorkshifts_Wednesday
             // 
             this.rbWorkshifts_Wednesday.AutoSize = true;
-            this.rbWorkshifts_Wednesday.Location = new System.Drawing.Point(122, 3);
+            this.rbWorkshifts_Wednesday.Location = new System.Drawing.Point(150, 4);
+            this.rbWorkshifts_Wednesday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshifts_Wednesday.Name = "rbWorkshifts_Wednesday";
-            this.rbWorkshifts_Wednesday.Size = new System.Drawing.Size(36, 17);
+            this.rbWorkshifts_Wednesday.Size = new System.Drawing.Size(42, 21);
             this.rbWorkshifts_Wednesday.TabIndex = 10;
             this.rbWorkshifts_Wednesday.Text = "W";
             this.rbWorkshifts_Wednesday.UseVisualStyleBackColor = true;
@@ -598,9 +553,10 @@
             // rbWorkshifts_Thursday
             // 
             this.rbWorkshifts_Thursday.AutoSize = true;
-            this.rbWorkshifts_Thursday.Location = new System.Drawing.Point(164, 3);
+            this.rbWorkshifts_Thursday.Location = new System.Drawing.Point(200, 4);
+            this.rbWorkshifts_Thursday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshifts_Thursday.Name = "rbWorkshifts_Thursday";
-            this.rbWorkshifts_Thursday.Size = new System.Drawing.Size(38, 17);
+            this.rbWorkshifts_Thursday.Size = new System.Drawing.Size(46, 21);
             this.rbWorkshifts_Thursday.TabIndex = 11;
             this.rbWorkshifts_Thursday.Text = "Th";
             this.rbWorkshifts_Thursday.UseVisualStyleBackColor = true;
@@ -609,9 +565,10 @@
             // rbWorkshifts_Friday
             // 
             this.rbWorkshifts_Friday.AutoSize = true;
-            this.rbWorkshifts_Friday.Location = new System.Drawing.Point(208, 3);
+            this.rbWorkshifts_Friday.Location = new System.Drawing.Point(254, 4);
+            this.rbWorkshifts_Friday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshifts_Friday.Name = "rbWorkshifts_Friday";
-            this.rbWorkshifts_Friday.Size = new System.Drawing.Size(31, 17);
+            this.rbWorkshifts_Friday.Size = new System.Drawing.Size(37, 21);
             this.rbWorkshifts_Friday.TabIndex = 12;
             this.rbWorkshifts_Friday.Text = "F";
             this.rbWorkshifts_Friday.UseVisualStyleBackColor = true;
@@ -620,9 +577,10 @@
             // rbWorkshifts_Saturday
             // 
             this.rbWorkshifts_Saturday.AutoSize = true;
-            this.rbWorkshifts_Saturday.Location = new System.Drawing.Point(245, 3);
+            this.rbWorkshifts_Saturday.Location = new System.Drawing.Point(299, 4);
+            this.rbWorkshifts_Saturday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshifts_Saturday.Name = "rbWorkshifts_Saturday";
-            this.rbWorkshifts_Saturday.Size = new System.Drawing.Size(38, 17);
+            this.rbWorkshifts_Saturday.Size = new System.Drawing.Size(46, 21);
             this.rbWorkshifts_Saturday.TabIndex = 13;
             this.rbWorkshifts_Saturday.Text = "Sa";
             this.rbWorkshifts_Saturday.UseVisualStyleBackColor = true;
@@ -631,9 +589,10 @@
             // rbWorkshifts_Sunday
             // 
             this.rbWorkshifts_Sunday.AutoSize = true;
-            this.rbWorkshifts_Sunday.Location = new System.Drawing.Point(289, 3);
+            this.rbWorkshifts_Sunday.Location = new System.Drawing.Point(353, 4);
+            this.rbWorkshifts_Sunday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshifts_Sunday.Name = "rbWorkshifts_Sunday";
-            this.rbWorkshifts_Sunday.Size = new System.Drawing.Size(38, 17);
+            this.rbWorkshifts_Sunday.Size = new System.Drawing.Size(46, 21);
             this.rbWorkshifts_Sunday.TabIndex = 14;
             this.rbWorkshifts_Sunday.Text = "Su";
             this.rbWorkshifts_Sunday.UseVisualStyleBackColor = true;
@@ -643,10 +602,11 @@
             // 
             this.tabPage2.Controls.Add(this.dgvWorkshiftTemplates);
             this.tabPage2.Controls.Add(this.flpWorkshiftTemplates);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(367, 157);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Size = new System.Drawing.Size(492, 194);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Template";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -673,12 +633,13 @@
             this.col_dgvWorkshiftTemplates_Start,
             this.col_dgvWorkshiftTemplates_Duration});
             this.dgvWorkshiftTemplates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvWorkshiftTemplates.Location = new System.Drawing.Point(3, 26);
+            this.dgvWorkshiftTemplates.Location = new System.Drawing.Point(4, 32);
+            this.dgvWorkshiftTemplates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvWorkshiftTemplates.MultiSelect = false;
             this.dgvWorkshiftTemplates.Name = "dgvWorkshiftTemplates";
             this.dgvWorkshiftTemplates.RowHeadersVisible = false;
             this.dgvWorkshiftTemplates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvWorkshiftTemplates.Size = new System.Drawing.Size(361, 128);
+            this.dgvWorkshiftTemplates.Size = new System.Drawing.Size(484, 158);
             this.dgvWorkshiftTemplates.TabIndex = 6;
             // 
             // col_dgvWorkshiftTemplates_Id
@@ -722,9 +683,10 @@
             this.flpWorkshiftTemplates.Controls.Add(this.rbWorkshiftTemplates_Saturday);
             this.flpWorkshiftTemplates.Controls.Add(this.rbWorkshiftTemplates_Sunday);
             this.flpWorkshiftTemplates.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flpWorkshiftTemplates.Location = new System.Drawing.Point(3, 3);
+            this.flpWorkshiftTemplates.Location = new System.Drawing.Point(4, 4);
+            this.flpWorkshiftTemplates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flpWorkshiftTemplates.Name = "flpWorkshiftTemplates";
-            this.flpWorkshiftTemplates.Size = new System.Drawing.Size(361, 23);
+            this.flpWorkshiftTemplates.Size = new System.Drawing.Size(484, 28);
             this.flpWorkshiftTemplates.TabIndex = 9;
             // 
             // lnk_Edit_WorkshiftTemplates
@@ -733,9 +695,10 @@
             this.lnk_Edit_WorkshiftTemplates.Dock = System.Windows.Forms.DockStyle.Right;
             this.lnk_Edit_WorkshiftTemplates.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnk_Edit_WorkshiftTemplates.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnk_Edit_WorkshiftTemplates.Location = new System.Drawing.Point(3, 0);
+            this.lnk_Edit_WorkshiftTemplates.Location = new System.Drawing.Point(4, 0);
+            this.lnk_Edit_WorkshiftTemplates.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnk_Edit_WorkshiftTemplates.Name = "lnk_Edit_WorkshiftTemplates";
-            this.lnk_Edit_WorkshiftTemplates.Size = new System.Drawing.Size(29, 23);
+            this.lnk_Edit_WorkshiftTemplates.Size = new System.Drawing.Size(36, 29);
             this.lnk_Edit_WorkshiftTemplates.TabIndex = 15;
             this.lnk_Edit_WorkshiftTemplates.TabStop = true;
             this.lnk_Edit_WorkshiftTemplates.Text = "Edit";
@@ -745,9 +708,10 @@
             // rbWorkshiftTemplates_Monday
             // 
             this.rbWorkshiftTemplates_Monday.AutoSize = true;
-            this.rbWorkshiftTemplates_Monday.Location = new System.Drawing.Point(38, 3);
+            this.rbWorkshiftTemplates_Monday.Location = new System.Drawing.Point(48, 4);
+            this.rbWorkshiftTemplates_Monday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshiftTemplates_Monday.Name = "rbWorkshiftTemplates_Monday";
-            this.rbWorkshiftTemplates_Monday.Size = new System.Drawing.Size(34, 17);
+            this.rbWorkshiftTemplates_Monday.Size = new System.Drawing.Size(40, 21);
             this.rbWorkshiftTemplates_Monday.TabIndex = 8;
             this.rbWorkshiftTemplates_Monday.Text = "M";
             this.rbWorkshiftTemplates_Monday.UseVisualStyleBackColor = true;
@@ -756,9 +720,10 @@
             // rbWorkshiftTemplates_Tuesday
             // 
             this.rbWorkshiftTemplates_Tuesday.AutoSize = true;
-            this.rbWorkshiftTemplates_Tuesday.Location = new System.Drawing.Point(78, 3);
+            this.rbWorkshiftTemplates_Tuesday.Location = new System.Drawing.Point(96, 4);
+            this.rbWorkshiftTemplates_Tuesday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshiftTemplates_Tuesday.Name = "rbWorkshiftTemplates_Tuesday";
-            this.rbWorkshiftTemplates_Tuesday.Size = new System.Drawing.Size(38, 17);
+            this.rbWorkshiftTemplates_Tuesday.Size = new System.Drawing.Size(46, 21);
             this.rbWorkshiftTemplates_Tuesday.TabIndex = 9;
             this.rbWorkshiftTemplates_Tuesday.Text = "Tu";
             this.rbWorkshiftTemplates_Tuesday.UseVisualStyleBackColor = true;
@@ -767,9 +732,10 @@
             // rbWorkshiftTemplates_Wednesday
             // 
             this.rbWorkshiftTemplates_Wednesday.AutoSize = true;
-            this.rbWorkshiftTemplates_Wednesday.Location = new System.Drawing.Point(122, 3);
+            this.rbWorkshiftTemplates_Wednesday.Location = new System.Drawing.Point(150, 4);
+            this.rbWorkshiftTemplates_Wednesday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshiftTemplates_Wednesday.Name = "rbWorkshiftTemplates_Wednesday";
-            this.rbWorkshiftTemplates_Wednesday.Size = new System.Drawing.Size(36, 17);
+            this.rbWorkshiftTemplates_Wednesday.Size = new System.Drawing.Size(42, 21);
             this.rbWorkshiftTemplates_Wednesday.TabIndex = 10;
             this.rbWorkshiftTemplates_Wednesday.Text = "W";
             this.rbWorkshiftTemplates_Wednesday.UseVisualStyleBackColor = true;
@@ -778,9 +744,10 @@
             // rbWorkshiftTemplates_Thursday
             // 
             this.rbWorkshiftTemplates_Thursday.AutoSize = true;
-            this.rbWorkshiftTemplates_Thursday.Location = new System.Drawing.Point(164, 3);
+            this.rbWorkshiftTemplates_Thursday.Location = new System.Drawing.Point(200, 4);
+            this.rbWorkshiftTemplates_Thursday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshiftTemplates_Thursday.Name = "rbWorkshiftTemplates_Thursday";
-            this.rbWorkshiftTemplates_Thursday.Size = new System.Drawing.Size(38, 17);
+            this.rbWorkshiftTemplates_Thursday.Size = new System.Drawing.Size(46, 21);
             this.rbWorkshiftTemplates_Thursday.TabIndex = 11;
             this.rbWorkshiftTemplates_Thursday.Text = "Th";
             this.rbWorkshiftTemplates_Thursday.UseVisualStyleBackColor = true;
@@ -789,9 +756,10 @@
             // rbWorkshiftTemplates_Friday
             // 
             this.rbWorkshiftTemplates_Friday.AutoSize = true;
-            this.rbWorkshiftTemplates_Friday.Location = new System.Drawing.Point(208, 3);
+            this.rbWorkshiftTemplates_Friday.Location = new System.Drawing.Point(254, 4);
+            this.rbWorkshiftTemplates_Friday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshiftTemplates_Friday.Name = "rbWorkshiftTemplates_Friday";
-            this.rbWorkshiftTemplates_Friday.Size = new System.Drawing.Size(31, 17);
+            this.rbWorkshiftTemplates_Friday.Size = new System.Drawing.Size(37, 21);
             this.rbWorkshiftTemplates_Friday.TabIndex = 12;
             this.rbWorkshiftTemplates_Friday.Text = "F";
             this.rbWorkshiftTemplates_Friday.UseVisualStyleBackColor = true;
@@ -800,9 +768,10 @@
             // rbWorkshiftTemplates_Saturday
             // 
             this.rbWorkshiftTemplates_Saturday.AutoSize = true;
-            this.rbWorkshiftTemplates_Saturday.Location = new System.Drawing.Point(245, 3);
+            this.rbWorkshiftTemplates_Saturday.Location = new System.Drawing.Point(299, 4);
+            this.rbWorkshiftTemplates_Saturday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshiftTemplates_Saturday.Name = "rbWorkshiftTemplates_Saturday";
-            this.rbWorkshiftTemplates_Saturday.Size = new System.Drawing.Size(38, 17);
+            this.rbWorkshiftTemplates_Saturday.Size = new System.Drawing.Size(46, 21);
             this.rbWorkshiftTemplates_Saturday.TabIndex = 13;
             this.rbWorkshiftTemplates_Saturday.Text = "Sa";
             this.rbWorkshiftTemplates_Saturday.UseVisualStyleBackColor = true;
@@ -811,9 +780,10 @@
             // rbWorkshiftTemplates_Sunday
             // 
             this.rbWorkshiftTemplates_Sunday.AutoSize = true;
-            this.rbWorkshiftTemplates_Sunday.Location = new System.Drawing.Point(289, 3);
+            this.rbWorkshiftTemplates_Sunday.Location = new System.Drawing.Point(353, 4);
+            this.rbWorkshiftTemplates_Sunday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbWorkshiftTemplates_Sunday.Name = "rbWorkshiftTemplates_Sunday";
-            this.rbWorkshiftTemplates_Sunday.Size = new System.Drawing.Size(38, 17);
+            this.rbWorkshiftTemplates_Sunday.Size = new System.Drawing.Size(46, 21);
             this.rbWorkshiftTemplates_Sunday.TabIndex = 14;
             this.rbWorkshiftTemplates_Sunday.Text = "Su";
             this.rbWorkshiftTemplates_Sunday.UseVisualStyleBackColor = true;
@@ -822,9 +792,11 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(598, 245);
+            this.groupBox2.Location = new System.Drawing.Point(797, 302);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(190, 179);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(253, 220);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "PAY RULES";
@@ -854,12 +826,13 @@
             this.Column4,
             this.dataGridViewCheckBoxColumn2});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 19);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(184, 160);
+            this.dataGridView1.Size = new System.Drawing.Size(245, 197);
             this.dataGridView1.TabIndex = 5;
             // 
             // dataGridViewTextBoxColumn1
@@ -920,9 +893,11 @@
             // gbBankAccounts
             // 
             this.gbBankAccounts.Controls.Add(this.dgvBankAccounts);
-            this.gbBankAccounts.Location = new System.Drawing.Point(407, 245);
+            this.gbBankAccounts.Location = new System.Drawing.Point(543, 302);
+            this.gbBankAccounts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbBankAccounts.Name = "gbBankAccounts";
-            this.gbBankAccounts.Size = new System.Drawing.Size(185, 179);
+            this.gbBankAccounts.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbBankAccounts.Size = new System.Drawing.Size(247, 220);
             this.gbBankAccounts.TabIndex = 8;
             this.gbBankAccounts.TabStop = false;
             this.gbBankAccounts.Text = "BANK ACCOUNTS";
@@ -950,12 +925,13 @@
             this.col_dgvBankAccounts_AccountNumber,
             this.col_dgvBankAccounts_Notes});
             this.dgvBankAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBankAccounts.Location = new System.Drawing.Point(3, 16);
+            this.dgvBankAccounts.Location = new System.Drawing.Point(4, 19);
+            this.dgvBankAccounts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvBankAccounts.MultiSelect = false;
             this.dgvBankAccounts.Name = "dgvBankAccounts";
             this.dgvBankAccounts.RowHeadersVisible = false;
             this.dgvBankAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBankAccounts.Size = new System.Drawing.Size(179, 160);
+            this.dgvBankAccounts.Size = new System.Drawing.Size(239, 197);
             this.dgvBankAccounts.TabIndex = 5;
             // 
             // col_dgvBankAccounts_Id
@@ -996,16 +972,62 @@
             this.col_dgvBankAccounts_Notes.MinimumWidth = 30;
             this.col_dgvBankAccounts_Notes.Name = "col_dgvBankAccounts_Notes";
             // 
+            // col_dgvWorkshifts_Id
+            // 
+            this.col_dgvWorkshifts_Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_dgvWorkshifts_Id.HeaderText = "Id";
+            this.col_dgvWorkshifts_Id.Name = "col_dgvWorkshifts_Id";
+            this.col_dgvWorkshifts_Id.Visible = false;
+            this.col_dgvWorkshifts_Id.Width = 25;
+            // 
+            // col_dgvWorkshifts_Name
+            // 
+            this.col_dgvWorkshifts_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_dgvWorkshifts_Name.HeaderText = "Name";
+            this.col_dgvWorkshifts_Name.MinimumWidth = 50;
+            this.col_dgvWorkshifts_Name.Name = "col_dgvWorkshifts_Name";
+            // 
+            // col_dgvWorkshifts_UserAccounts_Id
+            // 
+            this.col_dgvWorkshifts_UserAccounts_Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvWorkshifts_UserAccounts_Id.HeaderText = "EmployeeId";
+            this.col_dgvWorkshifts_UserAccounts_Id.MinimumWidth = 10;
+            this.col_dgvWorkshifts_UserAccounts_Id.Name = "col_dgvWorkshifts_UserAccounts_Id";
+            this.col_dgvWorkshifts_UserAccounts_Id.Visible = false;
+            this.col_dgvWorkshifts_UserAccounts_Id.Width = 10;
+            // 
+            // col_dgvWorkshifts_UserAccounts_Fullname
+            // 
+            this.col_dgvWorkshifts_UserAccounts_Fullname.HeaderText = "Employee";
+            this.col_dgvWorkshifts_UserAccounts_Fullname.Name = "col_dgvWorkshifts_UserAccounts_Fullname";
+            // 
+            // col_dgvWorkshifts_Start
+            // 
+            this.col_dgvWorkshifts_Start.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvWorkshifts_Start.HeaderText = "Start";
+            this.col_dgvWorkshifts_Start.MinimumWidth = 40;
+            this.col_dgvWorkshifts_Start.Name = "col_dgvWorkshifts_Start";
+            this.col_dgvWorkshifts_Start.Width = 40;
+            // 
+            // col_dgvWorkshifts_Duration
+            // 
+            this.col_dgvWorkshifts_Duration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvWorkshifts_Duration.HeaderText = "Duration";
+            this.col_dgvWorkshifts_Duration.MinimumWidth = 50;
+            this.col_dgvWorkshifts_Duration.Name = "col_dgvWorkshifts_Duration";
+            this.col_dgvWorkshifts_Duration.Width = 50;
+            // 
             // Clients_Profile_Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 435);
+            this.ClientSize = new System.Drawing.Size(1079, 535);
             this.Controls.Add(this.gbBankAccounts);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lblCompany_Name);
             this.Controls.Add(this.gb_Info);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Clients_Profile_Form";
             this.Text = "PROFILE";
             this.Load += new System.EventHandler(this.Form_Load);
@@ -1092,11 +1114,6 @@
         private System.Windows.Forms.Label lblBillingAddress;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_UserAccounts_Fullname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Start;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Duration;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshiftTemplates_Start;
@@ -1108,5 +1125,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvBankAccounts_BankName;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvBankAccounts_AccountNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvBankAccounts_Notes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_UserAccounts_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_UserAccounts_Fullname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Start;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvWorkshifts_Duration;
     }
 }

@@ -51,6 +51,7 @@ namespace HR_Desktop.Admin
             dgvWorkshifts.AutoGenerateColumns = false;
             col_dgvWorkshifts_Id.DataPropertyName = Workshift.COL_DB_Id;
             col_dgvWorkshifts_Name.DataPropertyName = Workshift.COL_DB_Name;
+            col_dgvWorkshifts_UserAccounts_Id.DataPropertyName = Workshift.COL_DB_UserAccounts_Id;
             col_dgvWorkshifts_UserAccounts_Fullname.DataPropertyName = Workshift.COL_UserAccounts_Fullname;
             col_dgvWorkshifts_Start.DataPropertyName = Workshift.COL_DB_Start;
             col_dgvWorkshifts_Duration.DataPropertyName = Workshift.COL_DB_DurationMinutes;
@@ -105,7 +106,7 @@ namespace HR_Desktop.Admin
 
         private void populateDgvWorkshifts()
         {
-            Util.populateDataGridView(dgvWorkshifts, Workshift.get(false, null, null, _Clients_Id, null, null, (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshifts), null, null, null, null));
+            Util.populateDataGridView(dgvWorkshifts, Workshift.get(false, null, null, _Clients_Id, null, null, null, (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshifts), null, null, null, null));
         }
 
         private void populateDgvWorkshiftTemplates()
@@ -143,7 +144,7 @@ namespace HR_Desktop.Admin
 
         private void lnk_Edit_Workshifts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form(FormModes.Add, _Clients_Id));
+            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form(FormModes.Add, _Clients_Id, (Guid)Util.getSelectedRowValue(dgvWorkshifts, col_dgvWorkshifts_UserAccounts_Id)));
             populateDgvWorkshifts();
         }
         

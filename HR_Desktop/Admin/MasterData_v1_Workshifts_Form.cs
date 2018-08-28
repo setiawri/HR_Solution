@@ -16,6 +16,7 @@ namespace HR_Desktop.Admin
 
         private const bool FORM_SHOWDATAONLOAD = true;
         private Guid? _Clients_Id = null;
+        private Guid? _UserAccounts_Id = null;
 
         #endregion SETTINGS
         /*******************************************************************************************************/
@@ -24,6 +25,7 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_Name;
         private DataGridViewColumn col_dgv_Clients_CompanyName;
         private DataGridViewColumn col_dgv_UserAccounts_Fullname;
+        private DataGridViewColumn col_dgv_WorkshiftTemplates_Name;
         private DataGridViewColumn col_dgv_WorkshiftCategories_Name;
         private DataGridViewColumn col_dgv_DayOfWeek;
         private DataGridViewColumn col_dgv_Start;
@@ -35,12 +37,15 @@ namespace HR_Desktop.Admin
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_Workshifts_Form() : this(FormModes.Add, null) { }
-        public MasterData_v1_Workshifts_Form(FormModes startingMode, Guid? Clients_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
+        public MasterData_v1_Workshifts_Form() : this(FormModes.Add, null, null) { }
+        public MasterData_v1_Workshifts_Form(FormModes startingMode, Guid? Clients_Id, Guid? UserAccounts_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
         {
             InitializeComponent();
             if (Clients_Id != null)
                 _Clients_Id = Clients_Id;
+
+            if (UserAccounts_Id != null)
+                _UserAccounts_Id = UserAccounts_Id;
 
         }
         
@@ -66,6 +71,7 @@ namespace HR_Desktop.Admin
             col_dgv_Clients_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Clients_CompanyName", itxt_Clients.LabelText, Workshift.COL_Clients_CompanyName, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_UserAccounts_Fullname = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_UserAccounts_Fullname", itxt_UserAccounts.LabelText, Workshift.COL_UserAccounts_Fullname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, Workshift.COL_DB_Name, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_WorkshiftTemplates_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_WorkshiftTemplates_Name", itxt_WorkshiftTemplate.LabelText, Workshift.COL_WorkshiftTemplates_Name, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_WorkshiftCategories_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_WorkshiftCategories_Name", itxt_WorkshiftCategories.LabelText, Workshift.COL_WorkshiftCategories_Name, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_DayOfWeek", iddl_DayOfWeek.LabelText, Workshift.COL_DayOfWeekName, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Start", idtp_Start.LabelText, Workshift.COL_DB_Start, true, true, @"h\:mm", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
@@ -107,9 +113,9 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            if(_Clients_Id != null)
+            if(_Clients_Id != null || _UserAccounts_Id != null)
                 return Workshift.get(chkIncludeInactive.Checked, null, null,
-                    _Clients_Id, null, null, null, null, null, null, null
+                    _Clients_Id, _UserAccounts_Id, null, null, null, null, null, null, null
                     ).DefaultView;
 
             DateTime? x = getFilterValue<DateTime?>(idtp_Start);
@@ -118,6 +124,7 @@ namespace HR_Desktop.Admin
                     itxt_Name.ValueText,
                     getFilterValue<Guid?>(itxt_Clients),
                     getFilterValue<Guid?>(itxt_UserAccounts),
+                    getFilterValue<Guid?>(itxt_WorkshiftTemplate),
                     getFilterValue<Guid?>(itxt_WorkshiftCategories),
                     getFilterValue<int?>(iddl_DayOfWeek),
                     getFilterValue<TimeSpan?>(idtp_Start),
@@ -149,6 +156,9 @@ namespace HR_Desktop.Admin
             in_DurationMinutes.Value = obj.DurationMinutes;
             in_PayableAmount.Value = obj.PayableAmount;
             itxt_Notes.ValueText = obj.Notes;
+            if(!string.IsNullOrEmpty(obj.WorkshiftTemplates_Name))
+                itxt_WorkshiftTemplate.setValue(obj.WorkshiftTemplates_Name, (Guid)obj.WorkshiftTemplates_Id);
+
         }
 
         protected override void update()
@@ -157,6 +167,7 @@ namespace HR_Desktop.Admin
                 selectedRowID(),
                 itxt_Name.ValueText,
                 (Guid)itxt_UserAccounts.ValueGuid,
+                itxt_WorkshiftTemplate.ValueGuid,
                 (Guid)itxt_WorkshiftCategories.ValueGuid,
                 (DayOfWeek)iddl_DayOfWeek.SelectedValue,
                 idtp_Start.ValueTimeSpan.ToString(),
@@ -171,6 +182,7 @@ namespace HR_Desktop.Admin
                 itxt_Name.ValueText,
                 (Guid)itxt_Clients.ValueGuid,
                 (Guid)itxt_UserAccounts.ValueGuid,
+                itxt_WorkshiftTemplate.ValueGuid,
                 (Guid)itxt_WorkshiftCategories.ValueGuid,
                 (DayOfWeek)iddl_DayOfWeek.SelectedValue,
                 idtp_Start.ValueTimeSpan.ToString(),
@@ -281,6 +293,11 @@ namespace HR_Desktop.Admin
         private void itxt_Clients_onTextChanged(object sender, EventArgs e)
         {
             gb_Template.Enabled = itxt_Clients.ValueGuid != null && Mode == FormModes.Add;
+        }
+
+        private void btnAttendancePayRates_Click(object sender, EventArgs e)
+        {
+            Util.displayForm(null, new Admin.MasterData_v1_AttendancePayRates_Form(FormModes.Add, Util.getSelectedRowID(dgv, col_dgv_Id), (string)Util.getSelectedRowValue(dgv, col_dgv_Name)));
         }
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

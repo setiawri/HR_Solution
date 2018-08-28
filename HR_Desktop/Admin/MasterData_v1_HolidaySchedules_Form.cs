@@ -81,11 +81,11 @@ namespace HR_Desktop.Admin
 
             return HolidaySchedule.get(chkIncludeInactive.Checked,
                     null,
-                    itxt_Clients.ValueGuid,
-                    idtp_StartDate.Value,
-                    itxt_DurationDays.ValueInt,
-                    itxt_Description.ValueText,
-                    itxt_Notes.ValueText
+                    getFilterValue<Guid?>(itxt_Clients),
+                    getFilterValue<DateTime?>(idtp_StartDate),
+                    getFilterValue<int?>(itxt_DurationDays),
+                    getFilterValue<string>(itxt_Description),
+                    getFilterValue<string>(itxt_Notes)
                     ).DefaultView;
         }
 

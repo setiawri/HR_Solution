@@ -166,6 +166,11 @@ namespace HR_Desktop
             LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_Attendances_Form());
         }
 
+        private void admin_attendance_pay_rates_Click(object sender, EventArgs e)
+        {
+            LIBUtil.Util.displayMDIChild(new Admin.MasterData_v1_AttendancePayRates_Form());
+        }
+
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

@@ -60,8 +60,9 @@ namespace HR_Desktop.Admin
         protected override System.Data.DataView loadGridviewDataSource()
         {
             return AttendanceStatus.get(chkIncludeInactive.Checked, null,
-                itxt_Name.ValueText,
-                itxt_Notes.ValueText).DefaultView;
+                getFilterValue<string>(itxt_Name),
+                getFilterValue<string>(itxt_Notes)
+                ).DefaultView;
 
         }
 

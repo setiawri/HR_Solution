@@ -107,14 +107,14 @@ namespace HR_Desktop.Admin
                     ).DefaultView;
 
             return WorkshiftTemplate.get(chkIncludeInactive.Checked, null,
-                    itxt_Name.ValueText,
-                    itxt_Clients.ValueGuid,
-                    itxt_WorkshiftCategories.ValueGuid,
-                    Util.wrapNullable<int?>(iddl_DayOfWeek.SelectedValue),
-                    idtp_Start.ValueTimeSpan,
-                    null,
-                    Util.wrapNullable<decimal>(in_PayableAmount.Value),
-                    Util.wrapNullable<string>(itxt_Notes.ValueText)
+                    getFilterValue<string>(itxt_Name),
+                    getFilterValue<Guid?>(itxt_Clients),
+                    getFilterValue<Guid?>(itxt_WorkshiftCategories),
+                    getFilterValue<int?>(iddl_DayOfWeek),
+                    getFilterValue<TimeSpan?>(idtp_Start),
+                    getFilterValue<int?>(in_DurationMinutes),
+                    getFilterValue<decimal>(in_PayableAmount),
+                    getFilterValue<string>(itxt_Notes)
                     ).DefaultView;
         }
 
@@ -229,6 +229,11 @@ namespace HR_Desktop.Admin
         private void itxt_WorkshiftCategories_isBrowseMode_Clicked(object sender, EventArgs e)
         {
             LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_WorkshiftCategories_Form(FormModes.Browse), ref sender);
+        }
+
+        private void btnAttendancePayRates_Click(object sender, EventArgs e)
+        {
+            Util.displayForm(null, new Admin.MasterData_v1_AttendancePayRates_Form(FormModes.Add, Util.getSelectedRowID(dgv, col_dgv_Id), (string)Util.getSelectedRowValue(dgv, col_dgv_Name)));
         }
 
         #endregion EVENT HANDLERS

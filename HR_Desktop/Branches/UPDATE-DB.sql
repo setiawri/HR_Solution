@@ -2,17 +2,126 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
-CREATE TABLE [dbo].[AttendancePayRates] (
-    [Id]                    UNIQUEIDENTIFIER NOT NULL,
-    [RefId]                 UNIQUEIDENTIFIER NOT NULL,
-    [AttendanceStatuses_Id] UNIQUEIDENTIFIER NOT NULL,
-    [Amount]                DECIMAL (12, 2)  NOT NULL,
-    [Notes] NVARCHAR(MAX) NULL, 
-    [Active]                BIT              DEFAULT ((1)) NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
+ALTER TABLE Workshifts ADD WorkshiftTemplates_Id UNIQUEIDENTIFIER NULL ;
 GO
 
+/**************************************************************************************************************************************************************/
+
+CREATE PROCEDURE [dbo].[AttendancePayRates_get]
+
+	@FILTER_IncludeInactive bit,
+	@Id uniqueidentifier = NULL,
+	@RefId uniqueidentifier= NULL,
+	@AttendanceStatuses_Id UNIQUEIDENTIFIER = NULL,
+	@Amount decimal = NULL,
+	@Notes nvarchar(MAX) = NULL
+
+AS
+
+BEGIN
+
+	SELECT AttendancePayRates.*, 
+	AttendanceStatuses.Name AS AttendanceStatuses_Name,
+	Workshifts.Name AS Workshifts_Name,
+	WorkshiftTemplates.Name AS WorkshiftTemplates_Name
+	FROM AttendancePayRates 
+		LEFT OUTER JOIN Workshifts ON Workshifts.Id = AttendancePayRates.RefId
+		LEFT OUTER JOIN WorkshiftTemplates ON WorkshiftTemplates.Id = AttendancePayRates.RefId
+		LEFT OUTER JOIN AttendanceStatuses ON AttendanceStatuses.Id = AttendancePayRates.AttendanceStatuses_Id
+	WHERE 1=1
+		AND (@FILTER_IncludeInactive = 1 OR AttendancePayRates.Active = 1)
+		AND (@Id IS NULL OR AttendancePayRates.Id = @Id)
+		AND (@RefId IS NULL OR AttendancePayRates.RefId = @RefId)
+		AND (@AttendanceStatuses_Id IS NULL OR AttendancePayRates.AttendanceStatuses_Id = @AttendanceStatuses_Id)
+		AND (@Amount = 0 OR @Amount IS NULL OR AttendancePayRates.Amount = @Amount)
+		AND (@Notes IS NULL OR AttendancePayRates.Notes LIKE '%'+ @Notes +'%')
+
+	ORDER BY AttendancePayRates.RefId, AttendanceStatuses.Name
+
+END
+GO
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[AttendancePayRates_iscombinationexist]
+
+	@Id uniqueidentifier = NULL,
+	@RefId uniqueidentifier,
+	@AttendanceStatuses_Id UNIQUEIDENTIFIER,
+	@returnValueBoolean bit = 0 OUTPUT 
+
+AS
+
+BEGIN
+
+	IF EXISTS (	SELECT AttendancePayRates.Id 
+				FROM AttendancePayRates 
+				WHERE AttendancePayRates.RefId = @RefId
+					AND AttendancePayRates.AttendanceStatuses_Id = @AttendanceStatuses_Id
+					AND (@Id IS NULL OR AttendancePayRates.Id <> @Id)
+				)
+		SET @returnValueBoolean = 1
+	ELSE
+		SET @returnValueBoolean = 0
+
+END
+GO
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[AttendancePayRates_add]
+
+	@Id uniqueidentifier,
+	@RefId uniqueidentifier,
+	@AttendanceStatuses_Id uniqueidentifier,
+	@Amount decimal,
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+
+	INSERT INTO AttendancePayRates(Id, RefId, AttendanceStatuses_Id, Amount, Notes) 
+	VALUES(@Id,@RefId,@AttendanceStatuses_Id,@Amount,@Notes)
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[AttendancePayRates_update]
+
+	@Id uniqueidentifier,
+	@Amount decimal = NULL,
+	@Notes nvarchar(MAX) = NULL
+	
+AS
+
+BEGIN
+
+	UPDATE AttendancePayRates SET
+		Amount = @Amount,
+		Notes = @Notes
+	WHERE Id = @Id 
+
+END
+GO
+
+
+/**************************************************************************************************************************************************************/
+CREATE PROCEDURE [dbo].[AttendancePayRates_update_Active]
+
+	@Id uniqueidentifier,
+	@Active bit
+	
+AS
+
+BEGIN
+
+	UPDATE AttendancePayRates SET
+		Active = @Active
+	WHERE Id = @Id
+
+END
+GO
 
 
 
@@ -1030,6 +1139,7 @@ ALTER PROCEDURE [dbo].[Workshifts_get]
 	@Name NVARCHAR(max) = NULL,
 	@Clients_Id uniqueidentifier= NULL,
 	@UserAccounts_Id uniqueidentifier = NULL,
+	@WorkshiftTemplates_Id UNIQUEIDENTIFIER = NULL,
 	@WorkshiftCategories_Id UNIQUEIDENTIFIER = NULL,
 	@DayOfWeek tinyint= NULL,
 	@Start time(7) = NULL,
@@ -1044,17 +1154,20 @@ BEGIN
 	SELECT Workshifts.*, [dbo].[DayOfWeekName](Workshifts.DayOfWeek) AS Day_Of_Week_Name,
 		Clients.CompanyName AS Clients_CompanyName,
 		UserAccounts.Firstname + ' ' + COALESCE(UserAccounts.Lastname,'') AS UserAccounts_Fullname,
-		WorkshiftCategories.Name AS WorkshiftCategories_Name
+		WorkshiftCategories.Name AS WorkshiftCategories_Name,
+		WorkshiftTemplates.Name AS WorkshiftTemplates_Name
 	FROM Workshifts 
 		LEFT OUTER JOIN Clients ON Workshifts.Clients_Id = Clients.Id
 		LEFT OUTER JOIN WorkshiftCategories ON Workshifts.WorkshiftCategories_Id = WorkshiftCategories.Id
 		LEFT OUTER JOIN UserAccounts ON UserAccounts.Id = Workshifts.UserAccounts_Id
+		LEFT OUTER JOIN WorkshiftTemplates ON WorkshiftTemplates.Id = Workshifts.WorkshiftTemplates_Id
 	WHERE 1=1
 		AND (@FILTER_IncludeInactive = 1 OR Workshifts.Active = 1)
 		AND (@Id IS NULL OR Workshifts.Id = @Id)
 		AND (@Name IS NULL OR Workshifts.Name LIKE '%'+ @Name +'%')
 		AND (@Clients_Id IS NULL OR Workshifts.Clients_Id = @Clients_Id)
 		AND (@UserAccounts_Id IS NULL OR Workshifts.UserAccounts_Id = @UserAccounts_Id)
+		AND (@WorkshiftTemplates_Id IS NULL OR Workshifts.WorkshiftTemplates_Id = @WorkshiftTemplates_Id)
 		AND (@WorkshiftCategories_Id IS NULL OR Workshifts.WorkshiftCategories_Id = @WorkshiftCategories_Id)
 		AND (@DayOfWeek IS NULL OR Workshifts.DayOfWeek = @DayOfWeek)
 		AND (@Start IS NULL OR Workshifts.Start = @Start)
@@ -1106,6 +1219,7 @@ ALTER PROCEDURE [dbo].[Workshifts_add]
 	@Name NVARCHAR(max) = NULL,
 	@Clients_Id uniqueidentifier,
 	@UserAccounts_Id uniqueidentifier,
+	@WorkshiftTemplates_Id uniqueidentifier = NULL,
 	@WorkshiftCategories_Id uniqueidentifier,
 	@DayOfWeek int,
 	@Start nvarchar(MAX) = NULL,
@@ -1117,8 +1231,8 @@ AS
 
 BEGIN
 
-	INSERT INTO Workshifts(Id,Name, Clients_Id, UserAccounts_Id, WorkshiftCategories_Id, DayOfWeek, Start, DurationMinutes, PayableAmount, Notes) 
-	VALUES(@Id,@Name,@Clients_Id,@UserAccounts_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@DurationMinutes,@PayableAmount,@Notes)
+	INSERT INTO Workshifts(Id,Name, Clients_Id, UserAccounts_Id, WorkshiftTemplates_Id, WorkshiftCategories_Id, DayOfWeek, Start, DurationMinutes, PayableAmount, Notes) 
+	VALUES(@Id,@Name,@Clients_Id,@UserAccounts_Id,@WorkshiftTemplates_Id,@WorkshiftCategories_Id,@DayOfWeek,@Start,@DurationMinutes,@PayableAmount,@Notes)
 
 END
 GO
@@ -1131,6 +1245,7 @@ ALTER PROCEDURE [dbo].[Workshifts_update]
 	@Id uniqueidentifier,
 	@Name NVARCHAR(max) = NULL,
 	@UserAccounts_Id uniqueidentifier,
+	@WorkshiftTemplates_Id uniqueidentifier = NULL,
 	@WorkshiftCategories_Id uniqueidentifier,
 	@DayOfWeek INT,
 	@Start nvarchar(MAX) = NULL,
@@ -1145,6 +1260,7 @@ BEGIN
 	UPDATE Workshifts SET
 		Name = @Name,
 		UserAccounts_Id = @UserAccounts_Id,
+		WorkshiftTemplates_Id = @WorkshiftTemplates_Id,
 		WorkshiftCategories_Id = @WorkshiftCategories_Id,
 		DayOfWeek = @DayOfWeek,
 		Start = @Start,
