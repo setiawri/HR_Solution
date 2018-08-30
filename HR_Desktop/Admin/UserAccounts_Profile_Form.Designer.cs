@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gb_Info = new System.Windows.Forms.GroupBox();
             this.lblNotes = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -96,6 +96,7 @@
             this.col_dgvBankAccounts_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.lnk_Edit_BankAccounts = new System.Windows.Forms.LinkLabel();
             this.gb_Info.SuspendLayout();
             this.gb_Workshifts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorkshifts)).BeginInit();
@@ -148,7 +149,7 @@
             this.gb_Info.Controls.Add(this.username);
             this.gb_Info.Location = new System.Drawing.Point(16, 37);
             this.gb_Info.Name = "gb_Info";
-            this.gb_Info.Size = new System.Drawing.Size(305, 384);
+            this.gb_Info.Size = new System.Drawing.Size(270, 384);
             this.gb_Info.TabIndex = 0;
             this.gb_Info.TabStop = false;
             // 
@@ -582,9 +583,9 @@
             // 
             this.gb_Workshifts.Controls.Add(this.dgvWorkshifts);
             this.gb_Workshifts.Controls.Add(this.flpWorkshifts);
-            this.gb_Workshifts.Location = new System.Drawing.Point(330, 219);
+            this.gb_Workshifts.Location = new System.Drawing.Point(292, 219);
             this.gb_Workshifts.Name = "gb_Workshifts";
-            this.gb_Workshifts.Size = new System.Drawing.Size(381, 202);
+            this.gb_Workshifts.Size = new System.Drawing.Size(521, 202);
             this.gb_Workshifts.TabIndex = 2;
             this.gb_Workshifts.TabStop = false;
             this.gb_Workshifts.Text = "WORKSHIFTS";
@@ -596,14 +597,14 @@
             this.dgvWorkshifts.AllowUserToResizeRows = false;
             this.dgvWorkshifts.BackgroundColor = System.Drawing.Color.White;
             this.dgvWorkshifts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvWorkshifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWorkshifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvWorkshifts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWorkshifts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_dgvWorkshifts_Id,
@@ -617,7 +618,7 @@
             this.dgvWorkshifts.Name = "dgvWorkshifts";
             this.dgvWorkshifts.RowHeadersVisible = false;
             this.dgvWorkshifts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvWorkshifts.Size = new System.Drawing.Size(375, 160);
+            this.dgvWorkshifts.Size = new System.Drawing.Size(515, 160);
             this.dgvWorkshifts.TabIndex = 12;
             // 
             // col_dgvWorkshifts_Id
@@ -671,7 +672,7 @@
             this.flpWorkshifts.Dock = System.Windows.Forms.DockStyle.Top;
             this.flpWorkshifts.Location = new System.Drawing.Point(3, 16);
             this.flpWorkshifts.Name = "flpWorkshifts";
-            this.flpWorkshifts.Size = new System.Drawing.Size(375, 23);
+            this.flpWorkshifts.Size = new System.Drawing.Size(515, 23);
             this.flpWorkshifts.TabIndex = 11;
             // 
             // lnk_Edit_Workshift
@@ -769,9 +770,10 @@
             // gbBankAccounts
             // 
             this.gbBankAccounts.Controls.Add(this.dgvBankAccounts);
-            this.gbBankAccounts.Location = new System.Drawing.Point(526, 37);
+            this.gbBankAccounts.Controls.Add(this.lnk_Edit_BankAccounts);
+            this.gbBankAccounts.Location = new System.Drawing.Point(488, 37);
             this.gbBankAccounts.Name = "gbBankAccounts";
-            this.gbBankAccounts.Size = new System.Drawing.Size(185, 179);
+            this.gbBankAccounts.Size = new System.Drawing.Size(322, 179);
             this.gbBankAccounts.TabIndex = 9;
             this.gbBankAccounts.TabStop = false;
             this.gbBankAccounts.Text = "BANK ACCOUNTS";
@@ -783,14 +785,14 @@
             this.dgvBankAccounts.AllowUserToResizeRows = false;
             this.dgvBankAccounts.BackgroundColor = System.Drawing.Color.White;
             this.dgvBankAccounts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBankAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBankAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvBankAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBankAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_dgvBankAccounts_Id,
@@ -799,12 +801,12 @@
             this.col_dgvBankAccounts_AccountNumber,
             this.col_dgvBankAccounts_Notes});
             this.dgvBankAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBankAccounts.Location = new System.Drawing.Point(3, 16);
+            this.dgvBankAccounts.Location = new System.Drawing.Point(3, 29);
             this.dgvBankAccounts.MultiSelect = false;
             this.dgvBankAccounts.Name = "dgvBankAccounts";
             this.dgvBankAccounts.RowHeadersVisible = false;
             this.dgvBankAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBankAccounts.Size = new System.Drawing.Size(179, 160);
+            this.dgvBankAccounts.Size = new System.Drawing.Size(316, 147);
             this.dgvBankAccounts.TabIndex = 5;
             // 
             // col_dgvBankAccounts_Id
@@ -849,7 +851,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(330, 43);
+            this.pictureBox1.Location = new System.Drawing.Point(292, 43);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(192, 173);
             this.pictureBox1.TabIndex = 10;
@@ -859,7 +861,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(392, 114);
+            this.label1.Location = new System.Drawing.Point(352, 118);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.MinimumSize = new System.Drawing.Size(75, 20);
             this.label1.Name = "label1";
@@ -868,11 +870,26 @@
             this.label1.Text = "picture";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lnk_Edit_BankAccounts
+            // 
+            this.lnk_Edit_BankAccounts.AutoSize = true;
+            this.lnk_Edit_BankAccounts.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lnk_Edit_BankAccounts.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnk_Edit_BankAccounts.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnk_Edit_BankAccounts.Location = new System.Drawing.Point(3, 16);
+            this.lnk_Edit_BankAccounts.Name = "lnk_Edit_BankAccounts";
+            this.lnk_Edit_BankAccounts.Size = new System.Drawing.Size(29, 13);
+            this.lnk_Edit_BankAccounts.TabIndex = 15;
+            this.lnk_Edit_BankAccounts.TabStop = true;
+            this.lnk_Edit_BankAccounts.Text = "Edit";
+            this.lnk_Edit_BankAccounts.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lnk_Edit_BankAccounts.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_Edit_BankAccounts_LinkClicked);
+            // 
             // UserAccounts_Profile_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(726, 433);
+            this.ClientSize = new System.Drawing.Size(825, 433);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.gbBankAccounts);
@@ -889,6 +906,7 @@
             this.flpWorkshifts.ResumeLayout(false);
             this.flpWorkshifts.PerformLayout();
             this.gbBankAccounts.ResumeLayout(false);
+            this.gbBankAccounts.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBankAccounts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -964,5 +982,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvBankAccounts_Notes;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel lnk_Edit_BankAccounts;
     }
 }

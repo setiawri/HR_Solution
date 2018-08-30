@@ -2,12 +2,18 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
-ALTER TABLE Workshifts ADD WorkshiftTemplates_Id UNIQUEIDENTIFIER NULL ;
-GO
+
+
+
+
+
+
+
+
 
 /**************************************************************************************************************************************************************/
 
-CREATE PROCEDURE [dbo].[AttendancePayRates_get]
+ALTER PROCEDURE [dbo].[AttendancePayRates_get]
 
 	@FILTER_IncludeInactive bit,
 	@Id uniqueidentifier = NULL,
@@ -42,7 +48,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[AttendancePayRates_iscombinationexist]
+ALTER PROCEDURE [dbo].[AttendancePayRates_iscombinationexist]
 
 	@Id uniqueidentifier = NULL,
 	@RefId uniqueidentifier,
@@ -67,7 +73,7 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[AttendancePayRates_add]
+ALTER PROCEDURE [dbo].[AttendancePayRates_add]
 
 	@Id uniqueidentifier,
 	@RefId uniqueidentifier,
@@ -87,7 +93,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[AttendancePayRates_update]
+ALTER PROCEDURE [dbo].[AttendancePayRates_update]
 
 	@Id uniqueidentifier,
 	@Amount decimal = NULL,
@@ -107,7 +113,7 @@ GO
 
 
 /**************************************************************************************************************************************************************/
-CREATE PROCEDURE [dbo].[AttendancePayRates_update_Active]
+ALTER PROCEDURE [dbo].[AttendancePayRates_update_Active]
 
 	@Id uniqueidentifier,
 	@Active bit

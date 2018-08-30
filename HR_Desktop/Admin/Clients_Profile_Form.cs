@@ -158,6 +158,11 @@ namespace HR_Desktop.Admin
             populateDgvWorkshiftTemplates();
         }
 
+        private void lnk_Edit_BankAccounts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
     }

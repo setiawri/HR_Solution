@@ -15,8 +15,6 @@ namespace HR_Desktop.Admin
         #region SETTINGS
 
         private const bool FORM_SHOWDATAONLOAD = true;
-        private Guid? _Clients_Id = null;
-        private Guid? _UserAccounts_Id = null;
 
         #endregion SETTINGS
         /*******************************************************************************************************/
@@ -33,6 +31,9 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_PayableAmount;
         private DataGridViewColumn col_dgv_Notes;
 
+        private Guid? _Clients_Id = null;
+        private Guid? _UserAccounts_Id = null;
+
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
@@ -41,14 +42,14 @@ namespace HR_Desktop.Admin
         public MasterData_v1_Workshifts_Form(FormModes startingMode, Guid? Clients_Id, Guid? UserAccounts_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
         {
             InitializeComponent();
+
             if (Clients_Id != null)
                 _Clients_Id = Clients_Id;
 
             if (UserAccounts_Id != null)
                 _UserAccounts_Id = UserAccounts_Id;
-
         }
-        
+
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
         #region METHODS
@@ -113,10 +114,10 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            if(_Clients_Id != null || _UserAccounts_Id != null)
-                return Workshift.get(chkIncludeInactive.Checked, null, null,
-                    _Clients_Id, _UserAccounts_Id, null, null, null, null, null, null, null
-                    ).DefaultView;
+            //if(_Clients_Id != null || _UserAccounts_Id != null)
+            //    return Workshift.get(chkIncludeInactive.Checked, null, null,
+            //        _Clients_Id, _UserAccounts_Id, null, null, null, null, null, null, null
+            //        ).DefaultView;
 
             DateTime? x = getFilterValue<DateTime?>(idtp_Start);
 
@@ -247,16 +248,16 @@ namespace HR_Desktop.Admin
             in_PayableAmount.Value = obj.PayableAmount;
         }
 
-        #endregion METHODS
-        /*******************************************************************************************************/
-        #region EVENT HANDLERS
-
         protected override void btnUpdate_Click(object sender, EventArgs e)
         {
             itxt_Clients.Enabled = false;
 
             base.btnUpdate_Click(sender, e);
         }
+
+        #endregion METHODS
+        /*******************************************************************************************************/
+        #region EVENT HANDLERS
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -298,6 +299,34 @@ namespace HR_Desktop.Admin
         private void btnAttendancePayRates_Click(object sender, EventArgs e)
         {
             Util.displayForm(null, new Admin.MasterData_v1_AttendancePayRates_Form(FormModes.Add, Util.getSelectedRowID(dgv, col_dgv_Id), (string)Util.getSelectedRowValue(dgv, col_dgv_Name)));
+        }
+
+        private void Form_Shown(object sender, EventArgs e)
+        {
+            if (_UserAccounts_Id != null || _Clients_Id != null)
+            {
+                FormModes originalMode = Mode;
+
+                //open input container
+                if (scMain.Panel1Collapsed)
+                    ptInputPanel.toggle();
+
+                //change mode to filter
+                btnSearch.PerformClick();
+
+                //set filter values to controls
+                if (_UserAccounts_Id != null)
+                    itxt_UserAccounts.setValue(new UserAccount((Guid)_UserAccounts_Id).Fullname, (Guid)_UserAccounts_Id);
+
+                if (_Clients_Id != null)
+                    itxt_Clients.setValue(new Client((Guid)_Clients_Id).CompanyName, (Guid)_Clients_Id);
+
+                //save filter values
+                btnSubmit.PerformClick();
+
+                //change mode to original state
+                Mode = originalMode;
+            }
         }
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

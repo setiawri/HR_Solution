@@ -133,12 +133,17 @@ namespace HR_Desktop.Admin
         
         private void lnk_Edit_Workshift_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form());
+            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form(FormModes.Add, null, _UserAccounts_Id));
         }
 
         private void rbWorkshifts_CheckedChanged(object sender, EventArgs e)
         {
             populateDgvWorkshifts();
+        }
+
+        private void lnk_Edit_BankAccounts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
         }
 
 
