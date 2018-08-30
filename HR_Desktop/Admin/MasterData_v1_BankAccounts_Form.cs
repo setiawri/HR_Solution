@@ -28,17 +28,21 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_Internal;
 
         private bool _internal;
+        private Guid? _Owner_RefId;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_BankAccounts_Form() : this(FormModes.Add, null) { }
-        public MasterData_v1_BankAccounts_Form(FormModes startingMode, bool? @internal) : base(startingMode, FORM_SHOWDATAONLOAD)
+        public MasterData_v1_BankAccounts_Form() : this(FormModes.Add, null, null) { }
+        public MasterData_v1_BankAccounts_Form(FormModes startingMode, bool? @internal, Guid? Owner_RefId) : base(startingMode, FORM_SHOWDATAONLOAD)
         {
             InitializeComponent();
             if(@internal != null)
                 _internal = (bool)@internal;
+
+            if (Owner_RefId != null)
+                _Owner_RefId = Owner_RefId;
         }
         
         #endregion CONSTRUCTOR METHODS
@@ -216,7 +220,36 @@ namespace HR_Desktop.Admin
             itxt_Owner_Ref.reset();
         }
 
+        private void Form_Shown(object sender, EventArgs e)
+        {
+            if (_Owner_RefId != null)
+            {
+                FormModes originalMode = Mode;
 
+                //open input container
+                if (scMain.Panel1Collapsed)
+                    ptInputPanel.toggle();
+
+                //change mode to filter
+                btnSearch.PerformClick();
+
+                //set filter values to control
+                rbClient.Checked = true;
+                itxt_Owner_Ref.setValue(new Client((Guid)_Owner_RefId).CompanyName, (Guid)_Owner_RefId);
+                if (String.IsNullOrEmpty(itxt_Owner_Ref.ValueText))
+                {
+                    rbUserAccount.Checked = true;
+                    itxt_Owner_Ref.setValue(new UserAccount((Guid)_Owner_RefId).Fullname, (Guid)_Owner_RefId);
+
+                }
+
+                //save filter values
+                btnSubmit.PerformClick();
+
+                //change mode to original state
+                Mode = originalMode;
+            }
+        }
 
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/

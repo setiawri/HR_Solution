@@ -415,6 +415,7 @@
             this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "MasterData_v1_WorkshiftTemplates_Form";
             this.Text = "WORKSHIFT TEMPLATES";
+            this.Shown += new System.EventHandler(this.Form_Shown);
             this.panel1.ResumeLayout(false);
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);

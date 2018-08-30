@@ -33,13 +33,14 @@ namespace HR_Desktop.Admin
 
         private Guid? _Clients_Id = null;
         private Guid? _UserAccounts_Id = null;
+        private int? _DayOfWeek = null;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_Workshifts_Form() : this(FormModes.Add, null, null) { }
-        public MasterData_v1_Workshifts_Form(FormModes startingMode, Guid? Clients_Id, Guid? UserAccounts_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
+        public MasterData_v1_Workshifts_Form() : this(FormModes.Add, null, null, null) { }
+        public MasterData_v1_Workshifts_Form(FormModes startingMode, Guid? Clients_Id, Guid? UserAccounts_Id, int? DayOfWeek) : base(startingMode, FORM_SHOWDATAONLOAD)
         {
             InitializeComponent();
 
@@ -48,6 +49,9 @@ namespace HR_Desktop.Admin
 
             if (UserAccounts_Id != null)
                 _UserAccounts_Id = UserAccounts_Id;
+
+            if (DayOfWeek != null)
+                _DayOfWeek = DayOfWeek;
         }
 
         #endregion CONSTRUCTOR METHODS
@@ -278,7 +282,7 @@ namespace HR_Desktop.Admin
         private void itxt_WorkshiftTemplate_isBrowseMode_Clicked(object sender, EventArgs e)
         {
             Admin.MasterData_v1_WorkshiftTemplates_Form form;
-            form = (MasterData_v1_WorkshiftTemplates_Form)InputControl_Textbox.browseForm(new MasterData_v1_WorkshiftTemplates_Form(FormModes.Browse, itxt_Clients.ValueGuid), ref sender);
+            form = (MasterData_v1_WorkshiftTemplates_Form)InputControl_Textbox.browseForm(new MasterData_v1_WorkshiftTemplates_Form(FormModes.Browse, itxt_Clients.ValueGuid, null), ref sender);
             if(form.BrowsedItemSelectionId != null)
             {
                 itxt_WorkshiftTemplate.ValueGuid = form.BrowsedItemSelectionId;
@@ -303,7 +307,7 @@ namespace HR_Desktop.Admin
 
         private void Form_Shown(object sender, EventArgs e)
         {
-            if (_UserAccounts_Id != null || _Clients_Id != null)
+            if (_UserAccounts_Id != null || _Clients_Id != null || _DayOfWeek != null)
             {
                 FormModes originalMode = Mode;
 
@@ -320,6 +324,9 @@ namespace HR_Desktop.Admin
 
                 if (_Clients_Id != null)
                     itxt_Clients.setValue(new Client((Guid)_Clients_Id).CompanyName, (Guid)_Clients_Id);
+
+                if (_DayOfWeek != null)
+                    iddl_DayOfWeek.SelectedItem = (DayOfWeek)_DayOfWeek; ;
 
                 //save filter values
                 btnSubmit.PerformClick();

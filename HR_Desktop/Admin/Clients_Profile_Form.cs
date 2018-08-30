@@ -138,13 +138,13 @@ namespace HR_Desktop.Admin
 
         private void lnk_Edit_WorkshiftTemplates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_WorkshiftTemplates_Form(FormModes.Add, _Clients_Id));
+            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_WorkshiftTemplates_Form(FormModes.Add, _Clients_Id, (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshifts)));
             populateDgvWorkshiftTemplates();
         }
 
         private void lnk_Edit_Workshifts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form(FormModes.Add, _Clients_Id, (Guid)Util.getSelectedRowValue(dgvWorkshifts, col_dgvWorkshifts_UserAccounts_Id)));
+            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form(FormModes.Add, _Clients_Id, (Guid)Util.getSelectedRowValue(dgvWorkshifts, col_dgvWorkshifts_UserAccounts_Id), (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshifts)));
             populateDgvWorkshifts();
         }
         
@@ -160,7 +160,7 @@ namespace HR_Desktop.Admin
 
         private void lnk_Edit_BankAccounts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_BankAccounts_Form(FormModes.Add, false, _Clients_Id));
         }
 
         #endregion EVENT HANDLERS

@@ -277,7 +277,7 @@ namespace HR_Desktop.Admin
 
         private void itxt_Workshift_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Workshifts_Form(FormModes.Browse, itxt_Client.ValueGuid, itxt_UserAccount.ValueGuid), ref sender);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Workshifts_Form(FormModes.Browse, itxt_Client.ValueGuid, itxt_UserAccount.ValueGuid, null), ref sender);
         }
 
         private void idtp_TimestampIn_ValueChanged_1(object sender, EventArgs e)

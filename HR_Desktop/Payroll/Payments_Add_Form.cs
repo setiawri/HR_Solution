@@ -114,12 +114,12 @@ namespace HR_Desktop.Payroll
 
         private void itxt_Target_BankAccounts_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_BankAccounts_Form(FormModes.Browse, false), ref sender);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_BankAccounts_Form(FormModes.Browse, false, null), ref sender);
         }
 
         private void itxt_Source_BankAccounts_isBrowseMode_Clicked(object sender, EventArgs e)
         {
-            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_BankAccounts_Form(FormModes.Browse, true), ref sender);
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_BankAccounts_Form(FormModes.Browse, true, null), ref sender);
         }
 
         #endregion EVENT HANDLERS

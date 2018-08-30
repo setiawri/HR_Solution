@@ -133,7 +133,7 @@ namespace HR_Desktop.Admin
         
         private void lnk_Edit_Workshift_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form(FormModes.Add, null, _UserAccounts_Id));
+            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_Workshifts_Form(FormModes.Add, null, _UserAccounts_Id, (int)Util.getDayOfWeekFromActiveRadioButtonTag(flpWorkshifts)));
         }
 
         private void rbWorkshifts_CheckedChanged(object sender, EventArgs e)
@@ -143,7 +143,7 @@ namespace HR_Desktop.Admin
 
         private void lnk_Edit_BankAccounts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            LIBUtil.Util.displayForm(null, new Admin.MasterData_v1_BankAccounts_Form(FormModes.Add, false, _UserAccounts_Id));
         }
 
 

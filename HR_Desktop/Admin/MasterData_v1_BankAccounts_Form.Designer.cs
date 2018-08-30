@@ -244,6 +244,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MasterData_v1_BankAccounts_Form";
             this.Text = "BANK ACCOUNTS";
+            this.Shown += new System.EventHandler(this.Form_Shown);
             this.panel1.ResumeLayout(false);
             this.pnlActionButtons.ResumeLayout(false);
             this.scInputLeft.Panel1.ResumeLayout(false);

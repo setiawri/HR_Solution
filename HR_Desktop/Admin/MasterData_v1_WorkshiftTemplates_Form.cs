@@ -14,7 +14,6 @@ namespace HR_Desktop.Admin
         #region SETTINGS
 
         private const bool FORM_SHOWDATAONLOAD = true;
-        private Guid? _Clients_Id = null;
         public Guid? BrowsedItemSelectionValue = null;
 
 
@@ -31,16 +30,23 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_PayableAmount;
         private DataGridViewColumn col_dgv_Notes;
 
+        private Guid? _Clients_Id = null;
+        private int? _DayOfWeek = null;
+
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_WorkshiftTemplates_Form() : this(FormModes.Add, null) { }
-        public MasterData_v1_WorkshiftTemplates_Form(FormModes startingMode, Guid? Clients_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
+        public MasterData_v1_WorkshiftTemplates_Form() : this(FormModes.Add, null, null) { }
+        public MasterData_v1_WorkshiftTemplates_Form(FormModes startingMode, Guid? Clients_Id, int? DayOfWeek) : base(startingMode, FORM_SHOWDATAONLOAD)
         {
             InitializeComponent();
+
             if (Clients_Id != null)
                 _Clients_Id = Clients_Id;
+
+            if (DayOfWeek != null)
+                _DayOfWeek = DayOfWeek;
 
         }
         
@@ -101,10 +107,6 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            if (_Clients_Id != null)
-                return WorkshiftTemplate.get(chkIncludeInactive.Checked, null, null,
-                    _Clients_Id, null, null, null, null, null, null
-                    ).DefaultView;
 
             return WorkshiftTemplate.get(chkIncludeInactive.Checked, null,
                     getFilterValue<string>(itxt_Name),
@@ -236,6 +238,33 @@ namespace HR_Desktop.Admin
             Util.displayForm(null, new Admin.MasterData_v1_AttendancePayRates_Form(FormModes.Add, Util.getSelectedRowID(dgv, col_dgv_Id), (string)Util.getSelectedRowValue(dgv, col_dgv_Name)));
         }
 
+        private void Form_Shown(object sender, EventArgs e)
+        {
+            if (_Clients_Id != null || _DayOfWeek != null || _DayOfWeek != null)
+            {
+                FormModes originalMode = Mode;
+
+                //open input container
+                if (scMain.Panel1Collapsed)
+                    ptInputPanel.toggle();
+
+                //change mode to filter
+                btnSearch.PerformClick();
+
+                //set filter values to control
+                if (_Clients_Id != null)
+                    itxt_Clients.setValue(new Client((Guid)_Clients_Id).CompanyName, (Guid)_Clients_Id);
+
+                if (_DayOfWeek != null)
+                    iddl_DayOfWeek.SelectedItem = (DayOfWeek)_DayOfWeek;
+
+                //save filter values
+                btnSubmit.PerformClick();
+
+                //change mode to original state
+                Mode = originalMode;
+            }
+        }
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
     }
