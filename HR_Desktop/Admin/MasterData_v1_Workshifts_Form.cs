@@ -118,13 +118,6 @@ namespace HR_Desktop.Admin
 
         protected override System.Data.DataView loadGridviewDataSource()
         {
-            //if(_Clients_Id != null || _UserAccounts_Id != null)
-            //    return Workshift.get(chkIncludeInactive.Checked, null, null,
-            //        _Clients_Id, _UserAccounts_Id, null, null, null, null, null, null, null
-            //        ).DefaultView;
-
-            DateTime? x = getFilterValue<DateTime?>(idtp_Start);
-
             return Workshift.get(chkIncludeInactive.Checked, null,
                     itxt_Name.ValueText,
                     getFilterValue<Guid?>(itxt_Clients),

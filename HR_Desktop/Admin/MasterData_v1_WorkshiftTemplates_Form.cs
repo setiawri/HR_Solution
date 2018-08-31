@@ -14,12 +14,12 @@ namespace HR_Desktop.Admin
         #region SETTINGS
 
         private const bool FORM_SHOWDATAONLOAD = true;
-        public Guid? BrowsedItemSelectionValue = null;
-
 
         #endregion SETTINGS
         /*******************************************************************************************************/
-        #region PRIVATE VARIABLES
+        #region VARIABLES
+
+        public Guid? BrowsedItemSelectionValue = null;
 
         private DataGridViewColumn col_dgv_Name;
         private DataGridViewColumn col_dgv_Clients_CompanyName;
@@ -33,7 +33,7 @@ namespace HR_Desktop.Admin
         private Guid? _Clients_Id = null;
         private int? _DayOfWeek = null;
 
-        #endregion PRIVATE VARIABLES
+        #endregion VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 

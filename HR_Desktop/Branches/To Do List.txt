@@ -3,19 +3,6 @@
 > run UPDATE-DB.sql
 
 
-
-	
-> MasterData_v1_Form 
-	- UserAccounts_Profile_Form
-		> add parameter to filter to current UserAccounts_Id when calling MasterData_v1_Workshifts_Form 
-	- Clients_Profile_Form
-		> add parameter to filter to current Clients_Id when calling MasterData_v1_Workshifts_Form 
-
-
-> TABLE Compensations
-	- Employee
-	- rates based on attendancestatuses.id
-
 		
 > Verify TABLE Attendance
 	- if PaymentItems_Id not null, locked (no further modification is allowed). 

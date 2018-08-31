@@ -2,22 +2,17 @@
 > PULL HR & LibUtil
 > run UPDATE-DB.sql
 
-> modify all forms extending MasterData_v1_Form to accomodate filtering.
-	- see example in MasterData_v1_Workshifts_Form
 
-> Client profile form
-	- clicking on workshift edit link: pass user account id and use as filter. See example in UserAccount_Profile_Form
-	- do the same in workshift templates form
+> DELETE Column PayableAmount from TABLE Workshifts & WorkshiftTemplates & Attendances
+	- remove references to the columns in code
 
-> Implement MasterData_v1_AttendancePayRates_Form
-	- Use table AttendancePayRates (see update-db.sql)
+> TABLE Attendances
+	- add COLUMN Workshifts_Id -> Save itxt_Workshift in form MasterData_v1_Attendances_Form
+	- add COLUMN AttendancePayRates_Id & AttendancePayRates_Amount
+		-> Query AttendancePayRates by Workshifts_Id (RefId) and AttendanceStatuses_Id
 
-> MasterData_v1_Workshifts_Form
-	- TABLE Workshifts ADD WorkshiftTemplates_Id NULL 
-	- If template is selected, save to WorkshiftTemplates_Id
-	- when update button is clicked, populate template field if not null.
-
-> 
+> SP PayrollItems_add
+	- COLUMN Amount = (Effective_TimestampOut - Effective_TimestampIn) * AttendancePayRates_Amount
 
 	
 
