@@ -61,7 +61,7 @@
             this.col_dgvAttendances_EffectiveIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvAttendances_EffectiveOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvAttendances_EffectiveWorkHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_dgvAttendances_PayableAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvAttendances_PayRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvAttendances_Approved = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col_dgvAttendances_Rejected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col_dgvAttendances_Flag1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -181,7 +181,9 @@
             this.iddl_AttendanceStatuses.Location = new System.Drawing.Point(465, 65);
             this.iddl_AttendanceStatuses.Margin = new System.Windows.Forms.Padding(5);
             this.iddl_AttendanceStatuses.Name = "iddl_AttendanceStatuses";
+            this.iddl_AttendanceStatuses.SelectedIndex = -1;
             this.iddl_AttendanceStatuses.SelectedItem = null;
+            this.iddl_AttendanceStatuses.SelectedItemText = "";
             this.iddl_AttendanceStatuses.SelectedValue = null;
             this.iddl_AttendanceStatuses.ShowDropdownlistOnly = false;
             this.iddl_AttendanceStatuses.Size = new System.Drawing.Size(148, 50);
@@ -196,7 +198,9 @@
             this.iddl_DayOfWeek.Location = new System.Drawing.Point(465, 15);
             this.iddl_DayOfWeek.Margin = new System.Windows.Forms.Padding(5);
             this.iddl_DayOfWeek.Name = "iddl_DayOfWeek";
+            this.iddl_DayOfWeek.SelectedIndex = -1;
             this.iddl_DayOfWeek.SelectedItem = null;
+            this.iddl_DayOfWeek.SelectedItemText = "";
             this.iddl_DayOfWeek.SelectedValue = null;
             this.iddl_DayOfWeek.ShowDropdownlistOnly = false;
             this.iddl_DayOfWeek.Size = new System.Drawing.Size(148, 50);
@@ -205,7 +209,7 @@
             // 
             // idtp_FilterAttendance_StartDate
             // 
-            this.idtp_FilterAttendance_StartDate.Checked = false;
+            this.idtp_FilterAttendance_StartDate.Checked = true;
             this.idtp_FilterAttendance_StartDate.CustomFormat = "dd/MM/yyyy";
             this.idtp_FilterAttendance_StartDate.DefaultCheckedValue = false;
             this.idtp_FilterAttendance_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -218,8 +222,8 @@
             this.idtp_FilterAttendance_StartDate.Size = new System.Drawing.Size(132, 50);
             this.idtp_FilterAttendance_StartDate.TabIndex = 14;
             this.idtp_FilterAttendance_StartDate.TabStop = false;
-            this.idtp_FilterAttendance_StartDate.Value = null;
-            this.idtp_FilterAttendance_StartDate.ValueTimeSpan = null;
+            this.idtp_FilterAttendance_StartDate.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.idtp_FilterAttendance_StartDate.ValueTimeSpan = System.TimeSpan.Parse("00:00:00");
             // 
             // itxt_FilterEmployee_Client
             // 
@@ -242,7 +246,7 @@
             // 
             // idtp_FilterAttendance_EndDate
             // 
-            this.idtp_FilterAttendance_EndDate.Checked = false;
+            this.idtp_FilterAttendance_EndDate.Checked = true;
             this.idtp_FilterAttendance_EndDate.CustomFormat = "dd/MM/yyyy";
             this.idtp_FilterAttendance_EndDate.DefaultCheckedValue = false;
             this.idtp_FilterAttendance_EndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -255,8 +259,8 @@
             this.idtp_FilterAttendance_EndDate.Size = new System.Drawing.Size(132, 50);
             this.idtp_FilterAttendance_EndDate.TabIndex = 15;
             this.idtp_FilterAttendance_EndDate.TabStop = false;
-            this.idtp_FilterAttendance_EndDate.Value = null;
-            this.idtp_FilterAttendance_EndDate.ValueTimeSpan = null;
+            this.idtp_FilterAttendance_EndDate.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.idtp_FilterAttendance_EndDate.ValueTimeSpan = System.TimeSpan.Parse("00:00:00");
             // 
             // btnAddAttendance
             // 
@@ -309,7 +313,7 @@
             this.col_dgvAttendances_EffectiveIn,
             this.col_dgvAttendances_EffectiveOut,
             this.col_dgvAttendances_EffectiveWorkHours,
-            this.col_dgvAttendances_PayableAmount,
+            this.col_dgvAttendances_PayRate,
             this.col_dgvAttendances_Approved,
             this.col_dgvAttendances_Rejected,
             this.col_dgvAttendances_Flag1,
@@ -445,16 +449,16 @@
             this.col_dgvAttendances_EffectiveWorkHours.ReadOnly = true;
             this.col_dgvAttendances_EffectiveWorkHours.Width = 40;
             // 
-            // col_dgvAttendances_PayableAmount
+            // col_dgvAttendances_PayRate
             // 
-            this.col_dgvAttendances_PayableAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.col_dgvAttendances_PayRate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle7.Format = "N0";
-            this.col_dgvAttendances_PayableAmount.DefaultCellStyle = dataGridViewCellStyle7;
-            this.col_dgvAttendances_PayableAmount.HeaderText = "Amount";
-            this.col_dgvAttendances_PayableAmount.MinimumWidth = 50;
-            this.col_dgvAttendances_PayableAmount.Name = "col_dgvAttendances_PayableAmount";
-            this.col_dgvAttendances_PayableAmount.Width = 50;
+            this.col_dgvAttendances_PayRate.DefaultCellStyle = dataGridViewCellStyle7;
+            this.col_dgvAttendances_PayRate.HeaderText = "PayRate";
+            this.col_dgvAttendances_PayRate.MinimumWidth = 60;
+            this.col_dgvAttendances_PayRate.Name = "col_dgvAttendances_PayRate";
+            this.col_dgvAttendances_PayRate.Width = 60;
             // 
             // col_dgvAttendances_Approved
             // 
@@ -550,7 +554,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_EffectiveIn;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_EffectiveOut;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_EffectiveWorkHours;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_PayableAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_PayRate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvAttendances_Approved;
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvAttendances_Rejected;
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvAttendances_Flag1;

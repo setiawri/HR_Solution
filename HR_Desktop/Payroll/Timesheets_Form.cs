@@ -66,7 +66,7 @@ namespace HR_Desktop.Payroll
             col_dgvAttendances_Employee_UserAccounts_Fullname.DataPropertyName = Attendance.COL_UserAccounts_Fullname;
             col_dgvAttendances_Clients_Name.DataPropertyName = Attendance.COL_Clients_CompanyName;
             col_dgvAttendances_Workshifts_DayOfWeek.DataPropertyName = Attendance.COL_Workshifts_DayOfWeek_Name;
-            col_dgvAttendances_PayableAmount.DataPropertyName = Attendance.COL_DB_PayableAmount;
+            col_dgvAttendances_PayRate.DataPropertyName = Attendance.COL_DB_AttendancePayRates_Amount;
             col_dgvAttendances_Payrolls_No.DataPropertyName = Attendance.COL_Payrolls_No;
         }
 
@@ -112,10 +112,21 @@ namespace HR_Desktop.Payroll
         {
 
         }
-
+        
         private bool isValidToUpdate()
+        {   //valid to update if payroll_items_id = null and approved = false and rejected = false
+            return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString())
+                    & !(bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Approved)
+                    & !(bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Rejected)
+                 );
+        }
+
+        private bool isValidToGeneratePayroll()
         {
-            return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString()));
+            //valid to generate payroll if payroll_items_id = null and rejected = false
+            return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString())
+                    & ((bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Rejected) != true) 
+                );
         }
 
         private string getSelectedItemDescription()
@@ -152,8 +163,8 @@ namespace HR_Desktop.Payroll
         {
             if (Util.isColumnMatch(sender, e, col_dgvAttendances_Checkbox))
             {
-                if (!isValidToUpdate())
-                    Util.displayMessageBoxError("Item was already processed");
+                if (!isValidToGeneratePayroll())
+                    Util.displayMessageBoxError("Item was already processed or item was rejected");
                 else
                 {
                     Util.clickDataGridViewCheckbox(sender, e);
@@ -219,6 +230,12 @@ namespace HR_Desktop.Payroll
             {
                 if (dr.Cells[col_dgvAttendances_Checkbox.Name].Value != null && (bool)dr.Cells[col_dgvAttendances_Checkbox.Name].Value)
                 {
+                    decimal amount = 0;
+
+                    if (dr.Cells[col_dgvAttendances_PayRate.Name].Value != null)
+                        amount = (decimal)((DateTime)dr.Cells[col_dgvAttendances_EffectiveOut.Name].Value - (DateTime)dr.Cells[col_dgvAttendances_EffectiveIn.Name].Value).TotalHours
+                            * (decimal)dr.Cells[col_dgvAttendances_PayRate.Name].Value;
+
                     HR_LIB.HR.PayrollItem.add(
                         LOGIN.UserAccount.LoggedInAccount.Id,
                         (Guid)dr.Cells[col_dgvAttendances_Employee_UserAccounts_Id.Name].Value,
@@ -228,7 +245,7 @@ namespace HR_Desktop.Payroll
                             (DateTime)dr.Cells[col_dgvAttendances_In.Name].Value,
                             (DateTime)dr.Cells[col_dgvAttendances_Out.Name].Value
                             ),
-                        (decimal)dr.Cells[col_dgvAttendances_PayableAmount.Name].Value,
+                        amount,
                         Convert.ToString(dr.Cells[col_dgvAttendances_Notes.Name].Value)
                         );
                 }

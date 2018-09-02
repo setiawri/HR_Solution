@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.iddl_DayOfWeek = new LIBUtil.Desktop.UserControls.InputControl_Dropdownlist();
             this.itxt_Notes = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.itxt_Clients = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
@@ -37,7 +37,6 @@
             this.itxt_Name = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.idtp_Start = new LIBUtil.Desktop.UserControls.InputControl_DateTimePicker();
             this.in_DurationMinutes = new LIBUtil.Desktop.UserControls.InputControl_Numeric();
-            this.in_PayableAmount = new LIBUtil.Desktop.UserControls.InputControl_Numeric();
             this.gbPayRates = new System.Windows.Forms.GroupBox();
             this.dgvBankAccounts = new System.Windows.Forms.DataGridView();
             this.col_dgvAttendancePayRates_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,7 +68,7 @@
             // 
             // panel1
             // 
-            this.panel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Size = new System.Drawing.Size(805, 34);
             // 
             // lnkClearQuickSearch
@@ -79,7 +78,7 @@
             // pnlActionButtons
             // 
             this.pnlActionButtons.Location = new System.Drawing.Point(0, 252);
-            this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(5);
             this.pnlActionButtons.Size = new System.Drawing.Size(805, 28);
             // 
             // scInputLeft
@@ -88,7 +87,6 @@
             // 
             // scInputLeft.Panel1
             // 
-            this.scInputLeft.Panel1.Controls.Add(this.in_PayableAmount);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_WorkshiftCategories);
             this.scInputLeft.Panel1.Controls.Add(this.in_DurationMinutes);
             this.scInputLeft.Panel1.Controls.Add(this.idtp_Start);
@@ -105,25 +103,25 @@
             // 
             // scInputRight
             // 
-            this.scInputRight.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.scInputRight.Margin = new System.Windows.Forms.Padding(5);
             this.scInputRight.Size = new System.Drawing.Size(224, 220);
             this.scInputRight.SplitterWidth = 7;
             // 
             // scMain
             // 
-            this.scMain.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.scMain.Margin = new System.Windows.Forms.Padding(5);
             this.scMain.Size = new System.Drawing.Size(805, 750);
             this.scMain.SplitterDistance = 280;
             this.scMain.SplitterWidth = 6;
             // 
             // txtQuickSearch
             // 
-            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(5);
             // 
             // pnlButtons
             // 
             this.pnlButtons.Controls.Add(this.btnAttendancePayRates);
-            this.pnlButtons.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.pnlButtons.Margin = new System.Windows.Forms.Padding(5);
             this.pnlButtons.Size = new System.Drawing.Size(805, 32);
             this.pnlButtons.Controls.SetChildIndex(this.btnSearch, 0);
             this.pnlButtons.Controls.SetChildIndex(this.btnUpdate, 0);
@@ -133,7 +131,7 @@
             // 
             // scInputContainer
             // 
-            this.scInputContainer.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.scInputContainer.Margin = new System.Windows.Forms.Padding(5);
             this.scInputContainer.Size = new System.Drawing.Size(805, 220);
             this.scInputContainer.SplitterDistance = 574;
             this.scInputContainer.SplitterWidth = 7;
@@ -144,7 +142,7 @@
             // 
             // pnlQuickSearch
             // 
-            this.pnlQuickSearch.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.pnlQuickSearch.Margin = new System.Windows.Forms.Padding(5);
             this.pnlQuickSearch.Size = new System.Drawing.Size(765, 34);
             // 
             // iddl_DayOfWeek
@@ -153,9 +151,10 @@
             this.iddl_DayOfWeek.HideFilter = true;
             this.iddl_DayOfWeek.HideUpdateLink = true;
             this.iddl_DayOfWeek.LabelText = "*Day";
-            this.iddl_DayOfWeek.Location = new System.Drawing.Point(5, 161);
-            this.iddl_DayOfWeek.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.iddl_DayOfWeek.Location = new System.Drawing.Point(5, 180);
+            this.iddl_DayOfWeek.Margin = new System.Windows.Forms.Padding(5);
             this.iddl_DayOfWeek.Name = "iddl_DayOfWeek";
+            this.iddl_DayOfWeek.SelectedIndex = -1;
             this.iddl_DayOfWeek.SelectedItem = null;
             this.iddl_DayOfWeek.SelectedItemText = "";
             this.iddl_DayOfWeek.SelectedValue = null;
@@ -168,7 +167,7 @@
             this.itxt_Notes.IsBrowseMode = false;
             this.itxt_Notes.LabelText = "Notes";
             this.itxt_Notes.Location = new System.Drawing.Point(1, 10);
-            this.itxt_Notes.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.itxt_Notes.Margin = new System.Windows.Forms.Padding(5);
             this.itxt_Notes.MaxLength = 32767;
             this.itxt_Notes.MultiLine = true;
             this.itxt_Notes.Name = "itxt_Notes";
@@ -185,7 +184,7 @@
             this.itxt_Clients.IsBrowseMode = true;
             this.itxt_Clients.LabelText = "*Client";
             this.itxt_Clients.Location = new System.Drawing.Point(5, 10);
-            this.itxt_Clients.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.itxt_Clients.Margin = new System.Windows.Forms.Padding(5);
             this.itxt_Clients.MaxLength = 32767;
             this.itxt_Clients.MultiLine = false;
             this.itxt_Clients.Name = "itxt_Clients";
@@ -202,8 +201,8 @@
             // 
             this.itxt_WorkshiftCategories.IsBrowseMode = true;
             this.itxt_WorkshiftCategories.LabelText = "*Category";
-            this.itxt_WorkshiftCategories.Location = new System.Drawing.Point(5, 111);
-            this.itxt_WorkshiftCategories.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.itxt_WorkshiftCategories.Location = new System.Drawing.Point(5, 123);
+            this.itxt_WorkshiftCategories.Margin = new System.Windows.Forms.Padding(5);
             this.itxt_WorkshiftCategories.MaxLength = 32767;
             this.itxt_WorkshiftCategories.MultiLine = false;
             this.itxt_WorkshiftCategories.Name = "itxt_WorkshiftCategories";
@@ -220,8 +219,8 @@
             // 
             this.itxt_Name.IsBrowseMode = false;
             this.itxt_Name.LabelText = "*Name";
-            this.itxt_Name.Location = new System.Drawing.Point(5, 60);
-            this.itxt_Name.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.itxt_Name.Location = new System.Drawing.Point(5, 66);
+            this.itxt_Name.Margin = new System.Windows.Forms.Padding(5);
             this.itxt_Name.MaxLength = 32767;
             this.itxt_Name.MultiLine = false;
             this.itxt_Name.Name = "itxt_Name";
@@ -235,19 +234,19 @@
             // 
             // idtp_Start
             // 
-            this.idtp_Start.Checked = false;
+            this.idtp_Start.Checked = true;
             this.idtp_Start.CustomFormat = "HH:mm";
             this.idtp_Start.DefaultCheckedValue = false;
             this.idtp_Start.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.idtp_Start.LabelText = "*Start";
-            this.idtp_Start.Location = new System.Drawing.Point(133, 161);
-            this.idtp_Start.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.idtp_Start.Location = new System.Drawing.Point(133, 180);
+            this.idtp_Start.Margin = new System.Windows.Forms.Padding(5);
             this.idtp_Start.Name = "idtp_Start";
             this.idtp_Start.ShowCheckBox = false;
             this.idtp_Start.ShowUpAndDown = true;
             this.idtp_Start.Size = new System.Drawing.Size(93, 53);
             this.idtp_Start.TabIndex = 0;
-            this.idtp_Start.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.idtp_Start.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.idtp_Start.ValueTimeSpan = System.TimeSpan.Parse("00:00:00");
             // 
             // in_DurationMinutes
@@ -261,8 +260,8 @@
             0,
             0});
             this.in_DurationMinutes.LabelText = "*Minutes";
-            this.in_DurationMinutes.Location = new System.Drawing.Point(233, 161);
-            this.in_DurationMinutes.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.in_DurationMinutes.Location = new System.Drawing.Point(233, 180);
+            this.in_DurationMinutes.Margin = new System.Windows.Forms.Padding(5);
             this.in_DurationMinutes.MaximumValue = new decimal(new int[] {
             1440,
             0,
@@ -285,46 +284,11 @@
             0,
             0});
             // 
-            // in_PayableAmount
-            // 
-            this.in_PayableAmount.Checked = false;
-            this.in_PayableAmount.DecimalPlaces = 0;
-            this.in_PayableAmount.HideUpDown = false;
-            this.in_PayableAmount.Increment = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.in_PayableAmount.LabelText = "Amount";
-            this.in_PayableAmount.Location = new System.Drawing.Point(5, 214);
-            this.in_PayableAmount.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.in_PayableAmount.MaximumValue = new decimal(new int[] {
-            2147483647,
-            0,
-            0,
-            0});
-            this.in_PayableAmount.MinimumValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.in_PayableAmount.Name = "in_PayableAmount";
-            this.in_PayableAmount.ShowAllowDecimalCheckbox = false;
-            this.in_PayableAmount.ShowCheckbox = false;
-            this.in_PayableAmount.ShowTextboxOnly = false;
-            this.in_PayableAmount.Size = new System.Drawing.Size(321, 50);
-            this.in_PayableAmount.TabIndex = 10;
-            this.in_PayableAmount.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            // 
             // gbPayRates
             // 
             this.gbPayRates.Controls.Add(this.dgvBankAccounts);
             this.gbPayRates.Location = new System.Drawing.Point(1, 106);
-            this.gbPayRates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbPayRates.Margin = new System.Windows.Forms.Padding(4);
             this.gbPayRates.Name = "gbPayRates";
             this.gbPayRates.Padding = new System.Windows.Forms.Padding(4, 4, 4, 6);
             this.gbPayRates.Size = new System.Drawing.Size(424, 159);
@@ -339,14 +303,14 @@
             this.dgvBankAccounts.AllowUserToResizeRows = false;
             this.dgvBankAccounts.BackgroundColor = System.Drawing.Color.White;
             this.dgvBankAccounts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBankAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBankAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBankAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBankAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_dgvAttendancePayRates_Id,
@@ -355,7 +319,7 @@
             this.col_dgvBankAccounts_Notes});
             this.dgvBankAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBankAccounts.Location = new System.Drawing.Point(4, 19);
-            this.dgvBankAccounts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvBankAccounts.Margin = new System.Windows.Forms.Padding(4);
             this.dgvBankAccounts.MultiSelect = false;
             this.dgvBankAccounts.Name = "dgvBankAccounts";
             this.dgvBankAccounts.RowHeadersVisible = false;
@@ -381,9 +345,9 @@
             // col_dgvBankAccounts_AccountNumber
             // 
             this.col_dgvBankAccounts_AccountNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.col_dgvBankAccounts_AccountNumber.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.col_dgvBankAccounts_AccountNumber.DefaultCellStyle = dataGridViewCellStyle2;
             this.col_dgvBankAccounts_AccountNumber.HeaderText = "Amount";
             this.col_dgvBankAccounts_AccountNumber.MinimumWidth = 55;
             this.col_dgvBankAccounts_AccountNumber.Name = "col_dgvBankAccounts_AccountNumber";
@@ -412,7 +376,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(805, 750);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MasterData_v1_WorkshiftTemplates_Form";
             this.Text = "WORKSHIFT TEMPLATES";
             this.Shown += new System.EventHandler(this.Form_Shown);
@@ -449,7 +413,6 @@
         private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_Name;
         private LIBUtil.Desktop.UserControls.InputControl_DateTimePicker idtp_Start;
         private LIBUtil.Desktop.UserControls.InputControl_Numeric in_DurationMinutes;
-        private LIBUtil.Desktop.UserControls.InputControl_Numeric in_PayableAmount;
         private System.Windows.Forms.GroupBox gbPayRates;
         protected System.Windows.Forms.DataGridView dgvBankAccounts;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendancePayRates_Id;

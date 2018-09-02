@@ -33,6 +33,7 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_Flag1;
         private DataGridViewColumn col_dgv_Flag2;
         private DataGridViewColumn col_dgv_Approved;
+        private DataGridViewColumn col_dgv_Rejected;
         private DataGridViewColumn col_dgv_Notes;
         private DataGridViewColumn col_dgv_PayrollItems_Id;
         private DataGridViewColumn col_dgv_Payrolls_No;
@@ -49,10 +50,12 @@ namespace HR_Desktop.Admin
         #region METHODS
 
         private bool isValidToUpdate()
-        {
-            return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgv, col_dgv_PayrollItems_Id).ToString()));
+        {   //valid to update if payroll_items_id = null and approved = false and rejected = false
+            return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgv, col_dgv_PayrollItems_Id).ToString())
+                    & !(bool)Util.getSelectedRowValue(dgv, col_dgv_Approved)
+                    & !(bool)Util.getSelectedRowValue(dgv, col_dgv_Rejected)
+                 );
         }
-
         #endregion METHODS
         /*******************************************************************************************************/
         #region OVERRIDE METHODS
@@ -83,6 +86,7 @@ namespace HR_Desktop.Admin
             col_dgv_Flag1 = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Flag1", Attendance.COL_DB_Flag1, Attendance.COL_DB_Flag1, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Flag2 = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Flag2", Attendance.COL_DB_Flag2, Attendance.COL_DB_Flag2, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Approved = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Approved", Attendance.COL_DB_Approved, Attendance.COL_DB_Approved, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Rejected = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Rejected", Attendance.COL_DB_Rejected, Attendance.COL_DB_Rejected, true, false, "", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_PayrollItems_Id = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_PayrollItems_Id", "", Attendance.COL_DB_PayrollItems_Id, false, false, "", false, false, 30, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Payrolls_No = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Payrolls_No", "Payrolls", Attendance.COL_Payrolls_No, false, true, "", false, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Attendance.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
@@ -139,14 +143,15 @@ namespace HR_Desktop.Admin
             itxt_UserAccount.setValue(obj.UserAccounts_Fullname, obj.UserAccounts_Id);
             itxt_Client.setValue(obj.Clients_CompanyName, obj.Clients_Id);
             itxt_Workshift.setValue(obj.Workshifts_Name, obj.Workshifts_Id);
-            iddl_AttendanceStatuses.SelectedValue = obj.AttendanceStatuses_Name;
+            iddl_AttendanceStatuses.SelectedValue = obj.AttendanceStatuses_Id;
             idtp_TimestampIn.Value = obj.TimestampIn;
             idtp_TimestampOut.Value = obj.TimestampOut;
             idtp_EffectiveTimestampIn.Value = obj.EffectiveTimestampIn;
             idtp_EffectiveTimestampOut.Value = obj.EffectiveTimestampOut;
             itxt_Notes.ValueText = obj.Notes;
 
-            if (obj.PayrollItems_Id != null)
+            //valid to update if payroll_items_id = null and approved = false and rejected = false
+            if (obj.PayrollItems_Id != null || obj.Approved || obj.Rejected )
             {
                 itxt_UserAccount.Enabled = false;
                 itxt_Client.Enabled = false;
@@ -158,16 +163,20 @@ namespace HR_Desktop.Admin
                 idtp_EffectiveTimestampOut.Enabled = false;
                 itxt_Notes.Enabled = false;
             }
-            
         }
 
         protected override void update()
         {
             Attendance.update(UserAccount.LoggedInAccount.Id,
                 selectedRowID(),
+                (Guid)itxt_Client.ValueGuid,
+                itxt_Workshift.ValueGuid,
                 (DateTime)idtp_TimestampIn.Value,
                 (DateTime)idtp_TimestampOut.Value,
-                itxt_Notes.ValueText);
+                (DateTime)idtp_EffectiveTimestampIn.Value,
+                (DateTime)idtp_EffectiveTimestampOut.Value,
+                itxt_Notes.ValueText,
+                (Guid)iddl_AttendanceStatuses.SelectedValue);
         }
 
         protected override void add()

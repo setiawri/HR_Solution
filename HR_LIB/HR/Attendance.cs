@@ -20,6 +20,7 @@ namespace HR_LIB.HR
         public bool Flag2;
         public bool Approved;
         public Guid Clients_Id;
+        public Guid Workshifts_Id;
         public DayOfWeek Workshifts_DayOfWeek;
         public TimeSpan Workshifts_Start;
         public int Workshifts_DurationMinutes;
@@ -28,12 +29,12 @@ namespace HR_LIB.HR
         public bool Rejected;
         public Guid? PayrollItems_Id;
         public Guid AttendanceStatuses_Id;
-        public decimal PayableAmount;
+        public Guid AttendancePayRates_Id;
+        public decimal AttendancePayRates_Amount;
 
         public string UserAccounts_Fullname;
         public string Clients_CompanyName;
         public string AttendanceStatuses_Name;
-        public Guid Workshifts_Id;
         public string Workshifts_Name;
         public string Payrolls_No;
 
@@ -50,6 +51,7 @@ namespace HR_LIB.HR
         public const string COL_DB_Flag2 = "Flag2";
         public const string COL_DB_Approved = "Approved";
         public const string COL_DB_Clients_Id = "Clients_Id";
+        public const string COL_DB_Workshifts_Id = "Workshifts_Id";
         public const string COL_DB_Workshifts_DayOfWeek = "Workshifts_DayOfWeek";
         public const string COL_DB_Workshifts_Start = "Workshifts_Start";
         public const string COL_DB_Workshifts_DurationMinutes = "Workshifts_DurationMinutes";
@@ -58,12 +60,12 @@ namespace HR_LIB.HR
         public const string COL_DB_Rejected = "Rejected";
         public const string COL_DB_PayrollItems_Id = "PayrollItems_Id";
         public const string COL_DB_AttendanceStatuses_Id = "AttendanceStatuses_Id";
-        public const string COL_DB_PayableAmount = "PayableAmount";
+        public const string COL_DB_AttendancePayRates_Id = "AttendancePayRates_Id";
+        public const string COL_DB_AttendancePayRates_Amount = "AttendancePayRates_Amount";
 
         public const string COL_EffectiveWorkHours = "EffectiveWorkHours";
         public const string COL_UserAccounts_Fullname = "UserAccounts_Fullname";
         public const string COL_Clients_CompanyName = "Clients_CompanyName";
-        public const string COL_Workshifts_Id = "Workshifts_Id";
         public const string COL_Workshifts_Name = "Workshifts_Name";
         public const string COL_AttendanceStatuses_Name = "AttendanceStatuses_Name";
         public const string COL_Workshifts_DayOfWeek_Name = "Workshifts_DayOfWeek_Name";
@@ -93,6 +95,7 @@ namespace HR_LIB.HR
                 Flag2 = Util.wrapNullable<bool>(row, COL_DB_Flag2);
                 Approved = Util.wrapNullable<bool>(row, COL_DB_Approved);
                 Clients_Id = Util.wrapNullable<Guid>(row, COL_DB_Clients_Id);
+                Workshifts_Id = Util.wrapNullable<Guid>(row, COL_DB_Workshifts_Id);
                 Workshifts_DayOfWeek = Util.parseEnum<DayOfWeek>(Util.wrapNullable<int>(row, COL_DB_Workshifts_DayOfWeek));
                 Workshifts_Start = Util.wrapNullable<TimeSpan>(row, COL_DB_Workshifts_Start);
                 Workshifts_DurationMinutes = Util.wrapNullable<int>(row, COL_DB_Workshifts_DurationMinutes);
@@ -101,11 +104,13 @@ namespace HR_LIB.HR
                 Rejected = Util.wrapNullable<bool>(row, COL_DB_Rejected);
                 PayrollItems_Id = Util.wrapNullable<Guid?>(row, COL_DB_PayrollItems_Id);
                 AttendanceStatuses_Id = Util.wrapNullable<Guid>(row, COL_DB_AttendanceStatuses_Id);
-                PayableAmount = Util.wrapNullable<decimal>(row, COL_DB_PayableAmount);
+                AttendancePayRates_Id = Util.wrapNullable<Guid>(row, COL_DB_AttendancePayRates_Id);
+                AttendancePayRates_Amount = Util.wrapNullable<decimal>(row, COL_DB_AttendancePayRates_Amount);
+
+
                 UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
                 Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
                 AttendanceStatuses_Name = Util.wrapNullable<string>(row, COL_AttendanceStatuses_Name);
-                Workshifts_Id = Util.wrapNullable<Guid>(row, COL_Workshifts_Id);
                 Workshifts_Name = Util.wrapNullable<string>(row, COL_Workshifts_Name);
                 Payrolls_No = Util.wrapNullable<string>(row, COL_Payrolls_No);
             }
@@ -131,7 +136,7 @@ namespace HR_LIB.HR
             return result.ValueBoolean;
         }
 
-        public static Guid add(Guid userAccountID, Guid UserAccounts_Id, Guid? Clients_Id, Guid? Workshifts_Id,
+        public static Guid add(Guid userAccountID, Guid UserAccounts_Id, Guid Clients_Id, Guid? Workshifts_Id,
             DateTime timestampIn, DateTime timestampOut, DateTime? effectiveTimestampIn, DateTime? effectiveTimestampOut, 
             string notes, Guid AttendanceStatuses_Id)
         {
@@ -145,7 +150,7 @@ namespace HR_LIB.HR
                     new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
                     new SqlQueryParameter(COL_DB_UserAccounts_Id, SqlDbType.UniqueIdentifier, UserAccounts_Id),
                     new SqlQueryParameter(COL_DB_Clients_Id, SqlDbType.UniqueIdentifier, Clients_Id),
-                    new SqlQueryParameter(COL_Workshifts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Workshifts_Id)),
+                    new SqlQueryParameter(COL_DB_Workshifts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Workshifts_Id)),
                     new SqlQueryParameter(COL_DB_TimestampIn, SqlDbType.DateTime, timestampIn),
                     new SqlQueryParameter(COL_DB_TimestampOut, SqlDbType.DateTime, timestampOut),
                     new SqlQueryParameter(COL_DB_EffectiveTimestampIn, SqlDbType.DateTime, effectiveTimestampIn),
@@ -189,7 +194,7 @@ namespace HR_LIB.HR
                 new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(id)),
                 new SqlQueryParameter(COL_DB_UserAccounts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(UserAccounts_Id)),
                 new SqlQueryParameter(COL_DB_Clients_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Clients_Id)),
-                new SqlQueryParameter(COL_Workshifts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Workshifts_Id)),
+                new SqlQueryParameter(COL_DB_Workshifts_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Workshifts_Id)),
                 new SqlQueryParameter(FILTER_DayOfWeek, SqlDbType.TinyInt, Util.wrapNullable<int?>(dayOfWeek)),
                 new SqlQueryParameter(FILTER_StartDate, SqlDbType.DateTime, Util.wrapNullable(startDate)),
                 new SqlQueryParameter(FILTER_EndDate, SqlDbType.DateTime, Util.wrapNullable(endDate)),
@@ -202,13 +207,20 @@ namespace HR_LIB.HR
             return result.Datatable;
         }
 
-        public static void update(Guid userAccountID, Guid id, DateTime timestampIn, DateTime timestampOut,string notes)
+        public static void update(Guid userAccountID, Guid id, Guid Clients_Id, Guid? Workshifts_Id, DateTime timestampIn,
+            DateTime timestampOut, DateTime? effectiveTimestampIn, DateTime? effectiveTimestampOut, string notes, Guid AttendanceStatuses_Id)
         {
             Attendance objOld = new Attendance(id);
             string log = "";
+            log = Util.appendChange(log, objOld.Clients_CompanyName, new Client(Clients_Id).CompanyName, "Clients: '{0}' to '{1}'");
+            if(Workshifts_Id != null)
+                log = Util.appendChange(log, objOld.Workshifts_Name, new Workshift((Guid)Workshifts_Id).Name, "Workshifts: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.TimestampIn, timestampIn, "TimestampIn: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.TimestampOut, timestampOut, "TimestampOut: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.EffectiveTimestampIn, effectiveTimestampIn, "Effective TimestampIn: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.EffectiveTimestampOut, effectiveTimestampOut, "Effective TimestampOut: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Notes, notes, "Notes: '{0}' to '{1}'");
+            log = Util.appendChange(log, objOld.AttendanceStatuses_Name, new AttendanceStatus(AttendanceStatuses_Id).Name, "Status: '{0}' to '{1}'");
 
             if (string.IsNullOrEmpty(log))
                 Util.displayMessageBoxError("No changes to record");
@@ -221,9 +233,14 @@ namespace HR_LIB.HR
                         QueryTypes.ExecuteNonQuery,
                         "Attendances_update",
                         new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
+                        new SqlQueryParameter(COL_DB_Clients_Id, SqlDbType.UniqueIdentifier, Clients_Id),
+                        new SqlQueryParameter(COL_DB_Workshifts_Id, SqlDbType.UniqueIdentifier, Workshifts_Id),
                         new SqlQueryParameter(COL_DB_TimestampIn, SqlDbType.DateTime, timestampIn),
                         new SqlQueryParameter(COL_DB_TimestampOut, SqlDbType.DateTime, timestampOut),
-                        new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes))
+                        new SqlQueryParameter(COL_DB_EffectiveTimestampIn, SqlDbType.DateTime, effectiveTimestampIn),
+                        new SqlQueryParameter(COL_DB_EffectiveTimestampOut, SqlDbType.DateTime, effectiveTimestampOut),
+                        new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes)),
+                        new SqlQueryParameter(COL_DB_AttendanceStatuses_Id, SqlDbType.UniqueIdentifier, AttendanceStatuses_Id)
                     );
 
                     if (result.IsSuccessful)
