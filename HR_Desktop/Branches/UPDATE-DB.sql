@@ -5,7 +5,7 @@
 ALTER TABLE Attendances ADD Workshifts_Id uniqueidentifier;
 ALTER TABLE Attendances ADD AttendancePayRates_Id uniqueidentifier;
 ALTER TABLE Attendances ADD AttendancePayRates_Amount DECIMAL(12,2);
-
+ALTER TABLE Payrolls ADD hasPayment BIT DEFAULT 0 NOT NULL;
 
 
 
@@ -224,9 +224,16 @@ ALTER PROCEDURE [dbo].[PaymentItems_add]
 AS
 
 BEGIN
+	DECLARE @hasPayment bit = 1
 
 	INSERT INTO PaymentItems(Id,Payments_Id,Transaction_RefId,Amount,Notes) 
 	VALUES(@Id,@Payments_Id,@Transaction_RefId,@Amount,@Notes)
+
+	UPDATE Payrolls SET hasPayment = @hasPayment
+	WHERE ID IN 
+		(SELECT TOP 1 Transaction_RefId 
+		FROM PaymentItems 
+		WHERE Payrolls.Id = PaymentItems.Transaction_RefId AND PaymentItems.Payments_Id = @Payments_Id)
 
 END
 GO
@@ -274,8 +281,10 @@ BEGIN
 	SELECT @LastHex_String = ISNULL(MAX(No),'') From Payments	
 	EXEC UTIL_IncrementHex @HexLength, @LastHex_String, @NewNo OUTPUT
 
-	INSERT INTO Payments(Id,No,Timestamp,Source_BankAccounts_Id,Target_BankAccounts_Id,Amount,ConfirmationNumber,Notes) 
-	VALUES(@Id,@NewNo,CURRENT_TIMESTAMP,@Source_BankAccounts_Id,@Target_BankAccounts_Id,@Amount,@ConfirmationNumber,@Notes)
+	-- Chintia : Atribut RefId belum ada isinya pak
+	-- dan karena sifat nya NOT NULL, sementara saya isi dengan Id Payment
+	INSERT INTO Payments(Id,No,Timestamp,Source_BankAccounts_Id,Target_BankAccounts_Id,Amount,ConfirmationNumber,Notes, RefId) 
+	VALUES(@Id,@NewNo,CURRENT_TIMESTAMP,@Source_BankAccounts_Id,@Target_BankAccounts_Id,@Amount,@ConfirmationNumber,@Notes, @Id)
 
 END
 GO
@@ -350,13 +359,21 @@ ALTER PROCEDURE [dbo].[Payments_update_Rejected]
 AS
 
 BEGIN
+	DECLARE @hasPayment bit = 0
 
 	UPDATE Payments SET
 		Rejected = @Rejected
 	WHERE Id = @Id
 
+	UPDATE Payrolls SET hasPayment = @hasPayment
+	WHERE ID IN 
+		(SELECT TOP 1 Transaction_RefId 
+		FROM PaymentItems 
+		WHERE Payrolls.Id = PaymentItems.Transaction_RefId AND PaymentItems.Payments_Id = @Id)
+
 END
 GO
+
 
 /**************************************************************************************************************************************************************/
 ALTER PROCEDURE [dbo].[Payrolls_get]
@@ -1419,7 +1436,9 @@ BEGIN
 		COALESCE(DATEDIFF(MINUTE,Attendances.EffectiveTimestampIn, Attendances.EffectiveTimestampOut),0)/60 AS EffectiveWorkHours,
 		Workshifts.Id AS Workshifts_Id, Workshifts.Name AS Workshifts_Name,
 		[dbo].[DayOfWeekName](Attendances.Workshifts_DayOfWeek) AS Workshifts_DayofWeek_Name,
-		Payrolls.No AS Payrolls_No
+		Payrolls.No AS Payrolls_No, Payrolls.HasPayment AS Payrolls_HasPayment,
+		CASE WHEN Attendances.Workshifts_Id IS NULL then 1 ELSE 0 END AS IsNull_Workshifts_Id
+
 	FROM Attendances 
 		LEFT OUTER JOIN UserAccounts ON Attendances.UserAccounts_Id = UserAccounts.ID
 		LEFT OUTER JOIN Clients ON Attendances.Clients_Id = Clients.Id
@@ -1470,15 +1489,17 @@ BEGIN
 	Workshift_Data AS 
 		(SELECT TOP 1 Workshifts.* FROM Workshifts WHERE Id = @Workshifts_Id)
 	INSERT INTO Attendances(Id,UserAccounts_Id,TimestampIn,TimestampOut,Clients_Id, Workshifts_Id, Workshifts_DayOfWeek,
-		Workshifts_Start, Workshifts_DurationMinutes, EffectiveTimestampIn, EffectiveTimestampOut , Notes, AttendanceStatuses_Id, AttendancePayRates_Id, AttendancePayRates_Amount)
+		Workshifts_Start, Workshifts_DurationMinutes, EffectiveTimestampIn, EffectiveTimestampOut , Notes, AttendanceStatuses_Id, AttendancePayRates_Id, 
+		AttendancePayRates_Amount)
 	SELECT Attendances_Data.Id, Attendances_Data.UserAccounts_Id, Attendances_Data.TimestampIn, Attendances_Data.TimestampOut,Attendances_Data.Clients_Id,
 		Workshift_Data.Id, Workshift_Data.DayOfWeek, Workshift_Data.Start, Workshift_Data.DurationMinutes, Attendances_Data.EffectiveTimestampIn,
-		Attendances_Data.EffectiveTimestampOut, Attendances_Data.Notes, Attendances_Data.AttendanceStatuses_Id, AttendancePayRates.Id as AttendancePayRates_Id , AttendancePayRates.Amount as AttendancePayRates_Amount
+		Attendances_Data.EffectiveTimestampOut, Attendances_Data.Notes, Attendances_Data.AttendanceStatuses_Id, AttendancePayRates.Id as AttendancePayRates_Id , 
+		AttendancePayRates.Amount as AttendancePayRates_Amount
 	FROM 
 		Attendances_Data 
 		LEFT JOIN Workshift_Data ON Attendances_Data.Workshifts_Id = Workshift_Data.Id
 		LEFT JOIN AttendancePayRates ON Attendances_Data.Workshifts_Id = AttendancePayRates.RefId AND Attendances_Data.AttendanceStatuses_Id = AttendancePayRates.AttendanceStatuses_Id
-		
+
 END
 GO
 
@@ -1525,6 +1546,9 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
+--Chintia : Jika attendances diupdate (untuk Attendance yang sudah punya payroll tetapi belum punya payment)
+-- Apakah perlu update PayrollItem nya juga? Atau PayrollItem yang lama didelete dan buat PayrollItem Baru?
+
 ALTER PROCEDURE [dbo].[Attendances_update]
 
 	@Id uniqueidentifier,

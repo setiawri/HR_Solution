@@ -21,6 +21,7 @@ namespace HR_Desktop.Admin
 
         private DataGridViewColumn col_dgv_UserAccounts_FullName;
         private DataGridViewColumn col_dgv_Clients_CompanyName;
+        private DataGridViewColumn col_dgv_Workshifts_Id;
         private DataGridViewColumn col_dgv_Workshifts_Name;
         private DataGridViewColumn col_dgv_Workshifts_Start;
         private DataGridViewColumn col_dgv_Workshifts_Duration;
@@ -37,6 +38,7 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_Notes;
         private DataGridViewColumn col_dgv_PayrollItems_Id;
         private DataGridViewColumn col_dgv_Payrolls_No;
+        private DataGridViewColumn col_dgv_HasPayment;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
@@ -50,8 +52,8 @@ namespace HR_Desktop.Admin
         #region METHODS
 
         private bool isValidToUpdate()
-        {   //valid to update if payroll_items_id = null and approved = false and rejected = false
-            return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgv, col_dgv_PayrollItems_Id).ToString())
+        {   //valid to update if hasPayment = false and approved = false and rejected = false
+            return (!(bool)Util.getSelectedRowValue(dgv, col_dgv_HasPayment)
                     & !(bool)Util.getSelectedRowValue(dgv, col_dgv_Approved)
                     & !(bool)Util.getSelectedRowValue(dgv, col_dgv_Rejected)
                  );
@@ -74,6 +76,7 @@ namespace HR_Desktop.Admin
             dgv.AutoGenerateColumns = false;
             col_dgv_UserAccounts_FullName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_UserAccounts_FullName", itxt_UserAccount.LabelText, Attendance.COL_UserAccounts_Fullname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Clients_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Clients_CompanyName", itxt_Client.LabelText, Attendance.COL_Clients_CompanyName, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Workshifts_Id = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Workshifts_Id", itxt_Workshift.LabelText, Attendance.COL_IsNull_Workshifts_Id, true, false, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Workshifts_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Name", itxt_Workshift.LabelText, Attendance.COL_Workshifts_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Workshifts_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_DayOfWeek", "Day Of Week", Attendance.COL_Workshifts_DayOfWeek_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Workshifts_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Start", "Start", Attendance.COL_DB_Workshifts_Start, true, true, @"HH:mm", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
@@ -89,6 +92,7 @@ namespace HR_Desktop.Admin
             col_dgv_Rejected = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Rejected", Attendance.COL_DB_Rejected, Attendance.COL_DB_Rejected, true, false, "", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_PayrollItems_Id = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_PayrollItems_Id", "", Attendance.COL_DB_PayrollItems_Id, false, false, "", false, false, 30, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Payrolls_No = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Payrolls_No", "Payrolls", Attendance.COL_Payrolls_No, false, true, "", false, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_HasPayment = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_HasPayment", "HasPayment", Attendance.COL_Payrolls_HasPayment, false, false, "", false, false, 30, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Attendance.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             ptInputPanel.PerformClick();
@@ -150,8 +154,8 @@ namespace HR_Desktop.Admin
             idtp_EffectiveTimestampOut.Value = obj.EffectiveTimestampOut;
             itxt_Notes.ValueText = obj.Notes;
 
-            //valid to update if payroll_items_id = null and approved = false and rejected = false
-            if (obj.PayrollItems_Id != null || obj.Approved || obj.Rejected )
+            //valid to update if hasPayment = false and approved = false and rejected = false
+            if (obj.Payrolls_HasPayment || obj.Approved || obj.Rejected )
             {
                 itxt_UserAccount.Enabled = false;
                 itxt_Client.Enabled = false;

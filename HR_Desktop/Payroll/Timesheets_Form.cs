@@ -68,6 +68,7 @@ namespace HR_Desktop.Payroll
             col_dgvAttendances_Workshifts_DayOfWeek.DataPropertyName = Attendance.COL_Workshifts_DayOfWeek_Name;
             col_dgvAttendances_PayRate.DataPropertyName = Attendance.COL_DB_AttendancePayRates_Amount;
             col_dgvAttendances_Payrolls_No.DataPropertyName = Attendance.COL_Payrolls_No;
+            col_dgvAttendances_Payrolls_HasPayment.DataPropertyName = Attendance.COL_Payrolls_HasPayment;
         }
 
         private void setupControlsBasedOnRoles()
@@ -114,8 +115,8 @@ namespace HR_Desktop.Payroll
         }
         
         private bool isValidToUpdate()
-        {   //valid to update if payroll_items_id = null and approved = false and rejected = false
-            return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString())
+        {   //valid to update if hasPayment = false and approved = false and rejected = false
+            return (!(bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Payrolls_HasPayment)
                     & !(bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Approved)
                     & !(bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Rejected)
                  );
@@ -123,7 +124,7 @@ namespace HR_Desktop.Payroll
 
         private bool isValidToGeneratePayroll()
         {
-            //valid to generate payroll if payroll_items_id = null and rejected = false
+            //valid to generate payroll if payroll_items_id is null and rejected = false
             return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString())
                     & ((bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Rejected) != true) 
                 );
@@ -240,7 +241,7 @@ namespace HR_Desktop.Payroll
                         LOGIN.UserAccount.LoggedInAccount.Id,
                         (Guid)dr.Cells[col_dgvAttendances_Employee_UserAccounts_Id.Name].Value,
                         (Guid)dr.Cells[col_dgvAttendances_Id.Name].Value,
-                        string.Format("{0} - In :{1:dd/MM/yyyy HH:mm} - Out : {2:dd/MM/yyyy HH:mm}",
+                        string.Format("Attendance {0} - In :{1:dd/MM/yyyy HH:mm} - Out : {2:dd/MM/yyyy HH:mm}",
                             (string)dr.Cells[col_dgvAttendances_Employee_UserAccounts_Fullname.Name].Value,
                             (DateTime)dr.Cells[col_dgvAttendances_In.Name].Value,
                             (DateTime)dr.Cells[col_dgvAttendances_Out.Name].Value

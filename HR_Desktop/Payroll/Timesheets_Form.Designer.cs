@@ -52,6 +52,7 @@
             this.col_dgvAttendances_Checkbox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col_dgvAttendances_Employee_UserAccounts_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvAttendances_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_dgvAttendances_Payrolls_HasPayment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvAttendances_PayrollItems_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvAttendances_Employee_UserAccounts_Fullname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_dgvAttendances_Clients_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -304,6 +305,7 @@
             this.col_dgvAttendances_Checkbox,
             this.col_dgvAttendances_Employee_UserAccounts_Id,
             this.col_dgvAttendances_Id,
+            this.col_dgvAttendances_Payrolls_HasPayment,
             this.col_dgvAttendances_PayrollItems_Id,
             this.col_dgvAttendances_Employee_UserAccounts_Fullname,
             this.col_dgvAttendances_Clients_Name,
@@ -356,6 +358,15 @@
             this.col_dgvAttendances_Id.ReadOnly = true;
             this.col_dgvAttendances_Id.Visible = false;
             this.col_dgvAttendances_Id.Width = 5;
+            // 
+            // col_dgvAttendances_HasPayment
+            // 
+            this.col_dgvAttendances_Payrolls_HasPayment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.col_dgvAttendances_Payrolls_HasPayment.HeaderText = "HasPayment";
+            this.col_dgvAttendances_Payrolls_HasPayment.MinimumWidth = 30;
+            this.col_dgvAttendances_Payrolls_HasPayment.Name = "col_dgvAttendances_Payrolls_HasPayment";
+            this.col_dgvAttendances_Payrolls_HasPayment.Visible = false;
+            this.col_dgvAttendances_Payrolls_HasPayment.Width = 30;
             // 
             // col_dgvAttendances_PayrollItems_Id
             // 
@@ -545,6 +556,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_dgvAttendances_Checkbox;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_Employee_UserAccounts_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_Payrolls_HasPayment;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_PayrollItems_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_Employee_UserAccounts_Fullname;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_dgvAttendances_Clients_Name;

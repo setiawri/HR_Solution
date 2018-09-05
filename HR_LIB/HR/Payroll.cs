@@ -16,6 +16,7 @@ namespace HR_LIB.HR
         public DateTime Timestamp;
         public decimal Amount;
         public Guid Employee_UserAccounts_Id;
+        public bool HasPayment;
 
         public string Employee_UserAccounts_Fullname;
 
@@ -28,6 +29,7 @@ namespace HR_LIB.HR
         public const string COL_DB_Timestamp = "Timestamp";
         public const string COL_DB_Employee_UserAccounts_Id = "Employee_UserAccounts_Id";
         public const string COL_DB_Amount = "Amount";
+        public const string COL_DB_HasPayment = "HasPayment";
 
         public const string COL_Employee_UserAccounts_Fullname = "Employee_UserAccounts_Fullname";
 
@@ -49,6 +51,7 @@ namespace HR_LIB.HR
             Timestamp = Util.wrapNullable<DateTime>(row, COL_DB_Timestamp);
             Amount = Util.wrapNullable<decimal>(row, COL_DB_Amount);
             Employee_UserAccounts_Id = Util.wrapNullable<Guid>(row, COL_DB_Employee_UserAccounts_Id);
+            HasPayment = Util.wrapNullable<bool>(row, COL_DB_HasPayment);
 
             Employee_UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_Employee_UserAccounts_Fullname);
         }
