@@ -1443,9 +1443,7 @@ BEGIN
 		LEFT OUTER JOIN UserAccounts ON Attendances.UserAccounts_Id = UserAccounts.ID
 		LEFT OUTER JOIN Clients ON Attendances.Clients_Id = Clients.Id
 		LEFT OUTER JOIN AttendanceStatuses ON Attendances.AttendanceStatuses_Id = AttendanceStatuses.Id
-		LEFT OUTER JOIN Workshifts ON Attendances.Workshifts_DayOfWeek = Workshifts.DayOfWeek 
-						AND CAST(Attendances.Workshifts_Start AS Time) = Workshifts.Start 
-						AND Attendances.Workshifts_DurationMinutes = Workshifts.DurationMinutes 
+		LEFT OUTER JOIN Workshifts ON Attendances.Workshifts_Id = Workshifts.Id
 		LEFT OUTER JOIN PayrollItems ON PayrollItems.Id = Attendances.PayrollItems_Id
 		LEFT OUTER JOIN Payrolls ON Payrolls.Id = PayrollItems.Payrolls_Id
 	WHERE 1=1
