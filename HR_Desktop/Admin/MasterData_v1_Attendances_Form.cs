@@ -21,7 +21,7 @@ namespace HR_Desktop.Admin
 
         private DataGridViewColumn col_dgv_UserAccounts_FullName;
         private DataGridViewColumn col_dgv_Clients_CompanyName;
-        private DataGridViewColumn col_dgv_Workshifts_Id;
+        private DataGridViewColumn col_dgv_hasWorkshifts_Id;
         private DataGridViewColumn col_dgv_Workshifts_Name;
         private DataGridViewColumn col_dgv_Workshifts_Start;
         private DataGridViewColumn col_dgv_Workshifts_Duration;
@@ -76,7 +76,7 @@ namespace HR_Desktop.Admin
             dgv.AutoGenerateColumns = false;
             col_dgv_UserAccounts_FullName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_UserAccounts_FullName", itxt_UserAccount.LabelText, Attendance.COL_UserAccounts_Fullname, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Clients_CompanyName = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Clients_CompanyName", itxt_Client.LabelText, Attendance.COL_Clients_CompanyName, true, true, "", true, false, 60, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Workshifts_Id = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_Workshifts_Id", itxt_Workshift.LabelText, Attendance.COL_IsNull_Workshifts_Id, true, false, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_hasWorkshifts_Id = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_hasWorkshifts_Id", itxt_Workshift.LabelText, Attendance.COL_HasWorkshifts_Id, true, false, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Workshifts_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Name", itxt_Workshift.LabelText, Attendance.COL_Workshifts_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Workshifts_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_DayOfWeek", "Day Of Week", Attendance.COL_Workshifts_DayOfWeek_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Workshifts_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Start", "Start", Attendance.COL_DB_Workshifts_Start, true, true, @"HH:mm", true, false, 50, DataGridViewContentAlignment.MiddleLeft);

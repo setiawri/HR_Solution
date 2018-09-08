@@ -154,9 +154,9 @@ BEGIN
 		AND Payrolls.Employee_UserAccounts_Id = @Employee_UserAccounts_Id
 		AND Payrolls.Id NOT IN
 		(
-			SELECT DISTINCT (Payments.RefId)
-			FROM Payments
-			LEFT OUTER JOIN Payrolls ON Payments.RefId = Payrolls.Id
+			SELECT DISTINCT (PaymentItems.Transaction_RefId)
+			FROM PaymentItems
+			LEFT OUTER JOIN Payrolls ON PaymentItems.Transaction_RefId = Payrolls.Id
 			WHERE Payrolls.Employee_UserAccounts_Id = @Employee_UserAccounts_Id		
 		);
 	
@@ -224,16 +224,15 @@ ALTER PROCEDURE [dbo].[PaymentItems_add]
 AS
 
 BEGIN
-	DECLARE @hasPayment bit = 1
 
 	INSERT INTO PaymentItems(Id,Payments_Id,Transaction_RefId,Amount,Notes) 
 	VALUES(@Id,@Payments_Id,@Transaction_RefId,@Amount,@Notes)
 
-	UPDATE Payrolls SET hasPayment = @hasPayment
+	UPDATE Payrolls SET hasPayment = 1
 	WHERE ID IN 
-		(SELECT TOP 1 Transaction_RefId 
+		(SELECT DISTINCT Transaction_RefId 
 		FROM PaymentItems 
-		WHERE Payrolls.Id = PaymentItems.Transaction_RefId AND PaymentItems.Payments_Id = @Payments_Id)
+		WHERE PaymentItems.Payments_Id = @Payments_Id)
 
 END
 GO
@@ -281,10 +280,8 @@ BEGIN
 	SELECT @LastHex_String = ISNULL(MAX(No),'') From Payments	
 	EXEC UTIL_IncrementHex @HexLength, @LastHex_String, @NewNo OUTPUT
 
-	-- Chintia : Atribut RefId belum ada isinya pak
-	-- dan karena sifat nya NOT NULL, sementara saya isi dengan Id Payment
-	INSERT INTO Payments(Id,No,Timestamp,Source_BankAccounts_Id,Target_BankAccounts_Id,Amount,ConfirmationNumber,Notes, RefId) 
-	VALUES(@Id,@NewNo,CURRENT_TIMESTAMP,@Source_BankAccounts_Id,@Target_BankAccounts_Id,@Amount,@ConfirmationNumber,@Notes, @Id)
+	INSERT INTO Payments(Id,No,Timestamp,Source_BankAccounts_Id,Target_BankAccounts_Id,Amount,ConfirmationNumber,Notes) 
+	VALUES(@Id,@NewNo,CURRENT_TIMESTAMP,@Source_BankAccounts_Id,@Target_BankAccounts_Id,@Amount,@ConfirmationNumber,@Notes)
 
 END
 GO
@@ -359,17 +356,31 @@ ALTER PROCEDURE [dbo].[Payments_update_Rejected]
 AS
 
 BEGIN
-	DECLARE @hasPayment bit = 0
 
 	UPDATE Payments SET
 		Rejected = @Rejected
 	WHERE Id = @Id
 
-	UPDATE Payrolls SET hasPayment = @hasPayment
-	WHERE ID IN 
-		(SELECT TOP 1 Transaction_RefId 
-		FROM PaymentItems 
-		WHERE Payrolls.Id = PaymentItems.Transaction_RefId AND PaymentItems.Payments_Id = @Id)
+	IF(@Rejected = 1)
+		BEGIN
+			UPDATE Payrolls SET hasPayment = 0
+			WHERE ID IN 
+				(SELECT DISTINCT Transaction_RefId 
+				FROM PaymentItems 
+				WHERE PaymentItems.Payments_Id = @Id)
+			AND ID NOT IN 
+				(SELECT DISTINCT Transaction_RefId 
+				FROM PaymentItems INNER JOIN Payments ON PaymentItems.Payments_Id = Payments.Id
+				AND Payments.Rejected = 0)
+		END
+	ELSE
+		BEGIN
+			UPDATE Payrolls SET hasPayment = 1
+			WHERE ID IN 
+				(SELECT DISTINCT Transaction_RefId 
+				FROM PaymentItems 
+				WHERE PaymentItems.Payments_Id = @Id)
+		END
 
 END
 GO
@@ -1436,8 +1447,8 @@ BEGIN
 		COALESCE(DATEDIFF(MINUTE,Attendances.EffectiveTimestampIn, Attendances.EffectiveTimestampOut),0)/60 AS EffectiveWorkHours,
 		Workshifts.Id AS Workshifts_Id, Workshifts.Name AS Workshifts_Name,
 		[dbo].[DayOfWeekName](Attendances.Workshifts_DayOfWeek) AS Workshifts_DayofWeek_Name,
-		Payrolls.No AS Payrolls_No, Payrolls.HasPayment AS Payrolls_HasPayment,
-		CASE WHEN Attendances.Workshifts_Id IS NULL then 1 ELSE 0 END AS IsNull_Workshifts_Id
+		Payrolls.No AS Payrolls_No, CAST (COALESCE(Payrolls.HasPayment, 0) AS BIT) AS Payrolls_HasPayment,
+		CASE WHEN Attendances.Workshifts_Id IS NULL then 1 ELSE 0 END AS HasWorkshifts_Id
 
 	FROM Attendances 
 		LEFT OUTER JOIN UserAccounts ON Attendances.UserAccounts_Id = UserAccounts.ID
@@ -1544,8 +1555,6 @@ END
 GO
 
 /**************************************************************************************************************************************************************/
---Chintia : Jika attendances diupdate (untuk Attendance yang sudah punya payroll tetapi belum punya payment)
--- Apakah perlu update PayrollItem nya juga? Atau PayrollItem yang lama didelete dan buat PayrollItem Baru?
 
 ALTER PROCEDURE [dbo].[Attendances_update]
 
@@ -1561,6 +1570,9 @@ ALTER PROCEDURE [dbo].[Attendances_update]
 AS
 
 BEGIN
+
+	DECLARE @Payrolls_Id UNIQUEIDENTIFIER = NULL, @PayrollItems_Id UNIQUEIDENTIFIER = NULL, @PayrollItems_Amount DECIMAL(12,2);
+
 	WITH 
 	Attendances_Data AS
 		(SELECT @Id AS Id, @TimestampIn AS TimestampIn, @TimestampOut AS TimestampOut ,
@@ -1581,12 +1593,27 @@ BEGIN
 		Notes = @Notes,
 		AttendanceStatuses_Id = @AttendanceStatuses_Id,
 		AttendancePayRates_Id = AttendancePayRates.Id,
-		AttendancePayRates_Amount = AttendancePayRates.Amount
+		AttendancePayRates_Amount = AttendancePayRates.Amount,
+		Approved = 0,
+		Rejected = 0,
+		@PayrollItems_Id = PayrollItems_Id,
+		PayrollItems_Id = NULL
 	FROM 
 		Attendances_Data 
 		LEFT JOIN Workshift_Data ON Attendances_Data.Workshifts_Id = Workshift_Data.Id
 		LEFT JOIN AttendancePayRates ON Attendances_Data.Workshifts_Id = AttendancePayRates.RefId AND Attendances_Data.AttendanceStatuses_Id = AttendancePayRates.AttendanceStatuses_Id
 	WHERE Attendances.Id = Attendances_Data.Id
+	
+	UPDATE PayrollItems
+	SET @PayrollItems_Amount = Amount,
+	@Payrolls_Id = Payrolls_Id,
+	Amount = 0
+	WHERE RefId = @Id;
+
+	UPDATE Payrolls
+	SET Amount = Amount - @PayrollItems_Amount
+	WHERE Id = @Payrolls_Id;
+
 		
 END
 GO

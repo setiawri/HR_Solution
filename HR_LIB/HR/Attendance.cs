@@ -72,7 +72,7 @@ namespace HR_LIB.HR
         public const string COL_Workshifts_DayOfWeek_Name = "Workshifts_DayOfWeek_Name";
         public const string COL_Payrolls_No = "Payrolls_No";
         public const string COL_Payrolls_HasPayment = "Payrolls_HasPayment";
-        public const string COL_IsNull_Workshifts_Id = "IsNull_Workshifts_Id";
+        public const string COL_HasWorkshifts_Id = "HasWorkshifts_Id";
         public const string FILTER_DayOfWeek = "FILTER_DayOfWeek";
         public const string FILTER_StartDate = "FILTER_StartDate";
         public const string FILTER_EndDate = "FILTER_EndDate";
@@ -225,6 +225,12 @@ namespace HR_LIB.HR
             log = Util.appendChange(log, objOld.EffectiveTimestampOut, effectiveTimestampOut, "Effective TimestampOut: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.Notes, notes, "Notes: '{0}' to '{1}'");
             log = Util.appendChange(log, objOld.AttendanceStatuses_Name, new AttendanceStatus(AttendanceStatuses_Id).Name, "Status: '{0}' to '{1}'");
+            if (objOld.Approved)
+                log = Util.appendChange(log, objOld.Approved, false, "Approved: '{0}' to '{1}'");
+            if (objOld.Rejected)
+                log = Util.appendChange(log, objOld.Rejected, false, "Rejected: '{0}' to '{1}'");
+            if(objOld.PayrollItems_Id != null)
+                log = Util.appendChange(log,  objOld.Payrolls_No, " ", "Delete from Payroll : '{0}'");
 
             if (string.IsNullOrEmpty(log))
                 Util.displayMessageBoxError("No changes to record");
