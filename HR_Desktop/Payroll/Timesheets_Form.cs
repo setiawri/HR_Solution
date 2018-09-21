@@ -126,7 +126,7 @@ namespace HR_Desktop.Payroll
         {
             //valid to generate payroll if payroll_items_id is null and rejected = false
             return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString())
-                    & ((bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Rejected) != true) 
+                    & !((bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Rejected)) 
                 );
         }
 
@@ -165,7 +165,7 @@ namespace HR_Desktop.Payroll
             if (Util.isColumnMatch(sender, e, col_dgvAttendances_Checkbox))
             {
                 if (!isValidToGeneratePayroll())
-                    Util.displayMessageBoxError("Item was already processed or item was rejected");
+                    Util.displayMessageBoxError("Item was NOT approved / rejected / already processed.");
                 else
                 {
                     Util.clickDataGridViewCheckbox(sender, e);
@@ -229,7 +229,12 @@ namespace HR_Desktop.Payroll
         {
             foreach (DataGridViewRow dr in dgvAttendances.Rows)
             {
-                if (dr.Cells[col_dgvAttendances_Checkbox.Name].Value != null && (bool)dr.Cells[col_dgvAttendances_Checkbox.Name].Value)
+                //IMPROVEMENT: Add progress bar
+                //
+                //
+                //
+
+                if (dr.Cells[col_dgvAttendances_Checkbox.Name].Value != null && Util.getCheckboxValue(dr, col_dgvAttendances_Checkbox))
                 {
                     decimal amount = 0;
 

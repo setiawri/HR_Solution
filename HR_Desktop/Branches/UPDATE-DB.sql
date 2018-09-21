@@ -2,11 +2,6 @@
 /* NEW TABLE / COLUMNS / SP ***********************************************************************************************************************************/
 /**************************************************************************************************************************************************************/
 
-ALTER TABLE Attendances ADD Workshifts_Id uniqueidentifier;
-ALTER TABLE Attendances ADD AttendancePayRates_Id uniqueidentifier;
-ALTER TABLE Attendances ADD AttendancePayRates_Amount DECIMAL(12,2);
-ALTER TABLE Payrolls ADD hasPayment BIT DEFAULT 0 NOT NULL;
-
 
 
 
