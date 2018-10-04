@@ -124,9 +124,10 @@ namespace HR_Desktop.Payroll
 
         private bool isValidToGeneratePayroll()
         {
-            //valid to generate payroll if payroll_items_id is null and rejected = false
+            //valid to generate payroll if payroll_items_id is null and rejected = false and approved = true
             return (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString())
-                    & !((bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Rejected)) 
+                    & !(bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Rejected)
+                     & (bool)Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_Approved) 
                 );
         }
 
@@ -186,13 +187,13 @@ namespace HR_Desktop.Payroll
             }
             else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Approved))
             {
-                if (isValidToUpdate())
+                if (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString()))
                     Attendance.updateApprovedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
                     populateDgvAttendance();
             }
             else if (Util.isColumnMatch(sender, e, col_dgvAttendances_Rejected))
             {
-                if (isValidToUpdate())
+                if (String.IsNullOrEmpty(Util.getSelectedRowValue(dgvAttendances, col_dgvAttendances_PayrollItems_Id).ToString()))
                     Attendance.updateRejectedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgvAttendances, col_dgvAttendances_Id), !Util.getCheckboxValue(sender, e));
                     populateDgvAttendance(); 
             }
