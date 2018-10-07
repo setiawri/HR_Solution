@@ -19,6 +19,7 @@ namespace HR_Desktop.Admin
 
         private DataGridViewColumn col_dgv_Name;
         private DataGridViewColumn col_dgv_Notes;
+        private DataGridViewColumn col_dgv_IsReplace;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
@@ -41,6 +42,7 @@ namespace HR_Desktop.Admin
             setColumnsDataPropertyNames(AttendanceStatus.COL_DB_Id, AttendanceStatus.COL_DB_Active, null, null, null, null);
             col_dgv_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Name", itxt_Name.LabelText, AttendanceStatus.COL_DB_Name, true, true, "", true, false, null, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, AttendanceStatus.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_IsReplace = base.addColumn<DataGridViewCheckBoxCell>(dgv, "col_dgv_IsReplace", "Replace", AttendanceStatus.COL_DB_IsReplace, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             ptInputPanel.PerformClick();
@@ -116,6 +118,15 @@ namespace HR_Desktop.Admin
             return string.Format("{0}",
                 Util.getSelectedRowValue(dgv, col_dgv_Name)
                 );
+        }
+
+        protected override void virtual_dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Util.isColumnMatch(sender, e, col_dgv_IsReplace))
+            {
+                AttendanceStatus.updateReplaceStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
+                populateGridViewDataSource(true);
+            }
         }
 
         #endregion METHODS

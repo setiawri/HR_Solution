@@ -31,6 +31,7 @@ namespace HR_LIB.HR
         public Guid AttendanceStatuses_Id;
         public Guid AttendancePayRates_Id;
         public decimal AttendancePayRates_Amount;
+        public Guid? Replacement_Attendances_Id;
 
         public string UserAccounts_Fullname;
         public string Clients_CompanyName;
@@ -38,6 +39,8 @@ namespace HR_LIB.HR
         public string Workshifts_Name;
         public string Payrolls_No;
         public bool Payrolls_HasPayment;
+        public string Replacement_Attendances_Fullname;
+
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
@@ -63,6 +66,7 @@ namespace HR_LIB.HR
         public const string COL_DB_AttendanceStatuses_Id = "AttendanceStatuses_Id";
         public const string COL_DB_AttendancePayRates_Id = "AttendancePayRates_Id";
         public const string COL_DB_AttendancePayRates_Amount = "AttendancePayRates_Amount";
+        public const string COL_DB_Replacement_Attendances_Id = "Replacement_Attendances_Id";
 
         public const string COL_EffectiveWorkHours = "EffectiveWorkHours";
         public const string COL_UserAccounts_Fullname = "UserAccounts_Fullname";
@@ -78,6 +82,8 @@ namespace HR_LIB.HR
         public const string FILTER_EndDate = "FILTER_EndDate";
         public const string FILTER_StartTime = "FILTER_StartTime";
         public const string FILTER_EndTime = "FILTER_EndTime";
+        public const string COL_Replacement_Attendances_Fullname = "Replacement_Attendances_Fullname";
+
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
@@ -109,7 +115,7 @@ namespace HR_LIB.HR
                 AttendanceStatuses_Id = Util.wrapNullable<Guid>(row, COL_DB_AttendanceStatuses_Id);
                 AttendancePayRates_Id = Util.wrapNullable<Guid>(row, COL_DB_AttendancePayRates_Id);
                 AttendancePayRates_Amount = Util.wrapNullable<decimal>(row, COL_DB_AttendancePayRates_Amount);
-
+                Replacement_Attendances_Id = Util.wrapNullable<Guid?>(row, COL_DB_Replacement_Attendances_Id);
 
                 UserAccounts_Fullname = Util.wrapNullable<string>(row, COL_UserAccounts_Fullname);
                 Clients_CompanyName = Util.wrapNullable<string>(row, COL_Clients_CompanyName);
@@ -117,6 +123,7 @@ namespace HR_LIB.HR
                 Workshifts_Name = Util.wrapNullable<string>(row, COL_Workshifts_Name);
                 Payrolls_No = Util.wrapNullable<string>(row, COL_Payrolls_No);
                 Payrolls_HasPayment = Util.wrapNullable<bool>(row, COL_Payrolls_HasPayment);
+                Replacement_Attendances_Fullname = Util.wrapNullable<string>(row, COL_Replacement_Attendances_Fullname);
             }
         }
 
@@ -142,7 +149,7 @@ namespace HR_LIB.HR
 
         public static Guid add(Guid userAccountID, Guid UserAccounts_Id, Guid Clients_Id, Guid? Workshifts_Id,
             DateTime timestampIn, DateTime timestampOut, DateTime? effectiveTimestampIn, DateTime? effectiveTimestampOut, 
-            string notes, Guid AttendanceStatuses_Id)
+            string notes, Guid AttendanceStatuses_Id, Guid? Replacement_Attendances_Id)
         {
             Guid id = Guid.NewGuid();
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
@@ -160,7 +167,9 @@ namespace HR_LIB.HR
                     new SqlQueryParameter(COL_DB_EffectiveTimestampIn, SqlDbType.DateTime, effectiveTimestampIn),
                     new SqlQueryParameter(COL_DB_EffectiveTimestampOut, SqlDbType.DateTime, effectiveTimestampOut),
                     new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes)),
-                    new SqlQueryParameter(COL_DB_AttendanceStatuses_Id, SqlDbType.UniqueIdentifier, AttendanceStatuses_Id)
+                    new SqlQueryParameter(COL_DB_AttendanceStatuses_Id, SqlDbType.UniqueIdentifier, AttendanceStatuses_Id),
+                    new SqlQueryParameter(COL_DB_Replacement_Attendances_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Replacement_Attendances_Id))
+
                 );
 
                 if (result.IsSuccessful)
@@ -171,25 +180,25 @@ namespace HR_LIB.HR
 
         public static DataRow get(SqlConnection sqlConnection, Guid id)
         {
-            return Util.getFirstRow(get(sqlConnection, id, null, null, null, null, null, null, null, null, null, null));
+            return Util.getFirstRow(get(sqlConnection, id, null, null, null, null, null, null, null, null, null, null, null));
         }
         public static DataRow get(Guid id)
         {
             DataRow row;
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
-                row = Util.getFirstRow(get(sqlConnection, id, null, null, null, null, null, null, null, null, null, null));
+                row = Util.getFirstRow(get(sqlConnection, id, null, null, null, null, null, null, null, null, null, null, null));
             return row;
         }
         public static DataTable get(Guid? id, Guid? UserAccounts_Id, Guid? Clients_Id, Guid? Workshifts_Id, int? dayOfWeek, DateTime? startDate, 
-            DateTime? endDate, TimeSpan? startTime, TimeSpan? endTime, string notes, Guid? AttendanceStatuses_Id)
+            DateTime? endDate, TimeSpan? startTime, TimeSpan? endTime, string notes, Guid? AttendanceStatuses_Id, Guid? Replacement_Attendances_Id)
         {
             DataTable datatable;
             using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
-                datatable = get(sqlConnection, id, UserAccounts_Id, Clients_Id, Workshifts_Id, dayOfWeek, startDate, endDate, startTime, endTime, notes, AttendanceStatuses_Id);
+                datatable = get(sqlConnection, id, UserAccounts_Id, Clients_Id, Workshifts_Id, dayOfWeek, startDate, endDate, startTime, endTime, notes, AttendanceStatuses_Id, Replacement_Attendances_Id);
             return datatable;
         }
         public static DataTable get(SqlConnection sqlConnection, Guid? id, Guid? UserAccounts_Id, Guid? Clients_Id, Guid? Workshifts_Id, int? dayOfWeek, 
-            DateTime? startDate, DateTime? endDate, TimeSpan? startTime, TimeSpan? endTime, string notes, Guid? AttendanceStatuses_Id)
+            DateTime? startDate, DateTime? endDate, TimeSpan? startTime, TimeSpan? endTime, string notes, Guid? AttendanceStatuses_Id, Guid? Replacement_Attendances_Id)
         {
             SqlQueryResult result = DBConnection.query(
                 sqlConnection,
@@ -205,14 +214,15 @@ namespace HR_LIB.HR
                 new SqlQueryParameter(FILTER_StartTime, SqlDbType.Time, Util.wrapNullable(startTime)),
                 new SqlQueryParameter(FILTER_EndTime, SqlDbType.Time, Util.wrapNullable(endTime)),
                 new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes)),
-                new SqlQueryParameter(COL_DB_AttendanceStatuses_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(AttendanceStatuses_Id))
+                new SqlQueryParameter(COL_DB_AttendanceStatuses_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(AttendanceStatuses_Id)),
+                new SqlQueryParameter(COL_DB_Replacement_Attendances_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Replacement_Attendances_Id))
 
                 );
             return result.Datatable;
         }
 
         public static void update(Guid userAccountID, Guid id, Guid Clients_Id, Guid? Workshifts_Id, DateTime timestampIn,
-            DateTime timestampOut, DateTime? effectiveTimestampIn, DateTime? effectiveTimestampOut, string notes, Guid AttendanceStatuses_Id)
+            DateTime timestampOut, DateTime? effectiveTimestampIn, DateTime? effectiveTimestampOut, string notes, Guid AttendanceStatuses_Id, Guid? Replacement_Attendances_Id)
         {
             Attendance objOld = new Attendance(id);
             string log = "";
@@ -231,6 +241,9 @@ namespace HR_LIB.HR
                 log = Util.appendChange(log, objOld.Rejected, false, "Rejected: '{0}' to '{1}'");
             if(objOld.PayrollItems_Id != null)
                 log = Util.appendChange(log,  objOld.Payrolls_No, " ", "Delete from Payroll : '{0}'");
+            if (Replacement_Attendances_Id != null)
+                log = Util.appendChange(log, objOld.Replacement_Attendances_Fullname, new Attendance((Guid)Replacement_Attendances_Id).UserAccounts_Fullname, "Replacement: '{0}' to '{1}'");
+
 
             if (string.IsNullOrEmpty(log))
                 Util.displayMessageBoxError("No changes to record");
@@ -250,7 +263,9 @@ namespace HR_LIB.HR
                         new SqlQueryParameter(COL_DB_EffectiveTimestampIn, SqlDbType.DateTime, effectiveTimestampIn),
                         new SqlQueryParameter(COL_DB_EffectiveTimestampOut, SqlDbType.DateTime, effectiveTimestampOut),
                         new SqlQueryParameter(COL_DB_Notes, SqlDbType.NVarChar, Util.wrapNullable(notes)),
-                        new SqlQueryParameter(COL_DB_AttendanceStatuses_Id, SqlDbType.UniqueIdentifier, AttendanceStatuses_Id)
+                        new SqlQueryParameter(COL_DB_AttendanceStatuses_Id, SqlDbType.UniqueIdentifier, AttendanceStatuses_Id),
+                        new SqlQueryParameter(COL_DB_Replacement_Attendances_Id, SqlDbType.UniqueIdentifier, Util.wrapNullable(Replacement_Attendances_Id))
+
                     );
 
                     if (result.IsSuccessful)

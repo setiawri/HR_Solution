@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 using LIBUtil;
 using LOGIN;
@@ -39,13 +40,28 @@ namespace HR_Desktop.Admin
         private DataGridViewColumn col_dgv_PayrollItems_Id;
         private DataGridViewColumn col_dgv_Payrolls_No;
         private DataGridViewColumn col_dgv_HasPayment;
+        private DataGridViewColumn col_dgv_Replacement_Attendances_Id;
+        private DataGridViewColumn col_dgv_Replacement_Attendances_Fullname;
+
+        private bool _IsFinishPopulateAttendanceStatuses = false;
+        private Guid? _Id = null;
+        private Guid? _Clients_Id = null;
+        private Guid? _Workshifts_Id = null;
 
         #endregion PRIVATE VARIABLES
         /*******************************************************************************************************/
         #region CONSTRUCTOR METHODS
 
-        public MasterData_v1_Attendances_Form() : this(FormModes.Add) { }
-        public MasterData_v1_Attendances_Form(FormModes startingMode) : base(startingMode, FORM_SHOWDATAONLOAD) { InitializeComponent(); }
+        public MasterData_v1_Attendances_Form() : this(FormModes.Add, null, null, null) { }
+        public MasterData_v1_Attendances_Form(FormModes startingMode, Guid? Id, Guid? Clients_Id, Guid? Workshifts_Id) : base(startingMode, FORM_SHOWDATAONLOAD)
+        {
+            InitializeComponent();
+
+            _Id = Id;
+            _Clients_Id = Clients_Id;
+            _Workshifts_Id = Workshifts_Id;
+
+        }
 
         #endregion CONSTRUCTOR METHODS
         /*******************************************************************************************************/
@@ -80,7 +96,7 @@ namespace HR_Desktop.Admin
             col_dgv_Workshifts_Name = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Name", itxt_Workshift.LabelText, Attendance.COL_Workshifts_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Workshifts_DayOfWeek = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_DayOfWeek", "Day Of Week", Attendance.COL_Workshifts_DayOfWeek_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Workshifts_Start = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Start", "Start", Attendance.COL_DB_Workshifts_Start, true, true, @"HH:mm", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
-            col_dgv_Workshifts_Duration = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Duration", "Duration", Attendance.COL_DB_Workshifts_DurationMinutes, true, true, "", true, false, 40, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Workshifts_Duration = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Workshifts_Duration", "Duration", Attendance.COL_DB_Workshifts_DurationMinutes, true, true, "", true, false, 45, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_AttendanceStatuses = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_AttendanceStatuses", iddl_AttendanceStatuses.LabelText, Attendance.COL_AttendanceStatuses_Name, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_TimestampIn = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_TimestampIn", idtp_TimestampIn.LabelText, Attendance.COL_DB_TimestampIn, true, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
             col_dgv_TimestampOut = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_TimestampOut", idtp_TimestampOut.LabelText, Attendance.COL_DB_TimestampOut, true, true, @"dd/MM/yy  HH:mm", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
@@ -93,12 +109,45 @@ namespace HR_Desktop.Admin
             col_dgv_PayrollItems_Id = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_PayrollItems_Id", "", Attendance.COL_DB_PayrollItems_Id, false, false, "", false, false, 30, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Payrolls_No = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Payrolls_No", "Payrolls", Attendance.COL_Payrolls_No, false, true, "", false, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_HasPayment = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_HasPayment", "HasPayment", Attendance.COL_Payrolls_HasPayment, false, false, "", false, false, 30, DataGridViewContentAlignment.MiddleLeft);
+            col_dgv_Replacement_Attendances_Id = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Replacement_Attendances_Id", itxt_ReplacementAttendance.LabelText, Attendance.COL_DB_Replacement_Attendances_Id, true, false, "", true, false, 30, DataGridViewContentAlignment.MiddleCenter);
+
+            // note :
+            //Saya pakai method addLinkColumn agar bisa melakukan format Link (seperti yang di Form Timesheet) 
+            //Saya coba pakai method addColumn biasa, tidak ada pilihan untuk setting LinkBehavior dll.
+
+            //col_dgv_Replacement_Attendances_Fullname = base.addColumn<DataGridViewLinkCell>(dgv, "col_dgv_Replacement_Attendances_Fullname", "Replacement", Attendance.COL_Replacement_Attendances_Fullname, true, true, "", true, false, 100, DataGridViewContentAlignment.MiddleCenter);
+            col_dgv_Replacement_Attendances_Fullname = addLinkColumn(dgv, "col_dgv_Replacement_Attendances_Fullname", "Replacement", Attendance.COL_Replacement_Attendances_Fullname, 100, DataGridViewAutoSizeColumnMode.None, DataGridViewContentAlignment.MiddleCenter);
+
             col_dgv_Notes = base.addColumn<DataGridViewTextBoxCell>(dgv, "col_dgv_Notes", itxt_Notes.LabelText, Attendance.COL_DB_Notes, true, true, "", true, false, 50, DataGridViewContentAlignment.MiddleLeft);
             col_dgv_Notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             ptInputPanel.PerformClick();
 
+
             AttendanceStatus.populateDropDownList(iddl_AttendanceStatuses, false);
+            _IsFinishPopulateAttendanceStatuses = true;
         }
+
+
+        private DataGridViewColumn addLinkColumn(DataGridView dgv, string columnName, string headerText, string dataPropertyName, int minimumWidth, DataGridViewAutoSizeColumnMode autoSizeMode, DataGridViewContentAlignment alignment)
+        {
+            DataGridViewLinkColumn col = new DataGridViewLinkColumn();
+            col.Name = columnName;
+            col.HeaderText = headerText;
+            col.DataPropertyName = dataPropertyName;
+            col.MinimumWidth = minimumWidth;
+            col.DefaultCellStyle.Alignment = alignment;
+            col.LinkBehavior = LinkBehavior.HoverUnderline;
+            col.ActiveLinkColor = Color.Lime;
+            col.LinkColor = Color.Lime;
+            col.VisitedLinkColor = Color.Lime;
+            col.SortMode = DataGridViewColumnSortMode.Automatic;
+            col.AutoSizeMode = autoSizeMode;
+
+            dgv.Columns.Add(col);
+
+            return col;
+        } 
 
         protected override void additionalSettings() { }
 
@@ -112,6 +161,9 @@ namespace HR_Desktop.Admin
             itxt_Workshift.Enabled = true;
             iddl_AttendanceStatuses.reset();
             iddl_AttendanceStatuses.Enabled = true;
+            itxt_ReplacementAttendance.reset();
+            itxt_ReplacementAttendance.Enabled = true;
+            itxt_ReplacementAttendance.Visible = false;
             idtp_TimestampIn.Value = DateTime.Now;
             idtp_TimestampIn.Enabled = true;
             idtp_TimestampOut.Value = DateTime.Now;
@@ -121,6 +173,7 @@ namespace HR_Desktop.Admin
             idtp_EffectiveTimestampOut.Value = DateTime.Now;
             idtp_EffectiveTimestampOut.Enabled = true;
             itxt_Notes.reset();
+
         }
 
         protected override bool isValidToPopulateGridViewDataSource()
@@ -131,12 +184,14 @@ namespace HR_Desktop.Admin
         protected override System.Data.DataView loadGridviewDataSource()
         {            
             return Attendance.get(
+                _Id, 
                 getFilterValue<Guid?>(itxt_UserAccount),
                 getFilterValue<Guid?>(itxt_Client),
                 getFilterValue<Guid?>(itxt_Workshift),
-                null, null, null, null, null, null,
+                null, null, null, null, null,
                 getFilterValue<string>(itxt_Notes),
-                getFilterValue<Guid?>(iddl_AttendanceStatuses)
+                getFilterValue<Guid?>(iddl_AttendanceStatuses),
+                getFilterValue<Guid?>(itxt_ReplacementAttendance)
                 ).DefaultView;
         }
 
@@ -148,6 +203,8 @@ namespace HR_Desktop.Admin
             itxt_Client.setValue(obj.Clients_CompanyName, obj.Clients_Id);
             itxt_Workshift.setValue(obj.Workshifts_Name, obj.Workshifts_Id);
             iddl_AttendanceStatuses.SelectedValue = obj.AttendanceStatuses_Id;
+            if(obj.Replacement_Attendances_Id != null)
+                itxt_ReplacementAttendance.setValue(obj.Replacement_Attendances_Fullname, (Guid)obj.Replacement_Attendances_Id);
             idtp_TimestampIn.Value = obj.TimestampIn;
             idtp_TimestampOut.Value = obj.TimestampOut;
             idtp_EffectiveTimestampIn.Value = obj.EffectiveTimestampIn;
@@ -161,6 +218,7 @@ namespace HR_Desktop.Admin
                 itxt_Client.Enabled = false;
                 itxt_Workshift.Enabled = false;
                 iddl_AttendanceStatuses.Enabled = false;
+                itxt_ReplacementAttendance.Enabled = false;
                 idtp_TimestampIn.Enabled = false;
                 idtp_TimestampOut.Enabled = false;
                 idtp_EffectiveTimestampIn.Enabled = false;
@@ -180,7 +238,9 @@ namespace HR_Desktop.Admin
                 (DateTime)idtp_EffectiveTimestampIn.Value,
                 (DateTime)idtp_EffectiveTimestampOut.Value,
                 itxt_Notes.ValueText,
-                (Guid)iddl_AttendanceStatuses.SelectedValue);
+                (Guid)iddl_AttendanceStatuses.SelectedValue,
+                (Guid?)itxt_ReplacementAttendance.ValueGuid
+                );
         }
 
         protected override void add()
@@ -194,7 +254,9 @@ namespace HR_Desktop.Admin
                 (DateTime?)idtp_EffectiveTimestampIn.Value,
                 (DateTime?)idtp_EffectiveTimestampOut.Value,
                 itxt_Notes.ValueText,
-                (Guid)iddl_AttendanceStatuses.SelectedValue);
+                (Guid)iddl_AttendanceStatuses.SelectedValue,
+                (Guid?)itxt_ReplacementAttendance.ValueGuid
+                );
         }
 
         protected override Boolean isInputFieldsValid()
@@ -204,6 +266,8 @@ namespace HR_Desktop.Admin
                 return itxt_UserAccount.isValueError("Please select a User");
             else if (itxt_Client.ValueGuid == null)
                 return itxt_Client.isValueError("Please select a Client");
+            else if (itxt_Workshift.ValueGuid == null)
+                return itxt_Workshift.isValueError("Please select a Workshift");
             else if (!iddl_AttendanceStatuses.hasSelectedValue())
                 return iddl_AttendanceStatuses.SelectedValueError("Please select Attendance Status");
             else if (idtp_TimestampIn.Value == null)
@@ -254,6 +318,9 @@ namespace HR_Desktop.Admin
                     Attendance.updateApprovedStatus(UserAccount.LoggedInAccount.Id, Util.getSelectedRowID(dgv, col_dgv_Id), !Util.getCheckboxValue(sender, e));
                     populateGridViewDataSource(true);
             }
+            else if(Util.isColumnMatch(sender, e, col_dgv_Replacement_Attendances_Fullname))
+                LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Attendances_Form(FormModes.Browse, (Guid?)Util.getSelectedRowValue(dgv, col_dgv_Replacement_Attendances_Id), null, null), ref sender);
+
             base.virtual_dgv_CellContentClick(sender, e);
         }
 
@@ -303,6 +370,50 @@ namespace HR_Desktop.Admin
             idtp_EffectiveTimestampOut.Value = idtp_TimestampOut.Value;
         }
 
+
+        private void iddl_AttendanceStatuses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_IsFinishPopulateAttendanceStatuses && iddl_AttendanceStatuses.hasSelectedValue())
+            {
+                AttendanceStatus attendanceStatus = new AttendanceStatus((Guid)iddl_AttendanceStatuses.SelectedValue);
+                if (attendanceStatus.IsReplace)
+                    itxt_ReplacementAttendance.Visible = true;
+                else
+                    itxt_ReplacementAttendance.Visible = false;
+            }
+        }
+
+        private void itxt_ReplacementAttendance_isBrowseMode_Clicked(object sender, EventArgs e)
+        {
+            LIBUtil.Desktop.UserControls.InputControl_Textbox.browseForm(new Admin.MasterData_v1_Attendances_Form(FormModes.Browse, null, itxt_Client.ValueGuid, itxt_Workshift.ValueGuid), ref sender);
+        }
+
+        private void Form_Shown(object sender, EventArgs e)
+        {
+            if (_Clients_Id != null || _Workshifts_Id != null)
+            {
+                FormModes originalMode = Mode;
+
+                //open input container
+                if (scMain.Panel1Collapsed)
+                    ptInputPanel.toggle();
+
+                //change mode to filter
+                btnSearch.PerformClick();
+
+                //set filter values to control
+                if(_Clients_Id != null)
+                    itxt_Client.setValue(new Client((Guid)_Clients_Id).CompanyName, (Guid)_Clients_Id);
+                if (_Workshifts_Id != null)
+                    itxt_Workshift.setValue(new Workshift((Guid)_Workshifts_Id).Name, (Guid)_Workshifts_Id);
+
+                //save filter values
+                btnSubmit.PerformClick();
+
+                //change mode to original state
+                Mode = originalMode;
+            }
+        }
         #endregion EVENT HANDLERS
         /*******************************************************************************************************/
     }

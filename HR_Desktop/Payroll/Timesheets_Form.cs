@@ -103,7 +103,8 @@ namespace HR_Desktop.Payroll
                     idtp_FilterAttendance_In.ValueTimeSpan,
                     idtp_FilterAttendance_Out.ValueTimeSpan,
                     null,
-                    (Guid?)(iddl_AttendanceStatuses.SelectedValue)
+                    (Guid?)(iddl_AttendanceStatuses.SelectedValue),
+                    null
                 ));
 
             if (_headerCheckbox != null) _headerCheckbox.Checked = false;

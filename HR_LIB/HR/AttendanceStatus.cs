@@ -15,6 +15,7 @@ namespace HR_LIB.HR
         public string Name = "";
         public string Notes = "";
         public bool Active;
+        public bool IsReplace;
 
         #endregion PUBLIC VARIABLES
         /*******************************************************************************************************/
@@ -24,6 +25,7 @@ namespace HR_LIB.HR
         public const string COL_DB_Name = "Name";
         public const string COL_DB_Notes = "Notes";
         public const string COL_DB_Active = "Active";
+        public const string COL_DB_IsReplace = "IsReplace";
 
         public const string COL_FILTER_IncludeInactive = "FILTER_IncludeInactive";
 
@@ -40,6 +42,7 @@ namespace HR_LIB.HR
                 Name = Util.wrapNullable<string>(row, COL_DB_Name);
                 Notes = Util.wrapNullable<string>(row, COL_DB_Notes);
                 Active = Util.wrapNullable<bool>(row, COL_DB_Active);
+                IsReplace = Util.wrapNullable<bool>(row, COL_DB_IsReplace);
             }
         }
 
@@ -151,6 +154,23 @@ namespace HR_LIB.HR
 
                 if (result.IsSuccessful)
                     ActivityLog.add(sqlConnection, userAccountID, id, "Update Active Status to " + value);
+            }
+        }
+
+        public static void updateReplaceStatus(Guid userAccountID, Guid id, bool value)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(DBConnection.ConnectionString))
+            {
+                SqlQueryResult result = DBConnection.query(
+                    sqlConnection,
+                    QueryTypes.ExecuteNonQuery,
+                    "AttendanceStatuses_update_IsReplace",
+                    new SqlQueryParameter(COL_DB_Id, SqlDbType.UniqueIdentifier, id),
+                    new SqlQueryParameter(COL_DB_IsReplace, SqlDbType.Bit, value)
+                );
+
+                if (result.IsSuccessful)
+                    ActivityLog.add(sqlConnection, userAccountID, id, "Update Replace Status to " + value);
             }
         }
 
