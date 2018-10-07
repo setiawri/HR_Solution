@@ -37,6 +37,7 @@
             this.itxt_Client = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.itxt_Workshift = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.iddl_AttendanceStatuses = new LIBUtil.Desktop.UserControls.InputControl_Dropdownlist();
+            this.itxt_ReplacementAttendance = new LIBUtil.Desktop.UserControls.InputControl_Textbox();
             this.panel1.SuspendLayout();
             this.pnlActionButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scInputLeft)).BeginInit();
@@ -79,7 +80,7 @@
             // 
             // pnlActionButtons
             // 
-            this.pnlActionButtons.Location = new System.Drawing.Point(0, 237);
+            this.pnlActionButtons.Location = new System.Drawing.Point(0, 257);
             this.pnlActionButtons.Margin = new System.Windows.Forms.Padding(4);
             this.pnlActionButtons.Size = new System.Drawing.Size(1028, 23);
             // 
@@ -93,6 +94,7 @@
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Workshift);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_Client);
             this.scInputLeft.Panel1.Controls.Add(this.itxt_UserAccount);
+            this.scInputLeft.Panel1.Controls.Add(this.itxt_ReplacementAttendance);
             // 
             // scInputLeft.Panel2
             // 
@@ -101,14 +103,14 @@
             this.scInputLeft.Panel2.Controls.Add(this.idtp_EffectiveTimestampOut);
             this.scInputLeft.Panel2.Controls.Add(this.idtp_EffectiveTimestampIn);
             this.scInputLeft.Panel2.Controls.Add(this.itxt_Notes);
-            this.scInputLeft.Size = new System.Drawing.Size(500, 211);
+            this.scInputLeft.Size = new System.Drawing.Size(500, 231);
             this.scInputLeft.SplitterDistance = 220;
             this.scInputLeft.SplitterWidth = 3;
             // 
             // scInputRight
             // 
             this.scInputRight.Margin = new System.Windows.Forms.Padding(4);
-            this.scInputRight.Size = new System.Drawing.Size(523, 211);
+            this.scInputRight.Size = new System.Drawing.Size(523, 231);
             this.scInputRight.SplitterWidth = 3;
             // 
             // btnAdd
@@ -122,7 +124,6 @@
             // btnSearch
             // 
             this.btnSearch.TabStop = false;
-            this.btnSearch.Text = "FILTER";
             // 
             // btnSubmit
             // 
@@ -140,7 +141,7 @@
             // 
             this.scMain.Margin = new System.Windows.Forms.Padding(4);
             this.scMain.Size = new System.Drawing.Size(1028, 609);
-            this.scMain.SplitterDistance = 260;
+            this.scMain.SplitterDistance = 280;
             this.scMain.SplitterWidth = 8;
             // 
             // txtQuickSearch
@@ -157,7 +158,7 @@
             // scInputContainer
             // 
             this.scInputContainer.Margin = new System.Windows.Forms.Padding(4);
-            this.scInputContainer.Size = new System.Drawing.Size(1028, 211);
+            this.scInputContainer.Size = new System.Drawing.Size(1028, 231);
             this.scInputContainer.SplitterWidth = 5;
             // 
             // btnLog
@@ -224,8 +225,8 @@
             this.idtp_EffectiveTimestampOut.ShowUpAndDown = false;
             this.idtp_EffectiveTimestampOut.Size = new System.Drawing.Size(133, 41);
             this.idtp_EffectiveTimestampOut.TabIndex = 8;
-            this.idtp_EffectiveTimestampOut.Value = null;
-            this.idtp_EffectiveTimestampOut.ValueTimeSpan = null;
+            this.idtp_EffectiveTimestampOut.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.idtp_EffectiveTimestampOut.ValueTimeSpan = System.TimeSpan.Parse("00:00:00");
             // 
             // idtp_EffectiveTimestampIn
             // 
@@ -241,8 +242,8 @@
             this.idtp_EffectiveTimestampIn.ShowUpAndDown = false;
             this.idtp_EffectiveTimestampIn.Size = new System.Drawing.Size(133, 41);
             this.idtp_EffectiveTimestampIn.TabIndex = 7;
-            this.idtp_EffectiveTimestampIn.Value = null;
-            this.idtp_EffectiveTimestampIn.ValueTimeSpan = null;
+            this.idtp_EffectiveTimestampIn.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.idtp_EffectiveTimestampIn.ValueTimeSpan = System.TimeSpan.Parse("00:00:00");
             // 
             // idtp_TimestampOut
             // 
@@ -258,8 +259,8 @@
             this.idtp_TimestampOut.ShowUpAndDown = false;
             this.idtp_TimestampOut.Size = new System.Drawing.Size(133, 41);
             this.idtp_TimestampOut.TabIndex = 10;
-            this.idtp_TimestampOut.Value = null;
-            this.idtp_TimestampOut.ValueTimeSpan = null;
+            this.idtp_TimestampOut.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.idtp_TimestampOut.ValueTimeSpan = System.TimeSpan.Parse("00:00:00");
             this.idtp_TimestampOut.ValueChanged += new System.EventHandler(this.idtp_TimestampOut_ValueChanged);
             // 
             // idtp_TimestampIn
@@ -276,15 +277,15 @@
             this.idtp_TimestampIn.ShowUpAndDown = false;
             this.idtp_TimestampIn.Size = new System.Drawing.Size(133, 41);
             this.idtp_TimestampIn.TabIndex = 9;
-            this.idtp_TimestampIn.Value = null;
-            this.idtp_TimestampIn.ValueTimeSpan = null;
+            this.idtp_TimestampIn.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.idtp_TimestampIn.ValueTimeSpan = System.TimeSpan.Parse("00:00:00");
             this.idtp_TimestampIn.ValueChanged += new System.EventHandler(this.idtp_TimestampIn_ValueChanged_1);
             // 
             // itxt_Client
             // 
             this.itxt_Client.IsBrowseMode = true;
             this.itxt_Client.LabelText = "*Client";
-            this.itxt_Client.Location = new System.Drawing.Point(4, 52);
+            this.itxt_Client.Location = new System.Drawing.Point(4, 49);
             this.itxt_Client.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Client.MaxLength = 32767;
             this.itxt_Client.MultiLine = false;
@@ -301,8 +302,8 @@
             // itxt_Workshift
             // 
             this.itxt_Workshift.IsBrowseMode = true;
-            this.itxt_Workshift.LabelText = "Workshift";
-            this.itxt_Workshift.Location = new System.Drawing.Point(4, 97);
+            this.itxt_Workshift.LabelText = "*Workshift";
+            this.itxt_Workshift.Location = new System.Drawing.Point(4, 90);
             this.itxt_Workshift.Margin = new System.Windows.Forms.Padding(4);
             this.itxt_Workshift.MaxLength = 32767;
             this.itxt_Workshift.MultiLine = false;
@@ -322,15 +323,33 @@
             this.iddl_AttendanceStatuses.HideFilter = true;
             this.iddl_AttendanceStatuses.HideUpdateLink = true;
             this.iddl_AttendanceStatuses.LabelText = "*Status";
-            this.iddl_AttendanceStatuses.Location = new System.Drawing.Point(4, 141);
+            this.iddl_AttendanceStatuses.Location = new System.Drawing.Point(4, 131);
             this.iddl_AttendanceStatuses.Margin = new System.Windows.Forms.Padding(4);
             this.iddl_AttendanceStatuses.Name = "iddl_AttendanceStatuses";
+            this.iddl_AttendanceStatuses.SelectedIndex = -1;
             this.iddl_AttendanceStatuses.SelectedItem = null;
             this.iddl_AttendanceStatuses.SelectedItemText = "";
             this.iddl_AttendanceStatuses.SelectedValue = null;
             this.iddl_AttendanceStatuses.ShowDropdownlistOnly = false;
             this.iddl_AttendanceStatuses.Size = new System.Drawing.Size(205, 41);
             this.iddl_AttendanceStatuses.TabIndex = 3;
+            // 
+            // itxt_ReplacementAttendance
+            // 
+            this.itxt_ReplacementAttendance.IsBrowseMode = true;
+            this.itxt_ReplacementAttendance.LabelText = "Replacement attendance";
+            this.itxt_ReplacementAttendance.Location = new System.Drawing.Point(4, 172);
+            this.itxt_ReplacementAttendance.Margin = new System.Windows.Forms.Padding(4);
+            this.itxt_ReplacementAttendance.MaxLength = 32767;
+            this.itxt_ReplacementAttendance.MultiLine = false;
+            this.itxt_ReplacementAttendance.Name = "itxt_ReplacementAttendance";
+            this.itxt_ReplacementAttendance.PasswordChar = '\0';
+            this.itxt_ReplacementAttendance.RowCount = 1;
+            this.itxt_ReplacementAttendance.ShowDeleteButton = true;
+            this.itxt_ReplacementAttendance.ShowTextboxOnly = false;
+            this.itxt_ReplacementAttendance.Size = new System.Drawing.Size(208, 41);
+            this.itxt_ReplacementAttendance.TabIndex = 4;
+            this.itxt_ReplacementAttendance.ValueText = "";
             // 
             // MasterData_v1_Attendances_Form
             // 
@@ -373,5 +392,6 @@
         private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_Client;
         private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_Workshift;
         private LIBUtil.Desktop.UserControls.InputControl_Dropdownlist iddl_AttendanceStatuses;
+        private LIBUtil.Desktop.UserControls.InputControl_Textbox itxt_ReplacementAttendance;
     }
 }

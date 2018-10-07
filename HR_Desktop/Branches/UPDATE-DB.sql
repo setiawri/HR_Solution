@@ -2306,15 +2306,24 @@ GO
 
 /* COMPLETE CLEARING */
 --DELETE ActivityLogs
+--DELETE AttendancePayRates
 --DELETE Attendances
+--DELETE AttendanceStatuses
+--DELETE BankAccounts
 --DELETE Clients
+--DELETE HolidaySchedules
+--DELETE PaymentItems
+--DELETE Payments
+--DELETE PayrollItems
+--DELETE Payrolls
 --DELETE Settings
---DELETE UserAccountAccessRoleAssignments
---DELETE UserAccountRoleAssignments
---DELETE UserAccountRoles
---DELETE UserAccounts
+----DELETE UserAccountAccessRoleAssignments
+----DELETE UserAccountRoleAssignments
+----DELETE UserAccountRoles
+----DELETE UserAccounts
 --DELETE WorkshiftCategories
 --DELETE Workshifts
---GO
+--DELETE WorkshiftTemplates
+----GO
 
 /**************************************************************************************************************************************************************/

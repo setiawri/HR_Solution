@@ -3,17 +3,24 @@
 > run UPDATE-DB.sql
 
 
-> DELETE Column PayableAmount from TABLE Workshifts & WorkshiftTemplates & Attendances
-	- remove references to the columns in code
+> Table AttendanceStatuses ADD column isReplace bit NOT NULL DEFAULT 0
+> Table Attendances ADD column Replacement_Attendances_Id uniqueidentifier NULL 
 
-> TABLE Attendances
-	- add COLUMN Workshifts_Id -> Save itxt_Workshift in form MasterData_v1_Attendances_Form
-	- add COLUMN AttendancePayRates_Id & AttendancePayRates_Amount
-		-> Query AttendancePayRates by Workshifts_Id (RefId) and AttendanceStatuses_Id
+> MasterData_v1_AttendanceStatuses_Form
+	- add checkbox column isReplace (HeaderText: "Replace")
+	- update code to save value when value is changed.
 
-> SP PayrollItems_add
-	- COLUMN Amount = (Effective_TimestampOut - Effective_TimestampIn) * AttendancePayRates_Amount
-
+> MasterData_v1_Attendances_Form
+	- if Selected AttendanceStatuses isReplace == true, show itxt_ReplacementAttendance
+	- browse MasterData_v1_Attendances_Form, set filters: client id, workshift id
+	- update add() to save value: 
+		* example: New Attendance Id B, itxt_ReplacementAttendance = Attendances Id A
+		* New Attendance Id B, set column Replacement_Attendances_Id = Attendances Id A
+		* Attendance Id A, set column Replacement_Attendances_Id = Attendances Id B
+		Jadi dua2nya ada reference.
+	- add Link column col_dgv_Replacement_Attendances_Fullname. HeaderText: "Replacement", show Employee Name. Format link column. set fixed column width to 100.
+	- when link is clicked, open window MasterData_v1_Attendances_Form, set filters: Replacement_Attendances_Id = Attendance Id yang di click.
+	- make Workshift a required field. (update isInputFieldsValid())
 	
 
 
