@@ -65,14 +65,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\LIBUtil\LIBUtil\LIBUtil\LIBUtil.csproj">
+    <Content Include="DBScript.txt" />
+    <Content Include="Documentation\Rules And Assumptions.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\HR-Project\LIBUtil\LIBUtil\LIBUtil\LIBUtil.csproj">
       <Project>{23013bfc-021e-426a-8a92-8c1c34836974}</Project>
       <Name>LIBUtil</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DBScript.txt" />
-    <Content Include="Documentation\Rules And Assumptions.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

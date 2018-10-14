@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR_Desktop", "HR_Desktop\HR_Desktop.csproj", "{63D34F26-BB43-4B60-B09A-0279170D6ED5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR_LIB", "HR_LIB\HR_LIB.csproj", "{AF5A4FF1-B4AF-45FB-8F22-183DCD4CB44F}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HR_Installer", "HR_Installer\HR-Installer.vdproj", "{7091EB32-C10C-480F-8340-1C39428BD7ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIBUtil", "..\..\HR-Project\LIBUtil\LIBUtil\LIBUtil\LIBUtil.csproj", "{23013BFC-021E-426A-8A92-8C1C34836974}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIBUtil", "..\..\LIBUtil\LIBUtil\LIBUtil\LIBUtil.csproj", "{23013BFC-021E-426A-8A92-8C1C34836974}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRWebApplication", "..\HR-Web\HRWebApplication\HRWebApplication.csproj", "{33EA9CFD-D6EF-4E34-8C50-AEFC49F40CA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,13 +25,14 @@ Global
 		{AF5A4FF1-B4AF-45FB-8F22-183DCD4CB44F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF5A4FF1-B4AF-45FB-8F22-183DCD4CB44F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF5A4FF1-B4AF-45FB-8F22-183DCD4CB44F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7091EB32-C10C-480F-8340-1C39428BD7ED}.Debug|Any CPU.ActiveCfg = Debug
-		{7091EB32-C10C-480F-8340-1C39428BD7ED}.Release|Any CPU.ActiveCfg = Release
-		{7091EB32-C10C-480F-8340-1C39428BD7ED}.Release|Any CPU.Build.0 = Release
 		{23013BFC-021E-426A-8A92-8C1C34836974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{23013BFC-021E-426A-8A92-8C1C34836974}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23013BFC-021E-426A-8A92-8C1C34836974}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23013BFC-021E-426A-8A92-8C1C34836974}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33EA9CFD-D6EF-4E34-8C50-AEFC49F40CA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33EA9CFD-D6EF-4E34-8C50-AEFC49F40CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33EA9CFD-D6EF-4E34-8C50-AEFC49F40CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33EA9CFD-D6EF-4E34-8C50-AEFC49F40CA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
