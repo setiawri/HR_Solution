@@ -1,15 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR_Desktop", "HR_Desktop\HR_Desktop.csproj", "{63D34F26-BB43-4B60-B09A-0279170D6ED5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR_LIB", "HR_LIB\HR_LIB.csproj", "{AF5A4FF1-B4AF-45FB-8F22-183DCD4CB44F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIBUtil", "..\..\HR-Project\LIBUtil\LIBUtil\LIBUtil\LIBUtil.csproj", "{23013BFC-021E-426A-8A92-8C1C34836974}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIBUtil", "..\..\LIBUtil\LIBUtil\LIBUtil\LIBUtil.csproj", "{23013BFC-021E-426A-8A92-8C1C34836974}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRWebApplication", "..\HR-Web\HRWebApplication\HRWebApplication.csproj", "{33EA9CFD-D6EF-4E34-8C50-AEFC49F40CA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRWebApplication", "HRWebApplication\HRWebApplication.csproj", "{33EA9CFD-D6EF-4E34-8C50-AEFC49F40CA8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AF5A4FF1-B4AF-45FB-8F22-183DCD4CB44F} = {AF5A4FF1-B4AF-45FB-8F22-183DCD4CB44F}
+		{23013BFC-021E-426A-8A92-8C1C34836974} = {23013BFC-021E-426A-8A92-8C1C34836974}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

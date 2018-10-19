@@ -69,7 +69,7 @@
     <Content Include="Documentation\Rules And Assumptions.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\HR-Project\LIBUtil\LIBUtil\LIBUtil\LIBUtil.csproj">
+    <ProjectReference Include="..\..\..\LIBUtil\LIBUtil\LIBUtil\LIBUtil.csproj">
       <Project>{23013bfc-021e-426a-8a92-8c1c34836974}</Project>
       <Name>LIBUtil</Name>
     </ProjectReference>
