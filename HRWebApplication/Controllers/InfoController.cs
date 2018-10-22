@@ -8,9 +8,9 @@ namespace HRWebApplication.Controllers
 {
     public class InfoController : Controller
     {
-        public ActionResult Menu()
-        {
-            return View();
-        }
+        //public ActionResult Menu()
+        //{
+        //    return View();
+        //}
     }
 }

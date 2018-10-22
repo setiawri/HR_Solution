@@ -11,60 +11,72 @@ using System.Web.Mvc;
 
 namespace HRWebApplication.Controllers
 {
-    [CustomAuthorize(Roles = "Superuser, Manager")]
+    [Authorize]
     public class UserController : Controller
     {
         private HrContext db = new HrContext();
 
         public ActionResult Index()
         {
-            var user = (from u in db.User
-                        join ur in db.UserRole on u.Id equals ur.UserId
-                        join r in db.Role on ur.RoleId equals r.Id
-                        select new UserViewModel
-                        {
-                            Id = u.Id,
-                            FullName = u.FullName,
-                            UserName = u.UserName,
-                            Email = u.Email,
-                            Role = r.Name,
-                            RoleId = r.Id
-                        });
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
+            {
+                var user = (from u in db.User
+                            join ur in db.UserRole on u.Id equals ur.UserId
+                            join r in db.Role on ur.RoleId equals r.Id
+                            select new UserViewModel
+                            {
+                                Id = u.Id,
+                                FullName = u.FullName,
+                                UserName = u.UserName,
+                                Email = u.Email,
+                                Role = r.Name,
+                                RoleId = r.Id
+                            });
 
-            return View(user.ToList());
+                return View(user.ToList());
+            }
         }
 
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var userVM = (from u in db.User
+                              join ur in db.UserRole on u.Id equals ur.UserId
+                              join r in db.Role on ur.RoleId equals r.Id
+                              where u.Id == id
+                              select new UserViewModel
+                              {
+                                  Id = u.Id,
+                                  FullName = u.FullName,
+                                  UserName = u.UserName,
+                                  Email = u.Email,
+                                  Role = r.Name,
+                                  RoleId = r.Id
+                              }).FirstOrDefault();
+
+                UserViewModel userModels = userVM;
+
+                if (userModels == null)
+                {
+                    return HttpNotFound();
+                }
+
+                ViewBag.listRole = new SelectList(db.Role.OrderBy(x => x.Name).ToList(), "Id", "Name");
+
+                return View(userModels);
             }
-
-            var userVM = (from u in db.User
-                        join ur in db.UserRole on u.Id equals ur.UserId
-                        join r in db.Role on ur.RoleId equals r.Id
-                        where u.Id == id
-                        select new UserViewModel
-                        {
-                            Id = u.Id,
-                            FullName = u.FullName,
-                            UserName = u.UserName,
-                            Email = u.Email,
-                            Role = r.Name,
-                            RoleId = r.Id
-                        }).FirstOrDefault();
-
-            UserViewModel userModels = userVM;
-
-            if (userModels == null)
-            {
-                return HttpNotFound();
-            }
-
-            ViewBag.listRole = new SelectList(db.Role.OrderBy(x => x.Name).ToList(), "Id", "Name");
-
-            return View(userModels);
         }
 
         [HttpPost]

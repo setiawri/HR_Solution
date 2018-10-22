@@ -12,7 +12,7 @@ using HRWebApplication.Common;
 
 namespace HRWebApplication.Controllers
 {
-    [CustomAuthorize(Roles = "Superuser, Manager")]
+    [Authorize]
     public class ClientController : Controller
     {
         private HrContext db = new HrContext();
@@ -20,7 +20,13 @@ namespace HRWebApplication.Controllers
         // GET: Client
         public async Task<ActionResult> Index()
         {
-            return View(await db.Clients.ToListAsync());
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
+            {
+                return View(await db.Clients.ToListAsync());
+            }
         }
 
         // GET: Client/Details/5
@@ -41,7 +47,13 @@ namespace HRWebApplication.Controllers
         // GET: Client/Create
         public ActionResult Create()
         {
-            return View();
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: Client/Create
@@ -65,16 +77,22 @@ namespace HRWebApplication.Controllers
         // GET: Client/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
-            if (id == null)
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ClientModels clientModels = await db.Clients.FindAsync(id);
+                if (clientModels == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(clientModels);
             }
-            ClientModels clientModels = await db.Clients.FindAsync(id);
-            if (clientModels == null)
-            {
-                return HttpNotFound();
-            }
-            return View(clientModels);
         }
 
         // POST: Client/Edit/5
@@ -96,16 +114,22 @@ namespace HRWebApplication.Controllers
         // GET: Client/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
-            if (id == null)
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ClientModels clientModels = await db.Clients.FindAsync(id);
+                if (clientModels == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(clientModels);
             }
-            ClientModels clientModels = await db.Clients.FindAsync(id);
-            if (clientModels == null)
-            {
-                return HttpNotFound();
-            }
-            return View(clientModels);
         }
 
         // POST: Client/Delete/5

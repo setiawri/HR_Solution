@@ -159,16 +159,21 @@ namespace HRWebApplication.Controllers
         //
         // GET: /Account/Register
         //[AllowAnonymous]
-        [CustomAuthorize(Roles = "Superuser, Manager")]
         public ActionResult Register()
         {
-            List<SelectListItem> list = new List<SelectListItem>();
-            foreach (var role in RoleManager.Roles.OrderBy(x => x.Name))
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
             {
-                list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+                List<SelectListItem> list = new List<SelectListItem>();
+                foreach (var role in RoleManager.Roles.OrderBy(x => x.Name))
+                {
+                    list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+                }
+                ViewBag.Roles = list;
+                return View();
             }
-            ViewBag.Roles = list;
-            return View();
         }
 
         //
