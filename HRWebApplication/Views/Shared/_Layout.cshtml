@@ -15,6 +15,8 @@
     <link href="~/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="~/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- bootstrap-datetimepicker -->
+    <link href="~/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <!-- Datatables -->
     <link href="~/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
     <link href="~/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet" />
@@ -76,8 +78,8 @@
                                 <li>
                                     <a><i class="fa fa-calendar"></i> Workshift <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="@Url.Action("Category", "Workshift")">Categories</a></li>
-                                        <li><a href="@Url.Action("Template", "Workshift")">Templates</a></li>
+                                        <li><a href="@Url.Action("Index", "WorkshiftCategory")">Categories</a></li>
+                                        <li><a href="@Url.Action("Index", "WorkshiftTemplate")">Templates</a></li>
                                         <li><a href="@Url.Action("Index", "Workshift")">Workshifts</a></li>
                                     </ul>
                                 </li>
@@ -199,6 +201,8 @@
     <!-- bootstrap-daterangepicker -->
     <script src="~/vendors/moment/min/moment.min.js"></script>
     <script src="~/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-datetimepicker -->
+    <script src="~/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
     @*@Scripts.Render("~/listCustomer/js")
     @Scripts.Render("~/listLoan/js")*@

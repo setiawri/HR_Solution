@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Common\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Common\Master.cs" />
     <Compile Include="Common\Permissions.cs" />
     <Compile Include="Common\Query.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -178,6 +179,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WorkshiftCategoryController.cs" />
+    <Compile Include="Controllers\WorkshiftTemplateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,6 +199,9 @@
     <Compile Include="Models\MasterMenuModels.cs" />
     <Compile Include="Models\RoleViewModels.cs" />
     <Compile Include="Models\UserModels.cs" />
+    <Compile Include="Models\WorkshiftCategoryModels.cs" />
+    <Compile Include="Models\WorkshiftTemplateModels.cs" />
+    <Compile Include="Models\WorkshiftTemplateViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -233,6 +239,8 @@
     <Content Include="vendors\autosize\dist\autosize.min.js" />
     <Content Include="vendors\bootstrap-daterangepicker\daterangepicker.css" />
     <Content Include="vendors\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="vendors\bootstrap-datetimepicker\build\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="vendors\bootstrap-datetimepicker\build\js\bootstrap-datetimepicker.min.js" />
     <Content Include="vendors\bootstrap\dist\css\bootstrap.min.css" />
     <Content Include="vendors\bootstrap\dist\js\bootstrap.min.js" />
     <Content Include="vendors\Chart.js\dist\Chart.min.js" />
@@ -324,6 +332,16 @@
     <Content Include="Views\Role\Manage.cshtml" />
     <Content Include="Views\Role\DeleteAccess.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\WorkshiftCategory\Create.cshtml" />
+    <Content Include="Views\WorkshiftCategory\Delete.cshtml" />
+    <Content Include="Views\WorkshiftCategory\Details.cshtml" />
+    <Content Include="Views\WorkshiftCategory\Edit.cshtml" />
+    <Content Include="Views\WorkshiftCategory\Index.cshtml" />
+    <Content Include="Views\WorkshiftTemplate\Create.cshtml" />
+    <Content Include="Views\WorkshiftTemplate\Delete.cshtml" />
+    <Content Include="Views\WorkshiftTemplate\Details.cshtml" />
+    <Content Include="Views\WorkshiftTemplate\Edit.cshtml" />
+    <Content Include="Views\WorkshiftTemplate\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,152 @@
+﻿@model HRWebApplication.Models.WorkshiftTemplateModels
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Workshift</h3>
+            </div>
+            <div class="title_right">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Create <small>Add New Template</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal col-md-9">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Clients_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.Clients_Id, ViewBag.listClient as SelectList, "Select Client", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Clients_Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.WorkshiftCategories_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.WorkshiftCategories_Id, ViewBag.listCategory as SelectList, "Select Workshift Category", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.WorkshiftCategories_Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DayOfWeek, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.DayOfWeek, ViewBag.listDOW as SelectList, "Select Day", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.DayOfWeek, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @*@Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })*@
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Start / End Time</label>
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group date" id="From">
+                                            @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group date" id="To">
+                                            @Html.Editor("Stop", new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        @Html.ValidationMessage("Stop", "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DurationMinutes, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.EditorFor(model => model.DurationMinutes, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.DurationMinutes, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="checkbox">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.EditorFor(model => model.Active)
+                                            @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <a href="@Url.Action("Index", "WorkshiftTemplate")" class="btn btn-default">Back to List</a>
+                                        <input type="submit" value="Create" class="btn btn-success" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function GetDuration() {
+        var start = $("#Start").val();
+        var stop = $("#Stop").val();
+        var timeStart = new Date("01/01/2000 " + start);
+        var timeStop = new Date("01/01/2000 " + stop);
+        var diff = Math.round((timeStop - timeStart) / 60000);
+        $("#DurationMinutes").val(diff);
+    }
+
+    $(document).ready(function () {
+        $('#From').datetimepicker({
+            format: 'HH:mm'
+        });
+
+        $('#To').datetimepicker({
+            format: 'HH:mm'
+        }).on('dp.hide', function (e) {
+            GetDuration();
+        });
+    });
+</script>
