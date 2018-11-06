@@ -1,0 +1,170 @@
+﻿@model HRWebApplication.Models.AttendanceModels
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AttendanceModels</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserAccounts_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserAccounts_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimestampIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimestampIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimestampOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimestampOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flag1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flag1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flag2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flag2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Approved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Approved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Workshifts_DayOfWeek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workshifts_DayOfWeek)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Workshifts_Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workshifts_Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Workshifts_DurationMinutes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workshifts_DurationMinutes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EffectiveTimestampIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EffectiveTimestampIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EffectiveTimestampOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EffectiveTimestampOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Clients_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Clients_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rejected)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rejected)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayrollItems_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayrollItems_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttendanceStatuses_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttendanceStatuses_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Workshifts_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workshifts_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttendancePayRates_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttendancePayRates_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttendancePayRates_Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttendancePayRates_Amount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

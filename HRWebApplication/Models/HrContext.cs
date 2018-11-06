@@ -16,5 +16,8 @@ namespace HRWebApplication.Models
         public DbSet<ClientModels> Clients { get; set; }
         public DbSet<WorkshiftCategoryModels> WsCategory { get; set; }
         public DbSet<WorkshiftTemplateModels> WsTemplate { get; set; }
+        public DbSet<WorkshiftModels> Workshift { get; set; }
+        public DbSet<AttendanceStatusModels> AttStatus { get; set; }
+        public DbSet<AttendanceModels> Attendance { get; set; }
     }
 }

@@ -168,10 +168,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Common\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Common\IdentityExtension.cs" />
     <Compile Include="Common\Master.cs" />
     <Compile Include="Common\Permissions.cs" />
     <Compile Include="Common\Query.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
+    <Compile Include="Controllers\AttendanceStatusController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -180,6 +183,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WorkshiftCategoryController.cs" />
+    <Compile Include="Controllers\WorkshiftController.cs" />
     <Compile Include="Controllers\WorkshiftTemplateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,10 +192,21 @@
     <Compile Include="Migrations\201810132121248_initial.Designer.cs">
       <DependentUpon>201810132121248_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810292233184_identification.cs" />
+    <Compile Include="Migrations\201810292233184_identification.Designer.cs">
+      <DependentUpon>201810292233184_identification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810292238565_customUser.cs" />
+    <Compile Include="Migrations\201810292238565_customUser.Designer.cs">
+      <DependentUpon>201810292238565_customUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessModels.cs" />
     <Compile Include="Models\AccessViewModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AttendanceModels.cs" />
+    <Compile Include="Models\AttendanceStatusModels.cs" />
+    <Compile Include="Models\AttendanceViewModels.cs" />
     <Compile Include="Models\ClientModels.cs" />
     <Compile Include="Models\HrContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -200,8 +215,10 @@
     <Compile Include="Models\RoleViewModels.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Models\WorkshiftCategoryModels.cs" />
+    <Compile Include="Models\WorkshiftModels.cs" />
     <Compile Include="Models\WorkshiftTemplateModels.cs" />
     <Compile Include="Models\WorkshiftTemplateViewModels.cs" />
+    <Compile Include="Models\WorkshiftViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -342,6 +359,21 @@
     <Content Include="Views\WorkshiftTemplate\Details.cshtml" />
     <Content Include="Views\WorkshiftTemplate\Edit.cshtml" />
     <Content Include="Views\WorkshiftTemplate\Index.cshtml" />
+    <Content Include="Views\Workshift\Delete.cshtml" />
+    <Content Include="Views\Workshift\Details.cshtml" />
+    <Content Include="Views\Workshift\Edit.cshtml" />
+    <Content Include="Views\Workshift\Index.cshtml" />
+    <Content Include="Views\Workshift\Create.cshtml" />
+    <Content Include="Views\AttendanceStatus\Create.cshtml" />
+    <Content Include="Views\AttendanceStatus\Delete.cshtml" />
+    <Content Include="Views\AttendanceStatus\Details.cshtml" />
+    <Content Include="Views\AttendanceStatus\Edit.cshtml" />
+    <Content Include="Views\AttendanceStatus\Index.cshtml" />
+    <Content Include="Views\Attendance\Create.cshtml" />
+    <Content Include="Views\Attendance\Delete.cshtml" />
+    <Content Include="Views\Attendance\Details.cshtml" />
+    <Content Include="Views\Attendance\Edit.cshtml" />
+    <Content Include="Views\Attendance\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -358,6 +390,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810132121248_initial.resx">
       <DependentUpon>201810132121248_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810292233184_identification.resx">
+      <DependentUpon>201810292233184_identification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810292238565_customUser.resx">
+      <DependentUpon>201810292238565_customUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -378,7 +416,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>5790</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5790/</IISUrl>
+          <IISUrl>http://localhost:5791/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using HRWebApplication.Common
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -54,7 +56,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>@User.Identity.Name</h2>
+                            <h2>@User.Identity.GetFullName()</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -86,8 +88,9 @@
                                 <li>
                                     <a><i class="fa fa-bell"></i> Attendance <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="@Url.Action("Status", "Attendance")">Status</a></li>
-                                        <li><a href="@Url.Action("PayRate", "Attendance")">Pay Rates</a></li>
+                                        <li><a href="@Url.Action("Index", "Attendance")">Attendances</a></li>
+                                        <li><a href="@Url.Action("Index", "AttendanceStatus")">Status</a></li>
+                                        <li><a href="@Url.Action("Index", "AttendancePayRate")">Pay Rates</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -130,7 +133,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/images/man.png" alt=""> @User.Identity.Name
+                                    <img src="~/images/man.png" alt=""> @User.Identity.GetFullName()
                                     <span class="fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">

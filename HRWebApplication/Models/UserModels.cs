@@ -15,6 +15,15 @@ namespace HRWebApplication.Models
         public string Email { get; set; }
         public string UserName { get; set; }
         public string FullName { get; set; }
+        public DateTime? DOB { get; set; }
+        public string Identification { get; set; }
+        public int? Height { get; set; }
+        public int? Weight { get; set; }
+        public string Phone1 { get; set; }
+        public string Phone2 { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string Notes { get; set; }
     }
 
     [Table("AspNetRoles")]
@@ -47,5 +56,27 @@ namespace HRWebApplication.Models
         public string Email { get; set; }
         public string Role { get; set; }
         public string RoleId { get; set; }
+
+        public string Identification { get; set; }
+
+        [Display(Name = "Date of Birth")]
+        public DateTime? DOB { get; set; }
+
+        public int? Height { get; set; }
+        public int? Weight { get; set; }
+
+        [Display(Name = "Phone 1")]
+        public string Phone1 { get; set; }
+
+        [Display(Name = "Phone 2")]
+        public string Phone2 { get; set; }
+
+        [Display(Name = "Address 1")]
+        public string Address1 { get; set; }
+
+        [Display(Name = "Address 2")]
+        public string Address2 { get; set; }
+
+        public string Notes { get; set; }
     }
 }

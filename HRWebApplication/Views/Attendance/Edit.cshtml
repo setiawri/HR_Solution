@@ -1,0 +1,215 @@
+﻿@model HRWebApplication.Models.AttendanceModels
+
+@{
+    ViewBag.Title = "Edit Attendance";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Attendance</h3>
+            </div>
+            <div class="title_right">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Edit <small>Change Attendance Information</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal col-md-9">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Id)
+                                @Html.HiddenFor(model => model.Workshifts_DayOfWeek)
+                                @Html.HiddenFor(model => model.Workshifts_Start)
+                                @Html.HiddenFor(model => model.Workshifts_DurationMinutes)
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.UserAccounts_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.UserAccounts_Id, ViewBag.listEmployee as SelectList, "Select Employee", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.UserAccounts_Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Clients_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.Clients_Id, ViewBag.listClient as SelectList, "Select Client", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Clients_Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Workshifts_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.Workshifts_Id, ViewBag.listWorkshift as SelectList, "Select Workshift", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Workshifts_Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TimestampIn, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="input-group tanggal">
+                                            @Html.EditorFor(model => model.TimestampIn, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.TimestampIn, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TimestampOut, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="input-group tanggal">
+                                            @Html.EditorFor(model => model.TimestampOut, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.TimestampOut, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.EffectiveTimestampIn, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="input-group tanggal">
+                                            @Html.EditorFor(model => model.EffectiveTimestampIn, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.EffectiveTimestampIn, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.EffectiveTimestampOut, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="input-group tanggal">
+                                            @Html.EditorFor(model => model.EffectiveTimestampOut, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.EffectiveTimestampOut, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.AttendanceStatuses_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.AttendanceStatuses_Id, ViewBag.listAttStatus as SelectList, "Select Status", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.AttendanceStatuses_Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <a href="@Url.Action("Index", "Attendance")" class="btn btn-default">Back to List</a>
+                                        <input type="submit" value="Save" class="btn btn-success" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function GetWorkshifts() {
+        if ($('#UserAccounts_Id').val() == '' || $('#Clients_Id').val() == '') {
+            $('#Workshifts_Id').prop('disabled', true);
+            $('#Workshifts_Id').html('');
+        }
+        else {
+            $('#Workshifts_Id').prop('disabled', false);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("LoadWorkshifts", "Attendance")',
+                data: { id_emp: $('#UserAccounts_Id').val(), id_client: $('#Clients_Id').val() },
+                success: function (data) {
+                    console.log(data.result);
+                    var opt = "<option value=''>Select Workshift</option>";
+                    $.each(data.result, function (index, item) {
+                        opt += "<option value='" + item.Value + "'>" + item.Text + "</option>";
+                    });
+                    $("#Workshifts_Id").html(opt);
+                }, //end success
+                error: function (result) {
+                    alert("Error " + result);
+                } //end error
+            }); //end ajax
+        }
+    }
+
+    $(document).ready(function () {
+        $('.tanggal').datetimepicker({
+            format: 'DD/MM/YYYY HH:mm'
+        });
+
+        $('#UserAccounts_Id').change(function () {
+            GetWorkshifts();
+        });
+
+        $('#Clients_Id').change(function () {
+            GetWorkshifts();
+        });
+
+        $('#Workshifts_Id').change(function () {
+            if ($('#Workshifts_Id').val() == '') {
+                $('#Workshifts_DayOfWeek').val('');
+                $('#Workshifts_Start').val('');
+                $('#Workshifts_DurationMinutes').val('');
+                $('#TimestampIn').val('');
+                $('#TimestampOut').val('');
+                $('#EffectiveTimestampIn').val('');
+                $('#EffectiveTimestampOut').val('');
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetTime", "Attendance")',
+                    data: { id: $('#Workshifts_Id').val() },
+                    success: function (data) {
+                        console.log(data.result);
+                        $('#Workshifts_DayOfWeek').val(data.result.DayOfWeek);
+                        $('#Workshifts_Start').val(data.date_in);
+                        $('#Workshifts_DurationMinutes').val(data.result.DurationMinutes);
+                        $('#TimestampIn').val(data.date_in);
+                        $('#TimestampOut').val(data.date_out);
+                        $('#EffectiveTimestampIn').val(data.date_in);
+                        $('#EffectiveTimestampOut').val(data.date_out);
+                    }, //end success
+                    error: function (result) {
+                        alert("Error " + result);
+                    } //end error
+                }); //end ajax
+            }
+        });
+    });
+</script>

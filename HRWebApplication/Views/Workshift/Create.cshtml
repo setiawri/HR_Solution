@@ -1,7 +1,7 @@
-﻿@model HRWebApplication.Models.WorkshiftTemplateModels
+﻿@model HRWebApplication.Models.WorkshiftModels
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create New Workshift";
 }
 
 <div class="right_col" role="main">
@@ -18,7 +18,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Edit <small>Change Template Information</small></h2>
+                        <h2>Create <small>Add New Workshift</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li>
                                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -36,15 +36,6 @@
 
                             <div class="form-horizontal col-md-9">
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.HiddenFor(model => model.Id)
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Clients_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -58,6 +49,32 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         @Html.DropDownListFor(model => model.WorkshiftCategories_Id, ViewBag.listCategory as SelectList, "Select Workshift Category", new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.WorkshiftCategories_Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.WorkshiftTemplates_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="form-control" id="WorkshiftTemplates_Id" name="WorkshiftTemplates_Id" disabled="disabled">
+                                            <option value=""></option>
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.WorkshiftTemplates_Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.UserAccounts_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.UserAccounts_Id, ViewBag.listEmployee as SelectList, "Select Employee", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.UserAccounts_Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
@@ -116,8 +133,8 @@
 
                                 <div class="form-group">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <a href="@Url.Action("Index", "WorkshiftTemplate")" class="btn btn-default">Back to List</a>
-                                        <input type="submit" value="Save" class="btn btn-success" />
+                                        <a href="@Url.Action("Index", "Workshift")" class="btn btn-default">Back to List</a>
+                                        <input type="submit" value="Create" class="btn btn-success" />
                                     </div>
                                 </div>
                             </div>
@@ -150,17 +167,59 @@
             GetDuration();
         });
 
-        var start = new Date("01/01/2000 " + $("#Start").val());
-        var tot_hours = Math.floor($("#DurationMinutes").val() / 60);
-        var tot_minutes = $("#DurationMinutes").val() % 60;
-        //alert('tot hours: ' + tot_hours + ', tot_minutes: ' + tot_minutes + ', getHours: ' + start.getHours() + ', getMinutes: ' + start.getMinutes());
-        if ((start.getMinutes() + tot_minutes) >= 60) {
-            tot_hours = tot_hours + 1;
-            tot_minutes = (start.getMinutes() + tot_minutes) % 60;
-            $("#Stop").val(start.getHours() + tot_hours + ":" + tot_minutes);
-        }
-        else {
-            $("#Stop").val(start.getHours() + tot_hours + ":" + (start.getMinutes() + tot_minutes));
-        }
+        $('#Clients_Id').change(function () {
+            if ($('#Clients_Id').val() == '') {
+                $('#WorkshiftTemplates_Id').prop('disabled', true);
+                $('#WorkshiftTemplates_Id').html('');
+            }
+            else {
+                $('#WorkshiftTemplates_Id').prop('disabled', false);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("LoadTemplates", "Workshift")',
+                    data: { id: $('#Clients_Id').val() },
+                    success: function (data) {
+                        console.log(data.result);
+                        var opt = "<option value=''>Select Workshift Templates</option>";
+                        $.each(data.result, function (index, item) {
+                            opt += "<option value='" + item.Value + "'>" + item.Text + "</option>";
+                        });
+                        $("#WorkshiftTemplates_Id").html(opt);
+                    }, //end success
+                    error: function (result) {
+                        alert("Error " + result);
+                    } //end error
+                }); //end ajax
+            }
+        });
+
+        $('#WorkshiftTemplates_Id').change(function () {
+            if ($('#WorkshiftTemplates_Id').val() == '') {
+                $('#Name').val('');
+                $('#DayOfWeek').val('');
+                $('#Start').val('');
+                $('#Stop').val('');
+                $('#DurationMinutes').val('');
+            }
+            else {
+                //$('#Name').val($('#WorkshiftTemplates_Id option:selected').text());
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetTemplates", "Workshift")',
+                    data: { id: $('#WorkshiftTemplates_Id').val() },
+                    success: function (data) {
+                        console.log(data.result);
+                        $('#Name').val(data.result.Name);
+                        $('#DayOfWeek').val(data.result.DayOfWeek);
+                        $('#Start').val(data.start);
+                        $('#Stop').val(data.stop);
+                        $('#DurationMinutes').val(data.result.DurationMinutes);
+                    }, //end success
+                    error: function (result) {
+                        alert("Error " + result);
+                    } //end error
+                }); //end ajax
+            }
+        });
     });
 </script>

@@ -1,0 +1,130 @@
+﻿@model HRWebApplication.Models.WorkshiftViewModels
+
+@{
+    ViewBag.Title = "Delete Workshift";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Workshift</h3>
+            </div>
+            <div class="title_right">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Delete <small>Are you sure you want to delete this?</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Client)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Client)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Category)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Category)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TemplateName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TemplateName)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Employee)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Employee)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DayOfWeek)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DayOfWeek)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Start)
+                            </dt>
+
+                            <dd>
+                                @{ string start = Model.Start.Substring(0, 5);}
+                                @start
+                                @*@Html.DisplayFor(model => model.Start)*@
+                            </dd>
+
+                            <dt>End</dt>
+
+                            <dd>
+                                @{ string end = DateTime.Parse(Model.Start.Substring(0, 5)).AddMinutes(Model.DurationMinutes).ToString("HH:mm");}
+                                @end
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DurationMinutes)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DurationMinutes)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Active)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Active)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <a href="@Url.Action("Index", "Workshift")" class="btn btn-default">Back to List</a>
+                            <input type="submit" value="Delete" class="btn btn-danger submit" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
