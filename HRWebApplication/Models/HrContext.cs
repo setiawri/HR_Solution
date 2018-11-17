@@ -19,5 +19,7 @@ namespace HRWebApplication.Models
         public DbSet<WorkshiftModels> Workshift { get; set; }
         public DbSet<AttendanceStatusModels> AttStatus { get; set; }
         public DbSet<AttendanceModels> Attendance { get; set; }
+        public DbSet<AttendancePayRateModels> AttPayRate { get; set; }
+        public DbSet<BankAccountModels> BankAccount { get; set; }
     }
 }

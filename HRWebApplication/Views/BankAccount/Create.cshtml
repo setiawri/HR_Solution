@@ -1,0 +1,150 @@
+﻿@model HRWebApplication.Models.BankAccountModels
+
+@{
+    ViewBag.Title = "Create Bank Account";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Bank Account</h3>
+            </div>
+            <div class="title_right">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Create <small>Add New Bank Account</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal col-md-9">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Owner_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.Owner_Id, new List<SelectListItem>
+                                        {
+                                            new SelectListItem { Text = "Client", Value = "1" },
+                                            new SelectListItem { Text = "Employee", Value = "2" }
+                                        }, "Select Owner", new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Owner_RefId, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="form-control" id="Owner_RefId" name="Owner_RefId" disabled="disabled">
+                                            <option value=""></option>
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.Owner_RefId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.BankName, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.EditorFor(model => model.BankName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BankName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.AccountNumber, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.EditorFor(model => model.AccountNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="checkbox">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.EditorFor(model => model.Active)
+                                            @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <a href="@Url.Action("Index", "BankAccount")" class="btn btn-default">Back to List</a>
+                                        <a href="@Url.Action("Create", "BankAccount")" class="btn btn-warning">Reset</a>
+                                        <input type="submit" value="Create" class="btn btn-success" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function GetOwnerReff() {
+        if ($('#Owner_Id').val() == '') {
+            $('#Owner_RefId').prop('disabled', true);
+            $('#Owner_RefId').html('');
+        }
+        else {
+            $('#Owner_RefId').prop('disabled', false);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("LoadOwnerReff", "BankAccount")',
+                data: { owner_id: $('#Owner_Id').val() },
+                success: function (data) {
+                    console.log(data.result);
+                    var opt = "<option value=''>Select Client/Employee</option>";
+                    $.each(data.result, function (index, item) {
+                        opt += "<option value='" + item.Value + "'>" + item.Text + "</option>";
+                    });
+                    $("#Owner_RefId").html(opt);
+                }, //end success
+                error: function (result) {
+                    alert("Error " + result);
+                } //end error
+            }); //end ajax
+        }
+    }
+
+    $(document).ready(function () {
+        $('#Owner_Id').change(function () {
+            GetOwnerReff();
+        })
+    });
+</script>

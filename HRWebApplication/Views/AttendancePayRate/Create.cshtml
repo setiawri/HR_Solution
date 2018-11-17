@@ -1,14 +1,14 @@
-﻿@model HRWebApplication.Models.WorkshiftCategoryModels
+﻿@model HRWebApplication.Models.AttendancePayRateModels
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create New Attendance Pay Rate";
 }
 
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Workshift</h3>
+                <h3>Attendance</h3>
             </div>
             <div class="title_right">
             </div>
@@ -18,7 +18,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Create <small>Add New Category</small></h2>
+                        <h2>Create <small>Add New Attendance Pay Rate</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li>
                                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -37,10 +37,26 @@
                             <div class="form-horizontal col-md-9">
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    @Html.LabelFor(model => model.RefId, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.RefId, ViewBag.listWsTemplate as SelectList, "Select Workshifts Template", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.RefId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.AttendanceStatuses_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownListFor(model => model.AttendanceStatuses_Id, ViewBag.listAttStatus as SelectList, "Select Status", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.AttendanceStatuses_Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
@@ -64,8 +80,8 @@
 
                                 <div class="form-group">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <a href="@Url.Action("Index", "WorkshiftCategory")" class="btn btn-default">Back to List</a>
-                                        <a href="@Url.Action("Create", "WorkshiftCategory")" class="btn btn-warning">Reset</a>
+                                        <a href="@Url.Action("Index", "AttendancePayRate")" class="btn btn-default">Back to List</a>
+                                        <a href="@Url.Action("Create", "AttendancePayRate")" class="btn btn-warning">Reset</a>
                                         <input type="submit" value="Create" class="btn btn-success" />
                                     </div>
                                 </div>
@@ -77,3 +93,21 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input.number').keyup(function (event) {
+
+            // skip for arrow keys
+            if (event.which >= 37 && event.which <= 40) return;
+
+            // format number
+            $(this).val(function (index, value) {
+                return value
+                .replace(/\D/g, "")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                ;
+            });
+        });
+    });
+</script>

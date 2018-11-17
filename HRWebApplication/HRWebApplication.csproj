@@ -174,7 +174,9 @@
     <Compile Include="Common\Query.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
+    <Compile Include="Controllers\AttendancePayRateController.cs" />
     <Compile Include="Controllers\AttendanceStatusController.cs" />
+    <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -205,8 +207,12 @@
     <Compile Include="Models\AccessViewModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModels.cs" />
+    <Compile Include="Models\AttendancePayRateModels.cs" />
+    <Compile Include="Models\AttendancePayRateViewModels.cs" />
     <Compile Include="Models\AttendanceStatusModels.cs" />
     <Compile Include="Models\AttendanceViewModels.cs" />
+    <Compile Include="Models\BankAccountModels.cs" />
+    <Compile Include="Models\BankAccountViewModels.cs" />
     <Compile Include="Models\ClientModels.cs" />
     <Compile Include="Models\HrContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -374,6 +380,16 @@
     <Content Include="Views\Attendance\Details.cshtml" />
     <Content Include="Views\Attendance\Edit.cshtml" />
     <Content Include="Views\Attendance\Index.cshtml" />
+    <Content Include="Views\AttendancePayRate\Create.cshtml" />
+    <Content Include="Views\AttendancePayRate\Delete.cshtml" />
+    <Content Include="Views\AttendancePayRate\Details.cshtml" />
+    <Content Include="Views\AttendancePayRate\Edit.cshtml" />
+    <Content Include="Views\AttendancePayRate\Index.cshtml" />
+    <Content Include="Views\BankAccount\Create.cshtml" />
+    <Content Include="Views\BankAccount\Delete.cshtml" />
+    <Content Include="Views\BankAccount\Details.cshtml" />
+    <Content Include="Views\BankAccount\Edit.cshtml" />
+    <Content Include="Views\BankAccount\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
