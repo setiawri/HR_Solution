@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HRWebApplication.Models;
+using HRWebApplication.Common;
 
 namespace HRWebApplication.Controllers
 {
@@ -18,19 +19,25 @@ namespace HRWebApplication.Controllers
         // GET: AttendancePayRate
         public async Task<ActionResult> Index()
         {
-            var result = (from p in db.AttPayRate
-                          join wt in db.WsTemplate on p.RefId equals wt.Id
-                          join s in db.AttStatus on p.AttendanceStatuses_Id equals s.Id
-                          select new AttendancePayRateViewModels
-                          {
-                              Id = p.Id,
-                              WorkshiftsTemplate = wt.Name,
-                              Status = s.Name,
-                              Amount = p.Amount,
-                              Notes = p.Notes,
-                              Active = p.Active
-                          });
-            return View(await result.ToListAsync());
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
+            {
+                var result = (from pr in db.AttPayRate
+                              join wt in db.WsTemplate on pr.RefId equals wt.Id
+                              join s in db.AttStatus on pr.AttendanceStatuses_Id equals s.Id
+                              select new AttendancePayRateViewModels
+                              {
+                                  Id = pr.Id,
+                                  WorkshiftsTemplate = wt.Name,
+                                  Status = s.Name,
+                                  Amount = pr.Amount,
+                                  Notes = pr.Notes,
+                                  Active = pr.Active
+                              });
+                return View(await result.ToListAsync());
+            }
         }
 
         // GET: AttendancePayRate/Details/5
@@ -63,9 +70,15 @@ namespace HRWebApplication.Controllers
         // GET: AttendancePayRate/Create
         public ActionResult Create()
         {
-            ViewBag.listWsTemplate = new SelectList(db.WsTemplate.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
-            ViewBag.listAttStatus = new SelectList(db.AttStatus.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
-            return View();
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
+            {
+                ViewBag.listWsTemplate = new SelectList(db.WsTemplate.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
+                ViewBag.listAttStatus = new SelectList(db.AttStatus.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
+                return View();
+            }
         }
 
         // POST: AttendancePayRate/Create
@@ -91,18 +104,24 @@ namespace HRWebApplication.Controllers
         // GET: AttendancePayRate/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
-            if (id == null)
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                AttendancePayRateModels attendancePayRateModels = await db.AttPayRate.FindAsync(id);
+                if (attendancePayRateModels == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.listWsTemplate = new SelectList(db.WsTemplate.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
+                ViewBag.listAttStatus = new SelectList(db.AttStatus.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
+                return View(attendancePayRateModels);
             }
-            AttendancePayRateModels attendancePayRateModels = await db.AttPayRate.FindAsync(id);
-            if (attendancePayRateModels == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.listWsTemplate = new SelectList(db.WsTemplate.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
-            ViewBag.listAttStatus = new SelectList(db.AttStatus.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
-            return View(attendancePayRateModels);
         }
 
         // POST: AttendancePayRate/Edit/5
@@ -126,28 +145,34 @@ namespace HRWebApplication.Controllers
         // GET: AttendancePayRate/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
-            if (id == null)
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var result = (from pr in db.AttPayRate
+                              join wt in db.WsTemplate on pr.RefId equals wt.Id
+                              join s in db.AttStatus on pr.AttendanceStatuses_Id equals s.Id
+                              where pr.Id == id
+                              select new AttendancePayRateViewModels
+                              {
+                                  Id = pr.Id,
+                                  WorkshiftsTemplate = wt.Name,
+                                  Status = s.Name,
+                                  Amount = pr.Amount,
+                                  Notes = pr.Notes,
+                                  Active = pr.Active
+                              }).SingleAsync();
+                if (result == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(await result);
             }
-            var result = (from p in db.AttPayRate
-                          join wt in db.WsTemplate on p.RefId equals wt.Id
-                          join s in db.AttStatus on p.AttendanceStatuses_Id equals s.Id
-                          where p.Id == id
-                          select new AttendancePayRateViewModels
-                          {
-                              Id = p.Id,
-                              WorkshiftsTemplate = wt.Name,
-                              Status = s.Name,
-                              Amount = p.Amount,
-                              Notes = p.Notes,
-                              Active = p.Active
-                          }).SingleAsync();
-            if (result == null)
-            {
-                return HttpNotFound();
-            }
-            return View(await result);
         }
 
         // POST: AttendancePayRate/Delete/5

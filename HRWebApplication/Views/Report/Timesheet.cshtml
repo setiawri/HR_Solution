@@ -1,0 +1,251 @@
+﻿@model IEnumerable<HRWebApplication.Models.TimesheetViewModels>
+
+@{
+    ViewBag.Title = "Timesheets";
+}
+
+<form id="myForm" method="post">
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Timesheets</h3>
+                </div>
+                <div class="pull-right">
+                    
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Timesheet <small>List of all Attendance Information</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="table-responsive">
+                                <table id="chkDatatable" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th style="min-width:82px !important;">
+                                                @Html.DisplayNameFor(model => model.Employee)
+                                            </th>
+                                            <th style="min-width:82px !important;">
+                                                @Html.DisplayNameFor(model => model.Client)
+                                            </th>
+                                            @*<th>
+                                                @Html.DisplayNameFor(model => model.Day)
+                                            </th>*@
+                                            <th style="min-width:82px !important;">
+                                                @Html.DisplayNameFor(model => model.IN)
+                                            </th>
+                                            <th style="min-width:82px !important;">
+                                                @Html.DisplayNameFor(model => model.OUT)
+                                            </th>
+                                            <th style="min-width:82px !important;">
+                                                @Html.DisplayNameFor(model => model.EffectiveIN)
+                                            </th>
+                                            <th style="min-width:82px !important;">
+                                                @Html.DisplayNameFor(model => model.EffectiveOUT)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Hours)
+                                            </th>
+                                            @*<th>
+                                                @Html.DisplayNameFor(model => model.Notes)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Accept)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Reject)
+                                            </th>*@
+                                            <th style="min-width:60px !important;">Status</th>
+                                            <th style="min-width:45px !important;">Approved</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Id)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Employee)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Client)
+                                                </td>
+                                                @*<td>
+                                                    @Html.DisplayFor(modelItem => item.Day)
+                                                </td>*@
+                                                <td>
+                                                    @{ string IN = item.IN.ToString("yyyy-MM-dd HH:mm"); }
+                                                    @IN
+                                                </td>
+                                                <td>
+                                                    @{ string OUT = item.OUT.ToString("yyyy-MM-dd HH:mm"); }
+                                                    @OUT
+                                                </td>
+                                                <td>
+                                                    @{ string EffectiveIN = item.EffectiveIN.ToString("yyyy-MM-dd HH:mm"); }
+                                                    @EffectiveIN
+                                                </td>
+                                                <td>
+                                                    @{ string EffectiveOUT = item.EffectiveOUT.ToString("yyyy-MM-dd HH:mm"); }
+                                                    @EffectiveOUT
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Hours)
+                                                </td>
+                                                @*<td>
+                                                    @Html.DisplayFor(modelItem => item.Notes)
+                                                </td>
+                                                <td>
+                                                    @Html.CheckBoxFor(modelItem => item.Accept)
+                                                </td>
+                                                <td>
+                                                    @Html.CheckBoxFor(modelItem => item.Reject)
+                                                </td>*@
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Status)
+                                                </td>
+                                                <td>
+                                                    @*@Html.ActionLink("Approve", "Edit", new { id = item.Id }) |
+                                                    @Html.ActionLink("Reject", "Details", new { id = item.Id })*@
+                                                    @if (item.Status == "Approved")
+                                                    {
+                                                        <button type="button" class="btn btn-success btn-xs" style="min-width:25px" disabled><i class="fa fa-check"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-xs" style="min-width:25px" onclick="ActionStatus('@item.Id', 'reject')"><i class="fa fa-close"></i></button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="button" class="btn btn-success btn-xs" style="min-width:25px" onclick="ActionStatus('@item.Id', 'accept')"><i class="fa fa-check"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-xs" style="min-width:25px" disabled><i class="fa fa-close"></i></button>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        @*<pre id="view-rows"></pre>
+                        <pre id="view-form"></pre>*@
+                        <input type="button" value="Generate Payroll" class="btn btn-primary" id="test" />
+                        <a href="@Url.Action("Create", "Attendance")" class="btn btn-success">Add Attendance</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function ActionStatus(id, status) {
+        if (status == 'accept'){
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AcceptStatus", "Report")',
+                data: {
+                    Id: id
+                },
+                success: function (data) {
+                    window.location.reload();
+                }, //end success
+                error: function (result) {
+                    alert("Error " + result);
+                } //end error
+            }); //end ajax
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RejectStatus", "Report")',
+                data: {
+                    Id: id
+                },
+                success: function (data) {
+                    window.location.reload();
+                }, //end success
+                error: function (result) {
+                    alert("Error " + result);
+                } //end error
+            }); //end ajax
+        }
+    }
+
+    $(document).ready(function () {
+        var table = $('#chkDatatable').DataTable({
+            //'autoWidth': true,
+            'columnDefs': [
+               {
+                   'targets': 0,
+                   'checkboxes': {
+                       'selectRow': true
+                   }
+               }
+            ],
+            'select': {
+                'style': 'multi'
+            },
+            'order': [[1, 'asc']]
+        });
+
+        $('#test').on('click', function (e) {
+            //var form = this;
+            var rows_selected = table.column(0).checkboxes.selected();
+            //console.log(rows_selected);
+            //$.each(rows_selected, function (index, rowId) {
+            //    $(form).append(
+            //         $('<input>')
+            //            .attr('type', 'hidden')
+            //            .attr('name', 'id[]')
+            //            .val(rowId)
+            //     );
+            //    console.log(form);
+            //});
+            //$('#view-rows').text(rows_selected.join(","));
+            ////$('#view-form').text($(form).serialize());
+            //$('input[name="id\[\]"]', form).remove();
+            //e.preventDefault();
+
+            // alert(rows_selected.join(","));
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GeneratePayroll", "Report")',
+                data: {
+                    ids: rows_selected.join(",")
+                },
+                success: function (data) {
+                    if (data.status == '404') {
+                        alert("Please choose rows to Generate Payroll!")
+                    }
+                    else if (data.status == '405') {
+                        alert("Can't Generate Payroll that Not Approved!")
+                    }
+                    else {
+                        alert("Success");
+                        window.location.reload();
+                    }
+                }, //end success
+                error: function (result) {
+                    alert("Error " + result);
+                } //end error
+            }); //end ajax
+        });
+    });
+</script>

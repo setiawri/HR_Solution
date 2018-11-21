@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HRWebApplication.Models;
+using HRWebApplication.Common;
 
 namespace HRWebApplication.Controllers
 {
@@ -18,18 +19,24 @@ namespace HRWebApplication.Controllers
         // GET: BankAccount
         public async Task<ActionResult> Index()
         {
-            var result = (from b in db.BankAccount
-                          orderby b.Name
-                          select new BankAccountViewModels
-                          {
-                              Id = b.Id,
-                              Owner = (b.Owner_Id == 1) ? "Client" : "Employee",
-                              Name = b.Name,
-                              BankName = b.BankName,
-                              AccountNumber = b.AccountNumber,
-                              Active = b.Active
-                          });
-            return View(await result.ToListAsync());
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
+            {
+                var result = (from b in db.BankAccount
+                              orderby b.Name
+                              select new BankAccountViewModels
+                              {
+                                  Id = b.Id,
+                                  Owner = (b.Owner_Id == 1) ? "Client" : "Employee",
+                                  Name = b.Name,
+                                  BankName = b.BankName,
+                                  AccountNumber = b.AccountNumber,
+                                  Active = b.Active
+                              });
+                return View(await result.ToListAsync());
+            }
         }
 
         // GET: BankAccount/Details/5
@@ -64,7 +71,14 @@ namespace HRWebApplication.Controllers
         // GET: BankAccount/Create
         public ActionResult Create()
         {
-            return View();
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
+            {
+                return View();
+            }
+
         }
 
         // POST: BankAccount/Create
@@ -88,25 +102,31 @@ namespace HRWebApplication.Controllers
         // GET: BankAccount/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BankAccountModels bankAccountModels = await db.BankAccount.FindAsync(id);
-            if (bankAccountModels == null)
-            {
-                return HttpNotFound();
-            }
-
-            if (bankAccountModels.Owner_Id == 1)
-            {
-                ViewBag.listOwner = new SelectList(db.Clients.Where(x => x.Active == true).OrderBy(x => x.CompanyName).ToList(), "Id", "CompanyName");
-            }
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
             else
             {
-                ViewBag.listOwner = new SelectList(db.User.OrderBy(x => x.FullName).ToList(), "Id", "FullName");
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                BankAccountModels bankAccountModels = await db.BankAccount.FindAsync(id);
+                if (bankAccountModels == null)
+                {
+                    return HttpNotFound();
+                }
+
+                if (bankAccountModels.Owner_Id == 1)
+                {
+                    ViewBag.listOwner = new SelectList(db.Clients.Where(x => x.Active == true).OrderBy(x => x.CompanyName).ToList(), "Id", "CompanyName");
+                }
+                else
+                {
+                    ViewBag.listOwner = new SelectList(db.User.OrderBy(x => x.FullName).ToList(), "Id", "FullName");
+                }
+                return View(bankAccountModels);
             }
-            return View(bankAccountModels);
         }
 
         // POST: BankAccount/Edit/5
@@ -137,16 +157,22 @@ namespace HRWebApplication.Controllers
         // GET: BankAccount/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
-            if (id == null)
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                BankAccountModels bankAccountModels = await db.BankAccount.FindAsync(id);
+                if (bankAccountModels == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(bankAccountModels);
             }
-            BankAccountModels bankAccountModels = await db.BankAccount.FindAsync(id);
-            if (bankAccountModels == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bankAccountModels);
         }
 
         // POST: BankAccount/Delete/5
