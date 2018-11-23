@@ -29,6 +29,7 @@ namespace HRWebApplication.Controllers
                               join u in db.User on a.UserAccounts_Id.ToString() equals u.Id
                               join c in db.Clients on a.Clients_Id equals c.Id
                               join w in db.Workshift on a.Workshifts_Id equals w.Id
+                              where a.Approved == false
                               orderby u.FullName, c.CompanyName
                               select new AttendanceViewModels
                               {

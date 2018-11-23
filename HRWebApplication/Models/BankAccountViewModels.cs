@@ -12,6 +12,7 @@ namespace HRWebApplication.Models
         public string BankName { get; set; }
         public string Name { get; set; }
         public string AccountNumber { get; set; }
+        public bool Internal { get; set; }
         public bool Active { get; set; }
     }
 }

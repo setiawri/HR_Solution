@@ -33,6 +33,7 @@ namespace HRWebApplication.Controllers
                                   Name = b.Name,
                                   BankName = b.BankName,
                                   AccountNumber = b.AccountNumber,
+                                  Internal = b.Internal,
                                   Active = b.Active
                               });
                 return View(await result.ToListAsync());

@@ -37,15 +37,14 @@
                                     <thead>
                                         <tr>
                                             <th></th>
+                                            <th style="min-width:45px !important;">Approved</th>
+                                            <th style="min-width:60px !important;">Status</th>
                                             <th style="min-width:82px !important;">
                                                 @Html.DisplayNameFor(model => model.Employee)
                                             </th>
                                             <th style="min-width:82px !important;">
                                                 @Html.DisplayNameFor(model => model.Client)
                                             </th>
-                                            @*<th>
-                                                @Html.DisplayNameFor(model => model.Day)
-                                            </th>*@
                                             <th style="min-width:82px !important;">
                                                 @Html.DisplayNameFor(model => model.IN)
                                             </th>
@@ -61,17 +60,18 @@
                                             <th>
                                                 @Html.DisplayNameFor(model => model.Hours)
                                             </th>
-                                            @*<th>
-                                                @Html.DisplayNameFor(model => model.Notes)
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Day)
                                             </th>
                                             <th>
+                                                @Html.DisplayNameFor(model => model.Notes)
+                                            </th>
+                                            @*<th>
                                                 @Html.DisplayNameFor(model => model.Accept)
                                             </th>
                                             <th>
                                                 @Html.DisplayNameFor(model => model.Reject)
                                             </th>*@
-                                            <th style="min-width:60px !important;">Status</th>
-                                            <th style="min-width:45px !important;">Approved</th>
                                         </tr>
                                     </thead>
 
@@ -83,14 +83,26 @@
                                                     @Html.DisplayFor(modelItem => item.Id)
                                                 </td>
                                                 <td>
+                                                    @if (item.Status == "Approved")
+                                                    {
+                                                        <button type="button" class="btn btn-success btn-xs" style="min-width:25px" disabled><i class="fa fa-check"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-xs" style="min-width:25px" onclick="ActionStatus('@item.Id', 'reject')"><i class="fa fa-close"></i></button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="button" class="btn btn-success btn-xs" style="min-width:25px" onclick="ActionStatus('@item.Id', 'accept')"><i class="fa fa-check"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-xs" style="min-width:25px" disabled><i class="fa fa-close"></i></button>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Status)
+                                                </td>
+                                                <td>
                                                     @Html.DisplayFor(modelItem => item.Employee)
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Client)
                                                 </td>
-                                                @*<td>
-                                                    @Html.DisplayFor(modelItem => item.Day)
-                                                </td>*@
                                                 <td>
                                                     @{ string IN = item.IN.ToString("yyyy-MM-dd HH:mm"); }
                                                     @IN
@@ -110,32 +122,18 @@
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Hours)
                                                 </td>
-                                                @*<td>
-                                                    @Html.DisplayFor(modelItem => item.Notes)
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Day)
                                                 </td>
                                                 <td>
+                                                    @Html.DisplayFor(modelItem => item.Notes)
+                                                </td>
+                                                @*<td>
                                                     @Html.CheckBoxFor(modelItem => item.Accept)
                                                 </td>
                                                 <td>
                                                     @Html.CheckBoxFor(modelItem => item.Reject)
                                                 </td>*@
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Status)
-                                                </td>
-                                                <td>
-                                                    @*@Html.ActionLink("Approve", "Edit", new { id = item.Id }) |
-                                                    @Html.ActionLink("Reject", "Details", new { id = item.Id })*@
-                                                    @if (item.Status == "Approved")
-                                                    {
-                                                        <button type="button" class="btn btn-success btn-xs" style="min-width:25px" disabled><i class="fa fa-check"></i></button>
-                                                        <button type="button" class="btn btn-danger btn-xs" style="min-width:25px" onclick="ActionStatus('@item.Id', 'reject')"><i class="fa fa-close"></i></button>
-                                                    }
-                                                    else
-                                                    {
-                                                        <button type="button" class="btn btn-success btn-xs" style="min-width:25px" onclick="ActionStatus('@item.Id', 'accept')"><i class="fa fa-check"></i></button>
-                                                        <button type="button" class="btn btn-danger btn-xs" style="min-width:25px" disabled><i class="fa fa-close"></i></button>
-                                                    }
-                                                </td>
                                             </tr>
                                         }
                                     </tbody>
@@ -145,8 +143,9 @@
                         <hr />
                         @*<pre id="view-rows"></pre>
                         <pre id="view-form"></pre>*@
-                        <input type="button" value="Generate Payroll" class="btn btn-primary" id="test" />
+                        <input type="button" value="Generate Payroll" class="btn btn-primary" id="generate" />
                         <a href="@Url.Action("Create", "Attendance")" class="btn btn-success">Add Attendance</a>
+                        @*<input type="button" value="Test" class="btn btn-default" id="test" />*@
                     </div>
                 </div>
             </div>
@@ -205,7 +204,23 @@
             'order': [[1, 'asc']]
         });
 
-        $('#test').on('click', function (e) {
+        $('#test').click(function () {
+            //const toast = swal.mixin({
+            //    toast: true,
+            //    position: 'top',
+            //    showConfirmButton: false,
+            //    timer: 3000
+            //});
+
+            //toast({
+            //    type: 'success',
+            //    title: 'Generated successfully'
+            //})
+
+            
+        });
+
+        $('#generate').on('click', function (e) {
             //var form = this;
             var rows_selected = table.column(0).checkboxes.selected();
             //console.log(rows_selected);
@@ -232,14 +247,25 @@
                 },
                 success: function (data) {
                     if (data.status == '404') {
-                        alert("Please choose rows to Generate Payroll!")
+                        swal({
+                            type: 'info',
+                            title: 'No Data Selected',
+                            text: 'Please choose rows to Generate Payroll !'
+                        })
                     }
                     else if (data.status == '405') {
-                        alert("Can't Generate Payroll that Not Approved!")
+                        swal({
+                            type: 'error',
+                            title: 'Invalid Data',
+                            text: 'Generate Payroll only for same Employee and has been Approved !'
+                        })
                     }
                     else {
-                        alert("Success");
                         window.location.reload();
+                        swal({
+                            type: 'success',
+                            title: 'Generated successfully',
+                        })
                     }
                 }, //end success
                 error: function (result) {

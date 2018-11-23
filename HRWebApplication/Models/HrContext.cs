@@ -21,6 +21,9 @@ namespace HRWebApplication.Models
         public DbSet<AttendanceModels> Attendance { get; set; }
         public DbSet<AttendancePayRateModels> AttPayRate { get; set; }
         public DbSet<BankAccountModels> BankAccount { get; set; }
+        public DbSet<PayrollItemModels> PayrollItem { get; set; }
         public DbSet<PayrollModels> Payroll { get; set; }
+        public DbSet<PaymentModels> Payment { get; set; }
+        public DbSet<PaymentItemModels> PaymentItem { get; set; }
     }
 }

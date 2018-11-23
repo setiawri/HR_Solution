@@ -37,6 +37,15 @@
                             <div class="form-horizontal col-md-9">
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.Id)
+
+                                <div class="form-group">
+                                    @Html.Label("Client", htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.DropDownList("Clients_Id", ViewBag.listClient as SelectList, "Select Client", new { @class = "form-control" })
+                                        @Html.ValidationMessage("Clients_Id", "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.RefId, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -108,6 +117,34 @@
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 ;
             });
+        });
+
+        $('#Clients_Id').val('@ViewBag.idClient');
+
+        $('#Clients_Id').change(function () {
+            if ($('#Clients_Id').val() == '') {
+                $('#RefId').prop('disabled', true);
+                $('#RefId').html('');
+            }
+            else {
+                $('#RefId').prop('disabled', false);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("LoadTemplates", "AttendancePayRate")',
+                    data: { id: $('#Clients_Id').val() },
+                    success: function (data) {
+                        console.log(data.result);
+                        var opt = "<option value=''>Select Workshift Templates</option>";
+                        $.each(data.result, function (index, item) {
+                            opt += "<option value='" + item.Value + "'>" + item.Text + "</option>";
+                        });
+                        $("#RefId").html(opt);
+                    }, //end success
+                    error: function (result) {
+                        alert("Error " + result);
+                    } //end error
+                }); //end ajax
+            }
         });
     });
 </script>

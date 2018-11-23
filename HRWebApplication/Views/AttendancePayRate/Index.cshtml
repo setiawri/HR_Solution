@@ -35,6 +35,9 @@
                             <thead>
                                 <tr>
                                     <th>
+                                        @Html.DisplayNameFor(model => model.Client)
+                                    </th>
+                                    <th>
                                         @Html.DisplayNameFor(model => model.WorkshiftsTemplate)
                                     </th>
                                     <th>
@@ -57,6 +60,9 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Client)
+                                        </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.WorkshiftsTemplate)
                                         </td>

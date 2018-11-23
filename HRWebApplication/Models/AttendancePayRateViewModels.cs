@@ -10,6 +10,8 @@ namespace HRWebApplication.Models
     {
         public Guid Id { get; set; }
 
+        public string Client { get; set; }
+
         [Display(Name = "Workshifts Template")]
         public string WorkshiftsTemplate { get; set; }
         public string Status { get; set; }

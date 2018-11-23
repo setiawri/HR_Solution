@@ -219,7 +219,14 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MasterMenuModels.cs" />
+    <Compile Include="Models\PaymentIndexViewModels.cs" />
+    <Compile Include="Models\PaymentItemModels.cs" />
+    <Compile Include="Models\PaymentModels.cs" />
+    <Compile Include="Models\PaymentViewModels.cs" />
+    <Compile Include="Models\PayrollItemModels.cs" />
+    <Compile Include="Models\PayrollItemViewModels.cs" />
     <Compile Include="Models\PayrollModels.cs" />
+    <Compile Include="Models\PayrollViewModels.cs" />
     <Compile Include="Models\RoleViewModels.cs" />
     <Compile Include="Models\TimesheetViewModels.cs" />
     <Compile Include="Models\UserModels.cs" />
@@ -263,6 +270,7 @@
     <Content Include="vendors\404\css\style.css" />
     <Content Include="vendors\404\js\index.js" />
     <Content Include="vendors\autosize\dist\autosize.min.js" />
+    <Content Include="vendors\bootbox\bootbox.min.js" />
     <Content Include="vendors\bootstrap-daterangepicker\daterangepicker.css" />
     <Content Include="vendors\bootstrap-daterangepicker\daterangepicker.js" />
     <Content Include="vendors\bootstrap-datetimepicker\build\css\bootstrap-datetimepicker.min.css" />
@@ -270,6 +278,8 @@
     <Content Include="vendors\bootstrap\dist\css\bootstrap.min.css" />
     <Content Include="vendors\bootstrap\dist\js\bootstrap.min.js" />
     <Content Include="vendors\Chart.js\dist\Chart.min.js" />
+    <Content Include="vendors\datatables-checkboxes\css\dataTables.checkboxes.css" />
+    <Content Include="vendors\datatables-checkboxes\js\dataTables.checkboxes.min.js" />
     <Content Include="vendors\datatables.net-bs\css\dataTables.bootstrap.min.css" />
     <Content Include="vendors\datatables.net-bs\js\dataTables.bootstrap.min.js" />
     <Content Include="vendors\datatables.net-buttons-bs\css\buttons.bootstrap.min.css" />
@@ -306,6 +316,8 @@
     <Content Include="vendors\nprogress\nprogress.js" />
     <Content Include="vendors\pdfmake\build\pdfmake.min.js" />
     <Content Include="vendors\pdfmake\build\vfs_fonts.js" />
+    <Content Include="vendors\sweetalert2\dist\sweetalert2.all.min.js" />
+    <Content Include="vendors\sweetalert2\dist\sweetalert2.min.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -394,6 +406,9 @@
     <Content Include="Views\BankAccount\Edit.cshtml" />
     <Content Include="Views\BankAccount\Index.cshtml" />
     <Content Include="Views\Report\Timesheet.cshtml" />
+    <Content Include="Views\Report\Payroll.cshtml" />
+    <Content Include="Views\Report\Payment.cshtml" />
+    <Content Include="Views\Report\Payments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
