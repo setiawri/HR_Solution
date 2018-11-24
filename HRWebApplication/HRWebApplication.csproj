@@ -175,12 +175,15 @@
     <Compile Include="Common\Query.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
+    <Compile Include="Controllers\AttendancePayRateController.cs" />
     <Compile Include="Controllers\AttendanceStatusController.cs" />
+    <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WorkshiftCategoryController.cs" />
@@ -206,14 +209,27 @@
     <Compile Include="Models\AccessViewModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModels.cs" />
+    <Compile Include="Models\AttendancePayRateModels.cs" />
+    <Compile Include="Models\AttendancePayRateViewModels.cs" />
     <Compile Include="Models\AttendanceStatusModels.cs" />
     <Compile Include="Models\AttendanceViewModels.cs" />
+    <Compile Include="Models\BankAccountModels.cs" />
+    <Compile Include="Models\BankAccountViewModels.cs" />
     <Compile Include="Models\ClientModels.cs" />
     <Compile Include="Models\HrContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MasterMenuModels.cs" />
+    <Compile Include="Models\PaymentIndexViewModels.cs" />
+    <Compile Include="Models\PaymentItemModels.cs" />
+    <Compile Include="Models\PaymentModels.cs" />
+    <Compile Include="Models\PaymentViewModels.cs" />
+    <Compile Include="Models\PayrollItemModels.cs" />
+    <Compile Include="Models\PayrollItemViewModels.cs" />
+    <Compile Include="Models\PayrollModels.cs" />
+    <Compile Include="Models\PayrollViewModels.cs" />
     <Compile Include="Models\RoleViewModels.cs" />
+    <Compile Include="Models\TimesheetViewModels.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Models\WorkshiftCategoryModels.cs" />
     <Compile Include="Models\WorkshiftModels.cs" />
@@ -255,6 +271,7 @@
     <Content Include="vendors\404\css\style.css" />
     <Content Include="vendors\404\js\index.js" />
     <Content Include="vendors\autosize\dist\autosize.min.js" />
+    <Content Include="vendors\bootbox\bootbox.min.js" />
     <Content Include="vendors\bootstrap-daterangepicker\daterangepicker.css" />
     <Content Include="vendors\bootstrap-daterangepicker\daterangepicker.js" />
     <Content Include="vendors\bootstrap-datetimepicker\build\css\bootstrap-datetimepicker.min.css" />
@@ -262,6 +279,8 @@
     <Content Include="vendors\bootstrap\dist\css\bootstrap.min.css" />
     <Content Include="vendors\bootstrap\dist\js\bootstrap.min.js" />
     <Content Include="vendors\Chart.js\dist\Chart.min.js" />
+    <Content Include="vendors\datatables-checkboxes\css\dataTables.checkboxes.css" />
+    <Content Include="vendors\datatables-checkboxes\js\dataTables.checkboxes.min.js" />
     <Content Include="vendors\datatables.net-bs\css\dataTables.bootstrap.min.css" />
     <Content Include="vendors\datatables.net-bs\js\dataTables.bootstrap.min.js" />
     <Content Include="vendors\datatables.net-buttons-bs\css\buttons.bootstrap.min.css" />
@@ -298,6 +317,8 @@
     <Content Include="vendors\nprogress\nprogress.js" />
     <Content Include="vendors\pdfmake\build\pdfmake.min.js" />
     <Content Include="vendors\pdfmake\build\vfs_fonts.js" />
+    <Content Include="vendors\sweetalert2\dist\sweetalert2.all.min.js" />
+    <Content Include="vendors\sweetalert2\dist\sweetalert2.min.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -375,6 +396,20 @@
     <Content Include="Views\Attendance\Details.cshtml" />
     <Content Include="Views\Attendance\Edit.cshtml" />
     <Content Include="Views\Attendance\Index.cshtml" />
+    <Content Include="Views\AttendancePayRate\Create.cshtml" />
+    <Content Include="Views\AttendancePayRate\Delete.cshtml" />
+    <Content Include="Views\AttendancePayRate\Details.cshtml" />
+    <Content Include="Views\AttendancePayRate\Edit.cshtml" />
+    <Content Include="Views\AttendancePayRate\Index.cshtml" />
+    <Content Include="Views\BankAccount\Create.cshtml" />
+    <Content Include="Views\BankAccount\Delete.cshtml" />
+    <Content Include="Views\BankAccount\Details.cshtml" />
+    <Content Include="Views\BankAccount\Edit.cshtml" />
+    <Content Include="Views\BankAccount\Index.cshtml" />
+    <Content Include="Views\Report\Timesheet.cshtml" />
+    <Content Include="Views\Report\Payroll.cshtml" />
+    <Content Include="Views\Report\Payment.cshtml" />
+    <Content Include="Views\Report\Payments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

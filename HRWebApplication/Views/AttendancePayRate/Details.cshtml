@@ -1,0 +1,92 @@
+﻿@model HRWebApplication.Models.AttendancePayRateViewModels
+
+@{
+    ViewBag.Title = "Details Attendance Pay Rate";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Attendance</h3>
+            </div>
+            <div class="title_right">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Details <small>Information of Attendance Pay Rate</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Client)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Client)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.WorkshiftsTemplate)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.WorkshiftsTemplate)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Status)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Amount)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Amount)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Notes)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Notes)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Active)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Active)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <p>
+                        <a href="@Url.Action("Index", "AttendancePayRate")" class="btn btn-default">Back to List</a>
+                        <a href="@Url.Action("Edit", new { id = Model.Id})" class="btn btn-info">Edit Data</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

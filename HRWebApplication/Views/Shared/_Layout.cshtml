@@ -25,6 +25,10 @@
     <link href="~/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet" />
     <link href="~/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet" />
     <link href="~/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/vendors/datatables-checkboxes/css/dataTables.checkboxes.css" rel="stylesheet" />
+    @*<link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/css/dataTables.checkboxes.css" rel="stylesheet" />*@
+    <!-- sweet alert 2 -->
+    <link href="~/vendors/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
     <!-- Custom Theme Style -->
     <link href="~/build/css/custom.min.css" rel="stylesheet">
 
@@ -78,7 +82,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-calendar"></i> Workshift <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-book"></i> Workshift <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="@Url.Action("Index", "WorkshiftCategory")">Categories</a></li>
                                         <li><a href="@Url.Action("Index", "WorkshiftTemplate")">Templates</a></li>
@@ -86,11 +90,26 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-bell"></i> Attendance <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-calendar"></i> Attendance <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="@Url.Action("Index", "Attendance")">Attendances</a></li>
                                         <li><a href="@Url.Action("Index", "AttendanceStatus")">Status</a></li>
                                         <li><a href="@Url.Action("Index", "AttendancePayRate")">Pay Rates</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-edit"></i> Reports <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("Timesheet", "Report")">Timesheets</a></li>
+                                        <li><a href="@Url.Action("Payroll", "Report")">Payrolls</a></li>
+                                        <li><a href="@Url.Action("Payments", "Report")">Payments</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-bell"></i> Others <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("Index", "BankAccount")">Bank Account</a></li>
+                                        <li><a href="@Url.Action("Index", "Holiday")">Holiday Schedule</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -178,6 +197,8 @@
     <script src="~/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="~/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="~/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="~/vendors/datatables-checkboxes/js/dataTables.checkboxes.min.js"></script>
+    @*<script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/js/dataTables.checkboxes.min.js"></script>*@
     <script src="~/vendors/jszip/dist/jszip.min.js"></script>
     <script src="~/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="~/vendors/pdfmake/build/vfs_fonts.js"></script>
@@ -206,6 +227,10 @@
     <script src="~/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
     <!-- bootstrap-datetimepicker -->
     <script src="~/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- bootbox -->
+    <script src="~/vendors/bootbox/bootbox.min.js"></script>
+    <!-- sweet alert 2 -->
+    <script src="~/vendors/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
     @*@Scripts.Render("~/listCustomer/js")
     @Scripts.Render("~/listLoan/js")*@
