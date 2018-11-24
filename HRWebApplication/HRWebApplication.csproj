@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -397,6 +398,16 @@
     <EmbeddedResource Include="Migrations\201810292238565_customUser.resx">
       <DependentUpon>201810292238565_customUser.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LIBUtil\LIBUtil\LIBUtil\LIBUtil.csproj">
+      <Project>{23013bfc-021e-426a-8a92-8c1c34836974}</Project>
+      <Name>LIBUtil</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HR_LIB\HR_LIB.csproj">
+      <Project>{af5a4ff1-b4af-45fb-8f22-183dcd4cb44f}</Project>
+      <Name>HR_LIB</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
