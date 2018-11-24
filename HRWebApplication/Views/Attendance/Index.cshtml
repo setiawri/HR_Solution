@@ -85,11 +85,11 @@
                                             @Html.DisplayFor(modelItem => item.Day)
                                         </td>
                                         <td>
-                                            @{ string start = item.Start.Substring(0, 5);}
+                                            @{ string start = DateTime.Parse(item.Start).ToString("HH:mm"); }
                                             @start
                                         </td>
                                         <td>
-                                            @{ string end = DateTime.Parse(item.Start.Substring(0, 5)).AddMinutes(item.Duration).ToString("HH:mm"); }
+                                            @{ string end = DateTime.Parse(item.Start).AddMinutes(item.Duration).ToString("HH:mm"); }
                                             @end
                                         </td>
                                         <td>

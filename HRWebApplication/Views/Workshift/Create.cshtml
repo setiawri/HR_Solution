@@ -39,6 +39,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Clients_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                     <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.ValidationMessage("Duplicate", new { @class = "text-danger" })
                                         @Html.DropDownListFor(model => model.Clients_Id, ViewBag.listClient as SelectList, "Select Client", new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.Clients_Id, "", new { @class = "text-danger" })
                                     </div>

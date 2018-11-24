@@ -84,6 +84,19 @@ namespace HRWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Name,Clients_Id,WorkshiftCategories_Id,DayOfWeek,Start,DurationMinutes,Notes,Active")] WorkshiftTemplateModels workshiftTemplateModels)
         {
+            int check = (from wt in db.WsTemplate
+                         where wt.Name == workshiftTemplateModels.Name
+                         && wt.Clients_Id == workshiftTemplateModels.Clients_Id
+                         && wt.WorkshiftCategories_Id == workshiftTemplateModels.WorkshiftCategories_Id
+                         && wt.DayOfWeek == workshiftTemplateModels.DayOfWeek
+                         && wt.Start == workshiftTemplateModels.Start
+                         && wt.DurationMinutes == workshiftTemplateModels.DurationMinutes
+                         select wt).Count();
+            if (check > 0)
+            {
+                ModelState.AddModelError("Duplicate", "Data Workshift Templates already exist!");
+            }
+
             if (ModelState.IsValid)
             {
                 workshiftTemplateModels.Id = Guid.NewGuid();
@@ -134,6 +147,19 @@ namespace HRWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Clients_Id,WorkshiftCategories_Id,DayOfWeek,Start,DurationMinutes,Notes,Active")] WorkshiftTemplateModels workshiftTemplateModels)
         {
+            int check = (from wt in db.WsTemplate
+                         where wt.Name == workshiftTemplateModels.Name
+                         && wt.Clients_Id == workshiftTemplateModels.Clients_Id
+                         && wt.WorkshiftCategories_Id == workshiftTemplateModels.WorkshiftCategories_Id
+                         && wt.DayOfWeek == workshiftTemplateModels.DayOfWeek
+                         && wt.Start == workshiftTemplateModels.Start
+                         && wt.DurationMinutes == workshiftTemplateModels.DurationMinutes
+                         select wt).Count();
+            if (check > 0)
+            {
+                ModelState.AddModelError("Duplicate", "Data Workshift Templates already exist!");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(workshiftTemplateModels).State = EntityState.Modified;

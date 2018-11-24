@@ -38,8 +38,8 @@ namespace HRWebApplication.Controllers
                                   Client = c.CompanyName,
                                   Workshift = w.Name,
                                   Day = ((Common.Master.DayOfWeek)w.DayOfWeek).ToString(),
-                                  Start = w.Start.ToString(),
-                                  Duration = w.DurationMinutes,
+                                  Start = a.Workshifts_Start.ToString(),
+                                  Duration = a.Workshifts_DurationMinutes,
                                   Flag1 = a.Flag1,
                                   Flag2 = a.Flag2,
                                   Approved = a.Approved
@@ -75,8 +75,8 @@ namespace HRWebApplication.Controllers
                           where w.Id == id
                           select w).FirstOrDefault();
             
-            string date_in = DateTime.Now.ToString("dd/MM/yyyy") + " " + result.Start.ToString().Substring(0, 5);
-            string date_out = DateTime.Now.ToString("dd/MM/yyyy") + " " + result.Start.Add(TimeSpan.FromMinutes(result.DurationMinutes)).ToString().Substring(0, 5);
+            string date_in = DateTime.Now.ToShortDateString() + " " + result.Start.ToString().Substring(0, 5);
+            string date_out = DateTime.Now.ToShortDateString() + " " + result.Start.Add(TimeSpan.FromMinutes(result.DurationMinutes)).ToString().Substring(0, 5);
 
             return Json(new { result, date_in, date_out }, JsonRequestBehavior.AllowGet);
         }
@@ -106,9 +106,11 @@ namespace HRWebApplication.Controllers
             if (ModelState.IsValid)
             {
                 attendanceModels.Id = Guid.NewGuid();
+                attendanceModels.Workshifts_Start = attendanceModels.EffectiveTimestampIn;
+                attendanceModels.Workshifts_DurationMinutes = (int)attendanceModels.EffectiveTimestampOut.Subtract(attendanceModels.EffectiveTimestampIn).TotalMinutes;
                 db.Attendance.Add(attendanceModels);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             ViewBag.listClient = new SelectList(db.Clients.Where(x => x.Active == true).OrderBy(x => x.CompanyName).ToList(), "Id", "CompanyName");
@@ -152,6 +154,8 @@ namespace HRWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                attendanceModels.Workshifts_Start = attendanceModels.EffectiveTimestampIn;
+                attendanceModels.Workshifts_DurationMinutes = (int)attendanceModels.EffectiveTimestampOut.Subtract(attendanceModels.EffectiveTimestampIn).TotalMinutes;
                 db.Entry(attendanceModels).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

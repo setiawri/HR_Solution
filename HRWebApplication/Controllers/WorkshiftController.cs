@@ -103,6 +103,20 @@ namespace HRWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Name,Clients_Id,WorkshiftCategories_Id,DayOfWeek,Start,DurationMinutes,Notes,Active,UserAccounts_Id,WorkshiftTemplates_Id")] WorkshiftModels workshiftModels)
         {
+            int check = (from ws in db.Workshift
+                         where ws.Clients_Id == workshiftModels.Clients_Id
+                         && ws.WorkshiftCategories_Id == workshiftModels.WorkshiftCategories_Id
+                         && ws.WorkshiftTemplates_Id == workshiftModels.WorkshiftTemplates_Id
+                         && ws.UserAccounts_Id == workshiftModels.UserAccounts_Id
+                         && ws.DayOfWeek == workshiftModels.DayOfWeek
+                         && ws.Start == workshiftModels.Start
+                         && ws.DurationMinutes == workshiftModels.DurationMinutes
+                         select ws).Count();
+            if (check > 0)
+            {
+                ModelState.AddModelError("Duplicate", "Data Workshift already exist!");
+            }
+
             if (ModelState.IsValid)
             {
                 workshiftModels.Id = Guid.NewGuid();
@@ -156,6 +170,20 @@ namespace HRWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Clients_Id,WorkshiftCategories_Id,DayOfWeek,Start,DurationMinutes,Notes,Active,UserAccounts_Id,WorkshiftTemplates_Id")] WorkshiftModels workshiftModels)
         {
+            int check = (from ws in db.Workshift
+                         where ws.Clients_Id == workshiftModels.Clients_Id
+                         && ws.WorkshiftCategories_Id == workshiftModels.WorkshiftCategories_Id
+                         && ws.WorkshiftTemplates_Id == workshiftModels.WorkshiftTemplates_Id
+                         && ws.UserAccounts_Id == workshiftModels.UserAccounts_Id
+                         && ws.DayOfWeek == workshiftModels.DayOfWeek
+                         && ws.Start == workshiftModels.Start
+                         && ws.DurationMinutes == workshiftModels.DurationMinutes
+                         select ws).Count();
+            if (check > 0)
+            {
+                ModelState.AddModelError("Duplicate", "Data Workshift already exist!");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(workshiftModels).State = EntityState.Modified;
