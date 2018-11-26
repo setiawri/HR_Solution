@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HRWebApplication.Models
@@ -94,6 +95,16 @@ namespace HRWebApplication.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string Identification { get; set; }
+        public DateTime? DOB { get; set; }
+        public int? Height { get; set; }
+        public int? Weight { get; set; }
+        public string Phone1 { get; set; }
+        public string Phone2 { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string Notes { get; set; }
     }
 
     public class ResetPasswordViewModel

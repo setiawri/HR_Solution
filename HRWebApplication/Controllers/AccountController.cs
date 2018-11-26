@@ -185,7 +185,16 @@ namespace HRWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FullName = model.FullName };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FullName = model.FullName
+                                                , Identification = model.Identification
+                                                , DOB = model.DOB
+                                                , Height = model.Height
+                                                , Weight = model.Weight
+                                                , Phone1 = model.Phone1
+                                                , Phone2 = model.Phone2
+                                                , Address1 = model.Address1
+                                                , Address2 = model.Address2
+                                                , Notes = model.Notes };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

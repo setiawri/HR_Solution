@@ -168,6 +168,11 @@
     }
 
     $(document).ready(function () {
+        $('#UserAccounts_Id').select2({
+            allowClear: true,
+            placeholder: 'Select Employee'
+        });
+
         $('.tanggal').datetimepicker({
             //format: 'DD/MM/YYYY HH:mm'
         });

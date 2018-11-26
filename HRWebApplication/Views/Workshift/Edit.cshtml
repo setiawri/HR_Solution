@@ -158,6 +158,11 @@
     }
 
     $(document).ready(function () {
+        $('#UserAccounts_Id').select2({
+            allowClear: true,
+            placeholder: 'Select Employee'
+        });
+
         $('#From').datetimepicker({
             format: 'HH:mm'
         });

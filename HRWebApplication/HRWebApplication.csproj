@@ -317,6 +317,8 @@
     <Content Include="vendors\nprogress\nprogress.js" />
     <Content Include="vendors\pdfmake\build\pdfmake.min.js" />
     <Content Include="vendors\pdfmake\build\vfs_fonts.js" />
+    <Content Include="vendors\select2\dist\css\select2.min.css" />
+    <Content Include="vendors\select2\dist\js\select2.full.min.js" />
     <Content Include="vendors\sweetalert2\dist\sweetalert2.all.min.js" />
     <Content Include="vendors\sweetalert2\dist\sweetalert2.min.css" />
     <Content Include="Web.config" />

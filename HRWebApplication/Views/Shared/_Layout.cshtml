@@ -29,6 +29,8 @@
     @*<link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/css/dataTables.checkboxes.css" rel="stylesheet" />*@
     <!-- sweet alert 2 -->
     <link href="~/vendors/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
+    <!-- select2 -->
+    <link href="~/vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Custom Theme Style -->
     <link href="~/build/css/custom.min.css" rel="stylesheet">
 
@@ -76,17 +78,26 @@
                                 <li>
                                     <a><i class="fa fa-user"></i> Admin <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="@Url.Action("Index", "Role")">Role User</a></li>
-                                        <li><a href="@Url.Action("Index", "User")">User Account</a></li>
-                                        <li><a href="@Url.Action("Index", "Client")">Clients</a></li>
+                                        <li><a>Users<span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="@Url.Action("Index", "Role")">User Roles</a></li>
+                                                <li><a href="@Url.Action("Index", "User")">User Accounts</a></li>
+                                                <li><a href="@Url.Action("Menu", "Info")">Access Menu</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a>Clients<span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="@Url.Action("Index", "Client")">Clients</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-book"></i> Workshift <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="@Url.Action("Index", "WorkshiftCategory")">Categories</a></li>
-                                        <li><a href="@Url.Action("Index", "WorkshiftTemplate")">Templates</a></li>
-                                        <li><a href="@Url.Action("Index", "Workshift")">Workshifts</a></li>
+                                        <li><a href="@Url.Action("Index", "WorkshiftTemplate")">Client Templates</a></li>
+                                        <li><a href="@Url.Action("Index", "Workshift")">Employee Workshifts</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -114,14 +125,14 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="menu_section">
+                        @*<div class="menu_section">
                             <h3>Additional</h3>
                             <ul class="nav side-menu">
                                 <li>
                                     <a href="@Url.Action("Menu", "Info")"><i class="fa fa-info-circle"></i> Access Menu</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div>*@
                     </div>
                     <!-- /sidebar menu -->
                     <!-- /menu footer buttons -->
@@ -231,6 +242,8 @@
     <script src="~/vendors/bootbox/bootbox.min.js"></script>
     <!-- sweet alert 2 -->
     <script src="~/vendors/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <!-- select2 -->
+    <script src="~/vendors/select2/dist/js/select2.full.min.js"></script>
 
     @*@Scripts.Render("~/listCustomer/js")
     @Scripts.Render("~/listLoan/js")*@

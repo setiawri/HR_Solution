@@ -31,7 +31,7 @@ namespace HRWebApplication.Controllers
                               EffectiveOUT = a.EffectiveTimestampOut,
                               Hours = (a.Workshifts_DurationMinutes / 60).ToString(),
                               Notes = a.Notes,
-                              Status = a.Approved ? "Approved" : "Not Approved"
+                              Status = a.Approved ? "Approved" : "Rejected"
                           });
             return View(result.ToList());
         }
