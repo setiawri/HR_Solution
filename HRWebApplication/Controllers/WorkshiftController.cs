@@ -122,7 +122,7 @@ namespace HRWebApplication.Controllers
                 workshiftModels.Id = Guid.NewGuid();
                 db.Workshift.Add(workshiftModels);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             ViewBag.listClient = new SelectList(db.Clients.Where(x => x.Active == true).OrderBy(x => x.CompanyName).ToList(), "Id", "CompanyName");

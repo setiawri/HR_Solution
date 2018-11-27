@@ -94,7 +94,7 @@ namespace HRWebApplication.Controllers
                 bankAccountModels.Id = Guid.NewGuid();
                 db.BankAccount.Add(bankAccountModels);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(bankAccountModels);

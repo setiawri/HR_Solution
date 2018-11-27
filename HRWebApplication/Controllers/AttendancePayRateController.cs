@@ -104,7 +104,7 @@ namespace HRWebApplication.Controllers
                 attendancePayRateModels.Id = Guid.NewGuid();
                 db.AttPayRate.Add(attendancePayRateModels);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             ViewBag.listClient = new SelectList(db.Clients.Where(x => x.Active == true).OrderBy(x => x.CompanyName).ToList(), "Id", "CompanyName");

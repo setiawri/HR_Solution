@@ -68,7 +68,7 @@ namespace HRWebApplication.Controllers
                 clientModels.Id = Guid.NewGuid();
                 db.Clients.Add(clientModels);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(clientModels);

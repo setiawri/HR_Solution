@@ -68,7 +68,7 @@ namespace HRWebApplication.Controllers
                 attendanceStatusModels.Id = Guid.NewGuid();
                 db.AttStatus.Add(attendanceStatusModels);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(attendanceStatusModels);

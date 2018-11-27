@@ -68,7 +68,7 @@ namespace HRWebApplication.Controllers
                 workshiftCategoryModels.Id = Guid.NewGuid();
                 db.WsCategory.Add(workshiftCategoryModels);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(workshiftCategoryModels);
