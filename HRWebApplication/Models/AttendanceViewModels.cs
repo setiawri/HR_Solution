@@ -18,5 +18,8 @@ namespace HRWebApplication.Models
         public bool Flag1 { get; set; }
         public bool Flag2 { get; set; }
         public bool Approved { get; set; }
+        public string Hours { get; set; }
+        public string Notes { get; set; }
+        public string Status { get; set; }
     }
 }

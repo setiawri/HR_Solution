@@ -255,6 +255,7 @@
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\HRWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -277,6 +278,7 @@
     <Content Include="vendors\bootstrap-datetimepicker\build\css\bootstrap-datetimepicker.min.css" />
     <Content Include="vendors\bootstrap-datetimepicker\build\js\bootstrap-datetimepicker.min.js" />
     <Content Include="vendors\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="vendors\bootstrap\dist\js\bootstrap.min.js" />
     <Content Include="vendors\Chart.js\dist\Chart.min.js" />
     <Content Include="vendors\datatables-checkboxes\css\dataTables.checkboxes.css" />
@@ -309,6 +311,7 @@
     <Content Include="vendors\Flot\jquery.flot.stack.js" />
     <Content Include="vendors\Flot\jquery.flot.time.js" />
     <Content Include="vendors\font-awesome\css\font-awesome.min.css" />
+    <Content Include="vendors\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="vendors\jquery-sparkline\dist\jquery.sparkline.min.js" />
     <Content Include="vendors\jquery\dist\jquery.min.js" />
     <Content Include="vendors\jszip\dist\jszip.min.js" />
@@ -412,6 +415,15 @@
     <Content Include="Views\Report\Payroll.cshtml" />
     <Content Include="Views\Report\Payment.cshtml" />
     <Content Include="Views\Report\Payments.cshtml" />
+    <Content Include="vendors\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="vendors\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="vendors\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="vendors\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="vendors\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

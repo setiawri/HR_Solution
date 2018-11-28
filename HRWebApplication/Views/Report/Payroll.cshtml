@@ -149,4 +149,10 @@
             } //end error
         }); //end ajax
     }
+
+    $(document).ready(function () {
+        var table = $('#datatable').DataTable({
+            'order': [[0, 'desc']]
+        });
+    });
 </script>

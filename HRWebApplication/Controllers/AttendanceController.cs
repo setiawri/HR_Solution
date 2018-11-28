@@ -29,7 +29,7 @@ namespace HRWebApplication.Controllers
                               join u in db.User on a.UserAccounts_Id.ToString() equals u.Id
                               join c in db.Clients on a.Clients_Id equals c.Id
                               join w in db.Workshift on a.Workshifts_Id equals w.Id
-                              where a.Approved == false
+                              where a.PayrollItems_Id == null
                               orderby u.FullName, c.CompanyName
                               select new AttendanceViewModels
                               {
@@ -40,9 +40,10 @@ namespace HRWebApplication.Controllers
                                   Day = ((Common.Master.DayOfWeek)w.DayOfWeek).ToString(),
                                   Start = a.Workshifts_Start.ToString(),
                                   Duration = a.Workshifts_DurationMinutes,
-                                  Flag1 = a.Flag1,
-                                  Flag2 = a.Flag2,
-                                  Approved = a.Approved
+                                  Hours = (a.Workshifts_DurationMinutes / 60).ToString(),
+                                  Notes = a.Notes,
+                                  Approved = a.Approved,
+                                  Status = a.Approved ? "Approved" : "Rejected"
                               });
                 return View(await result.ToListAsync());
             }
@@ -180,12 +181,6 @@ namespace HRWebApplication.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                //AttendanceModels attendanceModels = await db.Attendance.FindAsync(id);
-                //if (attendanceModels == null)
-                //{
-                //    return HttpNotFound();
-                //}
-                //return View(attendanceModels);
                 var result = (from a in db.Attendance
                               join u in db.User on a.UserAccounts_Id.ToString() equals u.Id
                               join c in db.Clients on a.Clients_Id equals c.Id

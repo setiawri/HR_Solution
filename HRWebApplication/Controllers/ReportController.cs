@@ -1,4 +1,5 @@
-﻿using HRWebApplication.Models;
+﻿using HRWebApplication.Common;
+using HRWebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,34 +8,35 @@ using System.Web.Mvc;
 
 namespace HRWebApplication.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         private HrContext db = new HrContext();
 
-        public ActionResult Timesheet()
-        {
-            var result = (from a in db.Attendance
-                          join u in db.User on a.UserAccounts_Id.ToString() equals u.Id
-                          join c in db.Clients on a.Clients_Id equals c.Id
-                          join w in db.Workshift on a.Workshifts_Id equals w.Id
-                          where a.PayrollItems_Id == null
-                          orderby u.FullName, c.CompanyName
-                          select new TimesheetViewModels
-                          {
-                              Id = a.Id,
-                              Employee = u.FullName,
-                              Client = c.CompanyName,
-                              Day = ((Common.Master.DayOfWeek)w.DayOfWeek).ToString(),
-                              IN = a.TimestampIn,
-                              OUT = a.TimestampOut,
-                              EffectiveIN = a.EffectiveTimestampIn,
-                              EffectiveOUT = a.EffectiveTimestampOut,
-                              Hours = (a.Workshifts_DurationMinutes / 60).ToString(),
-                              Notes = a.Notes,
-                              Status = a.Approved ? "Approved" : "Rejected"
-                          });
-            return View(result.ToList());
-        }
+        //public ActionResult Timesheet()
+        //{
+        //    var result = (from a in db.Attendance
+        //                  join u in db.User on a.UserAccounts_Id.ToString() equals u.Id
+        //                  join c in db.Clients on a.Clients_Id equals c.Id
+        //                  join w in db.Workshift on a.Workshifts_Id equals w.Id
+        //                  where a.PayrollItems_Id == null
+        //                  orderby u.FullName, c.CompanyName
+        //                  select new TimesheetViewModels
+        //                  {
+        //                      Id = a.Id,
+        //                      Employee = u.FullName,
+        //                      Client = c.CompanyName,
+        //                      Day = ((Common.Master.DayOfWeek)w.DayOfWeek).ToString(),
+        //                      IN = a.TimestampIn,
+        //                      OUT = a.TimestampOut,
+        //                      EffectiveIN = a.EffectiveTimestampIn,
+        //                      EffectiveOUT = a.EffectiveTimestampOut,
+        //                      Hours = (a.Workshifts_DurationMinutes / 60).ToString(),
+        //                      Notes = a.Notes,
+        //                      Status = a.Approved ? "Approved" : "Rejected"
+        //                  });
+        //    return View(result.ToList());
+        //}
 
         public JsonResult AcceptStatus(Guid Id)
         {
@@ -186,37 +188,49 @@ namespace HRWebApplication.Controllers
 
         public ActionResult Payroll()
         {
-            var result = (from r in db.Payroll
-                          join u in db.User on r.Employee_UserAccounts_Id.ToString() equals u.Id
-                          where r.Amount > 0
-                          select new PayrollViewModels
-                          {
-                              Id = r.Id,
-                              No = r.No,
-                              Timestamp = r.Timestamp,
-                              Employee = u.FullName,
-                              Amount = r.Amount,
-                              HasPayment = r.hasPayment
-                          });
-            return View(result.ToList());
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
+            {
+                var result = (from r in db.Payroll
+                              join u in db.User on r.Employee_UserAccounts_Id.ToString() equals u.Id
+                              where r.Amount > 0
+                              select new PayrollViewModels
+                              {
+                                  Id = r.Id,
+                                  No = r.No,
+                                  Timestamp = r.Timestamp,
+                                  Employee = u.FullName,
+                                  Amount = r.Amount,
+                                  HasPayment = r.hasPayment
+                              });
+                return View(result.ToList());
+            }
         }
 
         public ActionResult Payment(Guid? Id)
         {
-            HRWebApplication.Common.Master m = new Common.Master();
-            PaymentViewModels result = (from pRoll in db.Payroll
-                                        where pRoll.Id == Id
-                                        select new PaymentViewModels
-                                        {
-                                            No = pRoll.No,
-                                            Amount = pRoll.Amount,
-                                            IdUser = pRoll.Employee_UserAccounts_Id,
-                                            hasPayment = pRoll.hasPayment
-                                        }).Single();
-            result.Amount -= m.GetTotalPayment(Id.Value);
-            ViewBag.listTarget = new SelectList(db.BankAccount.Where(x => x.Active == true && x.Owner_RefId == result.IdUser).OrderBy(x => x.Name).ToList(), "Id", "Name");
-            ViewBag.listSource = new SelectList(db.BankAccount.Where(x => x.Active == true && x.Internal == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
-            return View(result);
+            Permissions p = new Permissions();
+            bool auth = p.isGranted(User.Identity.Name, this.ControllerContext.RouteData.Values["controller"].ToString() + "_" + this.ControllerContext.RouteData.Values["action"].ToString());
+            if (!auth) { return new ViewResult() { ViewName = "Unauthorized" }; }
+            else
+            {
+                HRWebApplication.Common.Master m = new Common.Master();
+                PaymentViewModels result = (from pRoll in db.Payroll
+                                            where pRoll.Id == Id
+                                            select new PaymentViewModels
+                                            {
+                                                No = pRoll.No,
+                                                Amount = pRoll.Amount,
+                                                IdUser = pRoll.Employee_UserAccounts_Id,
+                                                hasPayment = pRoll.hasPayment
+                                            }).Single();
+                result.Amount -= m.GetTotalPayment(Id.Value);
+                ViewBag.listTarget = new SelectList(db.BankAccount.Where(x => x.Active == true && x.Owner_RefId == result.IdUser).OrderBy(x => x.Name).ToList(), "Id", "Name");
+                ViewBag.listSource = new SelectList(db.BankAccount.Where(x => x.Active == true && x.Internal == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
+                return View(result);
+            }
         }
 
         [HttpPost]
