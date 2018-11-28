@@ -111,6 +111,8 @@ namespace HRWebApplication.Controllers
             }
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             var role = await RoleManager.FindByIdAsync(id);
