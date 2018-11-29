@@ -44,6 +44,7 @@
                                             new SelectListItem { Text = "Client", Value = "1" },
                                             new SelectListItem { Text = "Employee", Value = "2" }
                                         }, "Select Owner", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Owner_Id, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 

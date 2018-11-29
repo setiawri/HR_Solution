@@ -29,7 +29,7 @@ namespace HRWebApplication.Controllers
                               select new BankAccountViewModels
                               {
                                   Id = b.Id,
-                                  Owner = (b.Owner_Id == 1) ? "Client" : "Employee",
+                                  Owner = b.Owner_Id.ToString(),
                                   Name = b.Name,
                                   BankName = b.BankName,
                                   AccountNumber = b.AccountNumber,
@@ -122,9 +122,13 @@ namespace HRWebApplication.Controllers
                 {
                     ViewBag.listOwner = new SelectList(db.Clients.Where(x => x.Active == true).OrderBy(x => x.CompanyName).ToList(), "Id", "CompanyName");
                 }
-                else
+                else if (bankAccountModels.Owner_Id == 2)
                 {
                     ViewBag.listOwner = new SelectList(db.User.OrderBy(x => x.FullName).ToList(), "Id", "FullName");
+                }
+                else
+                {
+                    ViewBag.listOwner = null;
                 }
                 return View(bankAccountModels);
             }

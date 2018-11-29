@@ -72,8 +72,8 @@ namespace HRWebApplication.Models
         [Required]
         public string RoleName { get; set; }
 
-        [Required]
-        [EmailAddress]
+        //[Required]
+        //[EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 

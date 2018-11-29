@@ -47,7 +47,7 @@ namespace HRWebApplication
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
+                RequireUniqueEmail = false //set false for not require email when registering user
             };
 
             // Configure validation logic for passwords

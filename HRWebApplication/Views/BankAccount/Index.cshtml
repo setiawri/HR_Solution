@@ -70,7 +70,13 @@
                                             @Html.DisplayFor(modelItem => item.AccountNumber)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Owner)
+                                            @{ 
+                                                string owner = "";
+                                                if (item.Owner == "1") { owner = "Client"; }
+                                                else if (item.Owner == "1") { owner = "Employee"; }
+                                                else { owner = "Internal"; }
+                                            }
+                                            @owner
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Internal)

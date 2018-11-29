@@ -32,6 +32,6 @@ namespace HRWebApplication.Models
         public bool Internal { get; set; }
 
         [Display(Name = "Owner")]
-        public int Owner_Id { get; set; }
+        public int? Owner_Id { get; set; }
     }
 }

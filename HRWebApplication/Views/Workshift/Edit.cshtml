@@ -173,6 +173,10 @@
             GetDuration();
         });
 
+        $('#Stop').blur(function () {
+            GetDuration();
+        });
+
         var start = new Date("01/01/2000 " + $("#Start").val());
         var tot_hours = Math.floor($("#DurationMinutes").val() / 60);
         var tot_minutes = $("#DurationMinutes").val() % 60;

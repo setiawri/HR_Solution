@@ -43,11 +43,11 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.WebMenuAccess)
                                     </th>
-                                    <th>Status</th>
-                                    <th>
+                                    <th>Enabled</th>
+                                    @*<th>
                                         @Html.DisplayNameFor(model => model.RoleName)
                                     </th>
-                                    <th>Action</th>
+                                    <th>Action</th>*@
                                 </tr>
                             </thead>
 
@@ -67,14 +67,16 @@
                                         <td>
                                             @if (string.IsNullOrEmpty(item.RoleName))
                                             {
-                                                <label class="btn btn-danger btn-xs">Access Disable</label>
+                                                <label class="btn btn-danger btn-xs" disabled>NO</label>
+                                                <button type="button" class="btn btn-primary btn-xs" onclick="ActionMenu('@item.WebMenuAccess', '@ViewBag.Id', 'enable')"><i class="fa fa-plus"></i> Enable</button>
                                             }
                                             else
                                             {
-                                                <label class="btn btn-success btn-xs">Access Enable</label>
+                                                <label class="btn btn-success btn-xs" disabled>YES</label>
+                                                <button type="button" class="btn btn-warning btn-xs" onclick="ActionMenu('@item.WebMenuAccess', '@ViewBag.Id', 'disable')"><i class="fa fa-trash"></i> Disable</button>
                                             }
                                         </td>
-                                        <td>
+                                        @*<td>
                                             @Html.DisplayFor(modelItem => item.RoleName)
                                         </td>
                                         <td>
@@ -88,7 +90,7 @@
                                                 <button type="button" class="btn btn-primary btn-xs" onclick="ActionMenu('@item.WebMenuAccess', '@ViewBag.Id', 'enable')" disabled><i class="fa fa-plus"></i> Add</button>
                                                 <button type="button" class="btn btn-warning btn-xs" onclick="ActionMenu('@item.WebMenuAccess', '@ViewBag.Id', 'disable')"><i class="fa fa-trash"></i> Remove</button>
                                             }
-                                        </td>
+                                        </td>*@
                                     </tr>
                                 }
                             </tbody>

@@ -52,7 +52,16 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Owner_RefId, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        @Html.DropDownListFor(model => model.Owner_RefId, ViewBag.listOwner as SelectList, "Select Client/Employee", new { @class = "form-control" })
+                                        @if (ViewBag.listOwner == null)
+                                        {
+                                            <select class="form-control" id="Owner_RefId" name="Owner_RefId" disabled="disabled">
+                                                <option value=""></option>
+                                            </select>
+                                        }
+                                        else
+                                        {
+                                            @Html.DropDownListFor(model => model.Owner_RefId, ViewBag.listOwner as SelectList, "Select Client/Employee", new { @class = "form-control" })
+                                        }
                                         @Html.ValidationMessageFor(model => model.Owner_RefId, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
