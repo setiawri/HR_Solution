@@ -37,6 +37,16 @@
                             <div class="form-horizontal col-md-9">
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="form-group">
+                                    @Html.LabelFor(model => model.Internal, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="checkbox">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.CheckBoxFor(model => model.Internal)
+                                            @Html.ValidationMessageFor(model => model.Internal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     @Html.LabelFor(model => model.Owner_Id, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         @Html.DropDownListFor(model => model.Owner_Id, new List<SelectListItem>
@@ -91,16 +101,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Internal, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="checkbox">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.EditorFor(model => model.Internal)
-                                            @Html.ValidationMessageFor(model => model.Internal, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="checkbox">
@@ -115,6 +115,7 @@
                                         <input type="submit" value="Create" class="btn btn-success" />
                                         <a href="@Url.Action("Create", "BankAccount")" class="btn btn-warning">Reset</a>
                                         <a href="@Url.Action("Index", "BankAccount")" class="btn btn-default">Back to List</a>
+                                        <button type="button" class="btn btn-default" id="test">Test</button>
                                     </div>
                                 </div>
                             </div>
@@ -154,6 +155,18 @@
     }
 
     $(document).ready(function () {
+        $('#Internal').click(function () {
+            if ($('#Internal').is(':checked')) {
+                $('#Owner_Id').val('');
+                $('#Owner_Id').prop('disabled', true);
+                $('#Owner_RefId').prop('disabled', true);
+                $('#Owner_RefId').html('');
+            }
+            else {
+                $('#Owner_Id').prop('disabled', false);
+            }
+        });
+
         $('#Owner_Id').change(function () {
             GetOwnerReff();
         })

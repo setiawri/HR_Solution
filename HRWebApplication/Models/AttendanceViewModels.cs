@@ -19,6 +19,9 @@ namespace HRWebApplication.Models
         public bool Flag2 { get; set; }
         public bool Approved { get; set; }
         public string Hours { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
+        public decimal Payrate { get; set; }
         public string Notes { get; set; }
         public string Status { get; set; }
     }

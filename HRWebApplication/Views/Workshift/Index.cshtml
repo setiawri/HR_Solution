@@ -35,13 +35,13 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Client)
+                                        @Html.DisplayNameFor(model => model.Name)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Employee)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Name)
+                                        @Html.DisplayNameFor(model => model.Client)
                                     </th>
                                     @*<th>
                                         @Html.DisplayNameFor(model => model.TemplateName)
@@ -70,13 +70,13 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Client)
+                                            @Html.DisplayFor(modelItem => item.Name)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Employee)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
+                                            @Html.DisplayFor(modelItem => item.Client)
                                         </td>
                                         @*<td>
                                             @Html.DisplayFor(modelItem => item.TemplateName)
@@ -113,3 +113,14 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var table = $('#datatable').DataTable({
+            'columnDefs': [
+                { type: 'natural', targets: 0 }
+            ],
+            'aaSorting': [[0, 'asc'], [1, 'asc'], [2, 'asc'], [3, 'asc'], [4, 'asc'], [5, 'asc'], [6, 'asc']]
+        });
+    });
+</script>

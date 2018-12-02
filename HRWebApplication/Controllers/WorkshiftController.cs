@@ -30,7 +30,7 @@ namespace HRWebApplication.Controllers
                             join u in db.User on w.UserAccounts_Id.ToString() equals u.Id
                             join wt in db.WsTemplate on w.WorkshiftTemplates_Id equals wt.Id
                             join wc in db.WsCategory on w.WorkshiftCategories_Id equals wc.Id
-                            orderby c.CompanyName, u.FullName
+                            //orderby c.CompanyName, u.FullName
                             select new WorkshiftViewModels
                             {
                                 Id = w.Id,
@@ -66,7 +66,29 @@ namespace HRWebApplication.Controllers
 
         public JsonResult LoadTemplates(Guid id)
         {
-            var result = new SelectList(db.WsTemplate.Where(x => x.Clients_Id == id).OrderBy(x => x.Name).ToList(), "Id", "Name");
+            //var result = new SelectList(db.WsTemplate.Where(x => x.Clients_Id == id).OrderBy(x => x.Name).ToList(), "Id", "Name");
+            List<WorkshiftTemplateViewModels> data = (from t in db.WsTemplate
+                                                      where t.Clients_Id == id
+                                                      orderby t.Name
+                                                      select new WorkshiftTemplateViewModels
+                                                      {
+                                                          Id = t.Id,
+                                                          Name = t.Name,
+                                                          DayOfWeek = ((Master.DayOfWeek)t.DayOfWeek).ToString(),
+                                                          Start = t.Start.ToString().Substring(0, 5),
+                                                          Duration = t.DurationMinutes
+                                                      }).ToList();
+            List<object> newList = new List<object>(); //create anonymous object list
+            foreach (var item in data)
+            {
+                newList.Add(new
+                {
+                    Id = item.Id,
+                    Name = item.Name + " ( " + item.DayOfWeek + " ) " + item.Start + " - " + DateTime.Parse(item.Start).AddMinutes(item.Duration).ToString("HH:mm")
+                });
+            }
+            var result = new SelectList(newList, "Id", "Name");
+
             return Json(new { result }, JsonRequestBehavior.AllowGet);
         }
 
@@ -107,6 +129,7 @@ namespace HRWebApplication.Controllers
                          where ws.Clients_Id == workshiftModels.Clients_Id
                          && ws.WorkshiftCategories_Id == workshiftModels.WorkshiftCategories_Id
                          && ws.WorkshiftTemplates_Id == workshiftModels.WorkshiftTemplates_Id
+                         && ws.Name == workshiftModels.Name
                          && ws.UserAccounts_Id == workshiftModels.UserAccounts_Id
                          && ws.DayOfWeek == workshiftModels.DayOfWeek
                          && ws.Start == workshiftModels.Start
@@ -174,6 +197,7 @@ namespace HRWebApplication.Controllers
                          where ws.Clients_Id == workshiftModels.Clients_Id
                          && ws.WorkshiftCategories_Id == workshiftModels.WorkshiftCategories_Id
                          && ws.WorkshiftTemplates_Id == workshiftModels.WorkshiftTemplates_Id
+                         && ws.Name == workshiftModels.Name
                          && ws.UserAccounts_Id == workshiftModels.UserAccounts_Id
                          && ws.DayOfWeek == workshiftModels.DayOfWeek
                          && ws.Start == workshiftModels.Start

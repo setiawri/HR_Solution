@@ -18,7 +18,7 @@ namespace HRWebApplication.Models
         public string Name { get; set; }
         
         [Display(Name = "Client / Employee")]
-        public Guid Owner_RefId { get; set; }
+        public Guid? Owner_RefId { get; set; }
 
         [Required]
         [Display(Name = "Bank Name")]

@@ -115,7 +115,7 @@ namespace HRWebApplication.Controllers
                             pi.Payrolls_Id = pRoll.Id;
                             pi.RefId = attID;
                             pi.Description = string.Empty;
-                            int hours = db.Attendance.Where(x => x.Id == attID).Select(x => x.Workshifts_DurationMinutes).Single() / 60;
+                            int hours = db.Attendance.Where(x => x.Id == attID).Select(x => x.Workshifts_DurationMinutes.Value).Single() / 60;
                             decimal payRate = (from a in db.Attendance
                                                join w in db.Workshift on a.Workshifts_Id equals w.Id
                                                join t in db.WsTemplate on w.WorkshiftTemplates_Id equals t.Id
@@ -227,7 +227,7 @@ namespace HRWebApplication.Controllers
                                                 hasPayment = pRoll.hasPayment
                                             }).Single();
                 result.Amount -= m.GetTotalPayment(Id.Value);
-                ViewBag.listTarget = new SelectList(db.BankAccount.Where(x => x.Active == true && x.Owner_RefId == result.IdUser).OrderBy(x => x.Name).ToList(), "Id", "Name");
+                ViewBag.listTarget = new SelectList(db.BankAccount.Where(x => x.Active == true && x.Owner_RefId.Value == result.IdUser).OrderBy(x => x.Name).ToList(), "Id", "Name");
                 ViewBag.listSource = new SelectList(db.BankAccount.Where(x => x.Active == true && x.Internal == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
                 return View(result);
             }
@@ -278,7 +278,7 @@ namespace HRWebApplication.Controllers
                 return RedirectToAction("Payroll");
             }
             
-            ViewBag.listTarget = new SelectList(db.BankAccount.Where(x => x.Active == true && x.Owner_RefId == paymentVM.IdUser).OrderBy(x => x.Name).ToList(), "Id", "Name");
+            ViewBag.listTarget = new SelectList(db.BankAccount.Where(x => x.Active == true && x.Owner_RefId.Value == paymentVM.IdUser).OrderBy(x => x.Name).ToList(), "Id", "Name");
             ViewBag.listSource = new SelectList(db.BankAccount.Where(x => x.Active == true && x.Internal == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
             return View(paymentVM);
         }

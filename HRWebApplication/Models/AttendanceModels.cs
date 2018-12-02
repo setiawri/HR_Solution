@@ -29,9 +29,9 @@ namespace HRWebApplication.Models
         public bool Flag1 { get; set; }
         public bool Flag2 { get; set; }
         public bool Approved { get; set; }
-        public byte Workshifts_DayOfWeek { get; set; }
-        public DateTime Workshifts_Start { get; set; }
-        public int Workshifts_DurationMinutes { get; set; }
+        public byte? Workshifts_DayOfWeek { get; set; }
+        public DateTime? Workshifts_Start { get; set; }
+        public int? Workshifts_DurationMinutes { get; set; }
 
         [Required]
         [Display(Name = "Effective In")]
@@ -51,10 +51,13 @@ namespace HRWebApplication.Models
         [Display(Name = "Status")]
         public Guid AttendanceStatuses_Id { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Workshift")]
-        public Guid Workshifts_Id { get; set; }
+        public Guid? Workshifts_Id { get; set; }
         public Guid? AttendancePayRates_Id { get; set; }
+
+        [Required]
+        [Display(Name = "Pay Rate Amount")]
         public decimal? AttendancePayRates_Amount { get; set; }
     }
 }

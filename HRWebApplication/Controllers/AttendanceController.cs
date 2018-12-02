@@ -28,7 +28,7 @@ namespace HRWebApplication.Controllers
                 var result = (from a in db.Attendance
                               join u in db.User on a.UserAccounts_Id.ToString() equals u.Id
                               join c in db.Clients on a.Clients_Id equals c.Id
-                              join w in db.Workshift on a.Workshifts_Id equals w.Id
+                              //join w in db.Workshift.DefaultIfEmpty() on a.Workshifts_Id equals w.Id
                               where a.PayrollItems_Id == null
                               orderby u.FullName, c.CompanyName
                               select new AttendanceViewModels
@@ -36,11 +36,12 @@ namespace HRWebApplication.Controllers
                                   Id = a.Id,
                                   Employee = u.FullName,
                                   Client = c.CompanyName,
-                                  Workshift = w.Name,
-                                  Day = ((Common.Master.DayOfWeek)w.DayOfWeek).ToString(),
+                                  //Workshift = w.Name,
+                                  //Day = ((Common.Master.DayOfWeek)w.DayOfWeek).ToString(),
                                   Start = a.Workshifts_Start.ToString(),
-                                  Duration = a.Workshifts_DurationMinutes,
+                                  Duration = a.Workshifts_DurationMinutes.Value,
                                   Hours = (a.Workshifts_DurationMinutes / 60).ToString(),
+                                  Payrate = a.AttendancePayRates_Amount.Value,
                                   Notes = a.Notes,
                                   Approved = a.Approved,
                                   Status = a.Approved ? "Approved" : "Rejected"
@@ -79,7 +80,18 @@ namespace HRWebApplication.Controllers
             string date_in = DateTime.Now.ToShortDateString() + " " + result.Start.ToString().Substring(0, 5);
             string date_out = DateTime.Now.ToShortDateString() + " " + result.Start.Add(TimeSpan.FromMinutes(result.DurationMinutes)).ToString().Substring(0, 5);
 
-            return Json(new { result, date_in, date_out }, JsonRequestBehavior.AllowGet);
+            var payrate = (from w in db.Workshift
+                           join t in db.WsTemplate on w.WorkshiftTemplates_Id equals t.Id
+                           join p in db.AttPayRate.DefaultIfEmpty() on t.Id equals p.RefId
+                           where w.Id == id
+                           select p).FirstOrDefault();
+            string amount_payrate = "";
+            if (payrate != null)
+            {
+                amount_payrate = payrate.Amount.ToString();
+            }
+
+            return Json(new { result, date_in, date_out, amount_payrate }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Attendance/Create
