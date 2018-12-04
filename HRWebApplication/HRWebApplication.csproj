@@ -230,6 +230,7 @@
     <Compile Include="Models\PayrollViewModels.cs" />
     <Compile Include="Models\RoleViewModels.cs" />
     <Compile Include="Models\TimesheetViewModels.cs" />
+    <Compile Include="Models\UserDetailModels.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Models\WorkshiftCategoryModels.cs" />
     <Compile Include="Models\WorkshiftModels.cs" />

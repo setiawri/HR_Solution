@@ -153,7 +153,16 @@
                     Id: id
                 },
                 success: function (data) {
-                    window.location.reload();
+                    if (data.status == '200') {
+                        window.location.reload();
+                    }
+                    else {
+                        swal({
+                            type: 'error',
+                            title: 'Rejected',
+                            text: 'Payrate Amount cannot be zero value !'
+                        })
+                    }
                 }, //end success
                 error: function (result) {
                     alert("Error " + result);
@@ -221,10 +230,10 @@
                     }
                     else {
                         window.location.reload();
-                        swal({
-                            type: 'success',
-                            title: 'Generated successfully',
-                        })
+                        //swal({
+                        //    type: 'success',
+                        //    title: 'Generated successfully',
+                        //})
                     }
                 }, //end success
                 error: function (result) {

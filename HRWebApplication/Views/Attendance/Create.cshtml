@@ -89,6 +89,14 @@
                                 </div>
 
                                 <div class="form-group">
+                                    @Html.Label("Duration", htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.Editor("DiffTime", new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessage("DiffTime", "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     @Html.LabelFor(model => model.EffectiveTimestampIn, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="input-group tanggal">
@@ -107,6 +115,14 @@
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                         @Html.ValidationMessageFor(model => model.EffectiveTimestampOut, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Duration Effective", htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.Editor("DiffTimeEff", new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessage("DiffTimeEff", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
@@ -177,6 +193,30 @@
         }
     }
 
+    function GetDuration() {
+        var timeStart = new Date($('#TimestampIn').val());
+        var timeStop = new Date($('#TimestampOut').val());
+        
+        var diff = Math.round((timeStop - timeStart) / 60000);
+
+        var hours = Math.floor(diff / 60);
+        var minutes = diff % 60;
+        
+        $('#DiffTime').val(hours + ' Hours ' + minutes + ' Minutes');
+    }
+
+    function GetDurationEff() {
+        var timeStart = new Date($('#EffectiveTimestampIn').val());
+        var timeStop = new Date($('#EffectiveTimestampOut').val());
+
+        var diff = Math.round((timeStop - timeStart) / 60000);
+
+        var hours = Math.floor(diff / 60);
+        var minutes = diff % 60;
+
+        $('#DiffTimeEff').val(hours + ' Hours ' + minutes + ' Minutes');
+    }
+
     $(document).ready(function () {
         $('#UserAccounts_Id').select2({
             allowClear: true,
@@ -202,8 +242,10 @@
                 $('#Workshifts_DurationMinutes').val('');
                 $('#TimestampIn').val('');
                 $('#TimestampOut').val('');
+                $('#DiffTime').val('');
                 $('#EffectiveTimestampIn').val('');
                 $('#EffectiveTimestampOut').val('');
+                $('#DiffTimeEff').val('');
             }
             else {
                 $.ajax({
@@ -217,14 +259,52 @@
                         $('#Workshifts_DurationMinutes').val(data.result.DurationMinutes);
                         $('#TimestampIn').val(data.date_in);
                         $('#TimestampOut').val(data.date_out);
+                        $('#DiffTime').val(data.duration);
                         $('#EffectiveTimestampIn').val(data.date_in);
                         $('#EffectiveTimestampOut').val(data.date_out);
+                        $('#DiffTimeEff').val(data.duration);
                         $('#AttendancePayRates_Amount').val(data.amount_payrate);
                     }, //end success
                     error: function (result) {
                         alert("Error " + result);
                     } //end error
                 }); //end ajax
+            }
+        });
+
+        $('#TimestampIn').blur(function () {
+            if ($('#TimestampIn').val() != '' && $('#TimestampOut').val() != '') {
+                GetDuration();
+            }
+            else {
+                $('#DiffTime').val('');
+            }
+        });
+
+        $('#TimestampOut').blur(function () {
+            if ($('#TimestampIn').val() != '' && $('#TimestampOut').val() != '') {
+                GetDuration();
+            }
+            else {
+                $('#DiffTime').val('');
+            }
+        });
+
+        $('#EffectiveTimestampIn').blur(function () {
+            if ($('#EffectiveTimestampIn').val() != '' && $('#EffectiveTimestampOut').val() != '') {
+                GetDurationEff();
+            }
+            else {
+                $('#DiffTimeEff').val('');
+            }
+        });
+
+        $('#EffectiveTimestampOut').blur(function () {
+            if ($('#EffectiveTimestampIn').val() != '' && $('#EffectiveTimestampOut').val() != '') {
+                GetDurationEff();
+            }
+            else {
+                $('#DiffTimeEff').val('');
             }
         });
     });

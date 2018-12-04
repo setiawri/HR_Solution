@@ -1,4 +1,4 @@
-﻿@model HRWebApplication.Models.UserViewModel
+﻿@model HRWebApplication.Models.UserDetailModels
 
 @{
     ViewBag.Title = "Details";
@@ -15,10 +15,11 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <!-- Left Div -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Details <small>Information of User</small></h2>
+                        <h2>Profile Information</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li>
                                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -30,45 +31,171 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <dl class="dl-horizontal">
-                            <dt>
-                                @Html.DisplayNameFor(model => model.FullName)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.FullName)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.UserName)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.UserName)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Email)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Email)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Role)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Role)
-                            </dd>
-
-                        </dl>
-                    </div>
-                    <p>
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.FullName)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.FullName)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.UserName)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.UserName)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.Email)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.Email)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.Role)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.Role)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.DOB)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.DOB)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.Height)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.Height)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.Weight)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.Weight)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.Phone1)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.Phone1)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.Phone2)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.Phone2)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.Address1)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.Address1)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.Address2)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.Address2)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.userModel.Notes)</th>
+                                    <td>@Html.DisplayFor(model => model.userModel.Notes)</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <a href="@Url.Action("Index", "User")" class="btn btn-default">Back to List</a>
-                        <a href="@Url.Action("Edit", new { id = Model.Id})" class="btn btn-info">Edit Data</a>
-                    </p>
+                        <a href="@Url.Action("Edit", new { id = Model.userModel.Id })" class="btn btn-info">Edit Data</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Div -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <!-- Bank Accounts -->
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Bank Accounts</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Bank</th>
+                                        <th>Account Name</th>
+                                        <th>Account Number</th>
+                                        <th>Active</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.bankModels)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(model => item.BankName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.AccountNumber)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.Active)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <a href="@Url.Action("Create", "BankAccount")" class="btn btn-success">Add Bank Account</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Workshifts -->
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Workshifts</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Client</th>
+                                        <th>Workshift Name</th>
+                                        <th>Day</th>
+                                        <th>Start</th>
+                                        <th>End</th>
+                                        <th>Active</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.workshiftModels)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(model => item.Client)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DayOfWeek)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.Start)
+                                            </td>
+                                            <td>
+                                                @{ string end = DateTime.Parse(item.Start.Substring(0, 5)).AddMinutes(item.DurationMinutes).ToString("HH:mm"); }
+                                                @end
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.Active)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <a href="@Url.Action("Create", "Workshift")" class="btn btn-success">Add Workshift</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

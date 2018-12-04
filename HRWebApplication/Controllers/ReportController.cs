@@ -40,11 +40,18 @@ namespace HRWebApplication.Controllers
 
         public JsonResult AcceptStatus(Guid Id)
         {
-            using (var ctx = new HrContext())
+            decimal payrate = db.Attendance.Where(x => x.Id == Id).Select(x => x.AttendancePayRates_Amount.Value).FirstOrDefault();
+            string statusCode;
+            if (payrate > 0)
             {
-                int rowUpdate = ctx.Database.ExecuteSqlCommand("UPDATE Attendances SET Approved='True' WHERE Id='" + Id + "'");
+                using (var ctx = new HrContext())
+                {
+                    int rowUpdate = ctx.Database.ExecuteSqlCommand("UPDATE Attendances SET Approved='True' WHERE Id='" + Id + "'");
+                }
+                statusCode = "200";
             }
-            return Json(new { status = "200" }, JsonRequestBehavior.AllowGet);
+            else { statusCode = "405"; }
+            return Json(new { status = statusCode }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult RejectStatus(Guid Id)

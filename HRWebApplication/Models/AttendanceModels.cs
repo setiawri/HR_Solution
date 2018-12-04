@@ -55,8 +55,7 @@ namespace HRWebApplication.Models
         [Display(Name = "Workshift")]
         public Guid? Workshifts_Id { get; set; }
         public Guid? AttendancePayRates_Id { get; set; }
-
-        [Required]
+        
         [Display(Name = "Pay Rate Amount")]
         public decimal? AttendancePayRates_Amount { get; set; }
     }

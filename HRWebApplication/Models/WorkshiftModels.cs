@@ -33,7 +33,7 @@ namespace HRWebApplication.Models
         public TimeSpan Start { get; set; }
 
         [Required]
-        [Display(Name = "Duration Minutes")]
+        [Display(Name = "Duration")]
         public int DurationMinutes { get; set; }
         public string Notes { get; set; }
         public bool Active { get; set; }

@@ -40,6 +40,62 @@ namespace HRWebApplication.Controllers
             }
         }
 
+        public async Task<ActionResult> Details(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            UserModels userData = await db.User.FindAsync(id);
+            UserViewModel userVM = new UserViewModel();
+            userVM.Id = id;
+            userVM.FullName = userData.FullName;
+            userVM.UserName = userData.UserName;
+            userVM.Email = userData.Email;
+            userVM.DOB = userData.DOB;
+            userVM.Height = userData.Height;
+            userVM.Weight = userData.Weight;
+            userVM.Phone1 = userData.Phone1;
+            userVM.Phone2 = userData.Phone2;
+            userVM.Address1 = userData.Address1;
+            userVM.Address2 = userData.Address2;
+            userVM.Notes = userData.Notes;
+
+            List<BankAccountViewModels> bankVMs = new List<BankAccountViewModels>();
+            List<BankAccountModels> banks = await db.BankAccount.Where(x => x.Owner_RefId.ToString() == id).ToListAsync();
+            foreach (var item in banks)
+            {
+                BankAccountViewModels bankVM = new BankAccountViewModels();
+                bankVM.BankName = item.BankName;
+                bankVM.Name = item.Name;
+                bankVM.AccountNumber = item.AccountNumber;
+                bankVM.Active = item.Active;
+                bankVMs.Add(bankVM);
+            }
+
+            List<WorkshiftViewModels> workshiftVMs = new List<WorkshiftViewModels>();
+            List<WorkshiftModels> workshifts = await db.Workshift.Where(x => x.UserAccounts_Id.ToString() == id).ToListAsync();
+            foreach (var item in workshifts)
+            {
+                WorkshiftViewModels workshiftVM = new WorkshiftViewModels();
+                workshiftVM.Client = await db.Clients.Where(x => x.Id == item.Clients_Id).Select(x => x.CompanyName).FirstOrDefaultAsync();
+                workshiftVM.Name = item.Name;
+                workshiftVM.DayOfWeek = ((Master.DayOfWeek)item.DayOfWeek).ToString();
+                workshiftVM.Start = item.Start.ToString().Substring(0, 5);
+                workshiftVM.DurationMinutes = item.DurationMinutes;
+                workshiftVM.Active = item.Active;
+                workshiftVMs.Add(workshiftVM);
+            }
+
+            UserDetailModels userDetail = new UserDetailModels();
+            userDetail.userModel = userVM;
+            userDetail.bankModels = bankVMs;
+            userDetail.workshiftModels = workshiftVMs;
+
+            return View(userDetail);
+        }
+
         public ActionResult Edit(string id)
         {
             Permissions p = new Permissions();

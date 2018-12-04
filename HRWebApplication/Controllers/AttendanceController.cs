@@ -76,9 +76,12 @@ namespace HRWebApplication.Controllers
             var result = (from w in db.Workshift
                           where w.Id == id
                           select w).FirstOrDefault();
-            
-            string date_in = DateTime.Now.ToShortDateString() + " " + result.Start.ToString().Substring(0, 5);
-            string date_out = DateTime.Now.ToShortDateString() + " " + result.Start.Add(TimeSpan.FromMinutes(result.DurationMinutes)).ToString().Substring(0, 5);
+
+            string date_in = DateTime.Parse(DateTime.Now.ToShortDateString() + " " + result.Start.ToString().Substring(0, 5)).ToString("MM/dd/yyyy h:mm tt");
+            string date_out = DateTime.Parse(DateTime.Now.ToShortDateString() + " " + result.Start.Add(TimeSpan.FromMinutes(result.DurationMinutes)).ToString().Substring(0, 5)).ToString("MM/dd/yyyy h:mm tt");
+
+            TimeSpan diff = DateTime.Parse(date_out) - DateTime.Parse(date_in);
+            string duration = diff.Hours.ToString() + " Hours " + diff.Minutes.ToString() + " Minutes";
 
             var payrate = (from w in db.Workshift
                            join t in db.WsTemplate on w.WorkshiftTemplates_Id equals t.Id
@@ -91,7 +94,7 @@ namespace HRWebApplication.Controllers
                 amount_payrate = payrate.Amount.ToString();
             }
 
-            return Json(new { result, date_in, date_out, amount_payrate }, JsonRequestBehavior.AllowGet);
+            return Json(new { result, date_in, date_out, duration, amount_payrate }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Attendance/Create
@@ -121,6 +124,7 @@ namespace HRWebApplication.Controllers
                 attendanceModels.Id = Guid.NewGuid();
                 attendanceModels.Workshifts_Start = attendanceModels.EffectiveTimestampIn;
                 attendanceModels.Workshifts_DurationMinutes = (int)attendanceModels.EffectiveTimestampOut.Subtract(attendanceModels.EffectiveTimestampIn).TotalMinutes;
+                attendanceModels.AttendancePayRates_Amount = attendanceModels.AttendancePayRates_Amount == null ? 0 : attendanceModels.AttendancePayRates_Amount;
                 db.Attendance.Add(attendanceModels);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Create");
