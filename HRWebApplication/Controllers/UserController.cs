@@ -53,6 +53,11 @@ namespace HRWebApplication.Controllers
             userVM.FullName = userData.FullName;
             userVM.UserName = userData.UserName;
             userVM.Email = userData.Email;
+            userVM.Role = (from u in db.User
+                           join ur in db.UserRole on u.Id equals ur.UserId
+                           join r in db.Role on ur.RoleId equals r.Id
+                           where u.Id == id
+                           select r.Name).FirstOrDefault();
             userVM.DOB = userData.DOB;
             userVM.Height = userData.Height;
             userVM.Weight = userData.Weight;
