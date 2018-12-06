@@ -108,6 +108,7 @@ namespace HRWebApplication.Controllers
                 ViewBag.listClient = new SelectList(db.Clients.Where(x => x.Active == true).OrderBy(x => x.CompanyName).ToList(), "Id", "CompanyName");
                 ViewBag.listEmployee = new SelectList(db.User.OrderBy(x => x.FullName).ToList(), "Id", "FullName");
                 ViewBag.listAttStatus = new SelectList(db.AttStatus.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
+                ViewBag.StatusAction = "";
                 return View();
             }
         }
@@ -127,7 +128,20 @@ namespace HRWebApplication.Controllers
                 attendanceModels.AttendancePayRates_Amount = attendanceModels.AttendancePayRates_Amount == null ? 0 : attendanceModels.AttendancePayRates_Amount;
                 db.Attendance.Add(attendanceModels);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Create");
+
+                //Guid idStatus = attendanceModels.AttendanceStatuses_Id;
+
+                ViewBag.listClient = new SelectList(db.Clients.Where(x => x.Active == true).OrderBy(x => x.CompanyName).ToList(), "Id", "CompanyName");
+                //ViewBag.ClientSelected = "";
+                ViewBag.listEmployee = new SelectList(db.User.OrderBy(x => x.FullName).ToList(), "Id", "FullName");
+                //ViewBag.EmployeeSelected = "";
+                ViewBag.listAttStatus = new SelectList(db.AttStatus.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
+                //ViewBag.StatusSelected = ""; // attendanceModels.AttendanceStatuses_Id;
+                //attendanceModels = null;
+                ViewBag.StatusAction = "Submit";
+                return View();
+
+                //return RedirectToAction("Create");
             }
 
             ViewBag.listClient = new SelectList(db.Clients.Where(x => x.Active == true).OrderBy(x => x.CompanyName).ToList(), "Id", "CompanyName");
@@ -200,17 +214,17 @@ namespace HRWebApplication.Controllers
                 var result = (from a in db.Attendance
                               join u in db.User on a.UserAccounts_Id.ToString() equals u.Id
                               join c in db.Clients on a.Clients_Id equals c.Id
-                              join w in db.Workshift on a.Workshifts_Id equals w.Id
+                              //join w in db.Workshift on a.Workshifts_Id equals w.Id
                               where a.Id == id
                               select new AttendanceViewModels
                               {
                                   Id = a.Id,
                                   Employee = u.FullName,
                                   Client = c.CompanyName,
-                                  Workshift = w.Name,
-                                  Day = ((Common.Master.DayOfWeek)w.DayOfWeek).ToString(),
-                                  Start = w.Start.ToString(),
-                                  Duration = w.DurationMinutes,
+                                  //Workshift = w.Name,
+                                  Day = ((Common.Master.DayOfWeek)a.Workshifts_DayOfWeek).ToString(),
+                                  Start = a.Workshifts_Start.Value.ToString(),
+                                  Duration = a.Workshifts_DurationMinutes.Value,
                                   Flag1 = a.Flag1,
                                   Flag2 = a.Flag2,
                                   Approved = a.Approved

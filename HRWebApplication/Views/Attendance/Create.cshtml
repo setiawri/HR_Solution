@@ -218,6 +218,23 @@
     }
 
     $(document).ready(function () {
+        
+        if('@ViewBag.StatusAction' == 'Submit'){
+            $('#Workshifts_Id').val('');
+            $('#Workshifts_DayOfWeek').val('');
+            $('#Workshifts_Start').val('');
+            $('#Workshifts_DurationMinutes').val('');
+            $('#TimestampIn').val('');
+            $('#TimestampOut').val('');
+            $('#DiffTime').val('');
+            $('#EffectiveTimestampIn').val('');
+            $('#EffectiveTimestampOut').val('');
+            $('#DiffTimeEff').val('');
+            $('#Notes').val('');
+            $('#AttendancePayRates_Amount').val('');
+            GetWorkshifts();
+        }
+
         $('#UserAccounts_Id').select2({
             allowClear: true,
             placeholder: 'Select Employee'

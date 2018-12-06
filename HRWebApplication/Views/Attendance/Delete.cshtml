@@ -47,13 +47,13 @@
                                 @Html.DisplayFor(model => model.Client)
                             </dd>
 
-                            <dt>
+                            @*<dt>
                                 @Html.DisplayNameFor(model => model.Workshift)
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => model.Workshift)
-                            </dd>
+                            </dd>*@
 
                             <dt>
                                 @Html.DisplayNameFor(model => model.Day)
@@ -68,7 +68,7 @@
                             </dt>
 
                             <dd>
-                                @{ string start = Model.Start.Substring(0, 5);}
+                                @{ string start = DateTime.Parse(Model.Start).ToString("HH:mm"); }
                                 @start
                                 @*@Html.DisplayFor(model => model.Start)*@
                             </dd>
@@ -76,7 +76,7 @@
                             <dt>End</dt>
 
                             <dd>
-                                @{ string end = DateTime.Parse(Model.Start.Substring(0, 5)).AddMinutes(Model.Duration).ToString("HH:mm");}
+                                @{ string end = DateTime.Parse(Model.Start).AddMinutes(Model.Duration).ToString("HH:mm");}
                                 @end
                             </dd>
 
