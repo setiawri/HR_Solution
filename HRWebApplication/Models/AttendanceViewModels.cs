@@ -17,7 +17,7 @@ namespace HRWebApplication.Models
         public int Duration { get; set; }
         public bool Flag1 { get; set; }
         public bool Flag2 { get; set; }
-        public bool Approved { get; set; }
+        public bool? Approved { get; set; }
         public string Hours { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]

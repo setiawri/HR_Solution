@@ -12,6 +12,7 @@ using HRWebApplication.Common;
 
 namespace HRWebApplication.Controllers
 {
+    [Authorize]
     public class AttendancePayRateController : Controller
     {
         private HrContext db = new HrContext();

@@ -69,7 +69,7 @@ namespace HRWebApplication.Controllers
             //var result = new SelectList(db.WsTemplate.Where(x => x.Clients_Id == id).OrderBy(x => x.Name).ToList(), "Id", "Name");
             List<WorkshiftTemplateViewModels> data = (from t in db.WsTemplate
                                                       where t.Clients_Id == id
-                                                      orderby t.Name
+                                                      orderby t.DayOfWeek, t.Start
                                                       select new WorkshiftTemplateViewModels
                                                       {
                                                           Id = t.Id,
@@ -84,7 +84,7 @@ namespace HRWebApplication.Controllers
                 newList.Add(new
                 {
                     Id = item.Id,
-                    Name = item.Name + " ( " + item.DayOfWeek + " ) " + item.Start + " - " + DateTime.Parse(item.Start).AddMinutes(item.Duration).ToString("HH:mm")
+                    Name = item.DayOfWeek + " ( " + item.Start + " - " + DateTime.Parse(item.Start).AddMinutes(item.Duration).ToString("HH:mm") + " ) " + item.Name
                 });
             }
             var result = new SelectList(newList, "Id", "Name");

@@ -35,19 +35,7 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Name)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Employee)
-                                    </th>
-                                    <th>
                                         @Html.DisplayNameFor(model => model.Client)
-                                    </th>
-                                    @*<th>
-                                        @Html.DisplayNameFor(model => model.TemplateName)
-                                    </th>*@
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Category)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.DayOfWeek)
@@ -58,6 +46,19 @@
                                     <th>
                                         End
                                     </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Category)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Employee)
+                                    </th>
+                                    
+                                    @*<th>
+                                        @Html.DisplayNameFor(model => model.TemplateName)
+                                    </th>*@
                                     <th>
                                         @Html.DisplayNameFor(model => model.Active)
                                     </th>
@@ -70,19 +71,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Employee)
-                                        </td>
-                                        <td>
                                             @Html.DisplayFor(modelItem => item.Client)
-                                        </td>
-                                        @*<td>
-                                            @Html.DisplayFor(modelItem => item.TemplateName)
-                                        </td>*@
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Category)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.DayOfWeek)
@@ -95,6 +84,18 @@
                                             @{ string end = DateTime.Parse(item.Start.Substring(0, 5)).AddMinutes(item.DurationMinutes).ToString("HH:mm"); }
                                             @end
                                         </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Category)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Employee)
+                                        </td>
+                                        @*<td>
+                                            @Html.DisplayFor(modelItem => item.TemplateName)
+                                        </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Active)
                                         </td>
@@ -118,7 +119,7 @@
     $(document).ready(function () {
         var table = $('#datatable').DataTable({
             'columnDefs': [
-                { type: 'natural', targets: 0 }
+                { type: 'natural', targets: 5 }
             ],
             'aaSorting': [[0, 'asc'], [1, 'asc'], [2, 'asc'], [3, 'asc'], [4, 'asc'], [5, 'asc'], [6, 'asc']]
         });

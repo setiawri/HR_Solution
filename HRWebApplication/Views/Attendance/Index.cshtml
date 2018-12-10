@@ -81,19 +81,39 @@
                                                 @Html.DisplayFor(modelItem => item.Id)
                                             </td>
                                             <td>
-                                                @if (item.Status == "Approved")
+                                                @if (item.Status == "True")
                                                 {
                                                     <button type="button" class="btn btn-success btn-xs" style="min-width:25px" disabled><i class="fa fa-check"></i></button>
                                                     <button type="button" class="btn btn-danger btn-xs" style="min-width:25px" onclick="ActionStatus('@item.Id', 'reject')"><i class="fa fa-close"></i></button>
                                                 }
-                                                else
+                                                else if (item.Status == "False")
                                                 {
                                                     <button type="button" class="btn btn-success btn-xs" style="min-width:25px" onclick="ActionStatus('@item.Id', 'accept')"><i class="fa fa-check"></i></button>
                                                     <button type="button" class="btn btn-danger btn-xs" style="min-width:25px" disabled><i class="fa fa-close"></i></button>
                                                 }
+                                                else
+                                                {
+                                                    <button type="button" class="btn btn-success btn-xs" style="min-width:25px" onclick="ActionStatus('@item.Id', 'accept')"><i class="fa fa-check"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-xs" style="min-width:25px" onclick="ActionStatus('@item.Id', 'reject')"><i class="fa fa-close"></i></button>
+                                                }
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Status)
+                                                @{ 
+                                                    string status;
+                                                    if (item.Status == "True")
+                                                    {
+                                                        status = "Approved";
+                                                    }
+                                                    else if (item.Status == "False")
+                                                    {
+                                                        status = "Rejected";
+                                                    }
+                                                    else
+                                                    {
+                                                        status = "";
+                                                    }
+                                                }
+                                                @status
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Employee)
@@ -144,6 +164,8 @@
 </div>
 
 <script type="text/javascript">
+    var dataTable;
+
     function ActionStatus(id, status) {
         if (status == 'accept') {
             $.ajax({
@@ -154,7 +176,23 @@
                 },
                 success: function (data) {
                     if (data.status == '200') {
-                        window.location.reload();
+                        //window.location.reload();
+                        dataTable.clear();
+                        $.each(data.list, function (index, row) {
+                            dataTable.row.add([
+                                row.Id,
+                                row.IsApproved,
+                                row.Status,
+                                row.Employee,
+                                row.Client,
+                                row.Start,
+                                row.End,
+                                row.Hours,
+                                row.Payrate.toLocaleString() + ".00",
+                                row.Notes,
+                                row.Actions
+                            ]).draw();
+                        }); //end each
                     }
                     else {
                         swal({
@@ -177,7 +215,23 @@
                     Id: id
                 },
                 success: function (data) {
-                    window.location.reload();
+                    //window.location.reload();
+                    dataTable.clear();
+                    $.each(data.list, function (index, row) {
+                        dataTable.row.add([
+                            row.Id,
+                            row.IsApproved,
+                            row.Status,
+                            row.Employee,
+                            row.Client,
+                            row.Start,
+                            row.End,
+                            row.Hours,
+                            row.Payrate.toLocaleString() + ".00",
+                            row.Notes,
+                            row.Actions
+                        ]).draw();
+                    }); //end each
                 }, //end success
                 error: function (result) {
                     alert("Error " + result);
@@ -187,7 +241,7 @@
     }
 
     $(document).ready(function () {
-        var table = $('#datatable').DataTable({
+        dataTable = $('#datatable').DataTable({
             //'autoWidth': true,
             'columnDefs': [
                {
@@ -204,7 +258,7 @@
         });
 
         $('#generate').on('click', function (e) {
-            var rows_selected = table.column(0).checkboxes.selected();
+            var rows_selected = dataTable.column(0).checkboxes.selected();
             //console.log(rows_selected);
             
             $.ajax({

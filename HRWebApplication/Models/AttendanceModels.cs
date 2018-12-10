@@ -28,7 +28,7 @@ namespace HRWebApplication.Models
         public string Notes { get; set; }
         public bool Flag1 { get; set; }
         public bool Flag2 { get; set; }
-        public bool Approved { get; set; }
+        public bool? Approved { get; set; }
         public byte? Workshifts_DayOfWeek { get; set; }
         public DateTime? Workshifts_Start { get; set; }
         public int? Workshifts_DurationMinutes { get; set; }

@@ -43,8 +43,8 @@ namespace HRWebApplication.Controllers
                                   Hours = (a.Workshifts_DurationMinutes / 60).ToString(),
                                   Payrate = a.AttendancePayRates_Amount.Value,
                                   Notes = a.Notes,
-                                  Approved = a.Approved,
-                                  Status = a.Approved ? "Approved" : "Rejected"
+                                  Approved = a.Approved.Value,
+                                  Status = (a.Approved.HasValue) ? a.Approved.Value.ToString() : ""
                               });
                 return View(await result.ToListAsync());
             }
@@ -129,18 +129,11 @@ namespace HRWebApplication.Controllers
                 db.Attendance.Add(attendanceModels);
                 await db.SaveChangesAsync();
 
-                //Guid idStatus = attendanceModels.AttendanceStatuses_Id;
-
                 ViewBag.listClient = new SelectList(db.Clients.Where(x => x.Active == true).OrderBy(x => x.CompanyName).ToList(), "Id", "CompanyName");
-                //ViewBag.ClientSelected = "";
                 ViewBag.listEmployee = new SelectList(db.User.OrderBy(x => x.FullName).ToList(), "Id", "FullName");
-                //ViewBag.EmployeeSelected = "";
                 ViewBag.listAttStatus = new SelectList(db.AttStatus.Where(x => x.Active == true).OrderBy(x => x.Name).ToList(), "Id", "Name");
-                //ViewBag.StatusSelected = ""; // attendanceModels.AttendanceStatuses_Id;
-                //attendanceModels = null;
                 ViewBag.StatusAction = "Submit";
                 return View();
-
                 //return RedirectToAction("Create");
             }
 
@@ -227,7 +220,7 @@ namespace HRWebApplication.Controllers
                                   Duration = a.Workshifts_DurationMinutes.Value,
                                   Flag1 = a.Flag1,
                                   Flag2 = a.Flag2,
-                                  Approved = a.Approved
+                                  Approved = a.Approved.Value
                               });
                 if (result == null) { return HttpNotFound(); }
                 return View(await result.SingleAsync());

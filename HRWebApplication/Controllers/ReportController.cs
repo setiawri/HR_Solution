@@ -42,6 +42,8 @@ namespace HRWebApplication.Controllers
         {
             decimal payrate = db.Attendance.Where(x => x.Id == Id).Select(x => x.AttendancePayRates_Amount.Value).FirstOrDefault();
             string statusCode;
+            List<object> newList = new List<object>(); //create anonymous object list
+
             if (payrate > 0)
             {
                 using (var ctx = new HrContext())
@@ -49,9 +51,68 @@ namespace HRWebApplication.Controllers
                     int rowUpdate = ctx.Database.ExecuteSqlCommand("UPDATE Attendances SET Approved='True' WHERE Id='" + Id + "'");
                 }
                 statusCode = "200";
+
+                var result = (from a in db.Attendance
+                              join u in db.User on a.UserAccounts_Id.ToString() equals u.Id
+                              join c in db.Clients on a.Clients_Id equals c.Id
+                              where a.PayrollItems_Id == null
+                              orderby u.FullName, c.CompanyName
+                              select new AttendanceViewModels
+                              {
+                                  Id = a.Id,
+                                  Employee = u.FullName,
+                                  Client = c.CompanyName,
+                                  Start = a.Workshifts_Start.ToString(),
+                                  Duration = a.Workshifts_DurationMinutes.Value,
+                                  Hours = (a.Workshifts_DurationMinutes / 60).ToString(),
+                                  Payrate = a.AttendancePayRates_Amount.Value,
+                                  Notes = a.Notes,
+                                  Approved = a.Approved.Value,
+                                  Status = (a.Approved.HasValue) ? a.Approved.Value.ToString() : ""
+                              }).ToList();
+
+
+                foreach (var item in result)
+                {
+                    string status;
+                    string isApproved;
+                    if (item.Status == "True")
+                    {
+                        status = "Approved";
+                        isApproved = "<button type='button' class='btn btn-success btn-xs' style='min-width:25px' disabled><i class='fa fa-check'></i></button><button type='button' class='btn btn-danger btn-xs' style='min-width:25px' onclick='ActionStatus(\"" + item.Id + "\", \"reject\")'><i class='fa fa-close'></i></button>";
+                    }
+                    else if (item.Status == "False")
+                    {
+                        status = "Rejected";
+                        isApproved = "<button type='button' class='btn btn-success btn-xs' style='min-width:25px' onclick='ActionStatus(\"" + item.Id + "\", \"accept\")'><i class='fa fa-check'></i></button><button type='button' class='btn btn-danger btn-xs' style='min-width:25px' disabled><i class='fa fa-close'></i></button>";
+                    }
+                    else
+                    {
+                        status = "";
+                        isApproved = "<button type='button' class='btn btn-success btn-xs' style='min-width:25px' onclick='ActionStatus(\"" + item.Id + "\", \"accept\")'><i class='fa fa-check'></i></button><button type='button' class='btn btn-danger btn-xs' style='min-width:25px' onclick='ActionStatus(\"" + item.Id + "\", \"reject\")'><i class='fa fa-close'></i></button>";
+                    }
+
+                    string actions = "<a href='/Attendance/Edit/" + item.Id + "'>Edit</a> | <a href='/Attendance/Delete/" + item.Id + "'>Delete</a>";
+
+                    newList.Add(new
+                    {
+                        Id = item.Id,
+                        Employee = item.Employee,
+                        Client = item.Client,
+                        Start = DateTime.Parse(item.Start).ToString("yyyy-MM-dd HH:mm"),
+                        End = DateTime.Parse(item.Start).AddMinutes(item.Duration).ToString("yyyy-MM-dd HH:mm"),
+                        Hours = item.Hours,
+                        Payrate = item.Payrate,
+                        Notes = item.Notes,
+                        Approved = item.Approved,
+                        Status = status,
+                        IsApproved = isApproved,
+                        Actions = actions
+                    });
+                }
             }
             else { statusCode = "405"; }
-            return Json(new { status = statusCode }, JsonRequestBehavior.AllowGet);
+            return Json(new { status = statusCode, list = newList }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult RejectStatus(Guid Id)
@@ -60,7 +121,68 @@ namespace HRWebApplication.Controllers
             {
                 int rowUpdate = ctx.Database.ExecuteSqlCommand("UPDATE Attendances SET Approved='False' WHERE Id='" + Id + "'");
             }
-            return Json(new { status = "200" }, JsonRequestBehavior.AllowGet);
+            
+            List<object> newList = new List<object>(); //create anonymous object list
+            var result = (from a in db.Attendance
+                          join u in db.User on a.UserAccounts_Id.ToString() equals u.Id
+                          join c in db.Clients on a.Clients_Id equals c.Id
+                          where a.PayrollItems_Id == null
+                          orderby u.FullName, c.CompanyName
+                          select new AttendanceViewModels
+                          {
+                              Id = a.Id,
+                              Employee = u.FullName,
+                              Client = c.CompanyName,
+                              Start = a.Workshifts_Start.ToString(),
+                              Duration = a.Workshifts_DurationMinutes.Value,
+                              Hours = (a.Workshifts_DurationMinutes / 60).ToString(),
+                              Payrate = a.AttendancePayRates_Amount.Value,
+                              Notes = a.Notes,
+                              Approved = a.Approved.Value,
+                              Status = (a.Approved.HasValue) ? a.Approved.Value.ToString() : ""
+                          }).ToList();
+
+
+            foreach (var item in result)
+            {
+                string status;
+                string isApproved;
+                if (item.Status == "True")
+                {
+                    status = "Approved";
+                    isApproved = "<button type='button' class='btn btn-success btn-xs' style='min-width:25px' disabled><i class='fa fa-check'></i></button><button type='button' class='btn btn-danger btn-xs' style='min-width:25px' onclick='ActionStatus(\"" + item.Id + "\", \"reject\")'><i class='fa fa-close'></i></button>";
+                }
+                else if (item.Status == "False")
+                {
+                    status = "Rejected";
+                    isApproved = "<button type='button' class='btn btn-success btn-xs' style='min-width:25px' onclick='ActionStatus(\"" + item.Id + "\", \"accept\")'><i class='fa fa-check'></i></button><button type='button' class='btn btn-danger btn-xs' style='min-width:25px' disabled><i class='fa fa-close'></i></button>";
+                }
+                else
+                {
+                    status = "";
+                    isApproved = "<button type='button' class='btn btn-success btn-xs' style='min-width:25px' onclick='ActionStatus(\"" + item.Id + "\", \"accept\")'><i class='fa fa-check'></i></button><button type='button' class='btn btn-danger btn-xs' style='min-width:25px' onclick='ActionStatus(\"" + item.Id + "\", \"reject\")'><i class='fa fa-close'></i></button>";
+                }
+
+                string actions = "<a href='/Attendance/Edit/" + item.Id + "'>Edit</a> | <a href='/Attendance/Delete/" + item.Id + "'>Delete</a>";
+
+                newList.Add(new
+                {
+                    Id = item.Id,
+                    Employee = item.Employee,
+                    Client = item.Client,
+                    Start = DateTime.Parse(item.Start).ToString("yyyy-MM-dd HH:mm"),
+                    End = DateTime.Parse(item.Start).AddMinutes(item.Duration).ToString("yyyy-MM-dd HH:mm"),
+                    Hours = item.Hours,
+                    Payrate = item.Payrate,
+                    Notes = item.Notes,
+                    Approved = item.Approved,
+                    Status = status,
+                    IsApproved = isApproved,
+                    Actions = actions
+                });
+            }
+
+            return Json(new { status = "200", list = newList }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GeneratePayroll(string ids)
@@ -81,8 +203,17 @@ namespace HRWebApplication.Controllers
                         Guid attID = new Guid(arrID[a]);
 
                         //Approved Checked
-                        isValid = db.Attendance.Where(x => x.Id == attID).Select(x => x.Approved).Single();
-                        if (!isValid) { break; }
+                        bool isValidAtt = db.Attendance.Where(x => x.Id == attID).Select(x => x.Approved.HasValue).Single(); //return false jika Approved = NULL
+                        if (!isValidAtt)
+                        {
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            isValid = db.Attendance.Where(x => x.Id == attID).Select(x => x.Approved.Value).Single();
+                            if (!isValid) { break; }
+                        }
 
                         //Same Employee Checked
                         string userID = db.Attendance.Where(x => x.Id == attID).Select(x => x.UserAccounts_Id).Single().ToString();
@@ -123,12 +254,7 @@ namespace HRWebApplication.Controllers
                             pi.RefId = attID;
                             pi.Description = string.Empty;
                             int hours = db.Attendance.Where(x => x.Id == attID).Select(x => x.Workshifts_DurationMinutes.Value).Single() / 60;
-                            decimal payRate = (from a in db.Attendance
-                                               join w in db.Workshift on a.Workshifts_Id equals w.Id
-                                               join t in db.WsTemplate on w.WorkshiftTemplates_Id equals t.Id
-                                               join p in db.AttPayRate on t.Id equals p.RefId
-                                               where a.Id == attID
-                                               select p.Amount).Single();
+                            decimal payRate = db.Attendance.Where(x => x.Id == attID).Select(x => x.AttendancePayRates_Amount.Value).FirstOrDefault();
                             pi.Amount = hours * payRate;
                             pi.Notes = string.Empty;
                             db.PayrollItem.Add(pi);
