@@ -105,15 +105,16 @@
                                                     }
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-info btn-xs" onclick="details('@item.Employee', '@item.Id', '@item.No')"><i class="fa fa-info-circle"></i> Info Details</button>
+                                                    <button type="button" class="btn btn-info btn-xs" onclick="details('@item.Employee', '@item.Id', '@item.No')"><i class="fa fa-info-circle"></i> Items</button>
                                                     @if (remain > 0)
                                                     {
-                                                        <a href="@Url.Action("Payment", "Report", new { id = item.Id })" class="btn btn-warning btn-xs"><i class="fa fa-dollar"></i> Payment</a>
+                                                        <a href="@Url.Action("Payment", "Report", new { id = item.Id })" class="btn btn-warning btn-xs"><i class="fa fa-dollar"></i> Pay</a>
                                                     }
                                                     else
                                                     {
-                                                        <a href="@Url.Action("Payment", "Report", new { id = item.Id })" class="btn btn-warning btn-xs" disabled><i class="fa fa-dollar"></i> Payment</a>
+                                                        <a href="@Url.Action("Payment", "Report", new { id = item.Id })" class="btn btn-warning btn-xs" disabled><i class="fa fa-dollar"></i> Pay</a>
                                                     }
+                                                    <button type="button" class="btn btn-success btn-xs" onclick="payments('@item.Employee', '@item.Id', '@item.No')"><i class="fa fa-money"></i> Payments</button>
                                                 </td>
                                             </tr>
                                         }
@@ -139,6 +140,27 @@
             success: function (data) {
                 var dialog = bootbox.alert({
                     title: 'Payroll List No. ' + no + ' ( ' + name + ' )',
+                    message: data.content,
+                    //size: 'large',
+                    backdrop: true
+                });
+            }, //end success
+            error: function (result) {
+                bootbox.alert("Error " + result);
+            } //end error
+        }); //end ajax
+    }
+
+    function payments(name, id, no) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetPayments", "Report")',
+            data: {
+                Id: id
+            },
+            success: function (data) {
+                var dialog = bootbox.alert({
+                    title: 'Payment List for Payroll No. ' + no + ' ( ' + name + ' )',
                     message: data.content,
                     //size: 'large',
                     backdrop: true

@@ -319,6 +319,42 @@ namespace HRWebApplication.Controllers
             return Json(new { content = message }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetPayments(Guid Id)
+        {
+            var result = (from pi in db.PaymentItem
+                          join p in db.Payment on pi.Payments_Id equals p.Id
+                          where pi.Transaction_RefId == Id
+                          orderby p.Timestamp
+                          select new PaymentIndexViewModels
+                          {
+                              NoPayment = p.No,
+                              Timestamp = p.Timestamp,
+                              Amount = pi.Amount
+                          }).ToList();
+
+            string message = @"<div class='table-responsive'>
+                                    <table id='chkDatatable' class='table table-striped table-bordered'>
+                                        <thead>
+                                            <tr>
+                                                <th>No Payment</th>
+                                                <th>Timestamp</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>";
+            foreach (PaymentIndexViewModels piVM in result)
+            {
+                message += @"<tr>
+                                <td>" + piVM.NoPayment + @"</td>
+                                <td>" + piVM.Timestamp.ToString("yyyy-MM-dd HH:mm") + @"</td>
+                                <td>" + piVM.Amount.ToString("#,##0.00") + @"</td>
+                            </tr>";
+            }
+            message += "</tbody></table></div>";
+
+            return Json(new { content = message }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Payroll()
         {
             Permissions p = new Permissions();
